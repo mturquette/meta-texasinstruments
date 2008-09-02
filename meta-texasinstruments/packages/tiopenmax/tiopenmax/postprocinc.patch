@@ -1,0 +1,22 @@
+--- tiopenmax-0.3/video/src/openmax_il/post_processor/src/OMX_PostProc.c.orig	2008-07-15 15:55:27.000000000 -0500
++++ tiopenmax-0.3/video/src/openmax_il/post_processor/src/OMX_PostProc.c	2008-07-22 17:39:02.000000000 -0500
+@@ -70,7 +70,7 @@
+ #include "OMX_PostProc.h"
+ #include "OMX_PostProc_Utils.h"
+ #include "OMX_PostProc_CustomCmd.h"
+-#include <videodev.h>
++#include <linux/videodev.h>
+ 
+ #ifdef RESOURCE_MANAGER_ENABLED
+ #include <ResourceManagerProxyAPI.h>
+--- tiopenmax-0.3/video/src/openmax_il/post_processor/src/OMX_PostProc_Utils.c.orig	2008-07-15 15:55:27.000000000 -0500
++++ tiopenmax-0.3/video/src/openmax_il/post_processor/src/OMX_PostProc_Utils.c	2008-07-22 17:39:12.000000000 -0500
+@@ -73,7 +73,7 @@
+ #include <ResourceManagerProxyAPI.h>
+ #endif
+ 
+-#include <videodev.h>
++#include <linux/videodev.h>
+ #include <OMX_Clock.h>
+ #include <omap24xxvout.h>
+ /*------- Macros Files ----------------------------------------*/

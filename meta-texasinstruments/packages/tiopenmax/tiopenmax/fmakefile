@@ -1,0 +1,118 @@
+## Imports
+
+#BRIDGE_DIR =
+#INCLUDE DIR =
+
+## Exports
+
+SOURCE_DIR = .
+
+
+CROSS ?= arm-none-linux-gnueabi-
+CC ?= $(CROSS)gcc
+CFLAGS ?= -Wall -g3
+LDFLAGS = -lpthread
+
+# omx
+OMX_LIBS = -L$(core_DIR) -lOMX_Core
+OMX_CFLAGS = -I$(core_DIR)/inc -I$(core_DIR)/../clock_source/inc
+
+# lcml
+LCML_LIBS = -L$(lcml_DIR) -lLCML
+LCML_CFLAGS = -I$(lcml_DIR)/inc -DOMAP_2430 $(BRIDGE_CFLAGS)
+
+# bridge
+BRIDGE_LIBS = -lbridge
+BRIDGE_CFLAGS = -I$(BRIDGE_DIR) -DOMAP_3430
+
+# Other flags:
+# -DDSP_RENDERING_ON
+# -DRESOURCE_MANAGER_ENABLED
+
+## Targets
+# Default target:
+all:
+
+# core
+core_DIR = $(SOURCE_DIR)/system/src/openmax_il/omx_core
+core_TARGET = $(core_DIR)/libOMX_Core.so
+
+$(core_TARGET): $(core_DIR)/src/OMX_Core.o
+$(core_TARGET): INCLUDES := -I$(core_DIR)/inc
+$(core_TARGET): CFLAGS := $(CFLAGS) -DSTATIC_TABLE
+$(core_TARGET): LIBS := -ldl
+
+libraries += $(core_TARGET)
+
+# lcml
+lcml_DIR = $(SOURCE_DIR)/system/src/openmax_il/lcml
+lcml_TARGET = $(lcml_DIR)/libLCML.so
+
+$(lcml_TARGET): $(lcml_DIR)/src/LCML_DspCodec.o
+$(lcml_TARGET): INCLUDES := -I$(lcml_DIR)/inc
+$(lcml_TARGET): CFLAGS := $(CFLAGS) $(BRIDGE_CFLAGS) $(LCML_CFLAGS) $(OMX_CFLAGS)
+$(lcml_TARGET): LIBS := $(BRIDGE_LIBS)
+
+libraries += $(lcml_TARGET)
+
+# videodec
+videodec_DIR = $(SOURCE_DIR)/video/src/openmax_il/video_decode
+videodec_TARGET = $(videodec_DIR)/libOMX.TI.Video.Decoder.so
+
+$(videodec_TARGET): $(videodec_DIR)/src/OMX_VideoDec_Thread.o $(videodec_DIR)/src/OMX_VideoDec_Utils.o $(videodec_DIR)/src/OMX_VideoDecoder.o
+$(videodec_TARGET): INCLUDES := -I$(videodec_DIR)/inc
+$(videodec_TARGET): CFLAGS := $(CFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(videodec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+libraries += $(videodec_TARGET)
+
+# postproc
+postproc_DIR = $(SOURCE_DIR)/video/src/openmax_il/post_processor
+postproc_TARGET = $(postproc_DIR)/libOMX.TI.PostProc.so
+
+$(postproc_TARGET): $(postproc_DIR)/src/OMX_PostProc_Thread.o $(postproc_DIR)/src/OMX_PostProc_Utils.o $(postproc_DIR)/src/OMX_PostProc.o
+$(postproc_TARGET): INCLUDES := -I$(postproc_DIR)/inc -I$(INCLUDE_DIR)
+$(postproc_TARGET): CFLAGS := $(CFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(postproc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+libraries += $(postproc_TARGET)
+
+# aacdec
+aacdec_DIR = $(SOURCE_DIR)/audio/src/openmax_il/aac_dec
+aacdec_TARGET = $(aacdec_DIR)/libOMX.TI.AAC.decode.so
+
+$(aacdec_TARGET): $(aacdec_DIR)/src/OMX_AacDec_CompThread.o $(aacdec_DIR)/src/OMX_AacDec_Utils.o $(aacdec_DIR)/src/OMX_AacDecoder.o
+$(aacdec_TARGET): INCLUDES := -I$(aacdec_DIR)/inc
+$(aacdec_TARGET): CFLAGS := $(CFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(aacdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+libraries += $(aacdec_TARGET)
+
+# Rules
+
+all: $(libraries)
+
+clean:
+	rm -f $(libraries)
+	find . -name "*.o" | xargs rm -rf
+
+install: $(libraries)
+	mkdir -p $(DESTDIR)/lib
+	install $(libraries) $(DESTDIR)/lib
+
+# from Lauri Leukkunen's build system
+ifdef V
+Q = 
+P = @printf "" # <- space before hash is important!!!
+else
+P = @printf "[%s] $@\n" # <- space before hash is important!!!
+Q = @
+endif
+
+%.o:: %.c
+	$(P)CC
+	$(Q)$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+
+%.so::
+	$(P)SHLIB
+	$(Q)$(CC) $(LDFLAGS) -shared -o $@ $^ $(LIBS)
