@@ -3,12 +3,12 @@ PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments MPU/DSP Bridge libraries."
 LICENSE = "LGPL"
 PR = "r2"
-DEPENDS = "tidspbridge-module_${PV}"
+DEPENDS = "tidspbridge-module"
 
-SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_12.20RC1.tar.bz2 \
+SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_${PV}RC1.tar.bz2 \
 	file://mkcross-api.patch;patch=1"
 
-S = ${WORKDIR}/CSSD_Linux_12.20/src/bridge/mpu
+S = ${WORKDIR}/CSSD_Linux_${PV}/src/bridge/mpu
 
 do_compile() {
 	cd ${S}/mpu_api/src

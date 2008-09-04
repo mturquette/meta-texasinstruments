@@ -1,6 +1,6 @@
 SECTION = "libs"
 PRIORITY = "optional"
-DEPENDS = "tidspbridge"
+DEPENDS = "tidspbridge-lib"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
 # FIXME: Three licenses are used, not just LGPL
 LICENSE = "LGPL"
@@ -11,7 +11,7 @@ S = ${WORKDIR}/src/omx/linux
 inherit pkgconfig
 
 #SRC_URI = "http://omapzoom.org/gf/download/frsrelease/111/396/tiopenmax-${PV}.tar.gz \
-SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_12.20RC1.tar.bz2 \
+SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_${PV}RC1.tar.bz2 \
 	file://fmakefile \
 	file://libomxil-ti.pc \
 	file://omap24xxvout.h"
