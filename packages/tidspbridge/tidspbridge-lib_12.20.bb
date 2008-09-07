@@ -11,9 +11,11 @@ SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_
 S = ${WORKDIR}/CSSD_Linux_${PV}/src/bridge/mpu
 
 do_compile() {
+	mkdir ${S}/target
 	cd ${S}/mpu_api/src
-	oe_runmake PREFIX=${S} TGTROOT=${S} BUILD=rel CMDDEFS='GT_TRACE DEBUG' \
-		CROSS=${AR%-*}-
+#	oe_runmake PREFIX=${S} TGTROOT=${S} KRNLSRC=${STAGING_KERNEL_DIR} \
+	oe_runmake PREFIX=${S} TGTROOT=${S} KRNLSRC=${STAGING_KERNEL_DIR} \
+		BUILD=rel CMDDEFS='GT_TRACE DEBUG'
 	ln -s ${S}/mpu_api/src/bridge/libbridge.so.2 libbridge.so
 }
 
