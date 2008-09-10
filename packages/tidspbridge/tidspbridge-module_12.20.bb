@@ -25,3 +25,5 @@ do_install() {
 		KRNLSRC=${STAGING_KERNEL_DIR} \
 		TGTROOT=${S} BUILD=relinstall 
 }
+
+FILES_${PN} += "${D}/dspbridge/*"
