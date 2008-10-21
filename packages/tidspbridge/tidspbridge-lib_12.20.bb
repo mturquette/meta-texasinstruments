@@ -10,6 +10,11 @@ SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_
 
 S = ${WORKDIR}/CSSD_Linux_${PV}/src/bridge/mpu
 
+do_unpack() {
+	cd ${WORKDIR}
+	tar jxf ${DL_DIR}/CSSD_Linux_${PV}RC1.tar.bz2 CSSD_Linux_${PV}/src/bridge/mpu/mpu_api
+}
+
 do_compile() {
 	mkdir ${S}/target
 	cd ${S}/mpu_api/src

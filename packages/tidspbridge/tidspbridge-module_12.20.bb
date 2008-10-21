@@ -11,6 +11,11 @@ SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_
 	file://mkcross-driver.patch;patch=1"
 S = ${WORKDIR}/CSSD_Linux_${PV}/src/bridge/mpu
 
+do_unpack() {
+	cd ${WORKDIR}
+	tar jxf ${DL_DIR}/CSSD_Linux_${PV}RC1.tar.bz2 CSSD_Linux_${PV}/src/bridge/mpu/mpu_driver
+}
+
 do_compile() {
 	cd ${S}/mpu_driver/src
 	oe_runmake PREFIX=${S} PROJROOT=${S}/mpu_driver \
