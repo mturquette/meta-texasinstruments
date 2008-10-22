@@ -3,7 +3,7 @@ PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments MPU/DSP Bridge module."
 LICENSE = "GPL"
 PR = "r2"
-COMPATIBLE_MACHINE = "omap-3430ldp"
+COMPATIBLE_MACHINE = "omap-3430(l|s)dp"
 
 inherit module
 
