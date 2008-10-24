@@ -26,9 +26,6 @@ do_compile() {
 
 do_install() {
 	cd ${S}/mpu_driver/src
-	oe_runmake TARGETDIR=${D} PREFIX=${S} PROJROOT=${S}/mpu_driver \
-		KRNLSRC=${STAGING_KERNEL_DIR} \
-		TGTROOT=${S} BUILD=relinstall 
+	install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/dspbridge
+	install -m 0644 *${KERNEL_OBJECT_SUFFIX} ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/dspbridge
 }
-
-FILES_${PN} += "${D}/dspbridge/*"
