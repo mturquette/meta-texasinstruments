@@ -10,15 +10,17 @@ S = ${WORKDIR}/src/omx/linux
 
 inherit pkgconfig
 
-#SRC_URI = "http://omapzoom.org/gf/download/frsrelease/111/396/tiopenmax-${PV}.tar.gz \
 SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_${PV}RC1.tar.bz2 \
 	file://fmakefile \
 	file://libomxil-ti.pc \
-	file://omap24xxvout.h"
+	file://omap24xxvout.h \
+	file://aacdecpcomp.patch;patch=1 \
+	file://postprocnorm.patch;patch=1 \
+	file://aacdecnorm.patch;patch=1"
 
 do_unpack() {
-        cd ${WORKDIR}
-        tar jxf ${DL_DIR}/CSSD_Linux_${PV}RC1.tar.bz2 CSSD_Linux_${PV}/src/omx/linux --strip-components 1
+	cd ${WORKDIR}
+	tar jxf ${DL_DIR}/CSSD_Linux_${PV}RC1.tar.bz2 CSSD_Linux_${PV}/src/omx/linux --strip-components 1
 }
 
 do_compile_prepend() {
@@ -28,7 +30,6 @@ do_compile_prepend() {
 }
 
 do_compile() {
-#	oe_runmake BRIDGE_DIR=${STAGING_INCDIR}/dspbridge INCLUDE_DIR=${STAGING_INCDIR} PKGDIR=${STAGING_DIR} TARGETDIR=${STAGING_DIR} CROSS
 	oe_runmake BRIDGE_DIR=${STAGING_INCDIR}/dspbridge INCLUDE_DIR=${STAGING_INCDIR}
 }
 

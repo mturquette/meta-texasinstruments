@@ -1,0 +1,11 @@
+--- pkg/audio/src/openmax_il/aac_dec/src/OMX_AacDec_Utils.c.orig	2008-08-14 13:03:42.000000000 -0500
++++ pkg/audio/src/openmax_il/aac_dec/src/OMX_AacDec_Utils.c	2008-10-28 19:13:42.000000000 -0500
+@@ -798,7 +798,7 @@
+ #ifdef __PERF_INSTRUMENTATION__
+                     PERF_Boundary(pComponentPrivate->pPERFcomp,PERF_BoundaryComplete | PERF_BoundarySetup);
+ #endif
+-					ComponentPrivate->curState = OMX_StateIdle;
++					pComponentPrivate->curState = OMX_StateIdle;
+                     pComponentPrivate->cbInfo.EventHandler(pHandle,
+                                                            pHandle->pApplicationPrivate,
+                                                            OMX_EventCmdComplete, 
