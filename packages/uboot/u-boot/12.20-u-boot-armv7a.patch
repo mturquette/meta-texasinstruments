@@ -1,0 +1,11 @@
+--- u-boot/cpu/omap3/config.mk.orig	2006-10-30 11:57:37.000000000 -0600
++++ u-boot/cpu/omap3/config.mk	2008-11-03 15:08:07.000000000 -0600
+@@ -23,7 +23,7 @@
+ PLATFORM_RELFLAGS += -fno-strict-aliasing  -fno-common -ffixed-r8 \
+ 	-msoft-float
+ 
+-PLATFORM_CPPFLAGS += -march=armv7a
++PLATFORM_CPPFLAGS += -march=armv7-a
+ # =========================================================================
+ #
+ # Supply options according to compiler version
