@@ -2,7 +2,7 @@ require u-boot.inc
 
 PR="r1"
 
-SRC_URI = "file:///home/ddiaz/downs/CSSD_Linux_${PV}-u-boot.tar.gz \
+SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_${PV}RC1.tar.bz2 \
 	file://12.20-u-boot-armv7a.patch;patch=1"
 S = "${WORKDIR}/CSSD_Linux_${PV}/src/u-boot"
 
