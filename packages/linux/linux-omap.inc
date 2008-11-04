@@ -6,7 +6,7 @@ KERNEL_OUTPUT = "arch/${ARCH}/boot/compressed/${KERNEL_IMAGETYPE}"
 
 inherit kernel
 
-COMPATIBLE_MACHINE = "omap-zoom"
+COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp|beagleboard"
 
 do_configure_prepend() {
 
