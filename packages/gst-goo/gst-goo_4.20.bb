@@ -1,6 +1,6 @@
 SECTION = "libs"
 PRIORITY = "optional"
-DEPENDS = "glib-2.0 libgoo gstreamer"
+DEPENDS = "glib-2.0 libgoo gst-plugins-base"
 DESCRIPTION = "GStreamer plug-ins for OpenMAX IL based on LibGoo"
 LICENSE = "LGPL"
 PR = "r1"
