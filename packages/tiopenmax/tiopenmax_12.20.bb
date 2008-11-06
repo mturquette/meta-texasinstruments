@@ -64,9 +64,9 @@ do_stage() {
 	install -m 0644 ${S}/video/src/openmax_il/post_processor/inc/OMX_PostProc_CustomCmd.h ${STAGING_INCDIR}/omx/
 	install -m 0644 ${S}/audio/src/openmax_il/aac_dec/inc/TIDspOmx.h ${STAGING_INCDIR}/omx/
 	install -d ${STAGING_BINDIR}
-	install -m 0644 ${S}/system/src/openmax_il/audio_manager/src/OMXAudioManager ${STAGING_BINDIR}
-	install -m 0644 ${S}/system/src/openmax_il/resource_manager/src/OMXResourceManager ${STAGING_BINDIR}
-	install -m 0644 ${S}/system/src/openmax_il/omx_policy_manager/src/OMXPolicyManager ${STAGING_BINDIR}
+	install -m 0755 ${S}/system/src/openmax_il/audio_manager/src/OMXAudioManager ${STAGING_BINDIR}
+	install -m 0755 ${S}/system/src/openmax_il/resource_manager/src/OMXResourceManager ${STAGING_BINDIR}
+	install -m 0755 ${S}/system/src/openmax_il/omx_policy_manager/src/OMXPolicyManager ${STAGING_BINDIR}
 }
 
 do_install() {
@@ -87,9 +87,9 @@ do_install() {
 	oe_libinstall -so -C ${S}/audio/src/openmax_il/wbamr_dec/src libOMX.TI.WBAMR.decode ${D}${libdir}
 	oe_libinstall -so -C ${S}/audio/src/openmax_il/wbamr_enc/src libOMX.TI.WBAMR.encode ${D}${libdir}
 	install -d ${D}${bindir}
-	install -m 0644 ${S}/system/src/openmax_il/audio_manager/src/OMXAudioManager ${D}${bindir}
-	install -m 0644 ${S}/system/src/openmax_il/resource_manager/src/OMXResourceManager ${D}${bindir}
-	install -m 0644 ${S}/system/src/openmax_il/omx_policy_manager/src/OMXPolicyManager ${D}${bindir}
+	install -m 0755 ${S}/system/src/openmax_il/audio_manager/src/OMXAudioManager ${D}${bindir}
+	install -m 0755 ${S}/system/src/openmax_il/resource_manager/src/OMXResourceManager ${D}${bindir}
+	install -m 0755 ${S}/system/src/openmax_il/omx_policy_manager/src/OMXPolicyManager ${D}${bindir}
 }
 
 FILES_${PN} += "\
