@@ -199,26 +199,28 @@ libraries += $(vpp_TARGET)
 
 ##### IMAGE #####
 # jpegdec
-jpegdec_DIR = $(SOURCE_DIR)/image
+jpegdec_DIR = $(SOURCE_DIR)/image/src/openmax_il/jpeg_dec/src
+jpegdec_INC = $(jpegdec_DIR)/../inc
 jpegdec_TARGET = $(jpegdec_DIR)/libOMX.TI.JPEG.decoder.so
 
 $(jpegdec_TARGET): $(jpegdec_DIR)/OMX_JpegDec_Thread.o $(jpegdec_DIR)/OMX_JpegDec_Utils.o $(jpegdec_DIR)/OMX_JpegDecoder.o
-$(jpegdec_TARGET): INCLUDES := -I$(jpegdec_DIR)/inc
+$(jpegdec_TARGET): INCLUDES := -I$(jpegdec_INC)
 $(jpegdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
 $(jpegdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
 
-#libraries += $(jpegdec_TARGET)
+libraries += $(jpegdec_TARGET)
 
 # jpegenc
-jpegenc_DIR = $(SOURCE_DIR)/image
+jpegenc_DIR = $(SOURCE_DIR)/image/src/openmax_il/jpeg_enc/src
+jpegenc_INC = $(jpegenc_DIR)/../inc
 jpegenc_TARGET = $(jpegenc_DIR)/libOMX.TI.JPEG.encoder.so
 
 $(jpegenc_TARGET): $(jpegenc_DIR)/OMX_JpegEnc_Thread.o $(jpegenc_DIR)/OMX_JpegEnc_Utils.o $(jpegenc_DIR)/OMX_JpegEncoder.o
-$(jpegenc_TARGET): INCLUDES := -I$(jpegenc_DIR)/inc
+$(jpegenc_TARGET): INCLUDES := -I$(jpegenc_INC)
 $(jpegenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
 $(jpegenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
 
-#libraries += $(jpegenc_TARGET)
+libraries += $(jpegenc_TARGET)
 
 
 ##### AUDIO #####

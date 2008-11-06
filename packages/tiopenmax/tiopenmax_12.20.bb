@@ -50,6 +50,8 @@ do_stage() {
 	oe_libinstall -so -C ${S}/video/src/openmax_il/video_encode/src libOMX.TI.Video.encoder ${STAGING_LIBDIR}
 	oe_libinstall -so -C ${S}/video/src/openmax_il/post_processor/src libOMX.TI.PostProc ${STAGING_LIBDIR}
 	oe_libinstall -so -C ${S}/video/src/openmax_il/prepost_processor/src libOMX.TI.VPP ${STAGING_LIBDIR}
+	oe_libinstall -so -C ${S}/image/src/openmax_il/jpeg_dec/src libOMX.TI.JPEG.decoder ${STAGING_LIBDIR}
+	oe_libinstall -so -C ${S}/image/src/openmax_il/jpeg_enc/src libOMX.TI.JPEG.encoder ${STAGING_LIBDIR}
 	oe_libinstall -so -C ${S}/audio/src/openmax_il/mp3_dec/src libOMX.TI.MP3.decode ${STAGING_LIBDIR}
 	oe_libinstall -so -C ${S}/audio/src/openmax_il/aac_dec/src libOMX.TI.AAC.decode ${STAGING_LIBDIR}
 	oe_libinstall -so -C ${S}/audio/src/openmax_il/aac_enc/src libOMX.TI.AAC.encode ${STAGING_LIBDIR}
@@ -79,6 +81,8 @@ do_install() {
 	oe_libinstall -so -C ${S}/video/src/openmax_il/video_encode/src libOMX.TI.Video.encoder ${D}${libdir}
 	oe_libinstall -so -C ${S}/video/src/openmax_il/post_processor/src libOMX.TI.PostProc ${D}${libdir}
 	oe_libinstall -so -C ${S}/video/src/openmax_il/prepost_processor/src libOMX.TI.VPP ${D}${libdir}
+	oe_libinstall -so -C ${S}/image/src/openmax_il/jpeg_dec/src libOMX.TI.JPEG.decoder ${D}${libdir}
+	oe_libinstall -so -C ${S}/image/src/openmax_il/jpeg_enc/src libOMX.TI.JPEG.encoder ${D}${libdir}
 	oe_libinstall -so -C ${S}/audio/src/openmax_il/mp3_dec/src libOMX.TI.MP3.decode ${D}${libdir}
 	oe_libinstall -so -C ${S}/audio/src/openmax_il/aac_dec/src libOMX.TI.AAC.decode ${D}${libdir}
 	oe_libinstall -so -C ${S}/audio/src/openmax_il/aac_enc/src libOMX.TI.AAC.encode ${D}${libdir}
@@ -105,6 +109,8 @@ FILES_${PN} += "\
 	${libdir}/libOMX.TI.Video.encoder.so \
 	${libdir}/libOMX.TI.PostProc.so \
 	${libdir}/libOMX.TI.VPP.so \
+	${libdir}/libOMX.TI.JPEG.decoder.so \
+	${libdir}/libOMX.TI.JPEG.encoder.so \
 	${libdir}/libOMX.TI.MP3.decode.so \
 	${libdir}/libOMX.TI.AAC.decode.so \
 	${libdir}/libOMX.TI.AAC.encode.so \
