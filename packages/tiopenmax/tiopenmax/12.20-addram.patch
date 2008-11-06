@@ -1,0 +1,87 @@
+--- /dev/null	2008-09-25 13:50:40.271357656 -0500
++++ pkg/system/src/openmax_il/resource_activity_monitor/src/Resource_Activity_Monitor.c	2008-06-23 10:20:19.000000000 -0500
+@@ -0,0 +1,56 @@
++#include <stdlib.h>
++#include <stdio.h>
++#include <string.h>
++
++#include "Resource_Activity_Monitor.h"
++
++
++void omap_pm_set_constraint(int ID, int MHz)
++{
++#ifdef RAM_ENABLED
++    char command[100];
++    unsigned int operatingPoint;
++
++    if (MHz < OPERATING_POINT_1_MHZ) {
++        operatingPoint = OPERATING_POINT_1;
++    }
++    else if (MHz < OPERATING_POINT_2_MHZ) {
++        operatingPoint = OPERATING_POINT_2;
++    }
++    else if (MHz < OPERATING_POINT_3_MHZ) {
++        operatingPoint = OPERATING_POINT_3;
++    }
++    else if (MHz < OPERATING_POINT_4_MHZ) {
++        operatingPoint = OPERATING_POINT_4;
++    }
++    else {
++        operatingPoint = OPERATING_POINT_5;
++    }
++    
++    printf("[setting operating point] MHz = %d operatingPoint = %d\n",MHz,operatingPoint);
++    strcpy(command,"echo -n ");
++    strcat(command,ram_itoa(operatingPoint));
++    strcat(command," > /sys/power/vdd1_opp_value");
++    system(command);
++#endif    
++}
++
++int omap_pm_get_constraint(int ID)
++{
++    printf("[omap_pm_get_constraint] id = %d \n",ID);
++    return 0;
++}
++
++char * ram_itoa(int a)
++{
++    static char str[50];
++    int i = sizeof(str) - 1;
++    if (i != 0) {
++        do {
++            str[--i] = '0' + a % 10;
++        }
++        while ((a = a / 10) && i >= 0);
++    }
++    return &str[i];
++}
++
+--- /dev/null	2008-09-25 13:50:40.271357656 -0500
++++ pkg/system/src/openmax_il/resource_activity_monitor/inc/Resource_Activity_Monitor.h	2008-06-23 10:20:15.000000000 -0500
+@@ -0,0 +1,25 @@
++
++
++#define RAM_ENABLED
++
++#define OPERATING_POINT_1 1
++#define OPERATING_POINT_1_MHZ 90
++
++#define OPERATING_POINT_2 2
++#define OPERATING_POINT_2_MHZ 180
++
++#define OPERATING_POINT_3 3
++#define OPERATING_POINT_3_MHZ 360
++
++#define OPERATING_POINT_4 4
++#define OPERATING_POINT_4_MHZ 400
++
++#define OPERATING_POINT_5 5
++#define OPERATING_POINT_5_MHZ 430
++
++
++void omap_pm_set_constraint(int ID, int MHz);
++
++int omap_pm_get_constraint(int ID);
++char * ram_itoa(int a);
++
