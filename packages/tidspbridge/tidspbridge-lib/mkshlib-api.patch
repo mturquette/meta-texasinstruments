@@ -1,0 +1,11 @@
+--- dspbridge/mpu_api/src/qos/Makefile.orig	2008-11-05 23:29:20.000000000 -0600
++++ dspbridge/mpu_api/src/qos/Makefile	2008-11-05 23:32:26.000000000 -0600
+@@ -54,7 +54,7 @@
+ 
+ # TARGETTYPE must be EXEC, ST_LIB or SH_LIB in upper case.
+ 
+-TARGETTYPE  = ST_LIB
++TARGETTYPE  = SH_LIB
+ 
+ # install directory relative to the HOSTTARGET directory
+ HOSTRELEASE = lib
