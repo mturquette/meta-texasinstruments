@@ -147,29 +147,30 @@ libraries += $(rm_TARGET)
 endif
 
 
-
+##### VIDEO #####
 # videodec
-videodec_DIR = $(SOURCE_DIR)/video
+videodec_DIR = $(SOURCE_DIR)/video/src/openmax_il/video_decode/src
+videodec_INC = $(videodec_DIR)/../inc
 videodec_TARGET = $(videodec_DIR)/libOMX.TI.Video.Decoder.so
 
 $(videodec_TARGET): $(videodec_DIR)/OMX_VideoDec_Thread.o $(videodec_DIR)/OMX_VideoDec_Utils.o $(videodec_DIR)/OMX_VideoDecoder.o
-$(videodec_TARGET): INCLUDES := -I$(videodec_DIR)
+$(videodec_TARGET): INCLUDES := -I$(videodec_INC)
 $(videodec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
 $(videodec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
 
-#libraries += $(videodec_TARGET)
+libraries += $(videodec_TARGET)
 
 # videoenc
-videoenc_DIR = $(SOURCE_DIR)/video
+videoenc_DIR = $(SOURCE_DIR)/video/src/openmax_il/video_encode/src
+videoenc_INC = $(videoenc_DIR)/../inc
 videoenc_TARGET = $(videoenc_DIR)/libOMX.TI.Video.encoder.so
 
 $(videoenc_TARGET): $(videoenc_DIR)/OMX_VideoEnc_Thread.o $(videoenc_DIR)/OMX_VideoEnc_Utils.o $(videoenc_DIR)/OMX_VideoEncoder.o
-$(videoenc_TARGET): INCLUDES := -I$(videoenc_DIR)/inc
+$(videoenc_TARGET): INCLUDES := -I$(videoenc_INC)
 $(videoenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
 $(videoenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
 
-# not distributed
-#libraries += $(videoenc_TARGET)
+libraries += $(videoenc_TARGET)
 
 # postproc
 postproc_DIR = $(SOURCE_DIR)/video/src/openmax_il/post_processor/src
@@ -182,6 +183,19 @@ $(postproc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
 $(postproc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
 
 libraries += $(postproc_TARGET)
+
+# prepostproc
+vpp_DIR = $(SOURCE_DIR)/video/src/openmax_il/prepost_processor/src
+vpp_INC = $(vpp_DIR)/../inc
+vpp_TARGET = $(vpp_DIR)/libOMX.TI.VPP.so
+
+$(vpp_TARGET): $(vpp_DIR)/OMX_VPP_CompThread.o $(vpp_DIR)/OMX_VPP_Utils.o $(vpp_DIR)/OMX_VPP_ImgConv.o $(vpp_DIR)/OMX_VPP.o
+$(vpp_TARGET): INCLUDES := -I$(vpp_INC) -I$(clock_INC) -I$(INCLUDE_DIR)
+$(vpp_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(vpp_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+libraries += $(vpp_TARGET)
+
 
 ##### IMAGE #####
 # jpegdec
