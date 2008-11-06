@@ -6,7 +6,7 @@ PR = "r1"
 DEPENDS = "tidspbridge-module"
 
 PACKAGES = "${PN} ${PN}-dbg"
-FILES_${PN} = "${libdir}/libbridge.so ${libdir}/libqos.a"
+FILES_${PN} = "${libdir}/libbridge.so ${libdir}/libbridge.so.2 ${libdir}/libqos.a"
 
 SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_${PV}RC1.tar.bz2 \
 	file://mkcross-api.patch;patch=1"
@@ -23,6 +23,9 @@ do_compile() {
 	cd ${S}/mpu_api/src
 	oe_runmake PREFIX=${S} TGTROOT=${S} KRNLSRC=${STAGING_KERNEL_DIR} \
 		BUILD=rel CMDDEFS='GT_TRACE DEBUG'
+	cd ${S}/mpu_api/src/bridge
+	mv libbridge.so libbridge.so.2
+	ln -s libbridge.so.2 libbridge.so
 }
 
 do_stage() {
