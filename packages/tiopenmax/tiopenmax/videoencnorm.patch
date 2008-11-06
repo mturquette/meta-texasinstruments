@@ -1,0 +1,63 @@
+diff -Naur linux/video.orig/src/openmax_il/video_encode/inc/OMX_VideoEnc_Utils.h linux/video/src/openmax_il/video_encode/inc/OMX_VideoEnc_Utils.h
+--- linux/video.orig/src/openmax_il/video_encode/inc/OMX_VideoEnc_Utils.h	2008-08-07 16:16:12.000000000 -0500
++++ linux/video/src/openmax_il/video_encode/inc/OMX_VideoEnc_Utils.h	2008-11-06 00:11:06.000000000 -0600
+@@ -31,7 +31,9 @@
+ #include "LCML_DspCodec.h"
+ #include "LCML_Types.h"
+ #include "LCML_CodecInterface.h"
++#ifdef RESOURCE_MANAGER_ENABLED
+ #include <ResourceManagerProxyAPI.h>
++#endif
+ #include "OMX_VideoEnc_DSP.h"
+ #ifdef __PERF_INSTRUMENTATION__
+     #include "perf.h"
+@@ -571,7 +573,9 @@
+ 	OMX_BOOL bResyncDataEnable;
+ 	IH264VENC_Intra4x4Params intra4x4EnableIdc;
+ 	OMX_U32 maxMVperMB;	
++#ifdef RESOURCE_MANAGER_ENABLED
+ 	RMPROXY_CALLBACKTYPE cRMCallBack;
++#endif
+ 	OMX_BOOL bPreempted;
+ } VIDENC_COMPONENT_PRIVATE;
+ 
+@@ -632,7 +636,9 @@
+ 
+ OMX_ERRORTYPE OMX_VIDENC_HandleError(VIDENC_COMPONENT_PRIVATE* pComponentPrivate, OMX_ERRORTYPE eError);
+ 
++#ifdef RESOURCE_MANAGER_ENABLED
+ void OMX_VIDENC_ResourceManagerCallBack(RMPROXY_COMMANDDATATYPE cbData);
++#endif
+ 
+ 
+ #endif
+diff -Naur linux/video.orig/src/openmax_il/video_encode/src/OMX_VideoEnc_Utils.c linux/video/src/openmax_il/video_encode/src/OMX_VideoEnc_Utils.c
+--- linux/video.orig/src/openmax_il/video_encode/src/OMX_VideoEnc_Utils.c	2008-08-13 19:08:24.000000000 -0500
++++ linux/video/src/openmax_il/video_encode/src/OMX_VideoEnc_Utils.c	2008-11-06 00:14:19.000000000 -0600
+@@ -59,8 +59,9 @@
+ #include "OMX_VideoEnc_Debug.h"
+ #include "OMX_VideoEnc_DSP.h"
+ 
+-
++#ifdef RESOURCE_MANAGER_ENABLED
+     #include <ResourceManagerProxyAPI.h>
++#endif
+ 
+ #ifdef UNDER_CE
+     HINSTANCE g_hLcmlDllHandle = NULL;
+@@ -3703,6 +3704,7 @@
+   *         
+   **/
+ /*-----------------------------------------------------------------------------*/
++#ifdef RESOURCE_MANAGER_ENABLED
+ void OMX_VIDENC_ResourceManagerCallBack(RMPROXY_COMMANDDATATYPE cbData)
+ {
+     OMX_COMMANDTYPE Cmd = OMX_CommandStateSet;
+@@ -3742,6 +3744,4 @@
+ 
+ 
+ }
+-
+-
+-
++#endif

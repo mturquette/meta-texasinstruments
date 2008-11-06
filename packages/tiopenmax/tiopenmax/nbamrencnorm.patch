@@ -1,0 +1,62 @@
+diff -Naur linux/audio.orig/src/openmax_il/nbamr_enc/inc/OMX_AmrEnc_Utils.h linux/audio/src/openmax_il/nbamr_enc/inc/OMX_AmrEnc_Utils.h
+--- linux/audio.orig/src/openmax_il/nbamr_enc/inc/OMX_AmrEnc_Utils.h	2008-07-15 14:09:28.000000000 -0500
++++ linux/audio/src/openmax_il/nbamr_enc/inc/OMX_AmrEnc_Utils.h	2008-11-06 00:29:16.000000000 -0600
+@@ -43,7 +43,9 @@
+ #include "LCML_DspCodec.h"
+ #include <OMX_Component.h>
+ #include <TIDspOmx.h>
++#ifdef RESOURCE_MANAGER_ENABLED
+ #include <ResourceManagerProxyAPI.h>
++#endif
+ 
+ #ifdef __PERF_INSTRUMENTATION__
+     #include "perf.h"
+@@ -53,10 +55,6 @@
+ 	#include <AudioManagerAPI.h>
+ #endif
+ 
+-#ifndef UNDER_CE
+-	#include <ResourceManagerProxyAPI.h>
+-#endif
+-
+ #ifdef UNDER_CE
+ 	#define sleep Sleep
+ #endif
+@@ -687,7 +685,9 @@
+     OMX_PORT_PARAM_TYPE* sPortParam;
+     OMX_PRIORITYMGMTTYPE* sPriorityMgmt;
+ 	
++#ifdef RESOURCE_MANAGER_ENABLED
+ 	RMPROXY_CALLBACKTYPE rmproxyCallback;
++#endif
+     OMX_BOOL bPreempted;
+ 	
+     OMX_PARAM_PORTDEFINITIONTYPE* pPortDef[NBAMRENC_NUM_OF_PORTS];
+@@ -1146,8 +1146,9 @@
+ 						 OMX_U8 *pBuffer,
+ 						 OMX_DIRTYPE eDir);
+ 
+-						 
++#ifdef RESOURCE_MANAGER_ENABLED
+ void NBAMRENC_ResourceManagerCallback(RMPROXY_COMMANDDATATYPE cbData);
++#endif
+ 
+ /* ======================================================================= */
+ /** OMX_NBAMRENC_INDEXAUDIOTYPE  Defines the custom configuration settings
+diff -Naur linux/audio.orig/src/openmax_il/nbamr_enc/src/OMX_AmrEnc_Utils.c linux/audio/src/openmax_il/nbamr_enc/src/OMX_AmrEnc_Utils.c
+--- linux/audio.orig/src/openmax_il/nbamr_enc/src/OMX_AmrEnc_Utils.c	2008-07-15 14:09:40.000000000 -0500
++++ linux/audio/src/openmax_il/nbamr_enc/src/OMX_AmrEnc_Utils.c	2008-11-06 00:30:42.000000000 -0600
+@@ -3167,7 +3167,7 @@
+ }
+ 
+ 
+-
++#ifdef RESOURCE_MANAGER_ENABLED
+ void NBAMRENC_ResourceManagerCallback(RMPROXY_COMMANDDATATYPE cbData)
+ {
+     OMX_COMMANDTYPE Cmd = OMX_CommandStateSet;
+@@ -3196,3 +3196,4 @@
+     }
+ 
+ }
++#endif

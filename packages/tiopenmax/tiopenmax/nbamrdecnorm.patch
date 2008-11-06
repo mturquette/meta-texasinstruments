@@ -1,0 +1,95 @@
+diff -Naur linux/audio.orig/src/openmax_il/nbamr_dec/inc/OMX_AmrDecoder.h linux/audio/src/openmax_il/nbamr_dec/inc/OMX_AmrDecoder.h
+--- linux/audio.orig/src/openmax_il/nbamr_dec/inc/OMX_AmrDecoder.h	2008-07-15 13:54:10.000000000 -0500
++++ linux/audio/src/openmax_il/nbamr_dec/inc/OMX_AmrDecoder.h	2008-11-06 00:24:13.000000000 -0600
+@@ -25,14 +25,15 @@
+ #include "LCML_DspCodec.h"
+ #include <OMX_Component.h>
+ #include <pthread.h>
++#ifdef RESOURCE_MANAGER_ENABLED
+ #include <ResourceManagerProxyAPI.h>
++#endif
+ 
+ #ifdef __PERF_INSTRUMENTATION__
+     #include "perf.h"
+ #endif
+-#ifndef UNDER_CE
++#ifdef DSP_RENDERING_ON
+ #include <AudioManagerAPI.h>
+-#include <ResourceManagerProxyAPI.h>
+ #endif
+ 
+ /* ======================================================================= */
+@@ -744,7 +745,9 @@
+     /** Pointer to port priority management structure */
+     OMX_PRIORITYMGMTTYPE* pPriorityMgmt;
+ 
++#ifdef RESOURCE_MANAGER_ENABLED
+ 	RMPROXY_CALLBACKTYPE rmproxyCallback;
++#endif
+ 
+     OMX_BOOL bPreempted;
+     OMX_BOOL bFrameLost;
+diff -Naur linux/audio.orig/src/openmax_il/nbamr_dec/inc/OMX_AmrDec_Utils.h linux/audio/src/openmax_il/nbamr_dec/inc/OMX_AmrDec_Utils.h
+--- linux/audio.orig/src/openmax_il/nbamr_dec/inc/OMX_AmrDec_Utils.h	2008-06-16 08:11:37.000000000 -0500
++++ linux/audio/src/openmax_il/nbamr_dec/inc/OMX_AmrDec_Utils.h	2008-11-06 00:24:31.000000000 -0600
+@@ -152,7 +152,9 @@
+ /* OMX_ERRORTYPE NBAMRDEC_TransitionToIdle(AMRDEC_COMPONENT_PRIVATE *pComponentPrivate); */
+ OMX_ERRORTYPE OMX_DmmMap(DSP_HPROCESSOR ProcHandle, int size, void* pArmPtr, DMM_BUFFER_OBJ* pDmmBuf);
+ OMX_ERRORTYPE OMX_DmmUnMap(DSP_HPROCESSOR ProcHandle, void* pMapPtr, void* pResPtr);
++#ifdef RESOURCE_MANAGER_ENABLED
+ void NBAMR_ResourceManagerCallback(RMPROXY_COMMANDDATATYPE cbData);
++#endif
+ 
+ #ifdef UNDER_CE
+ 	#ifndef _OMX_EVENT_
+diff -Naur linux/audio.orig/src/openmax_il/nbamr_dec/src/OMX_AmrDecoder.c linux/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDecoder.c
+--- linux/audio.orig/src/openmax_il/nbamr_dec/src/OMX_AmrDecoder.c	2008-07-15 13:54:25.000000000 -0500
++++ linux/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDecoder.c	2008-11-06 00:27:06.000000000 -0600
+@@ -41,7 +41,7 @@
+ #include <dbapi.h>
+ #include <dlfcn.h>
+ 
+-#ifndef UNDER_CE
++#ifdef DSP_RENDERING_ON
+ #include <AudioManagerAPI.h>
+ #endif
+ #ifdef RESOURCE_MANAGER_ENABLED
+@@ -1354,10 +1354,10 @@
+     TI_OMX_DSP_DEFINITION *configData;
+     int flagValue=0;
+      TI_OMX_DATAPATH dataPath;
+-
++#ifdef DSP_RENDERING_ON
+     OMX_AUDIO_CONFIG_MUTETYPE *pMuteStructure = NULL;
+     OMX_AUDIO_CONFIG_VOLUMETYPE *pVolumeStructure = NULL;
+-
++#endif
+ 	AMRDEC_DPRINT("%d ::OMX_AmrDecoder.c :: Entering SetConfig\n", __LINE__);
+ 	if (pHandle == NULL) {
+ 		AMRDEC_DPRINT ("%d ::OMX_AmrDecoder.c :: Invalid HANDLE OMX_ErrorBadParameter \n",__LINE__);
+diff -Naur linux/audio.orig/src/openmax_il/nbamr_dec/src/OMX_AmrDec_Utils.c linux/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDec_Utils.c
+--- linux/audio.orig/src/openmax_il/nbamr_dec/src/OMX_AmrDec_Utils.c	2008-07-15 13:54:15.000000000 -0500
++++ linux/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDec_Utils.c	2008-11-06 00:26:25.000000000 -0600
+@@ -2517,7 +2517,9 @@
+     OMX_ERRORTYPE eError = OMX_ErrorNone;
+     OMX_U8 *pBuffer = args[1];
+     LCML_NBAMRDEC_BUFHEADERTYPE *pLcmlHdr;
++#ifdef RESOURCE_MANAGER_ENABLED
+     OMX_ERRORTYPE rm_error = OMX_ErrorNone;
++#endif
+ /*    ssize_t ret; */
+     OMX_COMPONENTTYPE *pHandle = NULL;
+     LCML_DSP_INTERFACE *pLcmlHandle;
+@@ -3779,6 +3781,7 @@
+ }
+ #endif
+ 
++#ifdef RESOURCE_MANAGER_ENABLED
+ void NBAMR_ResourceManagerCallback(RMPROXY_COMMANDDATATYPE cbData)
+ {
+     OMX_COMMANDTYPE Cmd = OMX_CommandStateSet;
+@@ -3807,3 +3810,4 @@
+     }
+ 
+ }
++#endif

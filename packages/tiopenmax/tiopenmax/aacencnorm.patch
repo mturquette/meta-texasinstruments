@@ -1,0 +1,73 @@
+diff -Naur linux/audio.orig/src/openmax_il/aac_enc/inc/OMX_AacEnc_Utils.h linux/audio/src/openmax_il/aac_enc/inc/OMX_AacEnc_Utils.h
+--- linux/audio.orig/src/openmax_il/aac_enc/inc/OMX_AacEnc_Utils.h	2008-06-10 20:44:27.000000000 -0500
++++ linux/audio/src/openmax_il/aac_enc/inc/OMX_AacEnc_Utils.h	2008-11-06 00:18:11.000000000 -0600
+@@ -4,7 +4,9 @@
+ #include <OMX_Component.h>
+ #include "LCML_DspCodec.h"
+ #include "OMX_AacEncoder.h"
++#ifdef RESOURCE_MANAGER_ENABLED
+ #include <ResourceManagerProxyAPI.h>
++#endif
+ 
+ #define AACENC_MAJOR_VER 0xF1
+ #define AACENC_MINOR_VER 0xF2
+@@ -279,7 +281,9 @@
+     
+ 	OMX_PRIORITYMGMTTYPE* sPriorityMgmt;
+     
++#ifdef RESOURCE_MANAGER_ENABLED
+ 	RMPROXY_CALLBACKTYPE rmproxyCallback;
++#endif
+     OMX_BOOL bPreempted;
+ 	
+ 	OMX_AUDIO_PARAM_PORTFORMATTYPE sInPortFormat;
+@@ -578,7 +582,9 @@
+ 
+ OMX_ERRORTYPE AACENCFill_LCMLInitParamsEx(OMX_HANDLETYPE pComponent);
+ 
++#ifdef RESOURCE_MANAGER_ENABLED
+ void AACENC_ResourceManagerCallback(RMPROXY_COMMANDDATATYPE cbData);
++#endif
+ 
+ #ifndef UNDER_CE
+ OMX_ERRORTYPE OMX_ComponentInit (OMX_HANDLETYPE hComp);
+diff -Naur linux/audio.orig/src/openmax_il/aac_enc/src/OMX_AacEncoder.c linux/audio/src/openmax_il/aac_enc/src/OMX_AacEncoder.c
+--- linux/audio.orig/src/openmax_il/aac_enc/src/OMX_AacEncoder.c	2008-07-15 14:09:13.000000000 -0500
++++ linux/audio/src/openmax_il/aac_enc/src/OMX_AacEncoder.c	2008-11-06 00:21:44.000000000 -0600
+@@ -57,7 +57,7 @@
+ #include "LCML_DspCodec.h"
+ 
+ 
+-#ifndef UNDER_CE
++#ifdef DSP_RENDERING_ON
+ #include <AudioManagerAPI.h>
+ #endif
+ #ifdef RESOURCE_MANAGER_ENABLED
+diff -Naur linux/audio.orig/src/openmax_il/aac_enc/src/OMX_AacEnc_Utils.c linux/audio/src/openmax_il/aac_enc/src/OMX_AacEnc_Utils.c
+--- linux/audio.orig/src/openmax_il/aac_enc/src/OMX_AacEnc_Utils.c	2008-07-15 14:22:24.000000000 -0500
++++ linux/audio/src/openmax_il/aac_enc/src/OMX_AacEnc_Utils.c	2008-11-06 00:19:50.000000000 -0600
+@@ -714,7 +714,9 @@
+     OMX_STATETYPE commandedState;
+     OMX_U32 commandData;
+     OMX_HANDLETYPE pLcmlHandle = pComponentPrivate->pLcmlHandle;
++#ifdef RESOURCE_MANAGER_ENABLED
+ 	OMX_ERRORTYPE rm_error = OMX_ErrorNone;
++#endif
+     OMX_ERRORTYPE eError = OMX_ErrorNone;
+ 	OMX_U16 arr[100]={0};
+ 	OMX_S32 ret = 0;
+@@ -3280,7 +3282,7 @@
+ }
+ #endif
+ 
+-
++#ifdef RESOURCE_MANAGER_ENABLED
+ void AACENC_ResourceManagerCallback(RMPROXY_COMMANDDATATYPE cbData)
+ {
+     OMX_COMMANDTYPE Cmd = OMX_CommandStateSet;
+@@ -3309,4 +3311,4 @@
+     }
+ 
+ }
+-
++#endif

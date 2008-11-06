@@ -1,0 +1,13 @@
+diff -Naur linux/video.orig/src/openmax_il/prepost_processor/inc/OMX_VPP_Utils.h linux/video/src/openmax_il/prepost_processor/inc/OMX_VPP_Utils.h
+--- linux/video.orig/src/openmax_il/prepost_processor/inc/OMX_VPP_Utils.h	2008-07-10 14:49:13.000000000 -0500
++++ linux/video/src/openmax_il/prepost_processor/inc/OMX_VPP_Utils.h	2008-11-06 00:15:37.000000000 -0600
+@@ -3,7 +3,9 @@
+ 
+ #include <OMX_Component.h>
+ #include "LCML_DspCodec.h"
++#ifdef RESOURCE_MANAGER_ENABLED
+ #include <ResourceManagerProxyAPI.h>
++#endif
+ 
+ #ifdef __PERF_INSTRUMENTATION__
+ #include "perf.h"
