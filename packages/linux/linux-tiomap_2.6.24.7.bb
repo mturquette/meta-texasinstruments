@@ -2,11 +2,12 @@ require linux-omap.inc
 
 PR = "r2"
 
-COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp|beagleboard"
+COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
 DEFAULT_PREFERENCE = "1"
 
 SRC_URI=" \
 	http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_12.20RC1.tar.bz2 \
+	file://csl-armv7a-to-armv7-a.patch;patch=1 \
 	file://defconfig-omap-3430ldp \
 	"
 
