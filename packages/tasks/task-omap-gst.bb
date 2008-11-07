@@ -22,11 +22,6 @@ RDEPENDS_task-omap-gst = "\
     "
 
 RDEPENDS_task-omap-gst-libs = "\
-    libid3tag	\
-    libmad	\
-    liboil	\
-    libxml2	\
-    popt	\
     check	\
     gstreamer	\
     libgoo	\
@@ -39,6 +34,13 @@ RDEPENDS_task-omap-gst-plugins = "\
     gst-plugins-ugly	\
     gst-ffmpeg		\
     gst-goo		\
+    gst-plugin-mpegaudioparse \
+    gst-plugin-audiotestsrc \
+    gst-plugin-videotestsrc \
+    gst-plugin-ffmpegcolorspace \
+    gst-plugin-video4linux2 \
+    gst-plugin-fbdevsink \
+    gst-plugin-qtdemux \
     "
 
 RDEPENDS_task-omap-gst-apps = ""
