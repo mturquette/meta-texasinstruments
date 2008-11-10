@@ -9,6 +9,7 @@ PACKAGES = "\
     task-omap-omx \
     task-omap-omx-libs \
     task-omap-omx-apps \
+	task-omap-dsp-sn \
     "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -24,3 +25,7 @@ RDEPENDS_task-omap-omx-libs = "\
     "
 
 RDEPENDS_task-omap-omx-apps = ""
+
+RDEPENDS_task-omap-dsp-sn = "\
+	tisocketnodes \
+	"
