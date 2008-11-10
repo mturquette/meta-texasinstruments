@@ -11,4 +11,5 @@ ALLOW_EMPTY = "1"
 RDEPENDS = "\
     tidspbridge-module \
     tidspbridge-lib \
+	tidspbridge-extra \
     "
