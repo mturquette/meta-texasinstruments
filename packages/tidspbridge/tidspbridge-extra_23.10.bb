@@ -22,7 +22,7 @@ do_install() {
 	install -m 0644 ${S}/dspbridge/*.*64P ${D}/dspbridge
 	install -m 0755 ${S}/dspbridge/{install_bridge,uninstall_bridge,ping.out,cexec.out} ${D}/dspbridge
 	install -d ${D}${sysconfdir}/init.d
-	install -m 0755 ${FILESDIR}/bridge.init ${D}${sysconfdir}/init.d/bridge
+	install -m 0755 ${FILESDIR}/23.10-bridge.init ${D}${sysconfdir}/init.d/bridge
 }
 
 FILES_${PN} = "/dspbridge ${sysconfdir}/init.d/bridge "
