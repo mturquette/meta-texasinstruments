@@ -1,0 +1,21 @@
+diff -Naurw linux.orig/system/src/openmax_il/resource_manager/src/Makefile linux/system/src/openmax_il/resource_manager/src/Makefile
+--- linux.orig/system/src/openmax_il/resource_manager/src/Makefile	2008-10-09 13:02:21.000000000 -0500
++++ linux/system/src/openmax_il/resource_manager/src/Makefile	2008-11-12 02:18:39.000000000 -0600
+@@ -13,7 +13,7 @@
+ 
+ include $(OMXROOT)/Master.mk
+ 
+-CFLAGS+=-I../inc -I$(OMXINCLUDEDIR) -I$(BRIDGEINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -Wall -fpic -pipe
++CFLAGS+=-I../inc -I$(OMXINCLUDEDIR) -I$(BRIDGEINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -I../../omx_policy_manager/inc -I../resource_activity_monitor/inc -Wall -fpic -pipe
+ 
+ ifeq ($(ENABLE_RMPM_STUB), 1)
+     CFLAGS += -D__ENABLE_RMPM_STUB__
+@@ -31,7 +31,7 @@
+ 	cp -f $(COMPONENT_SYS) $(COMPONENT_TARGET)
+ 
+ $(COMPONENT_SYS): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_SYS) $(OBJ) -L$(BRIDGELIBDIR) -lbridge $(LOMXPERFLIB) -lRAM -lqos
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_SYS) $(OBJ) -L$(BRIDGELIBDIR) -lbridge $(LOMXPERFLIB) -L../resource_activity_monitor/src -lRAM -lqos
+ 
+ $(SRC): $(HSRC)
+ 

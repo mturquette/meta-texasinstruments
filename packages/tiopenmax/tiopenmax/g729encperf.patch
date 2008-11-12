@@ -1,0 +1,24 @@
+diff -Naur linux.orig/audio/src/openmax_il/g729_enc/src/OMX_G729Enc_Utils.c linux/audio/src/openmax_il/g729_enc/src/OMX_G729Enc_Utils.c
+--- linux.orig/audio/src/openmax_il/g729_enc/src/OMX_G729Enc_Utils.c	2008-08-14 11:51:30.000000000 -0500
++++ linux/audio/src/openmax_il/g729_enc/src/OMX_G729Enc_Utils.c	2008-11-10 18:10:42.000000000 -0600
+@@ -2047,19 +2047,15 @@
+                                PREF(pLcmlHdr->buffer,pBuffer),
+                                PREF(pLcmlHdr->buffer,nFilledLen),
+                                PERF_ModuleCommonLayer);
+-#endif                    
+ 
+             pComponentPrivate_CC->nLcml_nCntOpReceived++;
+             if ((pComponentPrivate_CC->nLcml_nCntIp >= 1) &&
+                (pComponentPrivate_CC->nLcml_nCntOpReceived == 1))
+             {
+-            
+-#ifdef __PERF_INSTRUMENTATION__            
+                 PERF_Boundary(pComponentPrivate_CC->pPERFcomp,
+                               PERF_BoundaryStart | PERF_BoundarySteadyState);
+-#endif                                       
+             }
+-
++#endif                                       
+ 
+             for (i=0; i < numFrames; i++)
+             {

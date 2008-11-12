@@ -1,0 +1,16 @@
+diff -Naur linux.orig/image/src/openmax_il/jpeg_enc/test/Makefile linux/image/src/openmax_il/jpeg_enc/test/Makefile
+--- linux.orig/image/src/openmax_il/jpeg_enc/test/Makefile	2007-11-02 09:43:33.000000000 -0500
++++ linux/image/src/openmax_il/jpeg_enc/test/Makefile	2008-11-10 18:22:11.000000000 -0600
+@@ -46,10 +46,10 @@
+ 	cp -f $(COMPONENT_TEST_MULTIPLE) $(COMPONENT_TARGET_MULTIPLE)
+ 
+ $(COMPONENT_TEST): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lOMX_Core  
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lpthread -lOMX_Core  
+ 
+ $(COMPONENT_TEST_MULTIPLE): $(OBJ_MUL)
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST_MULTIPLE) $(OBJ_MUL) -L$(OMXLIBDIR) -lbridge -lOMX_Core  
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST_MULTIPLE) $(OBJ_MUL) -L$(OMXLIBDIR) -lbridge -lpthread -lOMX_Core  
+ 
+ $(SRC): $(HSRC)
+ 

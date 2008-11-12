@@ -1,0 +1,10 @@
+--- linux.orig/system/src/openmax_il/Makefile	2008-07-30 15:02:45.000000000 -0500
++++ linux/system/src/openmax_il/Makefile	2008-11-10 16:44:32.000000000 -0600
+@@ -17,6 +17,7 @@
+ 	  clock_source\
+ 	  audio_manager\
+ 	  resource_manager_proxy\
++	  resource_activity_monitor\
+ 	  resource_manager\
+ 	  omx_policy_manager
+ 

@@ -1,0 +1,12 @@
+diff -Naur linux.orig/audio/src/openmax_il/g722_enc/src/Makefile linux/audio/src/openmax_il/g722_enc/src/Makefile
+--- linux.orig/audio/src/openmax_il/g722_enc/src/Makefile	2008-08-01 15:36:03.000000000 -0500
++++ linux/audio/src/openmax_il/g722_enc/src/Makefile	2008-11-10 17:55:59.000000000 -0600
+@@ -45,7 +45,7 @@
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 
+ $(COMPONENT_LIB): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -shared -o $(COMPONENT_LIB) $(OBJ) -L$(BRIDGELIBDIR) -lbridge -lOMX_ResourceManagerProxy
++	$(CROSS)gcc $(CFLAGS) -shared -o $(COMPONENT_LIB) $(OBJ) -L$(OMXLIBDIR) -L$(BRIDGELIBDIR) -lbridge -lOMX_ResourceManagerProxy
+ 
+ $(SRC): $(HSRC)
+ 

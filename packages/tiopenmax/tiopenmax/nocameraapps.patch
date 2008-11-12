@@ -1,0 +1,13 @@
+diff -Naur linux.orig/application/src/openmax_il/Makefile linux/application/src/openmax_il/Makefile
+--- linux.orig/application/src/openmax_il/Makefile	2007-10-19 12:09:19.000000000 -0500
++++ linux/application/src/openmax_il/Makefile	2008-11-10 19:19:05.000000000 -0600
+@@ -8,9 +8,7 @@
+ DIRS= \
+ 	image_display \
+ 	video_display \
+-	video_capture \
+ 	avplay \
+-	avrecord \
+ 
+ EXTRA= \
+ 	

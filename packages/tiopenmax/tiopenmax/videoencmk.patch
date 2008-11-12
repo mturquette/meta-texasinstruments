@@ -1,0 +1,12 @@
+diff -Naur linux.orig/video/src/openmax_il/video_encode/test/Makefile linux/video/src/openmax_il/video_encode/test/Makefile
+--- linux.orig/video/src/openmax_il/video_encode/test/Makefile	2007-07-04 17:06:36.000000000 -0500
++++ linux/video/src/openmax_il/video_encode/test/Makefile	2008-11-10 19:07:24.000000000 -0600
+@@ -29,7 +29,7 @@
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
+ $(COMPONENT_TEST): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lOMX_Core  
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lpthread -lOMX_Core  
+ 
+ $(SRC): $(HSRC)
+ 
