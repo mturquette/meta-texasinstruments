@@ -1,0 +1,8 @@
+PREFERRED_VERSION_tidspbridge-module = "12.20"
+PREFERRED_VERSION_tidspbridge-lib =    "12.20"
+PREFERRED_VERSION_tidspbridge-extra =  "12.20"
+PREFERRED_VERSION_tisocketnodes =      "12.20"
+PREFERRED_VERSION_tiopenmax =          "12.20"
+PREFERRED_VERSION_libgoo =             "4.20"
+PREFERRED_VERSION_gst-goo =            "4.20"
+PREFERRED_VERSION_tisocketnodes =      "12.20"
