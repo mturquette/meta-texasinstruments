@@ -1,0 +1,75 @@
+#!/bin/sh
+# 
+# Victor Manuel Jaquez Leal <vjaquez@ti.com>
+#
+# description: starts and stops the dsp bridge
+#
+# usage:
+#     bridge {start|stop|restart} [dspimage.dof]
+
+
+# Sanity verificatiosn
+[ -d /dspbridge ] || exit 0
+
+BASEIMAGE=${2:-/lib/dsp/baseimage.dof}
+
+[ -f $BASEIMAGE ] || exit 0
+
+start ()
+{
+    cd /dspbridge
+    echo -n "Loading up Bridge driver: "
+    /dspbridge/install_bridge > /dev/null 2>&1
+    /dspbridge/cexec.out -T $BASEIMAGE > /dev/null 2>&1
+    [ $? -eq 0 ] || exit $?
+    echo "OK"
+    
+    if [ "$BASEIMAGE" = "/lib/dsp/baseimage.dof" ]; then
+        echo -n "Launching OMX Managers: "
+	sleep 1 && OMXAudioManager &
+	sleep 1 && OMXPolicyManager &
+	sleep 1 && OMXResourceManager &
+	echo "OK"
+    fi
+}
+
+stop ()
+{
+    echo -n "Shutting down OpenMAX: "
+    killall OMXAudioManager > /dev/null 2>&1
+    killall OMXPolicyManager > /dev/null 2>&1
+    killall OMXResourceManager > /dev/null 2>&1
+    sleep 3
+    echo "OK"
+
+    echo -n "Unloading Bridge driver: "
+    rmmod bridgedriver > /dev/null 2>&1
+    echo "OK"
+}
+
+restart ()
+{
+    stop
+    start
+}
+
+cd /
+
+case "$1" in
+    start)
+	start
+	;;
+    stop)
+	stop
+	;;
+    restart)
+	restart
+	;;
+    *)
+	echo "Usage: $0 {start|stop|restart} [dsp_image]"
+	exit 1
+esac
+
+cd - > /dev/null 2>&1
+
+exit $?
