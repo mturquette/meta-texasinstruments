@@ -9,10 +9,8 @@ S = ${WORKDIR}/src/omx/linux
 
 inherit pkgconfig
 
-#http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_23.x/CSSD_Linux_${PV}RC4.tar.bz2 \
-
 SRC_URI = "\
-	file://home/ddiaz/downs/CSSD_Linux_${PV}-omx-nopatterns.tar.gz \
+	http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_23.x/CSSD_Linux_${PV}RC4.tar.bz2 \
 	file://libomxil-ti.pc \
 	file://omap24xxvout.h \
 	file://aacdecnorm.patch;patch=1 \
@@ -46,8 +44,7 @@ SRC_URI = "\
 
 do_unpack() {
 	cd ${WORKDIR}
-#	tar jxf ${DL_DIR}/CSSD_Linux_${PV}RC4.tar.bz2 CSSD_Linux_${PV}RC4/src/omx/linux --strip-components 1
-	tar xf /home/ddiaz/downs/CSSD_Linux_${PV}-omx-nopatterns.tar.gz CSSD_Linux_${PV}RC4/src/omx --strip-components 1
+	tar jxf ${DL_DIR}/CSSD_Linux_${PV}RC4.tar.bz2 CSSD_Linux_${PV}RC4/src/omx/linux --strip-components 1
 }
 
 do_compile_prepend() {
