@@ -5,16 +5,12 @@ LICENSE = "GPL"
 PR = "r2"
 COMPATIBLE_MACHINE = "omap-3430(l|s)dp"
 
+# We need to override this and make sure it's only -j1
+PARALLEL_MAKE = "-j1"
+
 inherit module ccasefetch
 
-#SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_${PV}RC1.tar.bz2 \
 SRC_URI = "file://mkcross-driver.patch;patch=1"
-#S = ${WORKDIR}/CSSD_Linux_${PV}/src/bridge/mpu
-
-#do_unpack() {
-#	cd ${WORKDIR}
-#	tar jxf ${DL_DIR}/CSSD_Linux_${PV}RC1.tar.bz2 CSSD_Linux_${PV}/src/bridge/mpu/mpu_driver
-#}
 
 CCASE_SPEC = "%\
 	element * COMPONENT_ROOT%\
@@ -30,8 +26,7 @@ do_compile() {
 	oe_runmake PREFIX=${S} PROJROOT=${S}/mpu_driver \
 		KRNLSRC=${STAGING_KERNEL_DIR} \
 		TGTROOT=${S} BUILD=rel CMDDEFS='GT_TRACE DEBUG' \
-		CROSS=arm-poky-linux-gnueabi-
-		#CROSS=${AR%-*}-
+		CROSS=${AR%-*}-
 }
 
 do_install() {
