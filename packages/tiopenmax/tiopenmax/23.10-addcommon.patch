@@ -1,0 +1,96 @@
+diff -Naur 1/Makefile common/Makefile
+--- /dev/null	1969-12-31 18:00:00.000000000 -0600
++++ omx/system/src/openmax_il/common/Makefile	2008-09-09 02:51:14.000000000 -0500
+@@ -0,0 +1,13 @@
++
++
++all::
++
++# pull in the master "inherited" definitions
++include $(OMXROOT)/Master.mk
++
++DIRS= \
++	inc \
++
++$(BASETARGETS)::
++	@$(call traverse_dirs,$(DIRS),$@)
++
+diff -Naur 1/content.pkg common/content.pkg
+--- /dev/null	1969-12-31 18:00:00.000000000 -0600
++++ omx/system/src/openmax_il/common/content.pkg	2008-09-18 06:01:49.000000000 -0500
+@@ -0,0 +1,4 @@
++system\src\openmax_il\common\Makefile
++system\src\openmax_il\common\inc\Makefile
++system\src\openmax_il\common\inc\OMX_TI_Common.h
++
+diff -Naur 1/inc/Makefile common/inc/Makefile
+--- /dev/null	1969-12-31 18:00:00.000000000 -0600
++++ omx/system/src/openmax_il/common/inc/Makefile	2008-09-09 02:49:32.000000000 -0500
+@@ -0,0 +1,12 @@
++HSRC=$(wildcard *.h)
++HTARGET=$(HSRC:%=$(OMXINCLUDEDIR)/%)
++
++include $(OMXROOT)/Master.mk
++
++all install:: $(OMXINCLUDEDIR) $(HTARGET) 
++
++$(OMXINCLUDEDIR)/%: % 
++	cp -f $< $@
++
++clobber::
++	rm -f $(OMXINCLUDEDIR)/OMX_TI_Common.h
+diff -Naur 1/inc/OMX_TI_Common.h common/inc/OMX_TI_Common.h
+--- /dev/null	1969-12-31 18:00:00.000000000 -0600
++++ omx/system/src/openmax_il/common/inc/OMX_TI_Common.h	2008-10-03 10:43:53.000000000 -0500
+@@ -0,0 +1,51 @@
++
++/*
++ * Copyright (C) Texas Instruments - http://www.ti.com/
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ */
++/* ====================================================================
++*             Texas Instruments OMAP(TM) Platform Software
++* (c) Copyright Texas Instruments, Incorporated. All Rights Reserved.
++*
++* Use of this software is controlled by the terms and conditions found
++* in the license agreement under which this software has been supplied.
++* ==================================================================== */
++
++/** OMX_TI_Common.h
++ *  The LCML header file contains the definitions used by both the
++ *  application and the component to access common items.
++ */
++
++#ifndef __OMX_TI_COMMON_H__
++#define __OMX_TI_COMMON_H__
++
++/* OMX_TI_SEVERITYTYPE enumeration is used to indicate severity level of errors returned by TI OpenMax components. 
++   Critcal	Requires reboot/reset DSP
++   Severe	Have to unload components and free memory and try again
++   Major	Can be handled without unloading the component
++   Minor	Essentially informational 
++*/
++typedef enum OMX_TI_SEVERITYTYPE {
++	OMX_TI_ErrorCritical=1,
++	OMX_TI_ErrorSevere,
++	OMX_TI_ErrorMajor,
++	OMX_TI_ErrorMinor
++} OMX_TI_SEVERITYTYPE;
++#endif
++/* File EOF */
++

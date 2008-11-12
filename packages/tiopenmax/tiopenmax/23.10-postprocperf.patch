@@ -1,0 +1,15 @@
+diff -Naurw linux.orig/video/src/openmax_il/post_processor/src/OMX_PostProc_Utils.c linux/video/src/openmax_il/post_processor/src/OMX_PostProc_Utils.c
+--- linux.orig/video/src/openmax_il/post_processor/src/OMX_PostProc_Utils.c	2008-10-22 20:53:17.000000000 -0500
++++ linux/video/src/openmax_il/post_processor/src/OMX_PostProc_Utils.c	2008-11-12 04:42:46.000000000 -0600
+@@ -2021,9 +2021,11 @@
+ 		if ((pBufHead->nFlags & OMX_BUFFERFLAG_EOS) || (pComponentPrivate->bStopping)) {
+             if (pBufHead->nFlags & OMX_BUFFERFLAG_EOS) {
+ 
++#ifdef __PERF_INSTRUMENTATION__
+ 				if(pComponentPrivate->nPrintPostProcEnabled == 1) {
+ 					printf("DONE:::: Frames rendered=%d, Frames Dropped=%d, Average FPS=%f\n", (int)pComponentPrivate->nFramesRendered, (int)pComponentPrivate->nFramesSkipped, frames/(nCurrentMediaTime * 0.000001));
+ 				}
++#endif
+ 
+                 /* trigger event handler */
+                 pComponentPrivate->sCallBackInfo.EventHandler(pComponentPrivate->pHandle, 
