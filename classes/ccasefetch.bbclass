@@ -24,10 +24,16 @@
 
 inherit base
 
+CCASEFETCH_OUTFILE=${DL_DIR}/${PN}-${PV}.tar.gz
+
 do_fetch_ccase () {
 	if [ ! -z "${CCASE_SPEC}" ]; then
-		cd ${DL_DIR}
-		echo "${CCASE_SPEC}" | tr '%' '\n' | fetchccversion2.sh ${CCASE_PATHFETCH} > ${DL_DIR}/${PN}-${PV}.tar.gz
+		if [ ! -f ${CCASEFETCH_OUTFILE} ]; then
+			cd ${DL_DIR}
+			echo "${CCASE_SPEC}" | tr '%' '\n' | fetchccversion2.sh ${CCASE_PATHFETCH} > ${CCASEFETCH_OUTFILE}
+		else
+			echo Package ${PN}-${PV}.tar.gz already downloaded.
+		fi
 	else
 		echo "Required ClearCase config spec is missing."
 		exit 1
@@ -38,7 +44,7 @@ do_unpack_ccase () {
 	if [ ! -z "${CCASE_SPEC}" ]; then
 		[ ! -z "${CCASE_PATHCOMPONENTS}" ] && TARSTRIP="--strip-components ${CCASE_PATHCOMPONENTS}"
 		cd ${WORKDIR}
-		tar zxf ${DL_DIR}/${PN}-${PV}.tar.gz ${TARSTRIP}
+		tar zxf ${CCASEFETCH_OUTFILE} ${TARSTRIP}
 		mv ${CCASE_PATHCOMPONENT} ${PN}-${PV}
 	fi
 }
