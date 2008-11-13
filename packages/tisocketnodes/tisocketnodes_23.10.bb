@@ -12,10 +12,10 @@ do_unpack() {
 }
 
 do_install() {
-	install -d ${D}${libdir}/dsp
-	install -m 0644 ${S}/lib/dsp/* ${D}${libdir}/dsp
+	install -d ${D}/lib/dsp
+	install -m 0644 ${S}/lib/dsp/* ${D}$/lib/dsp
 }
 
 FILES_${PN} += "\
-	${libdir}/dsp \
+	/lib/dsp \
 	"
