@@ -3,7 +3,7 @@ DEPENDS = "tidspbridge-lib"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
 LICENSE = "LGPL"
 PR = "r0"
-PACKAGES = "${PN}-dbg ${PN}-dev ${PN}"
+PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 S = ${WORKDIR}/src/omx/linux
 
@@ -89,16 +89,20 @@ do_install() {
 		install
 }
 
-FILES_${PN}-dbg = "\
-	/omx/.debug \
-	/bin/.debug \
-	/lib/.debug \
-	"
-
 FILES_${PN} = "\
 	/lib \
 	/bin \
 	/omx \
+	"
+
+FILES_${PN}-patterns = "\
+	/omx/patterns \
+	"
+
+FILES_${PN}-dbg = "\
+	/omx/.debug \
+	/bin/.debug \
+	/lib/.debug \
 	"
 
 FILES_${PN}-dev = "\
