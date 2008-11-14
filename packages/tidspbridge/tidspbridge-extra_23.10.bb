@@ -26,3 +26,9 @@ do_install() {
 }
 
 FILES_${PN} = "/dspbridge ${sysconfdir}/init.d/bridge "
+
+pkg_postinst_${PN} () {
+	if [ x"$D" = "x" ]; then
+		ln -sf /lib/modules/`uname -r`/kernel/drivers/dspbridge/bridgedriver.ko /dspbridge/bridgedriver.ko
+	fi
+}
