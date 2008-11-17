@@ -2,7 +2,7 @@
 # Copyright (C) 2008 Texas Instruments
 #
 
-DESCRIPTION = "Tasks for the TI's OpenMAX IL"
+DESCRIPTION = "Tasks for TI's OpenMAX IL"
 PR = "r1"
 
 PACKAGES = "\
