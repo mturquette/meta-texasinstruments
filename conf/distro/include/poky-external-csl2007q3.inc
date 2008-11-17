@@ -6,7 +6,7 @@ TARGET_VENDOR = "-none"
 
 EXTERNAL_TOOLCHAIN = "/usr/local/csl/arm-2007q3"
 
-PATH =. ":${EXTERNAL_TOOLCHAIN}/bin:"
+PATH =. "${EXTERNAL_TOOLCHAIN}/bin:"
 
 PREFERRED_PROVIDER_linux-libc-headers = "external-csl-toolchain"
 PREFERRED_PROVIDER_virtual/arm-none-linux-gnueabi-gcc = "external-csl-toolchain"
@@ -23,3 +23,5 @@ PREFERRED_VERSION_external-csl-toolchain = "2007q3-51"
 
 TARGET_CPPFLAGS_prepend = " -isystem${EXTERNAL_TOOLCHAIN}/${TARGET_SYS}/include "
 TARGET_LDFLAGS_prepend = " -L${EXTERNAL_TOOLCHAIN}/${TARGET_SYS}/lib -Wl,-rpath-link,${EXTERNAL_TOOLCHAIN}/${TARGET_SYS}/lib "
+
+TOOLCHAIN_OPTIONS = " --sysroot=${STAGING_DIR_HOST}"
