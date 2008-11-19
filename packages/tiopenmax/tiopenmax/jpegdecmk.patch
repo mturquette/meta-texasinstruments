@@ -6,7 +6,7 @@ diff -Naur linux.orig/image/src/openmax_il/jpeg_dec/tests/Makefile linux/image/s
  
  $(COMPONENT_TEST): $(OBJ)
 -	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lOMX_Core 
-+	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lpthread -lOMX_Core 
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -L$(BRIDGELIBDIR) -lbridge -lpthread -lOMX_Core 
  $(SRC): $(HSRC)
  
  clean:: 

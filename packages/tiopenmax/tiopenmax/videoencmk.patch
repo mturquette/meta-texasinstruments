@@ -6,7 +6,7 @@ diff -Naur linux.orig/video/src/openmax_il/video_encode/test/Makefile linux/vide
  
  $(COMPONENT_TEST): $(OBJ)
 -	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lOMX_Core  
-+	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lpthread -lOMX_Core  
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -L$(BRIDGELIBDIR) -lbridge -lpthread -lOMX_Core  
  
  $(SRC): $(HSRC)
  
