@@ -8,13 +8,13 @@ DEPENDS = "tidspbridge-module"
 inherit ccasefetch
 
 PACKAGES = "${PN} ${PN}-dbg ${PN}-dev"
-FILES_${PN} = "${libdir}/libbridge.so ${libdir}/libbridge.so.2 ${libdir}/libqos.so ${libdir}/libqos.so.2"
+FILES_${PN} = "${libdir}/libbridge.so ${libdir}/libbridge.so.2 ${libdir}/libqos.a ${libdir}/libqos.so.2"
 FILES_${PN}-dev = "${includedir}/dspbridge"
 
 #SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_${PV}RC1.tar.bz2 \
 SRC_URI = " \
 	file://mkcross-api.patch;patch=1 \
-	file://mkshlib-api.patch;patch=1"
+	"
 
 #S = ${WORKDIR}/CSSD_Linux_${PV}/src/bridge/mpu
 
@@ -42,9 +42,10 @@ do_compile() {
 	mv libbridge.so libbridge.so.2
 	ln -s libbridge.so.2 libbridge.so
 
+	# don't blame me -- i voted for kodos!
 	cd ${S}/mpu_api/src/qos
-	mv libqos.so libqos.so.2
-	ln -s libqos.so.2 libqos.so
+	mv libqos.a libqos.so.2
+	ln -s libqos.so.2 libqos.a
 }
 
 do_stage() {
