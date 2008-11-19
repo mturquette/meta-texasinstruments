@@ -1,3 +1,7 @@
 # This is based on Sato image, plus TI stuff
-IMAGE_FEATURES += "apps-console-core omap-bridge omap-omx omap-gst ${SATO_IMAGE_FEATURES}"
+IMAGE_FEATURES += "apps-console-core ${SATO_IMAGE_FEATURES}"
+#IMAGE_FEATURES += "omap-bridge"
+#IMAGE_FEATURES += "omap-omx"
+#IMAGE_FEATURES += "omap-gst"
+#IMAGE_FEATURES += "omap-gfx"
 inherit omap-image
