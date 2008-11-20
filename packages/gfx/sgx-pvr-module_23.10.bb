@@ -31,6 +31,6 @@ do_install() {
 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
 	cd ${S}/src/eurasia_km/eurasiacon/build/linux/omap3430_linux/kbuild
 	oe_runmake EURASIAROOT=${S}/src/eurasia_km KERNELDIR=${STAGING_KERNEL_DIR} \
-		DISCIMAGE=${STAGING_DIR_TARGET} X11ROOT=${prefix} CROSS=${AR%-*}- \
+		DISCIMAGE=${D} X11ROOT=${prefix} CROSS=${AR%-*}- \
 		install
 }
