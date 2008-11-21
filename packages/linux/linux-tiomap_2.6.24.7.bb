@@ -15,4 +15,5 @@ CCASE_PATHFETCH = "/vobs/wtbu/CSSD_L_GIT_2.6/linux/kernel_org/2.6_kernel"
 CCASE_PATHCOMPONENTS = 5
 CCASE_PATHCOMPONENT = "2.6_kernel"
 
-SRC_URI="file://defconfig-omap-3430ldp" 
+SRC_URI_omap-3430ldp = "file://defconfig-omap-3430ldp"
+SRC_URI_omap-3430sdp = "file://defconfig-omap-3430sdp"
