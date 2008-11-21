@@ -14,7 +14,7 @@ PROVIDES = "\
     virtual/linux-libc-headers "
 RPROVIDES = "glibc-utils libsegfault glibc-thread-db"
 PACKAGES_DYNAMIC = "glibc-gconv-*"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://www.codesourcery.com/public/gnu_toolchain/arm-none-linux-gnueabi/arm-${PV}-arm-none-linux-gnueabi-i686-pc-linux-gnu.tar.bz2 \
 file://SUPPORTED"
@@ -40,6 +40,16 @@ do_stage() {
 
 	install -d ${STAGING_DIR_TARGET}${layout_base_libdir}
 	cp -a ${S}/arm-none-linux-gnueabi/libc/lib/* ${STAGING_DIR_TARGET}${base_libdir}
+
+	sed -e "s# /lib# ../../lib#g" \
+		-e "s# /usr/lib# .#g" \
+		${STAGING_LIBDIR}/libc.so > ${STAGING_LIBDIR}/temp
+	mv ${STAGING_LIBDIR}/temp ${STAGING_LIBDIR}/libc.so
+	
+	sed -e "s# /lib# ../../lib#" \
+		-e "s# /usr/lib# .#g" \
+		${STAGING_LIBDIR}/libpthread.so > ${STAGING_LIBDIR}/temp
+	mv ${STAGING_LIBDIR}/temp ${STAGING_LIBDIR}/libpthread.so
 }
 
 PACKAGES = "libgcc libgcc-dev libstdc++ libstdc++-dev linux-libc-headers"
