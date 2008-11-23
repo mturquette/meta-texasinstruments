@@ -4,4 +4,5 @@ IMAGE_FEATURES += "omap-bridge"
 IMAGE_FEATURES += "omap-omx"
 IMAGE_FEATURES += "omap-gst"
 #IMAGE_FEATURES += "omap-gfx"
+IMAGE_FEATURES += "omap-connectivity"
 inherit omap-image
