@@ -3,7 +3,7 @@ SECTION = "libs"
 PRIORITY = "optional"
 RDEPENDS = "expat dbus bluez-libs bluez-utils openobex obexftp"
 LICENSE = "LGPL"
-PR = "r0"
+PR = "r1"
 
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
 
@@ -16,4 +16,5 @@ do_install() {
 	install -m 755 ${S}/init_scripts/* ${D}/lib/firmware
 }
 
-FILES_${PN} = "/lib/firmware"
+PACKAGES = "${PN}"
+FILES_${PN} = "${layout_base_libdir}/firmware"
