@@ -12,4 +12,6 @@ RDEPENDS = "\
     tidspbridge-module \
     tidspbridge-lib \
     tidspbridge-extra \
+    tidspbridge \
+    baseimage \
     "
