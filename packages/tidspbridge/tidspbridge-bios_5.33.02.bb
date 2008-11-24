@@ -1,0 +1,17 @@
+SECTION = "toolchains"
+PRIORITY = "optional"
+DESCRIPTION = "Texas Instruments DSP Toolchain"
+LICENSE = "Texas Instruments"
+PR = "r0"
+
+inherit dfetch
+
+DIRAC_PATHFETCH = "/data/omapts/linux/dsp-tc/BIOS-${PV}"
+DIRAC_PATHCOMPONENT = "BIOS-${PV}"
+DIRAC_PATHCOMPONENTS = 6
+
+do_stage() {
+	cd ${STAGING_BINDIR}
+	install -d ${STAGING_BINDIR}/dspbridge/tools
+	cp -a ${S}/* ${STAGING_BINDIR}/dspbridge/tools
+}

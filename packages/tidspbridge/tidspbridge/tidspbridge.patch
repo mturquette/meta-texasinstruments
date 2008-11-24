@@ -1,0 +1,11 @@
+--- dsp/gmakefile.orig	2008-11-16 20:03:40.000000000 -0600
++++ dsp/gmakefile	2008-11-16 20:06:58.000000000 -0600
+@@ -187,6 +187,8 @@
+ 	$(RM) -rf bdsptools/packages
+ 	$(MKDIR) -p bdsptools/packages
+ 	$(DD_XDCDIR)/bin/tar -C bdsptools/packages -xvf bdsptools/bridge-tools.tar
++	$(RM) bdsptools/packages/ti/dspbridge/dsp/doffbuild/bin/DLLcreate
++	cp $(DLLCREATE_DIR)/DLLcreate bdsptools/packages/ti/dspbridge/dsp/doffbuild/bin
+ 	$(TOUCH) .bridge_tools
+ 
+ ifeq ($(FC_PACKAGE), TRUE)
