@@ -5,6 +5,7 @@ PROVIDES = "\
     virtual/arm-none-linux-gnueabi-gcc \
     virtual/arm-none-linux-gnueabi-g++ \
     virtual/arm-none-linux-gnueabi-gcc-initial \
+    virtual/arm-none-linux-gnueabi-gcc-intermediate \
     virtual/arm-none-linux-gnueabi-binutils \
     virtual/arm-none-linux-gnueabi-libc-for-gcc \
     virtual/libc \
