@@ -1,0 +1,17 @@
+--- scm.oig/build_tools/mcl_parser.pl	2008-11-17 14:20:08.000000000 -0600
++++ scm/build_tools/mcl_parser.pl	2008-11-17 14:16:40.000000000 -0600
+@@ -20,6 +20,7 @@
+ 
+ my $line;
+ my $colInd=0;
++my $opts = "";
+ 
+ my $opt_status  = GetOptions($opts,
+     "fname|fn=s"              => \$filename,
+@@ -356,4 +357,4 @@
+   }
+   
+   return -1;
+-}
+\ No newline at end of file
++}
