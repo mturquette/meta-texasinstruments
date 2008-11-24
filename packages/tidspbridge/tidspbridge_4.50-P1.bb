@@ -5,6 +5,7 @@ PR = "r0"
 DEPENDS = "tidspbridge-bios \
 	   tidspbridge-cgt6x \
 	   tidspbridge-dllcreate"
+FILES_${PN}="/dspbridge"
 
 CCASE_SPEC = "%\
 	      element /vobs/SDS/Source/Bridge/dsp/... BRIDGE-DSP_RLS_${PV}%\

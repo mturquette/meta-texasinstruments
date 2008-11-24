@@ -13,6 +13,7 @@ DEPENDS = "baseimage-avsync \
 	   baseimage-utils \
 	   baseimage-masterconfig \
 	   tidspbridge"
+FILES_${PN}="${base_libdir}/dsp/baseimage.dof"
 
 CCASE_SPEC = "%\
 	      element /vobs/wtbu/OMAPSW_DSP/system/baseimage/...  DSP-MM-TID-SYSTEM_RLS_${PV}%\
