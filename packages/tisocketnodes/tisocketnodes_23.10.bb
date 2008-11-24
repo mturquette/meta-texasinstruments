@@ -13,7 +13,7 @@ do_unpack() {
 
 do_install() {
 	install -d ${D}/lib/dsp
-	install -m 0644 -t ${D}/lib/dsp ${S}/lib/dsp/*
+	install -m 0644 ${S}/lib/dsp/* ${D}/lib/dsp
 }
 
 FILES_${PN} += "\

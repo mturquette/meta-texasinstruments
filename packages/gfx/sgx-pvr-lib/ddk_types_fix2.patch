@@ -1,0 +1,11 @@
+--- GFX_Linux_DDK/src/eurasia/eurasiacon/include/drveglplatform.h	2008-09-16 18:29:23.000000000 -0500
++++ GFX_Linux_DDK2/src/eurasia/eurasiacon/include/drveglplatform.h	2008-11-23 11:42:47.000000000 -0600
+@@ -33,7 +33,7 @@
+ /* Windows calling convention boilerplate */
+ 
+ #ifndef int32_t
+-typedef int int32_t;
++#include <stdint.h>
+ #endif
+ 
+ /* Macros used in EGL function prototype declarations.

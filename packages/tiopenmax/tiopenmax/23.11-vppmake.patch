@@ -1,0 +1,12 @@
+diff -Naur linux.orig/video/src/openmax_il/prepost_processor/tests/Makefile linux/video/src/openmax_il/prepost_processor/tests/Makefile
+--- linux.orig/video/src/openmax_il/prepost_processor/tests/Makefile	2008-11-18 03:35:55.000000000 -0600
++++ linux/video/src/openmax_il/prepost_processor/tests/Makefile	2008-11-23 15:11:27.000000000 -0600
+@@ -37,7 +37,7 @@
+ 
+ $(COMPONENT_TEST): $(OBJ)
+ #	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -L$(BRIDGELIBDIR) -lOMX_ResourceManagerProxy -ldl -lOMX_Core -lpthread -lOMX_VPP -lbridge 
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lOMX_Core
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(BRIDGELIBDIR) -L$(OMXLIBDIR) -lpthread -lbridge -lOMX_Core
+ 
+ $(COMP_SRC): $(HSRC)
+ 
