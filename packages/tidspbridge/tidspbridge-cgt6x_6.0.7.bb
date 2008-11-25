@@ -11,7 +11,7 @@ DIRAC_PATHCOMPONENT = "cgt6x-${PV}"
 DIRAC_PATHCOMPONENTS = 4
 
 do_stage() {
-	cd ${STAGING_BINDIR}
+	chmod -R +w ${S}/*
 	install -d ${STAGING_BINDIR}/dspbridge/tools/cgt6x-${PV}
 	cp -a ${S}/* ${STAGING_BINDIR}/dspbridge/tools
 }

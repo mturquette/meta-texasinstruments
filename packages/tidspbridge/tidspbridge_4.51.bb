@@ -29,7 +29,7 @@ SRC_URI = "file://tidspbridge.patch;patch=1"
 inherit ccasefetch
 
 do_compile() {
-	cd ${S}
+	chmod -R +w ${S}/*
 	${ENV_VAR} oe_runmake -f gmakefile .clean
 	${ENV_VAR} oe_runmake -f gmakefile .bridge_samples
 }

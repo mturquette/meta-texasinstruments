@@ -11,7 +11,8 @@ DIRAC_PATHCOMPONENT = "BIOS-${PV}"
 DIRAC_PATHCOMPONENTS = 6
 
 do_stage() {
-	cd ${STAGING_BINDIR}
+	chmod -R +w ${S}/*
 	install -d ${STAGING_BINDIR}/dspbridge/tools
 	cp -a ${S}/* ${STAGING_BINDIR}/dspbridge/tools
+	
 }

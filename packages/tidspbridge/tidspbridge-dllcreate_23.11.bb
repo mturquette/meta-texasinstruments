@@ -17,6 +17,7 @@ inherit ccasefetch
 
 do_compile() {
 	cd DLLcreate
+        chmod -R +w *
 	mkdir -p linux/release
 	oe_runmake -f makefile.lin	
 }
