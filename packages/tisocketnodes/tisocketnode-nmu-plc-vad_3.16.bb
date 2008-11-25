@@ -1,5 +1,12 @@
+<<<<<<< HEAD:packages/tisocketnodes/tisocketnode-nmu-plc-vad_3.16.bb
+PRIORITY = "optional"
+DESCRIPTION = "Texas Instruments G711 Decoder/Encoder Socket Node nmu_plc_vad."
+LICENSE = "LGPL"
+=======
 DESCRIPTION = "Texas Instruments G711 Decoder Socket Node nmu_plc_vad."
+>>>>>>> origin:packages/tisocketnodes/tisocketnode-g711dec-nmu-plc-vad_3.15.bb
 PR = "r0"
+DEPENDS = "baseimage"
 
 CCASE_SPEC = "%\
 	      element /vobs/wtbu/CSSD_MM_Releases/Codecs/speech/nmu_plc_vad/... DSP-MM-TID-AUDIO_RLS_${PV}%\
