@@ -12,6 +12,7 @@ CCASE_PATHCOMPONENTS = "3"
 inherit ccasefetch
 
 do_stage() {
+	chmod -R +w ${S}/*
 	install -d ${STAGING_BINDIR}/dspbridge/algo
 	cp -a ${S}/* ${STAGING_BINDIR}/dspbridge/algo
 }
