@@ -18,21 +18,22 @@ do_compile() {
 ## Getting MasterConfig files
         mkdir -p ${S}/include
         cp -a ${STAGING_INCDIR}/dspbridge/include/* ${S}/include
-	## Getting the dsp make system
+## Getting the dsp make system
         mkdir -p ${S}/make
         cp -a ${STAGING_BINDIR}/dspbridge/make/* ${S}/make
-	## Getting utils files
+## Getting utils files
         mkdir -p ${S}/system/utils
         cp -a ${STAGING_BINDIR}/dspbridge/system/utils/* ${S}/system/utils
-	## Getting usn files
+## Getting usn files
         mkdir -p ${S}/system/usn
         cp -a ${STAGING_BINDIR}/dspbridge/system/usn/* ${S}/system/usn
-	## Getting inst2 files
+## Getting inst2 files
         mkdir -p ${S}/system/inst2
         cp -a ${STAGING_BINDIR}/dspbridge/system/inst2/* ${S}/system/inst2
-	## Setting PATH for gmake
+## Setting PATH for gmake
         pathorig=$PATH
         export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
+	chmod -R +w ${S}/*	
 	cd ${SN_DIR}
 	sed -e 's%\\%\/%g' makefile > makefile.linux
 	${ENV_VAR} oe_runmake -f makefile.linux build=omap3430${RELEASE}
