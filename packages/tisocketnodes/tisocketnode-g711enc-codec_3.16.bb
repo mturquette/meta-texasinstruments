@@ -17,6 +17,7 @@ do_unpack2() {
 }
 
 do_stage() {
+        chmod -R +w ${S}/*
 	install -d ${STAGING_BINDIR}/dspbridge/Codecs/speech/g711_enc/c64x/mm_tiicodecs/g711_x_all_c64xplus
 	cp -a ${S}/g711_x_all_c64xplus/* ${STAGING_BINDIR}/dspbridge/Codecs/speech/g711_enc/c64x/mm_tiicodecs/g711_x_all_c64xplus
 }

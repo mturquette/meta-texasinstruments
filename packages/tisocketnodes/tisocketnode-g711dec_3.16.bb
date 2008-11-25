@@ -1,6 +1,8 @@
 DESCRIPTION = "Texas Instruments G711 Decoder Socket Node."
 PR = "r0"
-DEPENDS += "tisocketnode-g711dec-codec"
+DEPENDS += "tisocketnode-g711dec-codec \
+	    tisocketnode-nmu-plc-vad \
+"
 
 CCASE_SPEC = "%\
 	      element /vobs/wtbu/OMAPSW_DSP/speech/node/g711/dec/... DSP-MM-TID-AUDIO_RLS_${PV}%\
