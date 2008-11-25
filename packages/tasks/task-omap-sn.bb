@@ -17,7 +17,7 @@ RDEPENDS = "\
     tisocketnode-g711dec \
     tisocketnode-gsmhrenc \
     tisocketnode-mpeg4enc \
-    tisocketnode-g711dec-nmu-plc-vad \
+    tisocketnode-nmu-plc-vad \
     tisocketnode-h264dec \
     tisocketnode-nbamrdec \
     tisocketnode-g711enc \
