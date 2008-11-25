@@ -17,6 +17,7 @@ do_compile() {
 }
 
 do_stage() {
+        chmod -R +w ${S}/*
 	install -d ${STAGING_BINDIR}/dspbridge/video/alg/vgpop
 	cp -a ${S}/* ${STAGING_BINDIR}/dspbridge/video/alg/vgpop
 }

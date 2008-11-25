@@ -17,6 +17,7 @@ do_compile() {
 }
 
 do_stage() {
+	chmod -R +w ${S}/*
 	install -d ${STAGING_BINDIR}/dspbridge/system/hal
 	cp -a ${S}/* ${STAGING_BINDIR}/dspbridge/system/hal
 }

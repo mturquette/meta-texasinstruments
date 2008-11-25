@@ -25,6 +25,7 @@ do_compile() {
 }
 
 do_stage() {
+        chmod -R +w ${S}/*
 	install -d ${STAGING_INCDIR}/dspbridge/include
 	cp -a ${S}/build_tools/MasterConfig.* ${STAGING_INCDIR}/dspbridge/include
 }
