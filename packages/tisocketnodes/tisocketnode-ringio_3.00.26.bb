@@ -27,7 +27,6 @@ RELEASE = "release"
 inherit ccasefetch
 
 do_compile() {
-	cd ${S}/system/ringio
 ## Getting the Master Config files
 	mkdir -p ${S}/include 
         cp -a ${STAGING_INCDIR}/dspbridge/include/* ${S}/include
@@ -37,6 +36,8 @@ do_compile() {
 ## Setting path to find gmake
         pathorig=$PATH
 	export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
+        chmod -R +w ${S}/*
+	cd ${S}/system/ringio
 	sed -e 's%\\%\/%g' makefile > makefile.linux
 	${ENV_VAR} oe_runmake -f makefile.linux build=omap3430${RELEASE}
 ## Setting path to original value
@@ -47,12 +48,9 @@ do_compile() {
 do_stage() {
 	install -d ${STAGING_BINDIR}/dspbridge/system/ringio
 	cp -a ${S}/system/ringio/* ${STAGING_BINDIR}/dspbridge/system/ringio
-#	install -d ${STAGING_INCDIR}/dspbridge/exports/include
-#	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/include/*.h ${STAGING_INCDIR}/dspbridge/exports/include
 }
 
 do_install() {
 	install -d ${D}${base_libdir}/dsp
 	install -m 0644 ${S}/system/ringio/out/omap3430/${RELEASE}/ringio.dll64P ${D}${base_libdir}/dsp
-#	install -m 0644 ${S}/system/baseimage/out/omap3430/${RELEASE}/baseimage.map ${D}${libdir}/dsp
 }
