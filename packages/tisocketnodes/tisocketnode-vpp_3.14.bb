@@ -48,7 +48,7 @@ do_compile() {
 ## Setting PATH for gmake
         pathorig=$PATH
         export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
-	pwd
+        chmod -R +w ${S}/*
 	cd ${S}/video/node/vpp
 	sed -e 's%\\%\/%g' makefile > makefile.linux
 	${ENV_VAR} oe_runmake -f makefile.linux build=omap3430${RELEASE}
@@ -56,15 +56,7 @@ do_compile() {
         unset pathorig
 }
 
-#do_stage() {
-#	install -d ${STAGING_LIBDIR}/dspbridge/exports/lib
-#	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/lib/*.a64P ${STAGING_LIBDIR}/dspbridge/exports/lib
-#	install -d ${STAGING_INCDIR}/dspbridge/exports/include
-#	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/include/*.h ${STAGING_INCDIR}/dspbridge/exports/include
-#}
-
 do_install() {
 	install -d ${D}${base_libdir}/dsp
 	install -m 0644 ${S}/video/node/vpp/out/omap3430/${RELEASE}/vpp_sn.dll64P ${D}${base_libdir}/dsp
-#	install -m 0644 ${S}/system/baseimage/out/omap3430/${RELEASE}/baseimage.map ${D}${libdir}/dsp
 }
