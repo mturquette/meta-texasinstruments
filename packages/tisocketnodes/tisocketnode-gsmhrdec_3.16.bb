@@ -1,17 +1,17 @@
 PRIORITY = "optional"
-DESCRIPTION = "Texas Instruments GSM Half-Rate Encoder Socket Node."
+DESCRIPTION = "Texas Instruments GSM Half-Rate Decoder Socket Node."
 LICENSE = "LGPL"
 PR = "r0"
 DEPENDS = "baseimage \
 	   tisocketnode-ringio \
 	   tisocketnode-usn \
-	   tisocketnode-gsmhrenc-codec"
+	   tisocketnode-gsmhrdec-codec"
 
 CCASE_SPEC = "%\
-	      element /vobs/wtbu/OMAPSW_DSP/speech/node/hr/enc/... DSP-MM-TID-AUDIO_RLS_${PV}%\
+	      element /vobs/wtbu/OMAPSW_DSP/speech/node/hr/dec/... DSP-MM-TID-AUDIO_RLS_${PV}%\
 	      element * /main/LATEST%"
 
-CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/speech/node/hr/enc"
+CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/speech/node/hr/dec"
 CCASE_PATHCOMPONENT = "OMAPSW_DSP"
 CCASE_PATHCOMPONENTS = "2"
 
@@ -37,6 +37,7 @@ do_compile() {
 ## Getting the dsp make system
         mkdir -p ${S}/make
         cp -a ${STAGING_BINDIR}/dspbridge/make/* ${S}/make
+        chmod -R +w ${S}/make
 ## Getting utils files
         mkdir -p ${S}/system/utils
         cp -a ${STAGING_BINDIR}/dspbridge/system/utils/* ${S}/system/utils
@@ -49,22 +50,15 @@ do_compile() {
 ## Setting PATH for gmake
         pathorig=$PATH
         export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
-	cd ${S}/speech/node/hr/enc
+        chmod -R +w ${S}/*
+	cd ${S}/speech/node/hr/dec
 	sed -e 's%\\%\/%g' makefile > makefile.linux
 	${ENV_VAR} oe_runmake -f makefile.linux build=omap3430${RELEASE}
         export PATH=$pathorig
         unset pathorig
 }
 
-#do_stage() {
-#	install -d ${STAGING_LIBDIR}/dspbridge/exports/lib
-#	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/lib/*.a64P ${STAGING_LIBDIR}/dspbridge/exports/lib
-#	install -d ${STAGING_INCDIR}/dspbridge/exports/include
-#	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/include/*.h ${STAGING_INCDIR}/dspbridge/exports/include
-#}
-
 do_install() {
 	install -d ${D}${base_libdir}/dsp
-	install -m 0644 ${S}/speech/node/hr/enc/out/omap3430/${RELEASE}/hrenc_sn.dll64P ${D}${base_libdir}/dsp
-#	install -m 0644 ${S}/system/baseimage/out/omap3430/${RELEASE}/baseimage.map ${D}${libdir}/dsp
+	install -m 0644 ${S}/speech/node/hr/dec/out/omap3430/${RELEASE}/hrdec_sn.dll64P ${D}${base_libdir}/dsp
 }
