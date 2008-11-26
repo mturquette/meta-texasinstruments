@@ -1,8 +1,6 @@
-PRIORITY = "optional"
-DEPENDS = "tidspbridge-lib"
+DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-LICENSE = "LGPL"
-PR = "r0"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
@@ -18,14 +16,11 @@ CCASE_SPEC = "\
 	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_3.17%\
 	# ROOT folder & Make files%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_3.17%\
-	# MM ISP%\
-	element /vobs/wtbu/OMAPSW_MPU/algo/... LINUX-TID-MMISP_RLS_1.11%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/mm_isp/... LINUX-TID-MMISP_RLS_1.11%\
 	\
 	element * /main/LATEST%\
 	"
 
-CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux"
+CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux /vobs/wtbu/OMAPSW_MPU/algo"
 CCASE_PATHCOMPONENTS = 3
 CCASE_PATHCOMPONENT = "linux"
 
@@ -45,11 +40,10 @@ SRC_URI = "\
 	file://jpegdecmk.patch;patch=1 \
 	file://jpegencmk.patch;patch=1 \
 	file://23.10-postprocperf.patch;patch=1 \
-	file://nocamera.patch;patch=1 \
 	file://23.11-vppmake.patch;patch=1 \
 	file://videoencmk.patch;patch=1 \
 	file://videodecmk.patch;patch=1 \
-	file://nocameraapps.patch;patch=1 \
+	file://23.11-cameramk.patch;patch=1 \
 	"
 # these pending update for 23.10/23.11:
 #	file://wbamrencnorm.patch;patch=1 \
@@ -64,6 +58,8 @@ SRC_URI = "\
 #	file://23.10-nbamrencnorm.patch;patch=1 \
 #	file://23.10-wbamrdecnorm.patch;patch=1 \
 #	file://23.10-addcommon.patch;patch=1 \
+##	file://nocamera.patch;patch=1 \
+##	file://nocameraapps.patch;patch=1 \
 
 
 do_compile_prepend() {

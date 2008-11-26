@@ -1,0 +1,12 @@
+diff -Naur vobs.orig/wtbu/OMAPSW_MPU/linux/mm_isp/ipp/src/Makefile vobs/wtbu/OMAPSW_MPU/linux/mm_isp/ipp/src/Makefile
+--- OMAPSW_MPU.orig/linux/mm_isp/ipp/src/Makefile	2008-07-21 14:35:30.000000000 -0500
++++ OMAPSW_MPU/linux/mm_isp/ipp/src/Makefile	2008-11-26 01:14:35.000000000 -0600
+@@ -18,7 +18,7 @@
+ 
+ $(COMPONENT_LIB): $(OBJ)
+ 	# Not sure if MPU bridge needs to be dynmaically linked here.  Keep for now.
+-	$(CC) $(CFLAGS) -shared -o $(COMPONENT_LIB) $(OBJ) -L$(BRIDGELIBDIR) -lbridge -lpthread -lcapl
++	$(CC) $(CFLAGS) -shared -o $(COMPONENT_LIB) $(OBJ) -L$(BRIDGELIBDIR) -lbridge -lpthread -lcapl -L../../capl/src
+ 
+ install::
+ 	cp -f $(COMPONENT_LIB) $(MMISPLIBDIR)

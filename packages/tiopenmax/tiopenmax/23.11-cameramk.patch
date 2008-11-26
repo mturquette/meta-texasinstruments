@@ -1,0 +1,12 @@
+--- tiopenmax-3.17/video/src/openmax_il/camera.orig/src/Makefile	2008-10-22 20:52:08.000000000 -0500
++++ tiopenmax-3.17/video/src/openmax_il/camera/src/Makefile	2008-11-26 02:19:23.000000000 -0600
+@@ -55,7 +55,8 @@
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 
+ $(COMPONENT_LIB): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -shared -o $(COMPONENT_LIB) $(OBJ) -L$(OMXLIBDIR) -lpthread -lOMX_ResourceManagerProxy -lVStab -lImagePipeline -lcapl
++	# BRIDGELIBDIR should be instead MMISPLIBDIR, but there is no such var defined
++	$(CROSS)gcc $(CFLAGS) -shared -o $(COMPONENT_LIB) $(OBJ) -L$(OMXLIBDIR) -L$(BRIDGELIBDIR) -lpthread -lOMX_ResourceManagerProxy -lVStab -lImagePipeline -lcapl
+ 
+ $(SRC): $(HSRC)
+ 

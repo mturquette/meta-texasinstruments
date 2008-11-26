@@ -1,0 +1,12 @@
+diff -Naur ../../vobs.orig/wtbu/OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile
+--- ../../vobs.orig/wtbu/OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile	2008-07-21 14:32:37.000000000 -0500
++++ OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile	2008-11-26 01:27:38.000000000 -0600
+@@ -24,7 +24,7 @@
+ 
+ include $(MMISPROOT)/Master.mk
+ 
+-CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/drivers/media/video/isp -Wall -fpic -pipe
++CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/drivers/media/video/isp -I../../../../algo/camera/isphal/inc -Wall -fpic -pipe
+ ifeq ($(USE_HWP), 1)
+ CFLAGS+=-DUSE_HWP=1
+ else
