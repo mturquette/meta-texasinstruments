@@ -1,4 +1,6 @@
+PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments RingIO Socket Node."
+LICENSE = "LGPL"
 PR = "r0"
 DEPENDS = "baseimage"
 
@@ -10,12 +12,19 @@ CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/system/ringio"
 CCASE_PATHCOMPONENT = "OMAPSW_DSP"
 CCASE_PATHCOMPONENTS = "2"
 
-SN_DIR=${S}/system/ringio
+ENV_VAR = "DEPOT=${STAGING_BINDIR}/dspbridge/tools \
+	   DSPMAKEROOT=${S}/make \
+	   DBS_BRIDGE_DIR_C64=${STAGING_BINDIR}/dspbridge/dsp \
+	   DBS_SABIOS_DIR_C64=${STAGING_BINDIR}/dspbridge/tools \
+	   DBS_CGTOOLS_DIR_C64=${STAGING_BINDIR}/dspbridge/tools/cgt6x-6.0.7 \
+	   DBS_FC=${STAGING_BINDIR}/dspbridge/dsp/bdsptools/framework_components_1_10_04/packages-bld \
+	   DLLCREATE_DIR=${STAGING_BINDIR}/DLLcreate \
+"
 
 #set to release or debug
 RELEASE = "release"
 
-inherit ccasefetch tisocketnode
+inherit ccasefetch
 
 do_compile() {
 ## Getting the Master Config files
@@ -28,7 +37,7 @@ do_compile() {
         pathorig=$PATH
 	export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
         chmod -R +w ${S}/*
-	cd ${SN_DIR}
+	cd ${S}/system/ringio
 	sed -e 's%\\%\/%g' makefile > makefile.linux
 	${ENV_VAR} oe_runmake -f makefile.linux build=omap3430${RELEASE}
 ## Setting path to original value
@@ -39,4 +48,9 @@ do_compile() {
 do_stage() {
 	install -d ${STAGING_BINDIR}/dspbridge/system/ringio
 	cp -a ${S}/system/ringio/* ${STAGING_BINDIR}/dspbridge/system/ringio
+}
+
+do_install() {
+	install -d ${D}${base_libdir}/dsp
+	install -m 0644 ${S}/system/ringio/out/omap3430/${RELEASE}/ringio.dll64P ${D}${base_libdir}/dsp
 }
