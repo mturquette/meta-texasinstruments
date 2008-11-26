@@ -27,7 +27,6 @@ RELEASE = "release"
 inherit ccasefetch
 
 do_compile() {
-	cd ${S}/system/usn
 ## Getting MasterConfig files
         mkdir -p ${S}/include
         cp -a ${STAGING_INCDIR}/dspbridge/include/* ${S}/include
@@ -46,6 +45,8 @@ do_compile() {
 ## Setting PATH for gmake
         pathorig=$PATH
         export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
+        chmod -R +w ${S}/*
+	cd ${S}/system/usn
 	sed -e 's%\\%\/%g' makefile > makefile.linux
 	${ENV_VAR} oe_runmake -f makefile.linux build=omap3430${RELEASE}
 	export PATH=$pathorig
@@ -55,12 +56,9 @@ do_compile() {
 do_stage() {
 	install -d ${STAGING_BINDIR}/dspbridge/system/usn
 	cp -a ${S}/system/usn/* ${STAGING_BINDIR}/dspbridge/system/usn
-#	install -d ${STAGING_INCDIR}/dspbridge/exports/include
-#	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/include/*.h ${STAGING_INCDIR}/dspbridge/exports/include
 }
 
 do_install() {
 	install -d ${D}${base_libdir}/dsp
 	install -m 0644 ${S}/system/usn/out/omap3430/${RELEASE}/usn.dll64P ${D}${base_libdir}/dsp
-#	install -m 0644 ${S}/system/usn/out/omap3430/${RELEASE}/baseimage.map ${D}${libdir}/dsp
 }
