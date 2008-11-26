@@ -5,6 +5,7 @@ PR = "r0"
 
 CCASE_SPEC = "%\
 	      element /vobs/wtbu/OMAPSW_DSP/system/dasf/... DSP-MM-TIF-DASF_RLS_${PV}%\
+	      element /vobs/wtbu/OMAPSW_DSP/system/dasf/... DSP-MM-TIF-DASF_RLS_3.40.1%\
 	      element * /main/LATEST%"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/system/dasf"
