@@ -31,7 +31,8 @@ RDEPENDS = "\
     tisocketnode-ilbcenc \
     tisocketnode-ringio \
     tisocketnode-g723dec \
-    tisocketnode-ima-adpcm \
+    tisocketnode-ima-adpcmdec \
+    tisocketnode-ima-adpcmenc \
     tisocketnode-g723enc \
     tisocketnode-spark \
     tisocketnode-ipp \
