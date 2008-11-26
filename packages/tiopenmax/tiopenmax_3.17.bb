@@ -20,7 +20,7 @@ CCASE_SPEC = "\
 	element * /main/LATEST%\
 	"
 
-CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux /vobs/wtbu/OMAPSW_MPU/algo"
+CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux"
 CCASE_PATHCOMPONENTS = 3
 CCASE_PATHCOMPONENT = "linux"
 
@@ -58,8 +58,6 @@ SRC_URI = "\
 #	file://23.10-nbamrencnorm.patch;patch=1 \
 #	file://23.10-wbamrdecnorm.patch;patch=1 \
 #	file://23.10-addcommon.patch;patch=1 \
-##	file://nocamera.patch;patch=1 \
-##	file://nocameraapps.patch;patch=1 \
 
 
 do_compile_prepend() {
