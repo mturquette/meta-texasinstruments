@@ -1,6 +1,6 @@
 DESCRIPTION = "Texas Instruments MPEG2 Socket Node."
 PR = "r0"
-DEPENDS = "tisocketnode-mpeg2-codec"
+DEPENDS += "tisocketnode-mpeg2-codec"
 
 CCASE_SPEC = "%\
 	      element /vobs/wtbu/OMAPSW_DSP/video/node/mpeg2/... DSP-MM-TID-IMVID_RLS_${PV}%\
