@@ -1,6 +1,6 @@
 DESCRIPTION = "Texas Instruments GSM Half-Rate Encoder Socket Node."
 PR = "r0"
-DEPENDS = "tisocketnode-gsmhrenc-codec"
+DEPENDS += "tisocketnode-gsmhrenc-codec"
 
 CCASE_SPEC = "%\
 	      element /vobs/wtbu/OMAPSW_DSP/speech/node/hr/enc/... DSP-MM-TID-AUDIO_RLS_${PV}%\
