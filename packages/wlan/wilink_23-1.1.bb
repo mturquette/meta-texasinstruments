@@ -11,7 +11,8 @@ CCASE_SPEC = "%\
 	"
 
 CCASE_PATHFETCH = "/vobs/WiLink/platforms/os/linux/voice/ \
-	/vobs/WiLink/platforms/os/linux/apps /vobs/WiLink/fw/Latest/"
+	/vobs/WiLink/platforms/os/linux/apps /vobs/WiLink/fw/Latest/ \
+	/vobs/WiLink/platforms/os/linux/suppl
 CCASE_PATHCOMPONENTS = 1
 CCASE_PATHCOMPONENT = "WiLink"
 
@@ -27,4 +28,6 @@ do_install() {
 	install -m 0644 ${S}/fw/Latest/Fw1273_CHIP.bin ${D}/wlan/firmware.bin
 	
 	install -m 0644 ${S}/platforms/os/linux/voice/wpa_supplicant.txt ${D}/wlan
+
+	install -m 0755 ${S}/platforms/os/linux/suppl/wpa_supplicant ${D}/wlan
 }
