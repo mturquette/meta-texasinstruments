@@ -1,0 +1,126 @@
+# invoke insmod with all arguments we were passed
+# and use a pathname, as newer modutils dont look in . by default
+
+version=`uname -r`
+version=`echo -n -e $version | cut -d "." -f -2`
+if [ $version = 2.4 ]
+then
+BridgeDriver=bridgedriver.o
+elif [ $version = 2.6 ]
+then
+BridgeDriver=bridgedriver.ko
+else
+echo "Unsupported Kernel"
+BridgeDriver=""
+exit
+fi
+
+if [ $# -eq 1 ]
+then
+if [ $1 = "help" -o $1 = "HELP" ]
+then
+echo "USAGE: "
+echo "./install_bridge <bridgedriver path> shm_size=<shm size> GT_str="**=trace levels""
+echo "where  :"
+echo " <bridgedriver path> : Path to bridgedriver, by default bridgedriver"
+echo "	  	           : is installed from current directory,Make sure that"
+echo "	              	   : the path argument should be the first argument"
+echo "	         <shm size>: Shared Memory size in hex"
+echo "	         	   : default value is 0x400000"
+echo "	     <trace levels>: this provides trace messages while running app"
+echo "	       	    	   : valid trace values are 0-7 e.g: GT_str="**=567""
+exit
+fi
+fi
+echo "INFO: For help run script as ./install_bridge help"
+
+allArgs=$*
+bridge_path=`echo $allArgs | grep bridgedriver'`
+if [ $? = 0 ]
+then
+flag_bridgepath=1
+echo "INFO:Installed Bridge driver from path: $bridge_path"
+else
+flag_bridgepath=0
+echo "INFO:Installed Bridgedriver from current directory:$PWD"
+fi
+
+if [ $# -lt 1 ]
+then
+    insmod  ./$BridgeDriver phys_mempool_base=0x87000000  phys_mempool_size=0x600000 shm_size=0x400000   $* || exit 1
+
+else
+allArgs=$*
+temp_shm=`echo $allArgs  | awk '{ for (I = 1; I <= NF; I = I + 1) if (match($I, /^shm_size/)) print $I }'`
+shm=`echo $temp_shm | grep 'shm_size'`
+
+if [ $? = 0 ]
+then
+#Extract the shm_size value in number
+
+shm_size=`echo -n -e $shm | cut -d "=" -f 2-`
+shm_size=`echo -n -e $shm_size | cut -d "x" -f 2-`
+
+#Marking numbers as hex numbers
+let shm_size=0x$shm_size
+let cmp=0x200000
+
+if [ $shm_size -le $cmp ]
+ then
+
+if [ $flag_bridgepath -eq 0 ]
+then
+   insmod ./$BridgeDriver  $allArgs || exit 1
+else
+   insmod   $allArgs || exit 1
+fi
+ else
+if [ $flag_bridgepath -eq 0 ]
+then
+   insmod  ./$BridgeDriver phys_mempool_base=0x87000000  phys_mempool_size=0x600000  $allArgs  || exit 1
+else
+   insmod  $allArgs phys_mempool_base=0x87000000  phys_mempool_size=0x600000  || exit 1
+fi
+ fi
+
+else
+if [ $flag_bridgepath -eq 0 ]
+then
+   insmod  ./$BridgeDriver phys_mempool_base=0x87000000  phys_mempool_size=0x600000 shm_size=0x400000  $allArgs  || exit 1
+else
+   insmod  $allArgs phys_mempool_base=0x87000000  phys_mempool_size=0x600000 shm_size=0x400000   || exit 1
+fi
+
+fi
+
+fi
+
+# Allow some time to create the device entries
+
+if [ $version = 2.6 ]
+then
+sleep 2
+fi
+
+#mknode for bridge if kenrel version is 2.4, From 2.6 udev takes car of it.
+if [ $version = 2.4 ]
+then
+# remove stale nodes
+rm -f /dev/DspBridge
+
+# Updated for BusyBox since it doesn't have awk - used sed instead
+MAJ=`cat /proc/devices | sed -ne "/DspBridge/s/DspBridge.*$//p"`
+if [ -z "$MAJ" ]
+then
+    echo "Can't find DspBridge driver, can't continue"
+        exit 1
+fi
+CNT=`echo "$MAJ" | wc -l`
+if [ $CNT != 1 ]
+then
+    echo "Found multiple instances of DspBridge driver, can't continue"
+    exit 1
+fi
+
+mknod /dev/DspBridge c $MAJ 0
+fi

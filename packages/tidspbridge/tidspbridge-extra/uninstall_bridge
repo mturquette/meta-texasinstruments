@@ -1,0 +1,7 @@
+version=`uname -r`
+version=`echo -n -e $version | cut -d "." -f -2`
+rmmod bridgedriver 
+if [ $version = 2.4 ]
+then
+rm -f /dev/DspBridge
+fi
