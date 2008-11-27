@@ -11,6 +11,7 @@ ALLOW_EMPTY = "1"
 RDEPENDS = "\
     tidspbridge-module \
     tidspbridge-lib \
-    tidspbridge \
+    tidspbridge-samples \
+    tidspbridge-extra \
     baseimage \
     "

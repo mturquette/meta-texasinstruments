@@ -12,7 +12,7 @@ DEPENDS = "baseimage-avsync \
    baseimage-make-system \
    baseimage-utils \
    baseimage-masterconfig \
-   tidspbridge"
+   tidspbridge-samples"
 FILES_${PN}="${base_libdir}/dsp/baseimage.dof"
  
 CCASE_SPEC = "%\
