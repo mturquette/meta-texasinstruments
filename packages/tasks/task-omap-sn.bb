@@ -9,7 +9,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"
 
 RDEPENDS = "\
-    tisocketnode-algo \
     tisocketnode-control-task \
     tisocketnode-gsmhrdec \
     tisocketnode-mpeg4dec \
@@ -17,7 +16,6 @@ RDEPENDS = "\
     tisocketnode-g711dec \
     tisocketnode-gsmhrenc \
     tisocketnode-mpeg4enc \
-    tisocketnode-nmu-plc-vad \
     tisocketnode-h264dec \
     tisocketnode-nbamrdec \
     tisocketnode-g711enc \
@@ -54,4 +52,9 @@ RDEPENDS = "\
     tisocketnode-wmv9 \
     tisocketnode-gsmfrenc \
 #    tisocketnode-mpeg4aacenc \
+    "
+
+DEPENDS = "\
+    tisocketnode-algo \
+    tisocketnode-nmu-plc-vad \
     "
