@@ -1,4 +1,4 @@
-DEPENDS = "baseimage \
+DEPENDS += "baseimage \
 	   tisocketnode-ringio \
 	   tisocketnode-usn"
 

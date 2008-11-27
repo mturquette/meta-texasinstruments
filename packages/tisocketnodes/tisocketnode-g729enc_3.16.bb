@@ -1,6 +1,6 @@
 DESCRIPTION = "Texas Instruments G729 Encoder Socket Node."
 PR = "r0"
-DEPENDS += "tisocketnode-g729enc-codec \"
+DEPENDS += "tisocketnode-g729enc-codec"
 
 CCASE_SPEC = "%\
 	      element /vobs/wtbu/OMAPSW_DSP/speech/node/g729/enc/... DSP-MM-TID-AUDIO_RLS_${PV}%\
