@@ -85,6 +85,8 @@ POKY_BASE_INSTALL = '\
     ${@base_contains("IMAGE_FEATURES", "omap-omx", "task-omap-omx", "",d)} \
     ${@base_contains("IMAGE_FEATURES", "omap-gst", "task-omap-gst", "",d)} \
     ${@base_contains("IMAGE_FEATURES", "omap-sn", "task-omap-sn", "",d)} \
+    ${@base_contains("IMAGE_FEATURES", "omap-conn", "task-omap-connectivity", "",d)} \
+    ${@base_contains("IMAGE_FEATURES", "omap-test", "task-omap-test", "",d)} \
     \
     ${@base_contains("IMAGE_FEATURES", "package-management", "${ROOTFS_PKGMANAGE}", "",d)} \
     ${POKY_EXTRA_INSTALL} \

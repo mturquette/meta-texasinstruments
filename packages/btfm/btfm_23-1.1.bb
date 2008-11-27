@@ -5,20 +5,26 @@ RDEPENDS = "expat dbus bluez-libs bluez-utils openobex obexftp"
 LICENSE = "LGPL"
 PR = "r1"
 
+inherit ccasefetch
+
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
 
 CCASE_SPEC =   "%\
-		element /vobs/WCGDev/... LINUX-WCG-BT_RLS_${PV}%\
-		element * /main/LATEST%"
+	element /vobs/WCGDev/... LINUX-WCG-BT_RLS_${PV} %\
+	element * /main/LATEST %\
+	"
 
-CCASE_PATHFETCH = "/vobs/WCGDev"
-CCASE_PATHCOMPONENT = "WCGDev"
-CCASE_PATHCOMPONENTS = "2"
+CCASE_PATHFETCH = "/vobs/WCGDev/linux/init_scripts"
+CCASE_PATHCOMPONENT = "init_scripts"
+CCASE_PATHCOMPONENTS = "3"
 
 do_install() {
-        chmod -R +w ${S}/*
 	install -d ${D}${base_libdir}/firmware
-	install -m 755 ${S}/linux/init_scripts/* ${D}${base_libdir}/firmware
+	install -m 755 ${S}/TIInit_7.1.24.bts ${D}${base_libdir}/firmware
+	install -m 755 ${S}/TIInit_7.1.24.bts.3000000 ${D}${base_libdir}/firmware
+	install -m 755 ${S}/fm_rx_init_1273.1.bts ${D}${base_libdir}/firmware
+	install -m 755 ${S}/fm_tx_init_1273.1.bts ${D}${base_libdir}/firmware
+	install -m 755 ${S}/fmc_init_1273.1.bts ${D}${base_libdir}/firmware
 }
 
 PACKAGES = "${PN}"
