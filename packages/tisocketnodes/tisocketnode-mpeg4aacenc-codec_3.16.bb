@@ -16,10 +16,13 @@ inherit ccasefetch
 
 do_compile() {
 	unzip 100_A_AAC_E_HE_c64x+_1_05.zip
+	unzip 100E_A_AAC_E_HE_C64X+_1_05.zip
 }
 
 do_stage() {
         chmod -R +w ${S}/*
 	install -d ${STAGING_BINDIR}/dspbridge/Codecs/audio/mpeg4aac_enc/c64x/mm_tiicodecs/100_A_AAC_E_HE_C64X+_1_05
 	cp -a ${S}/100_A_AAC_E_HE_C64X+_1_05/* ${STAGING_BINDIR}/dspbridge/Codecs/audio/mpeg4aac_enc/c64x/mm_tiicodecs/100_A_AAC_E_HE_C64X+_1_05
+	install -d ${STAGING_BINDIR}/dspbridge/Codecs/audio/mpeg4aac_enc/c64x/mm_tiicodecs/100E_A_AAC_E_HE_C64X+_1_05
+        cp -a ${S}/100E_A_AAC_E_HE_C64X+_1_05/* ${STAGING_BINDIR}/dspbridge/Codecs/audio/mpeg4aac_enc/c64x/mm_tiicodecs/100E_A_AAC_E_HE_C64X+_1_05
 }
