@@ -33,6 +33,9 @@ do_compile() {
 ## Getting dasf files
         mkdir -p ${S}/system/dasf
         cp -a ${STAGING_BINDIR}/dspbridge/system/dasf/* ${S}/system/dasf
+## Getting ringio files
+	mkdir -p ${S}/system/ringio
+	cp -a ${STAGING_BINDIR}/dspbridge/system/ringio/* ${S}/system/ringio
 ## Setting PATH for gmake
         pathorig=$PATH
         export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
