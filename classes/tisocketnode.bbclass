@@ -52,4 +52,4 @@ do_install() {
 	install -m 0644 ${SN_DIR}/out/omap3430/${RELEASE}/*.dll64P ${D}${base_libdir}/dsp
 }
 
-FILES_${PN}="${base_libdir}/dsp/*.dll64P"
+FILES_${PN}="${base_libdir}/dsp"
