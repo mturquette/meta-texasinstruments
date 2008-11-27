@@ -10,6 +10,6 @@ ALLOW_EMPTY = "1"
 
 RDEPENDS = "\
     gst-pyapps \
-    wpa-supplicant \
     iperf \
     "
+#    wpa-supplicant \
