@@ -9,7 +9,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"
 
 RDEPENDS = "\
-	tibtfm \
+#	btfm \
 	"
 #	tiwlan \
 #   "
