@@ -16,8 +16,3 @@ SN_DIR=${S}/speech/node/g723/enc
 RELEASE = "release"
 
 inherit ccasefetch tisocketnode
-
-	${ENV_VAR} oe_runmake -f makefile.linux build=omap3430${RELEASE}
-        export PATH=$pathorig
-        unset pathorig
-}
