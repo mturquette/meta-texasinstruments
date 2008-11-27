@@ -30,6 +30,9 @@ do_compile() {
 ## Getting inst2 files
         mkdir -p ${S}/system/inst2
         cp -a ${STAGING_BINDIR}/dspbridge/system/inst2/* ${S}/system/inst2
+## Getting dasf files
+        mkdir -p ${S}/system/dasf
+        cp -a ${STAGING_BINDIR}/dspbridge/system/dasf/* ${S}/system/dasf
 ## Setting PATH for gmake
         pathorig=$PATH
         export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
