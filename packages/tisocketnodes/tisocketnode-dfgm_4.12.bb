@@ -53,12 +53,9 @@ do_compile() {
 do_stage() {
 	install -d ${STAGING_BINDIR}/dspbridge/system/dfgm
 	cp -a ${S}/system/dfgm/* ${STAGING_BINDIR}/dspbridge/system/dfgm
-#	install -d ${STAGING_INCDIR}/dspbridge/exports/include
-#	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/include/*.h ${STAGING_INCDIR}/dspbridge/exports/include
 }
 
 do_install() {
 	install -d ${D}${libdir}/dsp
 	install -m 0644 ${S}/system/dfgm/out/omap3430/${RELEASE}/dfgm.dll64P ${D}${libdir}/dsp
-#	install -m 0644 ${S}/system/baseimage/out/omap3430/${RELEASE}/baseimage.map ${D}${libdir}/dsp
 }
