@@ -12,7 +12,7 @@ CCASE_SPEC = "%\
 
 CCASE_PATHFETCH = "/vobs/WiLink/platforms/os/linux/voice/ \
 	/vobs/WiLink/platforms/os/linux/apps /vobs/WiLink/fw/Latest/ \
-	/vobs/WiLink/platforms/os/linux/suppl
+	/vobs/WiLink/platforms/os/linux/suppl"
 CCASE_PATHCOMPONENTS = 1
 CCASE_PATHCOMPONENT = "WiLink"
 
