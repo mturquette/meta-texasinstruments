@@ -21,5 +21,5 @@ do_compile() {
 do_stage() {
         chmod -R +w ${S}/*
 	install -d ${STAGING_BINDIR}/dspbridge/Codecs/audio/ima-adpcm_enc/c64x/mm_tiicodecs/C64XPLUS_IMA_ADPCM
-	cp -a ${S}/C64XPLUS_IMA_ADPCM/* ${STAGING_BINDIR}/dspbridge/Codecs/audio/ima-adpcm_enc/c64x/mm_tiicodecs/C64XPLUS_IMA_ADPC
+	cp -a ${S}/C64XPLUS_IMA_ADPCM/* ${STAGING_BINDIR}/dspbridge/Codecs/audio/ima-adpcm_enc/c64x/mm_tiicodecs/C64XPLUS_IMA_ADPCM
 }
