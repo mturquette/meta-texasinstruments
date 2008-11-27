@@ -59,13 +59,6 @@ do_compile() {
         unset pathorig
 }
 
-#do_stage() {
-#	install -d ${STAGING_LIBDIR}/dspbridge/exports/lib
-#	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/lib/*.a64P ${STAGING_LIBDIR}/dspbridge/exports/lib
-#	install -d ${STAGING_INCDIR}/dspbridge/exports/include
-#	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/include/*.h ${STAGING_INCDIR}/dspbridge/exports/include
-#}
-
 do_install() {
 	install -d ${D}${base_libdir}/dsp
 	install -m 0644 ${S}/ivp/node/ipp/out/omap3430/${RELEASE}/ipp_sn.dll64P ${D}${base_libdir}/dsp
@@ -73,5 +66,4 @@ do_install() {
 	install -m 0644 ${S}/algo/ivp/chromasuppress/lib/chromasuppress.l64p ${D}${base_libdir}/dsp
 	install -m 0644 ${S}/algo/ivp/edgeenhance/lib/eenf_ti.l64P ${D}${base_libdir}/dsp
 	install -m 0644 ${S}/algo/ivp/yuvconvert/lib/yuvconvert.l64p ${D}${base_libdir}/dsp
-#	install -m 0644 ${S}/system/baseimage/out/omap3430/${RELEASE}/baseimage.map ${D}${libdir}/dsp
 }
