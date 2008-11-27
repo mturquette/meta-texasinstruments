@@ -54,3 +54,5 @@ do_install() {
 	install -d ${D}${base_libdir}/dsp
 	install -m 0644 ${S}/system/ringio/out/omap3430/${RELEASE}/ringio.dll64P ${D}${base_libdir}/dsp
 }
+
+FILES_${PN} = "${base_libdir}/dsp"

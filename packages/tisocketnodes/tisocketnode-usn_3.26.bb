@@ -62,3 +62,5 @@ do_install() {
 	install -d ${D}${base_libdir}/dsp
 	install -m 0644 ${S}/system/usn/out/omap3430/${RELEASE}/usn.dll64P ${D}${base_libdir}/dsp
 }
+
+FILES_${PN} = "${base_libdir}/dsp"
