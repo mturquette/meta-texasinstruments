@@ -2,7 +2,7 @@
 # Copyright (C) 2007 OpenedHand Ltd.
 # Copyright (C) 2008 Texas Instruments
 #
-IMAGE_INSTALL = "task-poky-boot task-omap-bridge task-omap-omx task-omap-gst ${ROOTFS_PKGMANAGE}"
+IMAGE_INSTALL = "task-poky-boot task-omap-bridge task-omap-sn task-omap-omx task-omap-gst ${ROOTFS_PKGMANAGE}"
 
 IMAGE_LINGUAS = " "
 
