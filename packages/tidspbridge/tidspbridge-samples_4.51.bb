@@ -47,4 +47,5 @@ do_install() {
 	install -d ${D}/dspbridge/exports/lib
 	install -m 0644 ${S}/ti/dspbridge/dsp/bridge_product/exports/lib/*.a64P ${D}/dspbridge/exports/lib
 	install -m 0644 ${S}/ti/dspbridge/dsp/samples/*.dof64P ${D}/dspbridge
+	install -m 0644 ${S}/ti/dspbridge/dsp/qos/*.dll64P ${D}/dspbridge
 }
