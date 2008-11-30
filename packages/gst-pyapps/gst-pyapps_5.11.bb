@@ -1,6 +1,6 @@
 SECTION = "x11/multimedia"
 PRIORITY = "optional"
-RDEPENDS = "gst-goo python-gst python-pygtk"
+RDEPENDS = "gst-goo python-gst python-pygtk python-threading"
 DESCRIPTION = "GStreamer plug-ins for OpenMAX IL based on LibGoo"
 PR = "r0"
 
