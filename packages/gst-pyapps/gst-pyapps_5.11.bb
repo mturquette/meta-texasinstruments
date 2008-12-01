@@ -2,7 +2,7 @@ SECTION = "x11/multimedia"
 PRIORITY = "optional"
 RDEPENDS = "gst-goo python-gst python-pygtk python-threading"
 DESCRIPTION = "GStreamer plug-ins for OpenMAX IL based on LibGoo"
-PR = "r0"
+PR = "r1"
 
 CCASE_SPEC = "%\
 element /vobs/wtbu/OMAPSW_L/mmframework/... MMFRAMEWORK_REL_${PV}%\
