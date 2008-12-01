@@ -30,9 +30,13 @@ do_configure_prepend() {
 		case ${MACHINE} in
 			omap-3430ldp)
 				yes '' | oe_runmake omap_3430ldp_defconfig
+				sed -i "s/# CONFIG_FB_OMAP_LCD_VGA is not set/CONFIG_FB_OMAP_LCD_VGA=y/" \
+					${S}/.config
 				;;
 			omap-3430sdp)
 				yes '' | oe_runmake omap_3430sdp_defconfig
+				sed -i "s/# CONFIG_FB_OMAP_LCD_VGA is not set/CONFIG_FB_OMAP_LCD_VGA=y/" \
+					${S}/.config
 				;;				
 			*)
 				yes '' | oe_runmake ${MACHINE}_defconfig
