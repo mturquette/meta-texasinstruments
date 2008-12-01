@@ -1,7 +1,7 @@
 # baseport
 PREFERRED_VERSION_x-load =		"4.59"
 PREFERRED_VERSION_u-boot =		"5.06"
-PREFERRED_VERSION_linux-tiomap =	"2.6.24.7-5.19"
+PREFERRED_VERSION_linux-tiomap =	"2.6.24.7-5.19+wlan"
 
 # bridge and friends
 PREFERRED_VERSION_tidspbridge-module =	"23.11"
