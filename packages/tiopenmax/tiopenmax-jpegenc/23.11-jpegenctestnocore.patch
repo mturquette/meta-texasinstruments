@@ -1,0 +1,25 @@
+diff -Naur tiopenmax-jpegenc-3.17.orig/image/src/openmax_il/jpeg_enc/test/Makefile tiopenmax-jpegenc-3.17/image/src/openmax_il/jpeg_enc/test/Makefile
+--- tiopenmax-jpegenc-3.17.orig/image/src/openmax_il/jpeg_enc/test/Makefile	2008-10-22 11:01:03.000000000 -0500
++++ tiopenmax-jpegenc-3.17/image/src/openmax_il/jpeg_enc/test/Makefile	2008-12-02 00:42:03.000000000 -0600
+@@ -28,7 +28,6 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=JPEGTestEnc_common
+ COMPONENT_TEST_MULTIPLE=JPEGEncoderTest_multiple
+ 
+@@ -37,11 +36,11 @@
+ 
+ all install:: $(COMPONENT_TARGET) $(COMPONENT_TARGET_MULTIPLE)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
+-omxcore1 $(COMPONENT_TARGET_MULTIPLE): $(OMXTESTDIR) $(COMPONENT_TEST_MULTIPLE) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET_MULTIPLE): $(OMXTESTDIR) $(COMPONENT_TEST_MULTIPLE) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST_MULTIPLE)"
+ 	cp -f $(COMPONENT_TEST_MULTIPLE) $(COMPONENT_TARGET_MULTIPLE)
+ 
