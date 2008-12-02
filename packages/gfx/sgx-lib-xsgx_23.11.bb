@@ -7,21 +7,21 @@ COMPATIBLE_MACHINE = "omap-3430(l|s)dp|beagleboard"
 RDEPENDS = sgx-pvr-module
 DEPENDS = bison-native-1.875 virtual/kernel
 
-SRC_URI =	"file:///home/mturquette/src/GFX_Linux_DDK.tar.gz \
-			file://ddk_types_fix2.patch;patch=1 \
-			"
+SRC_URI = "file://ddk_types_fix2.patch;patch=1"
 
-#SRC_URI = "git:///home/mturquette/src/GFX_Linux_DDK/"
-S="${WORKDIR}/GFX_Linux_DDK"
+CCASE_SPEC = "%\
+	element * COMPONENT_ROOT%\
+	element /vobs/wtbu/OMAPSW_GFX/... GFX-LINUX-SGX-DDK-23X_RLS_1.3%\
+	"
 
-#CCASE_SPEC = "%\
-#	element * COMPONENT_ROOT%\
-#	element /vobs/wtbu/OMAPSW_GFX/... GFX-LINUX-SGX-DDK-23X_RLS_1.2%\
-#	"
-#CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_GFX/IMAGINATION/GFX/GFX_Linux_DDK"
-#CCASE_PATHCOMPONENT = "GFX_Linux_DDK"
-#CCASE_PATHCOMPONENTS = "5"
+CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_GFX/IMAGINATION/GFX/GFX_Linux_DDK"
+CCASE_PATHCOMPONENT = "GFX_Linux_DDK"
+CCASE_PATHCOMPONENTS = "5"
 
+# unpack xsgx sources.  might be changed by Carlos in future releases
+do_xsgx_unpack () {
+    cd ${S}/pvr_kdrive
+    tar -xzf CustomerTI_Linux_freedesktop_source_tree_1.03.13.1397.tgz -C 
 # stupid hack.  Carlos knows to fix it in future revisions.
 do_chmod() {
 	chmod -R +w ${S}/src/eurasia/
@@ -31,11 +31,8 @@ do_compile() {
 	cd ${S}/src/eurasia/eurasiacon/build/linux/omap3430_linux
 # FIXME: X11ROOT be set to IMG's supplied libs in the future when we start
 #		using the accelerated KDrive.  For now we're using stock X.org 1.4
-#	oe_runmake EURASIAROOT=${S}/src/eurasia KERNELDIR=${STAGING_KERNEL_DIR} \
 	oe_runmake EURASIAROOT=${S}/src/eurasia KERNELDIR=${STAGING_DIR}/omap-3430ldp-none-linux-gnueabi/kernel \
 		DISCIMAGE=${STAGING_DIR_TARGET} X11ROOT=${prefix} BISON=${STAGING_DIR_NATIVE}/usr/local/bin/bison-native-1.875 V=1
-		#DISCIMAGE=${STAGING_DIR_TARGET} X11ROOT=${prefix} CROSS=${AR%-*}- \
-		#PATH=${STAGE_DIR_NATIVE}/usr/local/bin:$PATH BISON=${STAGING_DIR_NATIVE}/usr/local/bin/bison-native-1.875 V=1
 }
 
 #do_install() {
