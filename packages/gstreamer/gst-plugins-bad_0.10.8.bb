@@ -1,8 +1,8 @@
 require gst-plugins.inc
-DEPENDS += "gst-plugins-base libmusicbrainz tremor"
+DEPENDS += "gst-plugins-base libmusicbrainz tremor amrwb libmms"
 
 EXTRA_OECONF += "--disable-examples --disable-experimental --disable-sdl --disable-cdaudio \
-		--with-plugins=musicbrainz,wavpack,ivorbis,amrwb"
+		--with-plugins=musicbrainz,wavpack,ivorbis,amrwb,libmms,freeze"
 
 ARM_INSTRUCTION_SET = "arm"
 
