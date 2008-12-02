@@ -1,0 +1,11 @@
+diff -Naur tiopenmax-resourcemanager-3.17.orig/system/src/openmax_il/resource_manager/Makefile tiopenmax-resourcemanager-3.17/system/src/openmax_il/resource_manager/Makefile
+--- tiopenmax-resourcemanager-3.17.orig/system/src/openmax_il/resource_manager/Makefile	2008-06-23 09:47:38.000000000 -0500
++++ tiopenmax-resourcemanager-3.17/system/src/openmax_il/resource_manager/Makefile	2008-12-01 23:51:03.000000000 -0600
+@@ -6,7 +6,6 @@
+ include $(OMXROOT)/Master.mk
+ 
+ DIRS= \
+-	resource_activity_monitor \
+ 	src \
+ 	docs \
+ 	inc 

@@ -1,0 +1,12 @@
+diff -Naur tiopenmax-resourcemanager-3.17.orig/system/src/openmax_il/resource_manager/src/Makefile tiopenmax-resourcemanager-3.17/system/src/openmax_il/resource_manager/src/Makefile
+--- tiopenmax-resourcemanager-3.17.orig/system/src/openmax_il/resource_manager/src/Makefile	2008-10-09 13:02:21.000000000 -0500
++++ tiopenmax-resourcemanager-3.17/system/src/openmax_il/resource_manager/src/Makefile	2008-12-01 23:55:12.000000000 -0600
+@@ -26,7 +26,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(SYSTEMDIR) $(COMPONENT_SYS) $(OMXLIBDIR) 
++$(COMPONENT_TARGET): $(SYSTEMDIR) $(COMPONENT_SYS)
+ 	@echo "Installing $(COMPONENT_SYS)"
+ 	cp -f $(COMPONENT_SYS) $(COMPONENT_TARGET)
+ 
