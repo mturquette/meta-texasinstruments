@@ -3,7 +3,7 @@
 #
 
 DESCRIPTION = "Tasks for the TI's GStreamer Multimedia Framework"
-PR = "r2"
+PR = "r3"
 
 PACKAGES = "\
     task-omap-gst \
@@ -43,6 +43,7 @@ RDEPENDS_task-omap-gst-plugins = "\
     gst-plugin-asf \
     gst-plugin-wavparse \
     gst-plugin-rtsp \
+    gst-plugin-rtp \
     "
 
 RDEPENDS_task-omap-gst-apps = ""
