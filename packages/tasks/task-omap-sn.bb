@@ -51,7 +51,7 @@ RDEPENDS = "\
     tisocketnode-mpeg4aacdec \
     tisocketnode-wmv9 \
     tisocketnode-gsmfrenc \
-#    tisocketnode-mpeg4aacenc \
+    tisocketnode-mpeg4aacenc \
     "
 
 DEPENDS = "\

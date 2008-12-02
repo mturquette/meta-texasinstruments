@@ -1,0 +1,19 @@
+diff -Naur tiopenmax-lcml-3.17.orig/system/src/openmax_il/lcml/src/Makefile tiopenmax-lcml-3.17/system/src/openmax_il/lcml/src/Makefile
+--- tiopenmax-lcml-3.17.orig/system/src/openmax_il/lcml/src/Makefile	2008-10-09 13:02:16.000000000 -0500
++++ tiopenmax-lcml-3.17/system/src/openmax_il/lcml/src/Makefile	2008-12-02 00:17:28.000000000 -0600
+@@ -24,14 +24,13 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libLCML.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 

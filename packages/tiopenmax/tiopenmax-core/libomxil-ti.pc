@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include
+
+Name: libomxil
+Description: Texas Instruments' OpenMAX Integration Layer library
+Version: 0.3
+Libs: -L${libdir} -lOMX_Core
+Cflags: -I${includedir}/omx

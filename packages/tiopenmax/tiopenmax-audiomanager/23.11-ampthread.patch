@@ -1,0 +1,12 @@
+diff -Naur linux.orig/system/src/openmax_il/audio_manager/src/Makefile linux/system/src/openmax_il/audio_manager/src/Makefile
+--- linux.orig/system/src/openmax_il/audio_manager/src/Makefile	2007-10-26 11:17:31.000000000 -0500
++++ linux/system/src/openmax_il/audio_manager/src/Makefile	2008-11-10 16:06:49.000000000 -0600
+@@ -26,7 +26,7 @@
+ 	cp -f $(COMPONENT_SYS) $(COMPONENT_TARGET)
+ 
+ $(COMPONENT_SYS): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_SYS) $(OBJ) -L$(BRIDGELIBDIR) -lbridge
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_SYS) $(OBJ) -L$(BRIDGELIBDIR) -lbridge -lpthread
+ 
+ $(SRC): $(HSRC)
+ 

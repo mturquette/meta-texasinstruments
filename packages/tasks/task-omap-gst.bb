@@ -41,6 +41,8 @@ RDEPENDS_task-omap-gst-plugins = "\
     gst-plugin-fbdevsink \
     gst-plugin-qtdemux \
     gst-plugin-asf \
+    gst-plugin-wavparse \
+    gst-plugin-rtsp \
     "
 
 RDEPENDS_task-omap-gst-apps = ""

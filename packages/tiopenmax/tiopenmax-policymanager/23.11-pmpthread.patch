@@ -1,0 +1,11 @@
+--- omx/system/src/openmax_il/omx_policy_manager/src/Makefile.orig	2008-05-06 10:36:47.000000000 -0500
++++ omx/system/src/openmax_il/omx_policy_manager/src/Makefile	2008-11-10 17:27:43.000000000 -0600
+@@ -27,7 +27,7 @@
+ 	cp -f policytable.tbl $(OMXTESTDIR)
+ 
+ $(COMPONENT_SYS): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_SYS) $(OBJ) -L$(BRIDGELIBDIR) -lbridge $(LOMXPERFLIB)
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_SYS) $(OBJ) -L$(BRIDGELIBDIR) -lbridge -lpthread $(LOMXPERFLIB)
+ 
+ $(SRC): $(HSRC)
+ 

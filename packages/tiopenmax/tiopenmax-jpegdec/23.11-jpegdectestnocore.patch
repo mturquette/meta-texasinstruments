@@ -1,0 +1,19 @@
+diff -Naur tiopenmax-jpegdec-3.17.orig/image/src/openmax_il/jpeg_dec/tests/Makefile tiopenmax-jpegdec-3.17/image/src/openmax_il/jpeg_dec/tests/Makefile
+--- tiopenmax-jpegdec-3.17.orig/image/src/openmax_il/jpeg_dec/tests/Makefile	2008-12-02 00:27:12.000000000 -0600
++++ tiopenmax-jpegdec-3.17/image/src/openmax_il/jpeg_dec/tests/Makefile	2008-12-02 00:29:22.000000000 -0600
+@@ -24,14 +24,13 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=JpegTestCommon
+ 
+ COMPONENT_TARGET=$(OMXTESTDIR)/$(COMPONENT_TEST)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
