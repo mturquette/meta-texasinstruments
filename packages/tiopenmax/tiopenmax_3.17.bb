@@ -1,6 +1,6 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r1"
+PR = "r2"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
@@ -71,7 +71,7 @@ do_compile() {
 		PREFIX=${D} PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D} OMXROOT=${S}
+		TARGETDIR=${STAGING_INCDIR}/../ OMXROOT=${S}
 }
 
 do_stage() {

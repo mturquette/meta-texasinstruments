@@ -1,0 +1,65 @@
+diff -Naur gst-plugins-good-0.10.9.orig/gst/matroska/matroska-demux.c gst-plugins-good-0.10.9/gst/matroska/matroska-demux.c
+--- gst-plugins-good-0.10.9.orig/gst/matroska/matroska-demux.c	2008-07-19 08:16:02.000000000 -0500
++++ gst-plugins-good-0.10.9/gst/matroska/matroska-demux.c	2008-12-03 16:43:08.000000000 -0600
+@@ -5142,6 +5142,18 @@
+           strlen (GST_MATROSKA_CODEC_ID_AUDIO_AC3))) {
+     caps = gst_caps_new_simple ("audio/x-ac3", NULL);
+     *codec_name = g_strdup ("AC-3 audio");
++  } else if (!strncmp (codec_id, GST_MATROSKA_CODEC_ID_AUDIO_NBAMR,
++          strlen (GST_MATROSKA_CODEC_ID_AUDIO_NBAMR))) {
++    caps = gst_caps_new_simple ("audio/AMR",
++        "rate", G_TYPE_INT, 8000,
++        "channels", G_TYPE_INT, 1, NULL);
++    *codec_name = g_strdup ("AMR-NB audio");
++  } else if (!strncmp (codec_id, GST_MATROSKA_CODEC_ID_AUDIO_WBAMR,
++          strlen (GST_MATROSKA_CODEC_ID_AUDIO_WBAMR))) {
++    caps = gst_caps_new_simple ("audio/AMR-WB",
++        "rate", G_TYPE_INT, 16000,
++        "channels", G_TYPE_INT, 1, NULL);
++    *codec_name = g_strdup ("AMR-WB audio");
+   } else if (!strcmp (codec_id, GST_MATROSKA_CODEC_ID_AUDIO_DTS)) {
+     caps = gst_caps_new_simple ("audio/x-dts", NULL);
+     *codec_name = g_strdup ("DTS audio");
+diff -Naur gst-plugins-good-0.10.9.orig/gst/matroska/matroska-ids.h gst-plugins-good-0.10.9/gst/matroska/matroska-ids.h
+--- gst-plugins-good-0.10.9.orig/gst/matroska/matroska-ids.h	2008-07-19 08:16:02.000000000 -0500
++++ gst-plugins-good-0.10.9/gst/matroska/matroska-ids.h	2008-12-03 16:44:42.000000000 -0600
+@@ -364,6 +364,8 @@
+ #define GST_MATROSKA_CODEC_ID_AUDIO_AAC_MPEG4      "A_AAC/MPEG4/"
+ #define GST_MATROSKA_CODEC_ID_AUDIO_QUICKTIME_QDMC "A_QUICKTIME/QDMC"
+ #define GST_MATROSKA_CODEC_ID_AUDIO_QUICKTIME_QDM2 "A_QUICKTIME/QDM2"
++#define GST_MATROSKA_CODEC_ID_AUDIO_NBAMR          "A_AMR"
++#define GST_MATROSKA_CODEC_ID_AUDIO_WBAMR          "A_AWB"
+ /* Undefined for now:
+ #define GST_MATROSKA_CODEC_ID_AUDIO_MPC            "A_MPC"
+ */
+diff -Naur gst-plugins-good-0.10.9.orig/gst/matroska/matroska-mux.c gst-plugins-good-0.10.9/gst/matroska/matroska-mux.c
+--- gst-plugins-good-0.10.9.orig/gst/matroska/matroska-mux.c	2008-07-19 08:16:02.000000000 -0500
++++ gst-plugins-good-0.10.9/gst/matroska/matroska-mux.c	2008-12-03 16:46:12.000000000 -0600
+@@ -128,6 +128,12 @@
+         "endianness = (int) { BIG_ENDIAN, LITTLE_ENDIAN }, "
+         "signed = (boolean) true, "
+         COMMON_AUDIO_CAPS ";"
++        "audio/AMR, "
++        "rate = (int) 8000, "
++        "channels = (int) 1 ;"
++        "audio/AMR-WB, "
++        "rate = (int) 16000, "
++        "channels = (int) 1 ;"
+         "audio/x-tta, "
+         "width = (int) { 8, 16, 24 }, "
+         "channels = (int) { 1, 2 }, " "rate = (int) [ 8000, 96000 ]")
+@@ -1094,6 +1100,14 @@
+     context->codec_id = g_strdup (GST_MATROSKA_CODEC_ID_AUDIO_AC3);
+ 
+     return TRUE;
++  } else if (!strcmp (mimetype, "audio/AMR")) {
++    context->codec_id = g_strdup (GST_MATROSKA_CODEC_ID_AUDIO_NBAMR);
++
++    return TRUE;
++  } else if (!strcmp (mimetype, "audio/AMR-WB")) {
++    context->codec_id = g_strdup (GST_MATROSKA_CODEC_ID_AUDIO_WBAMR);
++
++    return TRUE;
+   } else if (!strcmp (mimetype, "audio/x-tta")) {
+     gint width;
+ 
