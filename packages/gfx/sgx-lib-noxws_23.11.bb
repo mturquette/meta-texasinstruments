@@ -54,6 +54,7 @@ do_compile() {
 
 do_install() {
 	install -d ${D}/lib/modules/2.6.24.7-omap1-arm2
+	install -d ${D}/usr/local/bin
 
 	cd ${S}/src/eurasia/eurasiacon/build/linux/omap3430_linux
 # FIXME: make install doesn't seem to work...
