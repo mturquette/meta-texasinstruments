@@ -1,7 +1,7 @@
 DEPENDS = "tidspbridge-lib"
 DESCRIPTION = "Texas Instruments Camera and ISP Algorithms."
 LICENSE = "LGPL"
-PR = "r0"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}"
 
 # We need to override this and make sure it's only -j1
@@ -84,6 +84,10 @@ do_install() {
 		BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${D} \
 		capl.install ipp.install #caf.install
+
+	# Since we can't do caf.install for now, manually install header
+	install -m 0644 \
+		${S}/linux/mm_isp/camera_algo_frmwk/inc/camera_alg.h ${STAGING_INCDIR}/mmisp/
 }
 
 do_stage() {
@@ -112,6 +116,10 @@ do_stage() {
 		BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${STAGING_LIBDIR}/../ \
 		capl.install ipp.install #caf.install
+
+	# Since we can't do caf.install for now, manually install header
+	install -m 0644 \
+		${S}/linux/mm_isp/camera_algo_frmwk/inc/camera_alg.h ${STAGING_INCDIR}/mmisp/
 }
 
 FILES_${PN} = "\
