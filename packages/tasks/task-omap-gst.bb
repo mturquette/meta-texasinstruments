@@ -44,6 +44,8 @@ RDEPENDS_task-omap-gst-plugins = "\
     gst-plugin-wavparse \
     gst-plugin-rtsp \
     gst-plugin-rtp \
+    gst-plugin-amrnb \
+    gst-plugin-amrwb \
     "
 
 RDEPENDS_task-omap-gst-apps = ""
