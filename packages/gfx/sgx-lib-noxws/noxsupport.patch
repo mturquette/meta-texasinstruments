@@ -1,0 +1,11 @@
+--- GFX_Linux_DDK/src/eurasia/eurasiacon/build/linux/omap3430_linux/makefile.conf.orig	2008-12-02 23:32:32.000000000 -0600
++++ GFX_Linux_DDK/src/eurasia/eurasiacon/build/linux/omap3430_linux/makefile.conf	2008-12-02 23:32:42.000000000 -0600
+@@ -17,7 +17,7 @@
+ 
+ X11ROOT			=
+ 
+-SUPPORT_XWS  = 1
++SUPPORT_XWS  = 0
+ PROFILE_COMMON = 1
+ SUPPORT_OPENVG = 1
+ 
