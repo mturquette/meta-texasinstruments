@@ -76,7 +76,7 @@ do_install() {
 	install -m 644 glsltest1_fragshaderA.txt ${D}${bindir}
 	install -m 644 glsltest1_fragshaderB.txt ${D}${bindir}
 
-	install -d ${D}${sysconfdir}
+	install -d ${D}${sysconfdir}/init.d
 	install -m 755 rc.pvr ${D}${sysconfdir}/init.d/
 
 #	cd ${S}/src/eurasia/eurasiacon/build/linux/omap3430_linux
