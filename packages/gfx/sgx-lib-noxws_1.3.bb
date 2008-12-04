@@ -79,6 +79,8 @@ do_install() {
 	install -d ${D}${sysconfdir}/init.d
 	install -m 755 rc.pvr ${D}${sysconfdir}/init.d/
 
+	sed -i "s#local/##" ${D}${sysconfdir}/init.d/rc.pvr
+
 #	cd ${S}/src/eurasia/eurasiacon/build/linux/omap3430_linux
 # FIXME: make install doesn't seem to work...
 #	oe_runmake EURASIAROOT=${S}/src/eurasia KERNELDIR=${STAGING_KERNEL_DIR} \
