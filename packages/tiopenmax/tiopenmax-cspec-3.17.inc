@@ -1,6 +1,6 @@
 CCASE_SPEC = "\
 	# OMX Audio%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.17%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_INT_BL_12X-081203%\
 	# OMX Video%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_3.17%\
 	# OMX Image%\
