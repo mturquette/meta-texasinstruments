@@ -1,0 +1,446 @@
+diff -Naurb gst-plugins-ugly-0.10.9.orig/ext/amrnb/amrnbparse.c gst-plugins-ugly-0.10.9/ext/amrnb/amrnbparse.c
+--- gst-plugins-ugly-0.10.9.orig/ext/amrnb/amrnbparse.c	2008-08-11 16:21:43.000000000 -0500
++++ gst-plugins-ugly-0.10.9/ext/amrnb/amrnbparse.c	2008-12-04 18:39:44.000000000 -0600
+@@ -21,13 +21,16 @@
+  * SECTION:element-amrnbparse
+  * @see_also: #GstAmrnbDec, #GstAmrnbEnc
+  *
+- * AMR narrowband bitstream parser.
+- * 
+  * <refsect2>
++ * <para>
++ * This is an AMR narrowband parser.
++ * </para>
+  * <title>Example launch line</title>
+- * |[
++ * <para>
++ * <programlisting>
+  * gst-launch filesrc location=abc.amr ! amrnbparse ! amrnbdec ! audioresample ! audioconvert ! alsasink
+- * ]|
++ * </programlisting>
++ * </para>
+  * </refsect2>
+  */
+ 
+@@ -57,18 +60,16 @@
+   0, 0, 0, 0, 0, 0, 0
+ };
+ 
+-/*static const GstFormat *gst_amrnbparse_formats (GstPad * pad);*/
+ static const GstQueryType *gst_amrnbparse_querytypes (GstPad * pad);
+ static gboolean gst_amrnbparse_query (GstPad * pad, GstQuery * query);
+ 
+ static gboolean gst_amrnbparse_sink_event (GstPad * pad, GstEvent * event);
++static gboolean gst_amrnbparse_src_event (GstPad * pad, GstEvent * event);
+ static GstFlowReturn gst_amrnbparse_chain (GstPad * pad, GstBuffer * buffer);
+-static void gst_amrnbparse_loop (GstPad * pad);
+-static gboolean gst_amrnbparse_sink_activate (GstPad * sinkpad);
+-static gboolean gst_amrnbparse_sink_activate_pull (GstPad * sinkpad,
+-    gboolean active);
+ static GstStateChangeReturn gst_amrnbparse_state_change (GstElement * element,
+     GstStateChange transition);
++static gboolean gst_amrnbparse_convert_src (GstPad * pad, GstFormat src_format,
++    gint64 src_value, GstFormat dest_format, gint64 * dest_value);
+ 
+ static void gst_amrnbparse_finalize (GObject * object);
+ 
+@@ -116,10 +117,6 @@
+       GST_DEBUG_FUNCPTR (gst_amrnbparse_chain));
+   gst_pad_set_event_function (amrnbparse->sinkpad,
+       GST_DEBUG_FUNCPTR (gst_amrnbparse_sink_event));
+-  gst_pad_set_activate_function (amrnbparse->sinkpad,
+-      gst_amrnbparse_sink_activate);
+-  gst_pad_set_activatepull_function (amrnbparse->sinkpad,
+-      gst_amrnbparse_sink_activate_pull);
+   gst_element_add_pad (GST_ELEMENT (amrnbparse), amrnbparse->sinkpad);
+ 
+   /* create the src pad */
+@@ -128,6 +125,8 @@
+       GST_DEBUG_FUNCPTR (gst_amrnbparse_query));
+   gst_pad_set_query_type_function (amrnbparse->srcpad,
+       GST_DEBUG_FUNCPTR (gst_amrnbparse_querytypes));
++  gst_pad_set_event_function (amrnbparse->srcpad,
++  	  GST_DEBUG_FUNCPTR (gst_amrnbparse_src_event));
+   gst_pad_use_fixed_caps (amrnbparse->srcpad);
+   gst_element_add_pad (GST_ELEMENT (amrnbparse), amrnbparse->srcpad);
+ 
+@@ -173,6 +172,7 @@
+ {
+   static const GstQueryType list[] = {
+     GST_QUERY_POSITION,
++    GST_QUERY_DURATION,
+     0
+   };
+ 
+@@ -224,7 +224,7 @@
+ 
+         pformat = GST_FORMAT_BYTES;
+         res = gst_pad_query_position (peer, &pformat, &pcur);
+-        res &= gst_pad_query_duration (peer, &pformat, &ptot);
++        res = gst_pad_query_duration (peer, &pformat, &ptot);
+         gst_object_unref (GST_OBJECT (peer));
+         if (res) {
+           tot = amrnbparse->ts * ((gdouble) ptot / pcur);
+@@ -241,6 +241,164 @@
+   return res;
+ }
+ 
++static gboolean
++gst_amrnbparse_convert_src (GstPad * pad, GstFormat src_format, gint64 src_value,
++    GstFormat dest_format, gint64 * dest_value)
++{
++  guint64 bytes_in, time_out, val;
++  GstAmrnbParse * amrnbparse;
++  
++  if (src_format == dest_format) {
++    if (dest_value)
++      *dest_value = src_value;
++    return TRUE;
++  }
++
++  amrnbparse = GST_AMRNBPARSE (GST_PAD_PARENT (pad));
++
++  GST_OBJECT_LOCK(amrnbparse);
++  bytes_in = amrnbparse->bytes_in;
++  time_out = amrnbparse->sum_dur_out;
++  GST_OBJECT_UNLOCK(amrnbparse);
++  
++  if (bytes_in == 0 || time_out == 0)
++    return FALSE;
++
++  /* convert based on the average bitrate so far */
++  if (src_format == GST_FORMAT_BYTES && dest_format == GST_FORMAT_TIME) {
++    val = gst_util_uint64_scale (src_value, (0.02 * GST_SECOND), bytes_in);
++  } else if (src_format == GST_FORMAT_TIME && dest_format == GST_FORMAT_BYTES) {
++    val = gst_util_uint64_scale (src_value, bytes_in, (0.02 * GST_SECOND));
++  } else {
++    return FALSE;
++  }
++
++  if (dest_value)
++    *dest_value = (gint64) val;
++
++  return TRUE;
++}
++
++static gboolean
++gst_amrnbparse_raw_seek (GstAmrnbParse * amrnbparse, GstPad * pad, 
++	GstEvent * event)
++{
++  gdouble rate;
++  GstFormat format, conv;
++  GstSeekFlags flags;
++  GstSeekType cur_type, stop_type;
++  gint64 cur, stop;
++  gint64 time_cur;
++  gint64 bytes_cur, bytes_stop;
++  GstFormat bytes_format = GST_FORMAT_BYTES;
++  GstFormat time_format = GST_FORMAT_TIME;
++  gint64 gResult;
++  guint64 new_ts;
++  gboolean res;
++
++  gst_event_parse_seek (event, &rate, &format, &flags,
++      &cur_type, &cur, &stop_type, &stop);
++
++  if (format != GST_FORMAT_TIME) 
++  {
++  	if (format == GST_FORMAT_BYTES)
++  	{
++      conv = GST_FORMAT_TIME;
++      if (!gst_amrnbparse_convert_src (pad, GST_FORMAT_BYTES, cur, 
++    	GST_FORMAT_TIME, &time_cur))
++        goto convert_error;
++  	}
++  	else
++  	  goto convert_error;
++  } 
++  else 
++  {
++    time_cur = cur;
++  }
++
++  if (!gst_amrnbparse_convert_src (pad, time_format, time_cur,
++          bytes_format, &bytes_cur)) {
++    return FALSE;
++  }
++  
++  if (!gst_amrnbparse_convert_src (pad, time_format, stop,
++  		  bytes_format, &bytes_stop)) {
++    return FALSE;
++  }
++  
++  if (!gst_amrnbparse_convert_src (pad, bytes_format, bytes_cur,
++  		  time_format, &new_ts)) {
++    return FALSE;
++  }
++  
++  amrnbparse->ts = new_ts;
++       
++  gResult = bytes_cur % amrnbparse->bytes_in;
++  
++  bytes_cur = bytes_cur - gResult;
++  
++  if (bytes_cur <= 0)
++  {
++  	bytes_cur = 6;
++  }
++  else
++  {
++  	bytes_cur = bytes_cur + 6;
++  }
++  
++  /* assume the worst */
++  res = FALSE;
++
++  {
++    GstEvent *seek_event;
++
++    /* conversion succeeded, create the seek */
++    
++    seek_event = gst_event_new_seek (rate, GST_FORMAT_BYTES, flags,
++      cur_type, bytes_cur, stop_type, bytes_stop);
++          
++    /* do the seek */
++    res = gst_pad_push_event (amrnbparse->sinkpad, seek_event);
++  }
++  
++  return res;
++
++  /* ERRORS */
++convert_error:
++  {
++    /* probably unsupported seek format */
++    GST_DEBUG ("failed to convert format %u into GST_FORMAT_TIME", format);
++    return FALSE;
++  }
++}
++
++static gboolean
++gst_amrnbparse_src_event (GstPad * pad, GstEvent * event)
++{
++  gboolean res = TRUE;
++  GstAmrnbParse *amrnbparse;
++
++  amrnbparse = GST_AMRNBPARSE (GST_PAD_PARENT (pad));
++
++  switch (GST_EVENT_TYPE (event)) {
++      /* the all-formats seek logic */
++    case GST_EVENT_SEEK:
++      gst_event_ref (event);
++      if (!(res = gst_pad_event_default (pad, event))) 
++      {
++      	res = gst_amrnbparse_raw_seek (amrnbparse, pad, event);
++      }
++      break;
++
++    default:
++      res = FALSE;
++      break;
++  }
++
++  gst_event_unref (event);
++  return res;
++}
++
+ 
+ /*
+  * Data reading.
+@@ -338,6 +496,7 @@
+     /* get size */
+     mode = (data[0] >> 3) & 0x0F;
+     block = block_size[mode] + 1;       /* add one for the mode */
++    amrnbparse->bytes_in = block;
+ 
+     if (gst_adapter_available (amrnbparse->adapter) < block)
+       break;
+@@ -351,7 +510,10 @@
+     GST_BUFFER_DURATION (out) = GST_SECOND * 160 / 8000;
+     GST_BUFFER_TIMESTAMP (out) = amrnbparse->ts;
+     if (GST_CLOCK_TIME_IS_VALID (amrnbparse->ts))
++    {
+       amrnbparse->ts += GST_BUFFER_DURATION (out);
++      amrnbparse->sum_dur_out += GST_BUFFER_DURATION (out);
++    }
+ 
+     gst_buffer_set_caps (out,
+         (GstCaps *) gst_pad_get_pad_template_caps (amrnbparse->srcpad));
+@@ -403,165 +565,6 @@
+   }
+ }
+ 
+-/* random access mode, could just read a fixed size buffer and push it to
+- * the chain function but we don't... */
+-static void
+-gst_amrnbparse_loop (GstPad * pad)
+-{
+-  GstAmrnbParse *amrnbparse;
+-  GstBuffer *buffer;
+-  guint8 *data;
+-  gint size;
+-  gint block, mode;
+-  GstFlowReturn ret;
+-
+-  amrnbparse = GST_AMRNBPARSE (GST_PAD_PARENT (pad));
+-
+-  /* init */
+-  if (G_UNLIKELY (amrnbparse->need_header)) {
+-    if (!gst_amrnbparse_pull_header (amrnbparse)) {
+-      GST_ELEMENT_ERROR (amrnbparse, STREAM, WRONG_TYPE, (NULL), (NULL));
+-      GST_LOG_OBJECT (amrnbparse, "could not read header");
+-      goto need_pause;
+-    }
+-
+-    GST_DEBUG_OBJECT (amrnbparse, "Sending newsegment event");
+-    gst_pad_push_event (amrnbparse->srcpad,
+-        gst_event_new_new_segment_full (FALSE, 1.0, 1.0,
+-            GST_FORMAT_TIME, 0, -1, 0));
+-
+-    amrnbparse->need_header = FALSE;
+-  }
+-
+-  ret =
+-      gst_pad_pull_range (amrnbparse->sinkpad, amrnbparse->offset, 1, &buffer);
+-
+-  if (ret == GST_FLOW_UNEXPECTED)
+-    goto eos;
+-  else if (ret != GST_FLOW_OK)
+-    goto need_pause;
+-
+-  data = GST_BUFFER_DATA (buffer);
+-  size = GST_BUFFER_SIZE (buffer);
+-
+-  /* EOS */
+-  if (size < 1) {
+-    gst_buffer_unref (buffer);
+-    goto eos;
+-  }
+-
+-  /* get size */
+-  mode = (data[0] >> 3) & 0x0F;
+-  block = block_size[mode] + 1; /* add one for the mode */
+-
+-  gst_buffer_unref (buffer);
+-
+-  ret =
+-      gst_pad_pull_range (amrnbparse->sinkpad, amrnbparse->offset, block,
+-      &buffer);
+-
+-  if (ret == GST_FLOW_UNEXPECTED)
+-    goto eos;
+-  else if (ret != GST_FLOW_OK)
+-    goto need_pause;
+-
+-  if (GST_BUFFER_SIZE (buffer) < block) {
+-    gst_buffer_unref (buffer);
+-    goto eos;
+-  }
+-
+-  amrnbparse->offset += block;
+-
+-  /* output */
+-  buffer = gst_buffer_make_metadata_writable (buffer);
+-  GST_BUFFER_DURATION (buffer) = GST_SECOND * 160 / 8000;
+-  GST_BUFFER_TIMESTAMP (buffer) = amrnbparse->ts;
+-
+-  gst_buffer_set_caps (buffer,
+-      (GstCaps *) gst_pad_get_pad_template_caps (amrnbparse->srcpad));
+-
+-  GST_DEBUG_OBJECT (amrnbparse, "Pushing %2d bytes, ts=%" GST_TIME_FORMAT,
+-      block, GST_TIME_ARGS (amrnbparse->ts));
+-
+-  ret = gst_pad_push (amrnbparse->srcpad, buffer);
+-
+-  if (G_UNLIKELY (ret != GST_FLOW_OK)) {
+-    GST_DEBUG_OBJECT (amrnbparse, "Flow: %s", gst_flow_get_name (ret));
+-    if (GST_FLOW_IS_FATAL (ret) || ret == GST_FLOW_NOT_LINKED) {
+-      if (ret == GST_FLOW_UNEXPECTED) {
+-        /* we don't do seeking yet, so no segment flag to check here either */
+-        if (0) {
+-          /* post segment_done message here one day when seeking works */
+-        } else {
+-          GST_LOG_OBJECT (amrnbparse, "Sending EOS at end of segment");
+-          gst_pad_push_event (amrnbparse->srcpad, gst_event_new_eos ());
+-        }
+-      } else {
+-        GST_ELEMENT_ERROR (amrnbparse, STREAM, FAILED, (NULL),
+-            ("streaming stopped, reason: %s", gst_flow_get_name (ret)));
+-        gst_pad_push_event (amrnbparse->srcpad, gst_event_new_eos ());
+-      }
+-    }
+-    goto need_pause;
+-  }
+-
+-  amrnbparse->ts += GST_BUFFER_DURATION (buffer);
+-
+-  return;
+-
+-need_pause:
+-  {
+-    GST_LOG_OBJECT (amrnbparse, "pausing task");
+-    gst_pad_pause_task (pad);
+-    return;
+-  }
+-eos:
+-  {
+-    GST_LOG_OBJECT (amrnbparse, "pausing task (eos)");
+-    gst_pad_push_event (amrnbparse->srcpad, gst_event_new_eos ());
+-    gst_pad_pause_task (pad);
+-    return;
+-  }
+-}
+-
+-static gboolean
+-gst_amrnbparse_sink_activate (GstPad * sinkpad)
+-{
+-  gboolean result = FALSE;
+-  GstAmrnbParse *amrnbparse;
+-
+-  amrnbparse = GST_AMRNBPARSE (gst_pad_get_parent (sinkpad));
+-
+-  if (gst_pad_check_pull_range (sinkpad)) {
+-    GST_DEBUG ("Trying to activate in pull mode");
+-    amrnbparse->seekable = TRUE;
+-    amrnbparse->ts = 0;
+-    result = gst_pad_activate_pull (sinkpad, TRUE);
+-  } else {
+-    GST_DEBUG ("Try to activate in push mode");
+-    amrnbparse->seekable = FALSE;
+-    result = gst_pad_activate_push (sinkpad, TRUE);
+-  }
+-
+-  gst_object_unref (amrnbparse);
+-  return result;
+-}
+-
+-static gboolean
+-gst_amrnbparse_sink_activate_pull (GstPad * sinkpad, gboolean active)
+-{
+-  gboolean result;
+-
+-  if (active) {
+-    result = gst_pad_start_task (sinkpad,
+-        (GstTaskFunction) gst_amrnbparse_loop, sinkpad);
+-  } else {
+-    result = gst_pad_stop_task (sinkpad);
+-  }
+-
+-  return result;
+-}
+-
+ static GstStateChangeReturn
+ gst_amrnbparse_state_change (GstElement * element, GstStateChange transition)
+ {
+diff -Naurb gst-plugins-ugly-0.10.9.orig/ext/amrnb/amrnbparse.h gst-plugins-ugly-0.10.9/ext/amrnb/amrnbparse.h
+--- gst-plugins-ugly-0.10.9.orig/ext/amrnb/amrnbparse.h	2006-06-01 16:11:40.000000000 -0500
++++ gst-plugins-ugly-0.10.9/ext/amrnb/amrnbparse.h	2008-12-04 18:39:48.000000000 -0600
+@@ -53,6 +53,9 @@
+ 
+   guint64 ts;
+ 
++  guint64 bytes_in;    /* bytes received                                  */
++  guint64 sum_dur_out; /* sum of durations of decoded buffers we sent out */
++
+   /* for seeking etc */
+   GstSegment segment;
+ };
