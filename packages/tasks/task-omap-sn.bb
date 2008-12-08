@@ -53,7 +53,6 @@ RDEPENDS = "\
     tisocketnode-gsmfrenc \
     tisocketnode-mpeg4aacenc \
     tisocketnode-mpeg4-720pdec \
-    tisocketnode-mpeg4-720pdec-codec \
     "
 
 DEPENDS = "\
