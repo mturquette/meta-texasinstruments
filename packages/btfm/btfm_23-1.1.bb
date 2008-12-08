@@ -2,12 +2,11 @@ DESCRIPTION = "Bluetooth and FM modules for OMAP"
 SECTION = "libs"
 PRIORITY = "optional"
 RDEPENDS = "expat dbus bluez-libs bluez-utils openobex obexftp"
-LICENSE = "LGPL"
-PR = "r1"
+PR = "r2"
 
 inherit ccasefetch
 
-COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
+COMPATIBLE_MACHINE = "omap-3430sdp"
 
 CCASE_SPEC =   "%\
 	element /vobs/WCGDev/... LINUX-WCG-BT_RLS_${PV} %\
