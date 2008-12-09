@@ -3,9 +3,10 @@ LICENSE = "LGPL"
 PRIORITY = "optional"
 SECTION = "devel"
 
-PR ="r2"
+PR = "r1"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/check/check-${PV}.tar.gz"
+SRC_URI = "${SOURCEFORGE_MIRROR}/check/check-${PV}.tar.gz \
+           file://configure_fix.patch;patch=1"
 S = "${WORKDIR}/check-${PV}"
 
 inherit autotools pkgconfig
@@ -13,8 +14,6 @@ inherit autotools pkgconfig
 EXTRA_OECONF += "--enable-plain-docdir"
 
 do_stage() {
-
-	install -m 0644 ${S}/src/check.h ${STAGING_INCDIR}/check.h
-	oe_libinstall -a -C src libcheck ${STAGING_LIBDIR}
+	autotools_stage_all
 }
 
