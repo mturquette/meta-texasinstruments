@@ -1,7 +1,7 @@
 require linux-omap.inc
 inherit ccasefetch
 
-PR = "r0"
+PR = "r1"
 
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
 DEFAULT_PREFERENCE = "1"
@@ -18,3 +18,11 @@ CCASE_PATHCOMPONENT = "2.6_kernel"
 # http://bec-systems.com/oe/html/recipes_sources.html for a full explanation
 #SRC_URI_omap-3430ldp = "file://defconfig-omap-3430ldp"
 #SRC_URI_omap-3430sdp = "file://defconfig-omap-3430sdp"
+
+do_stage2() {
+	# Why are these headers needed and not exported?
+	install -d ${STAGING_KERNEL_DIR}/drivers/media/video/isp
+	install -m 0644 ${S}/drivers/media/video/isp/*.h ${STAGING_KERNEL_DIR}/drivers/media/video/isp
+}
+
+addtask stage2 after do_populate_staging before do_package_stage
