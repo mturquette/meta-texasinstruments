@@ -1,6 +1,6 @@
-diff -Naur ../../vobs.orig/wtbu/OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile
---- ../../vobs.orig/wtbu/OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile	2008-07-21 14:32:37.000000000 -0500
-+++ OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile	2008-11-26 01:27:38.000000000 -0600
+diff -Naur OMAPSW_MPU.orig/linux/mm_isp/camera_algo_frmwk/src/Makefile OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile
+--- OMAPSW_MPU.orig/linux/mm_isp/camera_algo_frmwk/src/Makefile	2008-07-21 14:32:37.000000000 -0500
++++ OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Makefile	2008-12-11 01:53:22.000000000 -0600
 @@ -24,7 +24,7 @@
  
  include $(MMISPROOT)/Master.mk
@@ -10,3 +10,12 @@ diff -Naur ../../vobs.orig/wtbu/OMAPSW_MPU/linux/mm_isp/camera_algo_frmwk/src/Ma
  ifeq ($(USE_HWP), 1)
  CFLAGS+=-DUSE_HWP=1
  else
+@@ -37,7 +37,7 @@
+ all:: $(COMPONENT_LIB) install
+ 
+ $(COMPONENT_LIB): $(OBJ)
+-	$(CC) $(CFLAGS) -shared -L$(MMISPLIBDIR) \
++	$(CC) $(CFLAGS) -shared -L$(MMISPLIBDIR) -L../../../../algo/camera/3a/3a_interface/make/linux -L../../../../algo/camera/isphal/make/linux \
+ 			-l$(AE_NAME) -l$(AWB_NAME) -l$(AF_NAME) -l$(IL3P_NAME) -l$(ISPHAL_NAME) \
+ 			-o $(COMPONENT_LIB) $(OBJ)
+ 

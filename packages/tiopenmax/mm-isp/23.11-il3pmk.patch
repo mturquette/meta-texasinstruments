@@ -1,0 +1,21 @@
+diff -Naur OMAPSW_MPU.orig/linux/mm_isp/il3p/src/Makefile OMAPSW_MPU/linux/mm_isp/il3p/src/Makefile
+--- OMAPSW_MPU.orig/linux/mm_isp/il3p/src/Makefile	2008-07-21 14:34:58.000000000 -0500
++++ OMAPSW_MPU/linux/mm_isp/il3p/src/Makefile	2008-12-11 01:47:17.000000000 -0600
+@@ -8,7 +8,7 @@
+ 
+ FRMWRKINCLUDEDIR=$(MMISPROOT)/camera_algo_frmwk/inc
+ 
+-CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(FRMWRKINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/drivers/media/video/isp
++CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(FRMWRKINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/drivers/media/video/isp -I../../../../algo/camera/isphal/inc
+ 
+ COMPONENT_NAME=ALG.IL3P
+ COMPONENT_LIB=lib$(COMPONENT_NAME).so
+@@ -17,7 +17,7 @@
+ all:: $(COMPONENT_LIB) install
+ 
+ $(COMPONENT_LIB): $(OBJ)
+-	$(CC) $(CFLAGS) -Wall -fpic -pipe -shared -o $(COMPONENT_LIB) $(OBJ)
++	$(CC) $(CFLAGS) -L../../../../algo/camera/isphal/make/linux -Wall -fpic -pipe -shared -o $(COMPONENT_LIB) $(OBJ)
+ 
+ install::
+ 	cp -f $(COMPONENT_LIB) $(MMISPLIBDIR)

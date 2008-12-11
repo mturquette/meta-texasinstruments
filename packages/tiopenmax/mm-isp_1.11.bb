@@ -1,7 +1,8 @@
-DEPENDS = "tidspbridge-lib"
+DEPENDS = "tidspbridge-lib virtual/kernel"
 DESCRIPTION = "Texas Instruments Camera and ISP Algorithms."
 LICENSE = "LGPL"
-PR = "r2"
+PR = "r3"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}"
 
 # We need to override this and make sure it's only -j1
@@ -20,6 +21,7 @@ CCASE_PATHCOMPONENT = "OMAPSW_MPU"
 
 SRC_URI="\
 	file://23.11-ippmk.patch;patch=1 \
+	file://23.11-il3pmk.patch;patch=1 \
 	file://23.11-cafmk.patch;patch=1 \
 	"
 
@@ -30,32 +32,28 @@ do_compile() {
 	install -d ${D}/lib
 	install -d ${D}/include
 
-	# We can't build this right now
+	# We can't build any of this right now...
 	#cd ${S}/algo/camera/vstab/make/linux/
 	#oe_runmake -f Makefile.algo \
-		ALGOROOT=${S}/algo \
-		MMISPROOT=${S}/linux/mm_isp \
-		KERNISPINCLUDEDIR=${STAGING_KERNEL_DIR}
+	#	ALGOROOT=${S}/algo \
+	#	MMISPROOT=${S}/linux/mm_isp \
+	#	KERNISPINCLUDEDIR=${STAGING_KERNEL_DIR}
 
 	cd ${S}/linux/mm_isp/
-	oe_runmake \
-		ALGOROOT=${S}/algo \
-		MMISPROOT=${S}/linux/mm_isp \
-		KERNISPINCLUDEDIR=${STAGING_KERNEL_DIR} \
-		PKGDIR=${S}/linux \
-		CROSS=${AR%-*}- \
-		capl.clean ipp.clean #caf.clean
-
-	oe_runmake \
-		ALGOROOT=${S}/algo \
-		MMISPROOT=${S}/linux/mm_isp \
-		KERNISPINCLUDEDIR=${STAGING_KERNEL_DIR} \
-		PKGDIR=${S}/linux \
-		CROSS=${AR%-*}- \
-		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
-		BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D} \
-		capl.all ipp.all #caf.all
+	for action in clean all; do
+		for subcomp in capl ipp il3p caf; do
+			oe_runmake \
+				ALGOROOT=${S}/algo \
+				MMISPROOT=${S}/linux/mm_isp \
+				KERNISPINCLUDEDIR=${STAGING_KERNEL_DIR} \
+				PKGDIR=${S}/linux \
+				CROSS=${AR%-*}- \
+				BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
+				BRIDGELIBDIR=${STAGING_LIBDIR} \
+				TARGETDIR=${D} \
+				$subcomp.$action
+		done
+	done
 }
 
 do_install() {
@@ -73,6 +71,30 @@ do_install() {
 		TARGETDIR=${D} \
 		install
 
+	cd ${S}/algo/camera/isphal/make/linux/
+	oe_runmake \
+		ALGOROOT=${S}/algo \
+		MMISPROOT=${S}/linux/mm_isp \
+		KERNISPINCLUDEDIR=${STAGING_KERNEL_DIR} \
+		PKGDIR=${S}/linux \
+		CROSS=${AR%-*}- \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
+		BRIDGELIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${D} \
+		install
+
+	cd ${S}/algo/camera/3a/3a_interface/make/linux/
+	oe_runmake \
+		ALGOROOT=${S}/algo \
+		MMISPROOT=${S}/linux/mm_isp \
+		KERNISPINCLUDEDIR=${STAGING_KERNEL_DIR} \
+		PKGDIR=${S}/linux \
+		CROSS=${AR%-*}- \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
+		BRIDGELIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${D} \
+		install
+
 	cd ${S}/linux/mm_isp/
 	oe_runmake \
 		ALGOROOT=${S}/algo \
@@ -83,11 +105,7 @@ do_install() {
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
 		BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${D} \
-		capl.install ipp.install #caf.install
-
-	# Since we can't do caf.install for now, manually install header
-	install -m 0644 \
-		${S}/linux/mm_isp/camera_algo_frmwk/inc/camera_alg.h ${D}/include/mmisp/
+		capl.install ipp.install il3p.install caf.install
 }
 
 do_stage() {
@@ -105,6 +123,30 @@ do_stage() {
 		TARGETDIR=${STAGING_LIBDIR}/../ \
 		install
 
+	cd ${S}/algo/camera/isphal/make/linux/
+	oe_runmake \
+		ALGOROOT=${S}/algo \
+		MMISPROOT=${S}/linux/mm_isp \
+		KERNISPINCLUDEDIR=${STAGING_KERNEL_DIR} \
+		PKGDIR=${S}/linux \
+		CROSS=${AR%-*}- \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
+		BRIDGELIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${STAGING_LIBDIR} \
+		install
+
+	cd ${S}/algo/camera/3a/3a_interface/make/linux/
+	oe_runmake \
+		ALGOROOT=${S}/algo \
+		MMISPROOT=${S}/linux/mm_isp \
+		KERNISPINCLUDEDIR=${STAGING_KERNEL_DIR} \
+		PKGDIR=${S}/linux \
+		CROSS=${AR%-*}- \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
+		BRIDGELIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${STAGING_LIBDIR} \
+		install
+
 	cd ${S}/linux/mm_isp/
 	oe_runmake \
 		ALGOROOT=${S}/algo \
@@ -115,11 +157,7 @@ do_stage() {
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
 		BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${STAGING_LIBDIR}/../ \
-		capl.install ipp.install #caf.install
-
-	# Since we can't do caf.install for now, manually install header
-	install -m 0644 \
-		${S}/linux/mm_isp/camera_algo_frmwk/inc/camera_alg.h ${STAGING_INCDIR}/mmisp/
+		capl.install ipp.install il3p.install caf.install
 }
 
 FILES_${PN} = "\
