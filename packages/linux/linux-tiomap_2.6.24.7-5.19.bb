@@ -20,7 +20,6 @@ CCASE_PATHCOMPONENT = "2.6_kernel"
 #SRC_URI_omap-3430sdp = "file://defconfig-omap-3430sdp"
 
 do_stage2() {
-	# Why are these headers needed and not exported?
 	install -d ${STAGING_KERNEL_DIR}/drivers/media/video/isp
 	install -m 0644 ${S}/drivers/media/video/isp/*.h ${STAGING_KERNEL_DIR}/drivers/media/video/isp
 }
