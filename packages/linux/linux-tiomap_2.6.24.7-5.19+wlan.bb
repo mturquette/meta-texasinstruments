@@ -24,3 +24,10 @@ CCASE_PATHCOMPONENT = "vobs"
 # http://bec-systems.com/oe/html/recipes_sources.html for a full explanation
 #SRC_URI_omap-3430ldp = "file://defconfig-omap-3430ldp"
 #SRC_URI_omap-3430sdp = "file://defconfig-omap-3430sdp"
+
+do_stage2() {
+        install -d ${STAGING_KERNEL_DIR}/drivers/media/video/isp
+        install -m 0644 ${S}/drivers/media/video/isp/*.h ${STAGING_KERNEL_DIR}/drivers/media/video/isp
+}
+
+addtask stage2 after do_populate_staging before do_package_stage
