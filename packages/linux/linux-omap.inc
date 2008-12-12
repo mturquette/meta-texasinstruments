@@ -8,6 +8,8 @@ inherit kernel
 
 COMPATIBLE_MACHINE = "omap-3430(l|s)dp"
 
+ADD_DISTRO_FEATURES = "	${@base_contains("DISTRO_FEATURES", "720p", "sed -i 's/# CONFIG_FB_OMAP_720P_STREAMING is not set/CONFIG_FB_OMAP_720P_STREAMING=y/' ${S}/.config", "", d)}"
+
 do_configure_prepend() {
 
 	if [ -f '${WORKDIR}/defconfig-${MACHINE}' ]; then
@@ -43,6 +45,7 @@ do_configure_prepend() {
 				;;
 		esac
 	fi
+	${ADD_DISTRO_FEATURES}
 }
 
 do_deploy() {
