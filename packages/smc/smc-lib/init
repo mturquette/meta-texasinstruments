@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# load the SMC Driver
+if [ -f /lib/modules/`uname -r`/kernel/drivers/smc/smc_driver.ko ] ; then
+	echo "Loading SMC driver..."
+	if insmod  /lib/modules/`uname -r`/kernel/drivers/smc/smc_driver.ko; then
+		echo "Loading SMC driver: OK"
+	else
+		echo "Loading SMC driver: Failed"
+	fi
+else
+	echo "SMC driver not present (/lib/modules/`uname -r`/kernel/drivers/smc/smc_driver.ko)."
+fi
+
+# start the SMC PA
+if [ -f /usr/lib/smc/smc_pa.ift ] ; then
+	if [ -f /usr/lib/smc/smc_pa_ctrl ] ; then
+		echo "Starting SMC PA..."
+		if /usr/lib/smc/smc_pa_ctrl -c /usr/lib/smc/smc_linux_cfg.ini start /usr/lib/smc/smc_pa.ift ; then
+			echo "Starting SMC PA: OK"
+		else
+			echo "Starting SMC PA: Failed"
+		fi
+	else
+		echo "SMC Ctrl not present (/usr/lib/smc/smc_pa_ctrl)."
+	fi
+else
+	echo "SMC Ctrl not present (/usr/lib/smc/smc_pa.ift)."
+fi
+
+# start the SMC Daemon
+if [ -f /usr/lib/smc/smoduled ] ; then
+	echo "Starting SMC Daemon..."
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/smc
+	if /usr/lib/smc/smoduled -c /usr/lib/smc/smc_linux_cfg.ini ; then
+		echo "Starting SMC Daemon: OK"
+	else
+		echo "Starting SMC Daemon: Failed"
+	fi
+else
+	echo "SMC Daemon not present (/usr/lib/smc/smoduled)."
+fi
