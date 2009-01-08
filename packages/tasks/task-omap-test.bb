@@ -9,7 +9,5 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"
 
 RDEPENDS = "\
-    gst-pyapps \
-    iperf \
-    "
-#    wpa-supplicant \
+	gst-pyapps \
+	"

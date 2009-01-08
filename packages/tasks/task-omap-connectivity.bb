@@ -11,4 +11,6 @@ ALLOW_EMPTY = "1"
 RDEPENDS = "\
 	btfm \
 	wilink \
+	fmapp \
+	iperf \
 "

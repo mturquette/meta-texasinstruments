@@ -6,7 +6,7 @@ PR = "r0"
 
 inherit ccasefetch
 
-COMPATIBLE_MACHINE = "omap-3430sdp"
+COMPATIBLE_MACHINE = "omap-3430(s|l)dp"
 
 CCASE_SPEC =   "%\
 	element /vobs/WCGDev/... LINUX-WCG-BT_RLS_${PV}%\
@@ -15,19 +15,27 @@ CCASE_SPEC =   "%\
 	element * /main/LATEST %\
 	"
 
-CCASE_PATHFETCH = "/vobs/MCP_Common/Platform/fmhal/inc/int \
-	/vobs/MCP_Common/Platform/fmhal/inc \
-	/vobs/MCP_Common/Platform/os/linux \
-	/vobs/MCP_Common/Platform/inc \
-	/vobs/MCP_Common/tran \
-	/vobs/MCP_Common/inc \
-	/vobs/HSW_FMStack/stack/inc/int \
-	/vobs/HSW_FMStack/stack/inc \
-	/vobs/WCGDev/linux/fm_app \
-	/vobs/WCGDev/linux/build \
+CCASE_PATHFETCH = "/vobs/MCP_Common/ \
+	/vobs/HSW_FMStack \
+	/vobs/WCGDev \
 	"
+#CCASE_PATHFETCH = "/vobs/MCP_Common/Platform/fmhal/inc/int \
+#	/vobs/MCP_Common/Platform/fmhal/inc \
+#	/vobs/MCP_Common/Platform/os/linux \
+#	/vobs/MCP_Common/Platform/inc \
+#	/vobs/MCP_Common/tran \
+#	/vobs/MCP_Common/inc \
+#	/vobs/HSW_FMStack/stack/inc/int \
+#	/vobs/HSW_FMStack/stack/inc \
+#	/vobs/WCGDev/linux/fm_app \
+#	/vobs/WCGDev/linux/build \
+#	"
 CCASE_PATHCOMPONENT = "vobs"
 CCASE_PATHCOMPONENTS = "0"
+
+do_chmod () {
+	chmod -R +w ${S}
+}
 
 do_compile () {
 	cd ${S}/WCGDev/linux/build/
@@ -73,3 +81,5 @@ do_install() {
 	install -m 0755 ${S}/WCGDev/linux/build/build_directory/fm_app/fmapp \
 	    ${D}${bindir}
 }
+
+addtask chmod after do_unpack before do_patch
