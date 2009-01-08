@@ -1,35 +1,37 @@
 INHIBIT_DEFAULT_DEPS = "1"
 
 PROVIDES = "\
-    linux-libc-headers \
-    virtual/arm-none-linux-gnueabi-gcc \
-    virtual/arm-none-linux-gnueabi-g++ \
-    virtual/arm-none-linux-gnueabi-gcc-initial \
-    virtual/arm-none-linux-gnueabi-binutils \
-    virtual/arm-none-linux-gnueabi-libc-for-gcc \
-    virtual/libc \
-    virtual/libintl \
-    virtual/libiconv \
-    glibc-thread-db \
-    virtual/linux-libc-headers "
+	linux-libc-headers \
+	virtual/arm-none-linux-gnueabi-gcc \
+	virtual/arm-none-linux-gnueabi-g++ \
+	virtual/arm-none-linux-gnueabi-gcc-initial \
+	virtual/arm-none-linux-gnueabi-gcc-intermediate \
+	virtual/arm-none-linux-gnueabi-binutils \
+	virtual/arm-none-linux-gnueabi-libc-for-gcc \
+	virtual/libc \
+	virtual/libintl \
+	virtual/libiconv \
+	glibc-thread-db \
+	virtual/linux-libc-headers "
 RPROVIDES = "glibc-utils libsegfault glibc-thread-db"
 PACKAGES_DYNAMIC = "glibc-gconv-*"
 PR = "r1"
 
-SRC_URI = "http://www.codesourcery.com/public/gnu_toolchain/arm-none-linux-gnueabi/arm-${PV}-arm-none-linux-gnueabi-i686-pc-linux-gnu.tar.bz2 \
-file://SUPPORTED"
+#SRC_URI = "http://www.codesourcery.com/public/gnu_toolchain/arm-none-linux-gnueabi/arm-${PV}-arm-none-linux-gnueabi-i686-pc-linux-gnu.tar.bz2 \
+
+SRC_URI = "file://SUPPORTED"
 
 S = "${WORKDIR}/arm-2008q3"
 
 do_install() {
-    install -d ${D}${sysconfdir} ${D}${bindir} ${D}${sbindir} ${D}${base_bindir} ${D}${libdir}
-    install -d ${D}${base_libdir} ${D}${base_sbindir} ${D}${datadir}
+	install -d ${D}${sysconfdir} ${D}${bindir} ${D}${sbindir} ${D}${base_bindir} ${D}${libdir}
+	install -d ${D}${base_libdir} ${D}${base_sbindir} ${D}${datadir}
 
-    cp -a ${S}/arm-none-linux-gnueabi/libc/lib/*  ${D}${base_libdir}
-    cp -a ${S}/arm-none-linux-gnueabi/libc/etc/*  ${D}${sysconfdir}
-    cp -a ${S}/arm-none-linux-gnueabi/libc/sbin/* ${D}${base_sbindir}
-    cp -a ${S}/arm-none-linux-gnueabi/libc/usr/*  ${D}/usr
-}
+	cp -a ${S}/arm-none-linux-gnueabi/libc/lib/*  ${D}${base_libdir}
+						      cp -a ${S}/arm-none-linux-gnueabi/libc/etc/*  ${D}${sysconfdir}
+						      cp -a ${S}/arm-none-linux-gnueabi/libc/sbin/* ${D}${base_sbindir}
+						      cp -a ${S}/arm-none-linux-gnueabi/libc/usr/*  ${D}/usr
+						      }
 
 do_stage() {
 	install -d ${STAGING_INCDIR}
@@ -40,6 +42,16 @@ do_stage() {
 
 	install -d ${STAGING_DIR_TARGET}${layout_base_libdir}
 	cp -a ${S}/arm-none-linux-gnueabi/libc/lib/* ${STAGING_DIR_TARGET}${base_libdir}
+
+	sed -e "s# /lib# ../../lib#g" \
+	-e "s# /usr/lib# .#g" \
+	${STAGING_LIBDIR}/libc.so > ${STAGING_LIBDIR}/temp
+	mv ${STAGING_LIBDIR}/temp ${STAGING_LIBDIR}/libc.so
+
+	sed -e "s# /lib# ../../lib#" \
+	-e "s# /usr/lib# .#g" \
+	${STAGING_LIBDIR}/libpthread.so > ${STAGING_LIBDIR}/temp
+	mv ${STAGING_LIBDIR}/temp ${STAGING_LIBDIR}/libpthread.so
 }
 
 PACKAGES = "libgcc libgcc-dev libstdc++ libstdc++-dev linux-libc-headers"
@@ -47,18 +59,18 @@ FILES_libgcc = "${base_libdir}/libgcc_s.so.1"
 FILES_libgcc-dev = "${base_libdir}/libgcc_s.so"
 FILES_libstdc++ = "${libdir}/libstdc++.so.*"
 FILES_libstdc++-dev = "${includedir}/c++/${PV} \
-		       ${libdir}/libstdc++.so \
-		       ${libdir}/libstdc++.la \
-		       ${libdir}/libstdc++.a \
-		       ${libdir}/libsupc++.la \
-		       ${libdir}/libsupc++.a"
+	${libdir}/libstdc++.so \
+	${libdir}/libstdc++.la \
+	${libdir}/libstdc++.a \
+	${libdir}/libsupc++.la \
+	${libdir}/libsupc++.a"
 FILES_linux-libc-headers = "${includedir}/asm* \
-                            ${includedir}/linux \
-                            ${includedir}/mtd \
-                            ${includedir}/rdma \
-                            ${includedir}/scsi \
-                            ${includedir}/sound \
-                            ${includedir}/video \
+	${includedir}/linux \
+	${includedir}/mtd \
+	${includedir}/rdma \
+	${includedir}/scsi \
+	${includedir}/sound \
+	${includedir}/video \
 "
 
 PACKAGES += "glibc-dbg glibc catchsegv sln nscd ldd localedef glibc-utils glibc-dev glibc-doc glibc-locale libsegfault glibc-extra-nss glibc-thread-db glibc-pcprofile"
