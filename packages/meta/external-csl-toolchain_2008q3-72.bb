@@ -21,27 +21,26 @@ PR = "r1"
 
 SRC_URI = "file://SUPPORTED"
 
-S = "${WORKDIR}/arm-2008q3"
-
 do_install() {
+	echo "EXTERNAL_TOOLCHAIN is ${EXTERNAL_TOOLCHAIN}"
 	install -d ${D}${sysconfdir} ${D}${bindir} ${D}${sbindir} ${D}${base_bindir} ${D}${libdir}
 	install -d ${D}${base_libdir} ${D}${base_sbindir} ${D}${datadir}
 
-	cp -a ${S}/arm-none-linux-gnueabi/libc/lib/*  ${D}${base_libdir}
-						      cp -a ${S}/arm-none-linux-gnueabi/libc/etc/*  ${D}${sysconfdir}
-						      cp -a ${S}/arm-none-linux-gnueabi/libc/sbin/* ${D}${base_sbindir}
-						      cp -a ${S}/arm-none-linux-gnueabi/libc/usr/*  ${D}/usr
+	cp -a ${EXTERNAL_TOOLCHAIN}/arm-none-linux-gnueabi/libc/lib/*  ${D}${base_libdir}
+						      cp -a ${EXTERNAL_TOOLCHAIN}/arm-none-linux-gnueabi/libc/etc/*  ${D}${sysconfdir}
+						      cp -a ${EXTERNAL_TOOLCHAIN}/arm-none-linux-gnueabi/libc/sbin/* ${D}${base_sbindir}
+						      cp -a ${EXTERNAL_TOOLCHAIN}/arm-none-linux-gnueabi/libc/usr/*  ${D}/usr
 						      }
 
 do_stage() {
 	install -d ${STAGING_INCDIR}
-	cp -a ${S}/arm-none-linux-gnueabi/libc/usr/include/* ${STAGING_INCDIR}
+	cp -a ${EXTERNAL_TOOLCHAIN}/arm-none-linux-gnueabi/libc/usr/include/* ${STAGING_INCDIR}
 
 	install -d ${STAGING_LIBDIR}
-	cp -a ${S}/arm-none-linux-gnueabi/libc/usr/lib/* ${STAGING_LIBDIR}
+	cp -a ${EXTERNAL_TOOLCHAIN}/arm-none-linux-gnueabi/libc/usr/lib/* ${STAGING_LIBDIR}
 
 	install -d ${STAGING_DIR_TARGET}${layout_base_libdir}
-	cp -a ${S}/arm-none-linux-gnueabi/libc/lib/* ${STAGING_DIR_TARGET}${base_libdir}
+	cp -a ${EXTERNAL_TOOLCHAIN}/arm-none-linux-gnueabi/libc/lib/* ${STAGING_DIR_TARGET}${base_libdir}
 
 	sed -e "s# /lib# ../../lib#g" \
 	-e "s# /usr/lib# .#g" \
