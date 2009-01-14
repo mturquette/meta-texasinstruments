@@ -6,7 +6,7 @@
 # * gfx		- Include 3D GFX module and libraries.
 # * tiwifi	- Build kernel with WLAN support.
 
-DISTRO_FEATURES += "720p gfx tiwifi"
+DISTRO_FEATURES += "gfx tiwifi"
 
 
 # This is a multimedia-based distribution. We can specify what
