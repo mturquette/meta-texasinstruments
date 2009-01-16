@@ -1,11 +1,12 @@
 # baseport
-PREFERRED_VERSION_x-load =		"4.59"
-PREFERRED_VERSION_u-boot =		"5.06"
-PREFERRED_VERSION_linux-tiomap =	"2.6.24.7-5.19"
+PREFERRED_VERSION_x-load =		"4.60"
+PREFERRED_VERSION_u-boot =		"5.07"
+PREFERRED_VERSION_linux-tiomap =	"2.6.24.7-5.20"
 
 # bridge and friends
-PREFERRED_VERSION_tidspbridge-module =	"23.11"
-PREFERRED_VERSION_tidspbridge-lib =	"23.11"
+PREFERRED_VERSION_tidspbridge-module =	"23.12"
+PREFERRED_VERSION_tidspbridge-lib =	"23.12"
+PREFERRED_VERSION_tidspbridge-samples =	"4.52-P1"
 
 # openmax
 #PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax"
