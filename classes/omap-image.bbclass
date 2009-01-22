@@ -46,6 +46,10 @@ POKY_BASE_INSTALL = '\
     ${@base_contains("IMAGE_FEATURES", ["x11-sato", "dbg-pkgs"], "task-poky-x11-sato-dbg", "",d)} \
     ${@base_contains("IMAGE_FEATURES", ["x11-sato", "dev-pkgs"], "task-poky-x11-sato-dev", "",d)} \
     \
+    ${@base_contains("IMAGE_FEATURES", "x11-plankton", "task-fremantle-x11-plankton", "",d)} \
+    ${@base_contains("IMAGE_FEATURES", ["x11-plankton", "dbg-pkgs"], "task-fremantle-x11-plankton-dbg", "",d)} \
+    ${@base_contains("IMAGE_FEATURES", ["x11-plankton", "dev-pkgs"], "task-fremantle-x11-plankton-dev", "",d)} \ 
+    \
     ${@base_contains("IMAGE_FEATURES", "x11-netbook", "task-poky-x11-netbook", "", d)} \
     ${@base_contains("IMAGE_FEATURES", ["x11-netbook", "dbg-pkgs"], "task-poky-x11-netbook-dbg", "", d)} \
     ${@base_contains("IMAGE_FEATURES", ["x11-netbook", "dev-pkgs"], "task-poky-x11-netbook-dev", "", d)} \
@@ -102,6 +106,7 @@ X11_IMAGE_FEATURES  = "x11-base apps-x11-core package-management"
 ENHANCED_IMAGE_FEATURES = "${X11_IMAGE_FEATURES} apps-x11-games apps-x11-pimlico package-management"
 SATO_IMAGE_FEATURES = "${ENHANCED_IMAGE_FEATURES} apps-x11-sato"
 NETBOOK_IMAGE_FEATURES = "${ENHANCED_IMAGE_FEATURES} apps-x11-netbook"
+PLANKTON_IMAGE_FEATURES = "${ENHANCED_IMAGE_FEATURES} x11-plankton"
 
 inherit image
 
