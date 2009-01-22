@@ -16,6 +16,8 @@ CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_L/x-load"
 CCASE_PATHCOMPONENT = "x-load"
 CCASE_PATHCOMPONENTS = "3"
 
+SRC_URI += "file://armv7a.patch;patch=1"
+
 XLOAD_MACHINE_omap-3430ldp = "omap3430labrador_config"
 XLOAD_MACHINE_omap-3430sdp = "omap3430sdp_config"
 
