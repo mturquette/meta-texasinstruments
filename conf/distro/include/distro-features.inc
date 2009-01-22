@@ -4,9 +4,10 @@
 # Possible features are:
 # * 720p	- Enable 720p OpenMAX components, kernel.
 # * gfx		- Include 3D GFX module and libraries.
-# * tiwifi	- Build kernel with WLAN support.
+# * tiwifi	- Include support for TI's WLAN stack.
+# * tibluetooth	- Include support for TI's Bluetooth and FM stack.
 
-DISTRO_FEATURES += "gfx tiwifi"
+#DISTRO_FEATURES += "gfx tiwifi tibluetooth"
 
 
 # This is a multimedia-based distribution. We can specify what
