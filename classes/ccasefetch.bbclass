@@ -10,7 +10,8 @@
 # ${CCASE_CONTENTPKG} -		A file listing the content that will conform
 #				the tarball.
 #
-# The script (fetchccversion2.sh) needs to be available in the system.
+# The script (cfetchcc-get.sh) needs to be available in the system.
+# Get it from the ccfetch-20090122.tar.gz package.
 ##
 # The config spec must change new-lines with '%' (percentage signs):
 #   CCASE_SPEC = "\
@@ -36,7 +37,7 @@ do_fetch_ccase () {
 			[ ! -z "${CCASE_CONTENTPKG}" ] && TAROPTS="${TAROPTS} -c ${CCASE_CONTENTPKG}"
 
 			cd ${DL_DIR}
-			echo "${CCASE_SPEC}" | tr '%' '\n' | fetchccversion2.sh ${TAROPTS} ${CCASE_PATHFETCH} > ${CCASEFETCH_OUTFILE}
+			echo "${CCASE_SPEC}" | tr '%' '\n' | cfetchcc-get.sh ${TAROPTS} ${CCASE_PATHFETCH} > ${CCASEFETCH_OUTFILE}
 		else
 			echo Package ${PN}-${PV}.tar.gz already downloaded.
 		fi
