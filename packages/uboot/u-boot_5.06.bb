@@ -1,7 +1,7 @@
 require u-boot.inc
 inherit ccasefetch
 
-PR="r0"
+PR="r1"
 #S=${WORKDIR}/${PN}
 
 CCASE_SPEC = "%\
@@ -12,6 +12,8 @@ CCASE_SPEC = "%\
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_L/u-boot"
 CCASE_PATHCOMPONENT = "u-boot"
 CCASE_PATHCOMPONENTS = "3"
+
+SRC_URI += "file://armv7a.patch;patch=1"
 
 UBOOT_MACHINE_omap-3430ldp = "omap3430labrador_config"
 UBOOT_MACHINE_omap-3430sdp = "omap3430sdp_config"
