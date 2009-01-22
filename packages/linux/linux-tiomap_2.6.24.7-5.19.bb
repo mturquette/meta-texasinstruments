@@ -1,7 +1,7 @@
 require linux-omap.inc
 inherit ccasefetch
 
-PR = "r1"
+PR = "r2"
 
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
 DEFAULT_PREFERENCE = "1"
@@ -13,6 +13,8 @@ CCASE_SPEC = "\
 CCASE_PATHFETCH = "/vobs/wtbu/CSSD_L_GIT_2.6/linux/kernel_org/2.6_kernel"
 CCASE_PATHCOMPONENTS = 5
 CCASE_PATHCOMPONENT = "2.6_kernel"
+
+SRC_URI += "file://armv7a.patch;patch=1"
 
 # You can supply your own defconfig if you like.  See
 # http://bec-systems.com/oe/html/recipes_sources.html for a full explanation
