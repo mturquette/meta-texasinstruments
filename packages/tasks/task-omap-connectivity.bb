@@ -3,7 +3,7 @@
 #
 
 DESCRIPTION = "Tasks for TI's connectivity package"
-PR = "r0"
+PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"
@@ -13,4 +13,5 @@ RDEPENDS = "\
 	wilink \
 	fmapp \
 	iperf \
+	bluez-gnome \
 "
