@@ -3,12 +3,12 @@
 #
 
 DESCRIPTION = "Tasks for the TI's GFX package"
-PR = "r1"
+PR = "r2"
 
 RDEPENDS = "\
-	sgx-kernel-module \
-	sgx-lib-noxws \
-    "
+	${@base_contains("DISTRO_FEATURES", "gfx", "sgx-kernel-module", "", d)} \
+	${@base_contains("DISTRO_FEATURES", "gfx", "sgx-lib-noxws", "", d)} \
+	"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"

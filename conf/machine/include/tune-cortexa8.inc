@@ -5,7 +5,6 @@
 
 TARGET_CC_ARCH = ""
 # Override the options for some packages
-TARGET_CC_ARCH_pn-liba52 = "-march=armv7-a -mtune=cortex-a8 -mfloat-abi=softfp"
 TARGET_CC_ARCH_pn-libmad = "-mfpu=neon -mfloat-abi=softfp"
 # Other potentially useful options
 #-ftree-vectorize -ffast-math -fno-omit-frame-pointer
