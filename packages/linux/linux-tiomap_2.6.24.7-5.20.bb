@@ -19,6 +19,9 @@ CCASE_PATHCOMPONENT = "2.6_kernel"
 #SRC_URI_omap-3430ldp += "file://defconfig-omap-3430ldp"
 #SRC_URI_omap-3430sdp += "file://defconfig-omap-3430sdp"
 
+# work-around for touchscreen problem (remove this when proper soln is found):
+ADD_DISTRO_FEATURES += "sed -i 's/# CONFIG_INTERCONNECT_IO_POSTING is not set/CONFIG_INTERCONNECT_IO_POSTING=y/' ${S}/.config"
+
 do_stage_append() {
 	install -d ${STAGING_KERNEL_DIR}/drivers/media/video/isp
 	install -m 0644 ${S}/drivers/media/video/isp/*.h ${STAGING_KERNEL_DIR}/drivers/media/video/isp
