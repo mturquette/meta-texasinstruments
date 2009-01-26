@@ -14,4 +14,5 @@ RDEPENDS = "\
 	fmapp \
 	iperf \
 	bluez-gnome \
+	obex-data-server \
 "
