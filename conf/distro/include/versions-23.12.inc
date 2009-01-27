@@ -30,6 +30,7 @@ PREFERRED_VERSION_gst-pyapps =		"5.11"
 # connectivity
 PREFERRED_VERSION_wilink = 		"23-1.1"
 PREFERRED_VERSION_btfm = 		"23-1.1"
+PREFERRED_VERSION_openobex =            "1.3"
 
 # gfx
 PREFERRED_VERSION_sgx-kernel-module =	"1.3"
