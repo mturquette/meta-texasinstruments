@@ -52,7 +52,8 @@ RDEPENDS = "\
     tisocketnode-wmv9 \
     tisocketnode-gsmfrenc \
     tisocketnode-mpeg4aacenc \
-    tisocketnode-mpeg4-720pdec \
+    ${@base_contains("DISTRO_FEATURES", "720p", "tisocketnode-mpeg4-720pdec", "", d)} \
+    ${@base_contains("DISTRO_FEATURES", "720p", "tisocketnode-mpeg4-720penc", "", d)} \
     "
 
 DEPENDS = "\
