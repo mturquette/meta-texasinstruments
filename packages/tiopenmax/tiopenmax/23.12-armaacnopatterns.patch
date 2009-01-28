@@ -1,0 +1,28 @@
+Index: tiopenmax-3.18/audio/src/openmax_il/armaac_enc/Makefile
+===================================================================
+--- tiopenmax-3.18.orig/audio/src/openmax_il/armaac_enc/Makefile
++++ tiopenmax-3.18/audio/src/openmax_il/armaac_enc/Makefile
+@@ -9,8 +9,7 @@ DIRS= \
+ 	src \
+ 	inc \
+ 	tests \
+-	docs \
+-	patterns 
++	docs
+ 
+ EXTRA=\
+ 
+Index: tiopenmax-3.18/audio/src/openmax_il/armaac_dec/Makefile
+===================================================================
+--- tiopenmax-3.18.orig/audio/src/openmax_il/armaac_dec/Makefile
++++ tiopenmax-3.18/audio/src/openmax_il/armaac_dec/Makefile
+@@ -9,8 +9,7 @@ DIRS= \
+ 	src \
+ 	inc \
+ 	tests \
+-	docs \
+-	patterns 
++	docs
+ 
+ EXTRA=\
+ 
