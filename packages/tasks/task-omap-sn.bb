@@ -3,57 +3,60 @@
 #
 
 DESCRIPTION = "Tasks for TI's Socket Nodes"
-PR = "r0"
+PR = "r1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"
 
 RDEPENDS = "\
     tisocketnode-control-task \
-    tisocketnode-gsmhrdec \
-    tisocketnode-mpeg4dec \
     tisocketnode-dfgm \
-    tisocketnode-g711dec \
-    tisocketnode-gsmhrenc \
-    tisocketnode-mpeg4enc \
-    tisocketnode-h264dec \
-    tisocketnode-nbamrdec \
-    tisocketnode-g711enc \
-    tisocketnode-h264enc \
-    tisocketnode-nbamrenc \
-    tisocketnode-g722dec \
-    tisocketnode-ilbcdec \
-    tisocketnode-pcmdec \
-    tisocketnode-g722enc \
-    tisocketnode-pcmenc \
-    tisocketnode-ilbcenc \
+    tisocketnode-ipp \
     tisocketnode-ringio \
+    tisocketnode-usn \
+    \
+    tisocketnode-g711dec \
+    tisocketnode-g711enc \
+    tisocketnode-g722dec \
+    tisocketnode-g722enc \
     tisocketnode-g723dec \
+    tisocketnode-g723enc \
+    tisocketnode-g726dec \
+    tisocketnode-g726enc \
+    tisocketnode-g729dec \
+    tisocketnode-g729enc \
+    tisocketnode-gsmfrdec \
+    tisocketnode-gsmfrenc \
+    tisocketnode-gsmhrdec \
+    tisocketnode-gsmhrenc \
+    tisocketnode-ilbcdec \
+    tisocketnode-ilbcenc \
     tisocketnode-ima-adpcmdec \
     tisocketnode-ima-adpcmenc \
-    tisocketnode-g723enc \
-    tisocketnode-spark \
-    tisocketnode-ipp \
-    tisocketnode-g726dec \
-    tisocketnode-jpegdec \
-    tisocketnode-usn \
-    tisocketnode-vpp \
-    tisocketnode-g726enc \
-    tisocketnode-jpegenc \
-    tisocketnode-wbamrdec \
-    tisocketnode-g729dec \
     tisocketnode-mp3 \
-    tisocketnode-wbamrenc \
-    tisocketnode-g729enc \
-    tisocketnode-mpeg2 \
-    tisocketnode-wma9 \
-    tisocketnode-gsmfrdec \
     tisocketnode-mpeg4aacdec \
-    tisocketnode-wmv9 \
-    tisocketnode-gsmfrenc \
     tisocketnode-mpeg4aacenc \
+    tisocketnode-nbamrdec \
+    tisocketnode-nbamrenc \
+    tisocketnode-pcmdec \
+    tisocketnode-pcmenc \
+    tisocketnode-wbamrdec \
+    tisocketnode-wbamrenc \
+    tisocketnode-wma9 \
+    \
+    tisocketnode-h264dec \
+    tisocketnode-h264enc \
+    tisocketnode-mpeg2 \
+    tisocketnode-mpeg4dec \
+    tisocketnode-mpeg4enc \
+    tisocketnode-spark \
+    tisocketnode-vpp \
+    tisocketnode-wmv9 \
     ${@base_contains("DISTRO_FEATURES", "720p", "tisocketnode-mpeg4-720pdec", "", d)} \
     ${@base_contains("DISTRO_FEATURES", "720p", "tisocketnode-mpeg4-720penc", "", d)} \
+    \
+    tisocketnode-jpegdec \
+    tisocketnode-jpegenc \
     "
 
 DEPENDS = "\
