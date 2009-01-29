@@ -14,7 +14,7 @@ SRC_URI = "\
 	"
 
 INITSCRIPT_NAME = "bridge"
-INITSCRIPT_PARAMS = "start 01 S ."
+INITSCRIPT_PARAMS = "start 01 5 ."
 
 
 do_install() {
