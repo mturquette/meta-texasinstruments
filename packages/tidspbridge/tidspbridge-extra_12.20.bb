@@ -1,7 +1,7 @@
 PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments MPU/DSP Bridge libraries."
 LICENSE = "LGPL"
-PR = "r0"
+PR = "r1"
 DEPENDS = "tidspbridge-module"
 
 PACKAGES = "${PN}"
@@ -23,6 +23,24 @@ do_install() {
 	install -m 0755 ${S}/dspbridge/{install_bridge,uninstall_bridge,ping.out,cexec.out} ${D}/dspbridge
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${FILESDIR}/bridge.init ${D}${sysconfdir}/init.d/bridge
+	# setup defaults:
+	install -d ${D}/etc/default
+	cat > ${D}/etc/default/bridge <<EOF
+#
+# Defaults for /etc/init.d/bridge
+#
+DEFAULT_BASEIMAGE=/usr/lib/dsp/baseimage.dof
+
+# for OMXResourceManager (also started by /etc/init.d/bridge):
+export QOSDYN_FILE=/dspbridge/qosdyn_3430.dll64P
+
+# for OMXPolicyManager (also started by /etc/init.d/bridge):
+export PM_TBLFILE=/omx/policytable.tbl
+
+# for OMXAudioManager (also started by /etc/init.d/bridge):
+export DCTN_DLLFILE=/lib/dsp/dctn_dyn.dll64P
+
+EOF
 }
 
-FILES_${PN} = "/dspbridge ${sysconfdir}/init.d/bridge "
+FILES_${PN} = "/dspbridge ${sysconfdir}/init.d/bridge ${sysconfdir}/default/bridge "

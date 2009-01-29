@@ -11,7 +11,15 @@
 # Sanity verificatiosn
 [ -d /dspbridge ] || exit 0
 
-BASEIMAGE=${2:-/usr/lib/dsp/baseimage.dof}
+# pull in defaults:
+. /etc/default/bridge
+
+# if an image is  specified on the command-line, override the default:
+if [ -n "$2" ]; then
+    BASEIMAGE=$2
+else
+    BASEIMAGE=$DEFAULT_BASEIMAGE
+fi
 
 [ -f $BASEIMAGE ] || exit 0
 
@@ -19,12 +27,14 @@ start ()
 {
     cd /dspbridge
     echo -n "Loading up Bridge driver: "
-    /dspbridge/install_bridge > /dev/null 2>&1
+    /dspbridge/install_bridge /lib/modules/`uname -r`/kernel/drivers/dspbridge/bridgedriver.ko > /dev/null 2>&1
     /dspbridge/cexec.out -T $BASEIMAGE > /dev/null 2>&1
     [ $? -eq 0 ] || exit $?
     echo "OK"
     
-    if [ "$BASEIMAGE" = "/usr/lib/dsp/baseimage.dof" ]; then
+    # if this is done at startup (which I guess it should be), maybe we want to fork this off
+    # and run it in background, so we don't add 3 seconds to boot time:
+    if [ "$BASEIMAGE" = "$DEFAULT_BASEIMAGE" ]; then
         echo -n "Launching OMX Managers: "
 	sleep 1 && OMXAudioManager &
 	sleep 1 && OMXPolicyManager &
