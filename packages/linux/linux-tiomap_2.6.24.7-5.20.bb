@@ -1,7 +1,7 @@
 require linux-omap.inc
 inherit ccasefetch
 
-PR = "r0"
+PR = "r1"
 
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
 DEFAULT_PREFERENCE = "1"
