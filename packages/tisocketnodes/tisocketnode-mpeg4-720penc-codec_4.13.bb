@@ -19,6 +19,6 @@ do_compile() {
 
 do_stage() {
         chmod -R +w ${S}/*
-	install -d ${STAGING_BINDIR}/dspbridge/Codecs/video/DivX_3430
-	cp -a ${S}/* ${STAGING_BINDIR}/dspbridge/Codecs/video/DivX_3430
+	install -d ${STAGING_BINDIR}/dspbridge/Codecs/video/mpeg4_ari_enc
+	cp -a ${S}/* ${STAGING_BINDIR}/dspbridge/Codecs/video/mpeg4_ari_enc
 }
