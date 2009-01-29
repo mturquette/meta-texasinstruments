@@ -2,6 +2,8 @@ DESCRIPTION = "Texas Instruments MPU/DSP Bridge libraries."
 PR = "r1"
 DEPENDS = "tidspbridge-module"
 
+inherit update-rc.d
+
 PACKAGES = "${PN}"
 
 SRC_URI = "\
@@ -10,6 +12,10 @@ SRC_URI = "\
 	file://uninstall_bridge \
 	file://cexec.out \
 	"
+
+INITSCRIPT_NAME = "bridge"
+INITSCRIPT_PARAMS = "start 01 S ."
+
 
 do_install() {
 	install -d ${D}/dspbridge
