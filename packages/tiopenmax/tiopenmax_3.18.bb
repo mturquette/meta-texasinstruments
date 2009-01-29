@@ -1,6 +1,6 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r0"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
@@ -11,6 +11,7 @@ CCASE_SPEC = "\
 	# OMX Image%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_3.18%\
 	# LCML & core%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/system/src/openmax_il/omx_policy_manager/... LINUX-MMSYSTEM_RLS_3.18P1%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_3.18%\
 	# OMX Application%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_3.18%\
@@ -44,6 +45,7 @@ SRC_URI = "\
 	file://videodecmk.patch;patch=1 \
 	file://23.11-cameramk.patch;patch=1 \
 	file://23.12-armaacnopatterns.patch;patch=1 \
+	file://fix-amixer-path.patch;patch=1 \
 	"
 # these pending update for 23.10/23.11:
 #	file://wbamrencnorm.patch;patch=1 \
