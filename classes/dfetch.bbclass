@@ -24,7 +24,7 @@ do_fetch_dirac () {
 	else
 		cd ${DL_DIR}
 		echo "fetching ${DIRAC_PATHCOMPONENT} from ${DIRAC_PATHFETCH}"
-		fetchdirac.sh ${DIRAC_PATHFETCH} > ${DL_DIR}/${PN}-${PV}.tar.gz
+		cfetchdirac.sh ${DIRAC_PATHFETCH} > ${DL_DIR}/${PN}-${PV}.tar.gz
 	fi
 }
 
