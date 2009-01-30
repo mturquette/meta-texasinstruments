@@ -3,7 +3,6 @@ PR = "r1"
 inherit ccasefetch
 
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
-DEFAULT_PREFERENCE = "1"
 
 CCASE_SPEC = "%\
 	element /vobs/WiLink/...	LINUX-WCG-WLAN_RLS_${PV} %\
