@@ -1,0 +1,57 @@
+Index: tidspbridge-lib-23.12/mpu_api/make/start.mk
+===================================================================
+--- tidspbridge-lib-23.12.orig/mpu_api/make/start.mk
++++ tidspbridge-lib-23.12/mpu_api/make/start.mk
+@@ -32,7 +32,9 @@ CMDDEFS =
+ CMDDEFS_START =
+ 
+ 
++ifndef CROSS
+ CROSS=arm-none-linux-gnueabi-
++endif
+ PROCFAMILY=OMAP_3430
+ 
+ 
+@@ -91,8 +93,15 @@ MAKEDIR := $(CURDIR)
+ %.h:
+ 
+ #   Tools
++ifndef CC
+ CC	:= $(CROSS)gcc
++endif
++ifndef AR
+ AR	:= $(CROSS)ar
++endif
++ifndef LD
+ LD	:= $(CROSS)ld
++endif
++ifndef STRIP
+ STRIP	:= $(CROSS)strip
+-
++endif
+Index: tidspbridge-lib-23.12/mpu_api/src/bridge/Makefile
+===================================================================
+--- tidspbridge-lib-23.12.orig/mpu_api/src/bridge/Makefile
++++ tidspbridge-lib-23.12/mpu_api/src/bridge/Makefile
+@@ -90,7 +90,7 @@ INCLUDES    = \
+ # Libraries needed for linking.
+ 
+ ST_LIBS        =
+-SH_LIBS        = pthread
++SH_LIBS        =
+ 
+ # Search path for library (and linker command) files.
+ # Current folder and target folder are included by default.
+Index: tidspbridge-lib-23.12/mpu_api/src/qos/Makefile
+===================================================================
+--- tidspbridge-lib-23.12.orig/mpu_api/src/qos/Makefile
++++ tidspbridge-lib-23.12/mpu_api/src/qos/Makefile
+@@ -89,7 +89,7 @@ INCLUDES    = \
+ # Libraries needed for linking.
+ 
+ ST_LIBS        =
+-SH_LIBS        = pthread
++SH_LIBS        =
+ 
+ # Search path for library (and linker command) files.
+ # Current folder and target folder are included by default.

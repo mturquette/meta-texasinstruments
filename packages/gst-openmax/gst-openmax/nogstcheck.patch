@@ -1,0 +1,12 @@
+Index: git/configure.ac
+===================================================================
+--- git.orig/configure.ac
++++ git/configure.ac
+@@ -52,7 +52,6 @@ PKG_CHECK_MODULES([GTHREAD], [gthread-2.
+ dnl Check for GStreamer
+ AG_GST_CHECK_GST($GST_MAJORMINOR, [$GST_REQUIRED])
+ AG_GST_CHECK_GST_BASE($GST_MAJORMINOR, [$GST_REQUIRED])
+-AG_GST_CHECK_GST_CHECK($GST_MAJORMINOR, [$GST_REQUIRED])
+ 
+ dnl ** finalize ***
+ 

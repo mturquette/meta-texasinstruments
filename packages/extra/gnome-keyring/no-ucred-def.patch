@@ -1,0 +1,13 @@
+Index: gnome-keyring-2.20/daemon/gkr-daemon-io.c
+===================================================================
+--- gnome-keyring-2.20.orig/daemon/gkr-daemon-io.c
++++ gnome-keyring-2.20/daemon/gkr-daemon-io.c
+@@ -213,7 +213,7 @@ read_unix_socket_credentials (int fd,
+ #endif
+ 
+ 	{
+-#ifdef SO_PEERCRED
++#if defined(SO_PEERCRED) && defined(HAVE_GETPEERUCRED)
+ 		struct ucred cr;   
+ 		socklen_t cr_len = sizeof (cr);
+ 		

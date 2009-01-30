@@ -1,0 +1,78 @@
+Index: tidspbridge-module-23.12/mpu_driver/make/build.mk
+===================================================================
+--- tidspbridge-module-23.12.orig/mpu_driver/make/build.mk
++++ tidspbridge-module-23.12/mpu_driver/make/build.mk
+@@ -218,7 +218,7 @@ $(TARGETMOD).o: $(TARGETMOD).c 
+ 	$(CC) -c $(TARGETARGS) $(EXTRA_CFLAGS) $(INCPATH) -o $@ $<
+ 
+ # removed - need to be done as a pre-step to building
+-	$(MAKE) -C $(KRNLSRC) M=$(PROJROOT)/src modules	
++	LDFLAGS= CROSS_COMPILE=$(CROSS) $(MAKE) -C $(KRNLSRC) M=$(PROJROOT)/src modules	
+ 
+ # Generate Module vermagic
+ $(TARGETMOD).c: $(TARGET) 
+Index: tidspbridge-module-23.12/mpu_driver/make/start.mk
+===================================================================
+--- tidspbridge-module-23.12.orig/mpu_driver/make/start.mk
++++ tidspbridge-module-23.12/mpu_driver/make/start.mk
+@@ -65,19 +65,23 @@ KRN_VER = $(shell head -1 $(KRN_VERSION)
+ 
+ BRIDGE_BLD_LINUX_VERSION = $(shell grep LINUX_VERSION_CODE $(KRN_VERSION) | cut -d ' ' -f 3 | cut -c1-4 )
+ 
+-
+-ifdef CONFIG_ARCH_OMAP34XX
+-PROCFAMILY=OMAP_3430
++ifndef CROSS
+ ifeq ($(KRN_VER),2.4)
+ CROSS=arm_v5t_le-
+ endif
++ifeq ($(KRN_VER),2.6)
++CROSS=arm-none-linux-gnueabi-
++endif
++endif
++
++ifdef CONFIG_ARCH_OMAP34XX
++PROCFAMILY=OMAP_3430
+ ifdef CONFIG_PM
+ CMDDEFS_START +=
+ else
+ CMDDEFS_START +=DISABLE_BRIDGE_PM
+ endif
+ ifeq ($(KRN_VER),2.6)
+-CROSS=arm-none-linux-gnueabi-
+ #CMDDEFS_START +=RES_CLEANUP_DISABLE
+ endif
+ endif
+@@ -155,10 +159,18 @@ MAKEDIR := $(CURDIR)
+ %.h:
+ 
+ #   Tools
++ifndef CC
+ CC	:= $(CROSS)gcc
++endif
++ifndef AR
+ AR	:= $(CROSS)ar
++endif
++ifndef LD
+ LD	:= $(CROSS)ld
++endif
++ifndef STRIP
+ STRIP	:= $(CROSS)strip
++endif
+ ifneq ($(wildcard $(KRNLSRC)/scripts/modpost),)
+ MODPOST := $(KRNLSRC)/scripts/modpost		\
+         $(if $(CONFIG_MODVERSIONS),-m)             \
+Index: tidspbridge-module-23.12/mpu_driver/src/Makefile
+===================================================================
+--- tidspbridge-module-23.12.orig/mpu_driver/src/Makefile
++++ tidspbridge-module-23.12/mpu_driver/src/Makefile
+@@ -15,7 +15,9 @@
+ # General Public License for more details.
+ #
+ 
++ifndef PROJROOT
+ PROJROOT	= ..
++endif
+ 
+ include $(PROJROOT)/make/start.mk
+ # Do not change above "include" line(s)
