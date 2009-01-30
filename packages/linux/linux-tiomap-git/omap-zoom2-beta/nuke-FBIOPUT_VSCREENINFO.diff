@@ -1,0 +1,20 @@
+--- omapkernel/drivers/video/omap/omap_disp_out.c.orig	2009-01-13 22:30:10.000000000 -0600
++++ omapkernel/drivers/video/omap/omap_disp_out.c	2009-01-16 17:13:36.000000000 -0600
+@@ -605,7 +605,7 @@
+ 	* No information was provided by NEC for the following registers */
+ 	spi_wvgalcd_send(3, 0x01);    /* R3 = 01h */
+ 	spi_wvgalcd_send(0, 0x00);    /* R0 = 00h */
+-	spi_wvgalcd_send(1, 0x03);    /* R1 = 0x01 (normal), 0x03 (reversed) */
++	spi_wvgalcd_send(1, 0x01);    /* R1 = 0x01 (normal), 0x03 (reversed) */
+ 	spi_wvgalcd_send(4, 0x00);    /* R4 = 00h */
+ 	spi_wvgalcd_send(5, 0x14);    /* R5 = 14h */
+ 	spi_wvgalcd_send(6, 0x24);    /* R6 = 24h */
+@@ -664,7 +664,7 @@
+ 	spi_wvgalcd_send(114, 0x02);  /* R114 = 02h */
+ 	spi_wvgalcd_send(115, 0x0C);  /* R115 = 0Ch */
+ 	spi_wvgalcd_send(118, 0x0C);  /* R118 = 0Ch */
+-	spi_wvgalcd_send(121, 0x10);  /* R121 = 0x30(normal), 0x10(reversed)*/
++	spi_wvgalcd_send(121, 0x30);  /* R121 = 0x30(normal), 0x10(reversed)*/
+ 	spi_wvgalcd_send(130, 0x00);  /* R130 = 00h */
+ 	spi_wvgalcd_send(131, 0x00);  /* R131 = 00h */
+ 	spi_wvgalcd_send(132, 0xFC);  /* R132 = FCh */

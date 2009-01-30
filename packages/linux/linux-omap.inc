@@ -2,11 +2,11 @@ SECTION = "kernel"
 DESCRIPTION = "Linux kernel for TI OMAP devices"
 LICENSE = "GPL"
 
+COMPATIBLE_MACHINE = "omap-3430(l|s)dp|omap-zoom2-(alpha|beta)|beagleboard|omap3evm|overo"
+
 KERNEL_OUTPUT = "arch/${ARCH}/boot/compressed/${KERNEL_IMAGETYPE}"
 
 inherit kernel
-
-COMPATIBLE_MACHINE = "omap-3430(l|s)dp|omap-3430zoom2"
 
 ADD_DISTRO_FEATURES = "	${@base_contains("DISTRO_FEATURES", "720p", "sed -i 's/# CONFIG_FB_OMAP_720P_STREAMING is not set/CONFIG_FB_OMAP_720P_STREAMING=y/' ${S}/.config", "", d)}"
 
@@ -39,7 +39,13 @@ do_configure_prepend() {
 				yes '' | oe_runmake omap_3430sdp_defconfig
 				sed -i "s/# CONFIG_FB_OMAP_LCD_VGA is not set/CONFIG_FB_OMAP_LCD_VGA=y/" \
 					${S}/.config
-				;;				
+				;;
+			omap-zoom2-beta)
+				yes '' | oe_runmake omap_zoom2_defconfig
+				;;
+			omap-zoom2-alpha)
+				yes '' | oe_runmake omap_zoom2_defconfig
+				;;
 			*)
 				yes '' | oe_runmake ${MACHINE}_defconfig
 				;;

@@ -1,10 +1,7 @@
 require linux-omap.inc
 inherit ccasefetch
 
-PR = "r0"
-
-COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
-DEFAULT_PREFERENCE = "1"
+PR = "r1"
 
 S = ${WORKDIR}/${PN}-${PV}/wtbu/CSSD_L_GIT_2.6/linux/kernel_org/2.6_kernel
 

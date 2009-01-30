@@ -1,0 +1,10 @@
+--- omapkernel/drivers/video/fbmem.c.orig	2009-01-12 14:32:36.000000000 -0600
++++ omapkernel/drivers/video/fbmem.c	2009-01-16 17:13:25.000000000 -0600
+@@ -1032,6 +1032,7 @@
+ 		return copy_to_user(argp, &info->var,
+ 				    sizeof(var)) ? -EFAULT : 0;
+ 	case FBIOPUT_VSCREENINFO:
++		return 0;
+ 		if (copy_from_user(&var, argp, sizeof(var)))
+ 			return -EFAULT;
+ 		acquire_console_sem();
