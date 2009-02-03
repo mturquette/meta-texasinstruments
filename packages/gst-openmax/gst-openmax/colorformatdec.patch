@@ -1,0 +1,23 @@
+Index: git/omx/gstomx_jpegenc.c
+===================================================================
+--- git.orig/omx/gstomx_jpegenc.c
++++ git/omx/gstomx_jpegenc.c
+@@ -308,6 +308,9 @@ omx_setup (GstOmxBaseFilter *omx_base)
+ {
+     GstOmxJpegEnc *self;
+     GOmxCore *gomx;
++#if 1
++    OMX_COLOR_FORMATTYPE color_format;
++#endif
+ 
+     self = GST_OMX_JPEGENC (omx_base);
+     gomx = (GOmxCore *) omx_base->gomx;
+@@ -338,8 +341,6 @@ omx_setup (GstOmxBaseFilter *omx_base)
+ #if 1
+         /* the component should do this instead */
+ 
+-        OMX_COLOR_FORMATTYPE color_format;
+-
+         {
+ 
+             param->nPortIndex = 0;

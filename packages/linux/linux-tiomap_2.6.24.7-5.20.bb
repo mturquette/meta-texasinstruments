@@ -1,7 +1,7 @@
 require linux-omap.inc
 inherit ccasefetch
 
-PR = "r0"
+PR = "r1"
 
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
 DEFAULT_PREFERENCE = "1"
@@ -18,6 +18,9 @@ CCASE_PATHCOMPONENT = "2.6_kernel"
 # http://bec-systems.com/oe/html/recipes_sources.html for a full explanation
 #SRC_URI_omap-3430ldp += "file://defconfig-omap-3430ldp"
 #SRC_URI_omap-3430sdp += "file://defconfig-omap-3430sdp"
+
+# work-around for touchscreen problem (remove this when proper soln is found):
+ADD_DISTRO_FEATURES += "sed -i 's/# CONFIG_INTERCONNECT_IO_POSTING is not set/CONFIG_INTERCONNECT_IO_POSTING=y/' ${S}/.config"
 
 do_stage_append() {
 	install -d ${STAGING_KERNEL_DIR}/drivers/media/video/isp

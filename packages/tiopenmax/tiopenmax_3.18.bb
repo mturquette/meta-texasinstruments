@@ -1,16 +1,20 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r0"
+PR = "r2"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
 	# OMX Audio%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.18%\
 	# OMX Video%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/rm_parser/... LINUX-MMVIDEO_RLS_3.18P1%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/rm_rvparser/... LINUX-MMVIDEO_RLS_3.18P1%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/rv_decode/... LINUX-MMVIDEO_RLS_3.18P1%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_3.18%\
 	# OMX Image%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_3.18%\
 	# LCML & core%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/system/src/openmax_il/omx_policy_manager/... LINUX-MMSYSTEM_RLS_3.18P1%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_3.18%\
 	# OMX Application%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_3.18%\
@@ -44,6 +48,7 @@ SRC_URI = "\
 	file://videodecmk.patch;patch=1 \
 	file://23.11-cameramk.patch;patch=1 \
 	file://23.12-armaacnopatterns.patch;patch=1 \
+	file://fix-amixer-path.patch;patch=1 \
 	"
 # these pending update for 23.10/23.11:
 #	file://wbamrencnorm.patch;patch=1 \
@@ -72,6 +77,7 @@ do_compile() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
+		RAPARSERINCLUDEDIR=${D}/include/omx RVPARSERINCLUDEDIR=${D}/include/omx \
 		TARGETDIR=${STAGING_INCDIR}/../ OMXROOT=${S}
 }
 
