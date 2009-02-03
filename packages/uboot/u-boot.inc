@@ -10,8 +10,8 @@ PARALLEL_MAKE=""
 EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
 
 UBOOT_MACHINE ?= "${MACHINE}_config"
-UBOOT_IMAGE ?= "u-boot-${MACHINE}-${PV}-${PR}.bin"
-UBOOT_SYMLINK ?= "u-boot-${MACHINE}.bin"
+UBOOT_IMAGE ?= "u-boot-${MACHINE}-${PV}-${PR}-${DATETIME}.bin"
+UBOOT_SYMLINK ?= "u-boot.bin"
 
 do_compile () {
 	unset LDFLAGS
@@ -23,7 +23,7 @@ do_compile () {
 
 do_deploy () {
 	install -d ${DEPLOY_DIR_IMAGE}
-	install ${S}/u-boot.bin ${DEPLOY_DIR_IMAGE}/${UBOOT_IMAGE}
+	install -m 644 ${S}/u-boot.bin ${DEPLOY_DIR_IMAGE}/${UBOOT_IMAGE}
 	package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${UBOOT_IMAGE}
 
 	cd ${DEPLOY_DIR_IMAGE}
