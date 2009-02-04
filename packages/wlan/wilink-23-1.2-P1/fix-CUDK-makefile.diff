@@ -1,0 +1,11 @@
+--- wilink-23-1.2-P1/WiLink/CUDK/os/linux/src/makefile.orig	2009-02-04 11:49:01.000000000 -0600
++++ wilink-23-1.2-P1/WiLink/CUDK/os/linux/src/makefile	2009-02-04 11:49:45.000000000 -0600
+@@ -88,7 +88,7 @@
+ 
+ $(OUTPUT_DIR)/$(LIB_NAME).a: $(OBJS)
+ 	rm -f $@
+-	$(CROSS_COMPILE)$(AR) -q $@ $^
++	$(AR) -q $@ $^
+ 
+ $(OUTPUT_DIR)/$(LIB_NAME).so: $(OBJS)
+ 	rm -f $@
