@@ -146,7 +146,7 @@ PREFERRED_VERSION_gst-goo =		"5.12"
 PREFERRED_VERSION_gst-pyapps =		"5.11"
 
 # connectivity
-PREFERRED_VERSION_wilink = 		"23-1.2"
+PREFERRED_VERSION_wilink = 		"23-1.2-P1"
 PREFERRED_VERSION_btfm = 		"23-1.2"
 
 # graphics
