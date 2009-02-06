@@ -82,4 +82,4 @@ do_install() {
 	    ${D}${bindir}
 }
 
-addtask chmod after do_unpack before do_patch
+addtask chmod after do_unpack_ccase before do_patch
