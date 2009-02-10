@@ -1,0 +1,11 @@
+--- scratchbox-launcher.sh.orig	2009-01-17 12:32:54.000000000 -0600
++++ scratchbox-launcher.sh	2009-01-17 12:34:45.000000000 -0600
+@@ -35,7 +35,7 @@
+ PIDFILE="$AF_PIDDIR/$BASENAME-$TMPSVC.pid"
+ 
+ if [ -e /targets/links/scratchbox.config ]; then
+-  source /targets/links/scratchbox.config
++  . /targets/links/scratchbox.config
+   if echo $SBOX_CPUTRANSPARENCY_METHOD | grep "sbrsh$" >/dev/null; then
+     if [ -z "$SBOX_TARGET_NAME" ]; then
+       echo "$0: SBOX_CPUTRANSPARENCY_METHOD defined but SBOX_TARGET_NAME not!"

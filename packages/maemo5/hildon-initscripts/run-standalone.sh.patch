@@ -1,0 +1,11 @@
+--- run-standalone.sh.orig	2009-01-17 12:32:42.000000000 -0600
++++ run-standalone.sh	2009-01-17 12:34:27.000000000 -0600
+@@ -2,7 +2,7 @@
+ 
+ if [ -r /etc/osso-af-init/af-defines.sh ]; then
+   unset AF_DEFINES_SOURCED
+-  source /etc/osso-af-init/af-defines.sh
++  . /etc/osso-af-init/af-defines.sh
+ else
+   echo "$0: /etc/osso-af-init/af-defines.sh is not readable!"
+   exit 1

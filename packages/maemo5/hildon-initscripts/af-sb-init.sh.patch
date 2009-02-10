@@ -1,0 +1,51 @@
+--- af-sb-init.sh.in.orig	2009-01-17 12:32:26.000000000 -0600
++++ af-sb-init.sh.in	2009-01-17 12:34:06.000000000 -0600
+@@ -29,10 +29,10 @@
+   AF_SB_SERVICE_ACTION=$2
+ 
+   if [ -e $DIR/$AF_SB_SERVICE_NAME.defs ]; then
+-    source $DIR/$AF_SB_SERVICE_NAME.defs
++    . $DIR/$AF_SB_SERVICE_NAME.defs
+   fi
+   if [ -e $DIR/$AF_SB_SERVICE_NAME.sh ]; then
+-    source $DIR/$AF_SB_SERVICE_NAME.sh $AF_SB_SERVICE_ACTION
++    . $DIR/$AF_SB_SERVICE_NAME.sh $AF_SB_SERVICE_ACTION
+   fi 
+ }
+ 
+@@ -90,7 +90,7 @@
+   exit 2
+ fi
+ 
+-source $AF_DEFS
++. $AF_DEFS
+ 
+ # let's use /var/run as pid dir and make sure it is not a link
+ export AF_PIDDIR=/var/run
+@@ -109,7 +109,7 @@
+ export HOME="/home/$USER"
+ export MYDOCSDIR=$HOME/MyDocs
+ 
+-source $DIR/osso-gtk.defs
++. $DIR/osso-gtk.defs
+ 
+ # Let's use SB launcher wrapper
+ export LAUNCHWRAPPER=/usr/bin/scratchbox-launcher.sh
+@@ -122,7 +122,7 @@
+ 
+ # Check our environment
+ if [ -e /targets/links/scratchbox.config ]; then
+-  source /targets/links/scratchbox.config
++  . /targets/links/scratchbox.config
+   if echo $SBOX_CPUTRANSPARENCY_METHOD | grep "sbrsh$" >/dev/null; then
+     if [ -z "$SBOX_TARGET_NAME" ]; then
+       echo "$0: SBOX_CPUTRANSPARENCY_METHOD defined but SBOX_TARGET_NAME not!"
+@@ -214,7 +214,7 @@
+   af_sb_service dbus-sessionbus start
+ 
+   # resource AF_DEFS to read the address of the dbus session address
+-  source $AF_DEFS
++  . $AF_DEFS
+ 
+   # make some directories for games
+   af_sb_init_service lessertunjo0 start
