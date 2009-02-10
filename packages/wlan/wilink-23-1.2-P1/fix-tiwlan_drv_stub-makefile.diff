@@ -1,0 +1,11 @@
+--- wilink-23-1.2-P1/WiLink/platforms/os/linux/build/Makefile.orig	2009-02-04 11:44:28.000000000 -0600
++++ wilink-23-1.2-P1/WiLink/platforms/os/linux/build/Makefile	2009-02-04 11:45:02.000000000 -0600
+@@ -211,7 +211,7 @@
+ #
+ $(OUTPUT_FILE):
+ 	$(MAKE) -C $(KERNEL_DIR) M=`pwd` ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) modules
+-	$(CROSS_COMPILE)$(AR) rcs $(OUTPUT_LIB) $(OS_OBJS)
++	$(AR) rcs $(OUTPUT_LIB) $(OS_OBJS)
+ 	mv linux.ko $(OUTPUT_FILE)
+ 
+ 

@@ -1,0 +1,52 @@
+Index: tiopenmax-3.18/system/src/openmax_il/audio_manager/src/AudioManager.c
+===================================================================
+--- tiopenmax-3.18.orig/system/src/openmax_il/audio_manager/src/AudioManager.c	2009-01-28 10:46:41.000000000 -0600
++++ tiopenmax-3.18/system/src/openmax_il/audio_manager/src/AudioManager.c	2009-01-28 10:59:23.000000000 -0600
+@@ -1137,28 +1137,28 @@
+ 
+ 
+     if (cmd.param1 == 44100) {
+-        system("/bin/amixer cset numid=3 44100");
++        system("/usr/bin/env amixer cset numid=3 44100");
+     }
+     else if (cmd.param1 == 48000) {
+-        system("/bin/amixer cset numid=3 48000");
++        system("/usr/bin/env amixer cset numid=3 48000");
+     }  
+     else if (cmd.param1 == 8000) {
+-        system("/bin/amixer cset numid=3 8000");
++        system("/usr/bin/env amixer cset numid=3 8000");
+     }
+     else if (cmd.param1 == 11025) {
+-        system("/bin/amixer cset numid=3 11025");
++        system("/usr/bin/env amixer cset numid=3 11025");
+     }
+     else if (cmd.param1 == 12000) {
+-        system("/bin/amixer cset numid=3 12000");
++        system("/usr/bin/env amixer cset numid=3 12000");
+     }
+     else if (cmd.param1 == 22050) {
+-        system("/bin/amixer cset numid=3 22050");
++        system("/usr/bin/env amixer cset numid=3 22050");
+     }
+     else if (cmd.param1 == 24000) {
+-        system("/bin/amixer cset numid=3 24000");
++        system("/usr/bin/env amixer cset numid=3 24000");
+     }
+     else if (cmd.param1 == 32000) {
+-        system("/bin/amixer cset numid=3 32000");
++        system("/usr/bin/env amixer cset numid=3 32000");
+     }
+ 
+     dspMsg.dwCmd = ADN_NOTIFY_SAMPLING_FREQUENCY_CHANGED;
+@@ -2826,8 +2826,8 @@
+ #endif	
+ #ifdef ALSA_T2_TESTING
+ 
+-    system("/usr/snddevices");    
+-    system("/bin/amixer cset numid=1 1");
++    system("/usr/bin/env snddevices");    
++    system("/usr/bin/env amixer cset numid=1 1");
+ #endif
+ 
+ }

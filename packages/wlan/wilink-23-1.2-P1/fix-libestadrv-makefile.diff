@@ -1,0 +1,11 @@
+--- wilink-23-1.2-P1/WiLink/stad/build/linux/Makefile.orig	2009-02-03 23:55:37.000000000 -0600
++++ wilink-23-1.2-P1/WiLink/stad/build/linux/Makefile	2009-02-03 23:56:07.000000000 -0600
+@@ -125,7 +125,7 @@
+ #
+ $(OUTPUT_FILE):
+ 	$(MAKE) -C $(KERNEL_DIR) M=`pwd` ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) modules
+-	@$(CROSS_COMPILE)$(AR) rcs $@ $(DK_OBJS)
++	@$(AR) rcs $@ $(DK_OBJS)
+ 
+ 
+ endif	# ifneq ($(KERNELRELEASE),)
