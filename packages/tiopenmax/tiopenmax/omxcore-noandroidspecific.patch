@@ -1,0 +1,14 @@
+Index: git/system/src/openmax_il/omx_core/src/OMX_Core.c
+===================================================================
+--- git.orig/system/src/openmax_il/omx_core/src/OMX_Core.c
++++ git/system/src/openmax_il/omx_core/src/OMX_Core.c
+@@ -11,7 +11,9 @@
+ #include <string.h>
+ #include <stdlib.h>
+ #include <pthread.h>
++#ifdef ANDROID
+ #include <utils/Log.h>
++#endif
+ 
+ 
+ /* #include "OMX_RegLib.h" */

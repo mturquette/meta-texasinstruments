@@ -1,0 +1,42 @@
+Index: git/audio/src/openmax_il/aac_dec/inc/OMX_AacDec_Utils.h
+===================================================================
+--- git.orig/audio/src/openmax_il/aac_dec/inc/OMX_AacDec_Utils.h
++++ git/audio/src/openmax_il/aac_dec/inc/OMX_AacDec_Utils.h
+@@ -64,11 +64,12 @@
+ #endif
+ 
+ /* Log for Android system*/
++#ifdef ANDROID
+ #include <utils/Log.h>
++#endif
+ 
+ /* PV opencore capability custom parameter index */
+ #define PV_OMX_COMPONENT_CAPABILITY_TYPE_INDEX 0xFF7A347
+-#define ANDROID
+ #define OBJECTTYPE_LC 2
+ #define OBJECTTYPE_HE 5
+ #define OBJECTTYPE_HE2 29
+Index: git/audio/src/openmax_il/aac_dec/src/OMX_AacDecoder.c
+===================================================================
+--- git.orig/audio/src/openmax_il/aac_dec/src/OMX_AacDecoder.c
++++ git/audio/src/openmax_il/aac_dec/src/OMX_AacDecoder.c
+@@ -87,7 +87,9 @@
+ #endif
+ 
+ /* Log for Android system*/
++#ifdef ANDROID
+ #include <utils/Log.h>
++#endif
+ 
+ #ifdef DSP_RENDERING_ON
+ 
+@@ -202,7 +204,9 @@ static OMX_ERRORTYPE ComponentRoleEnum(O
+ /*-------------------------------------------------------------------*/
+ OMX_ERRORTYPE OMX_ComponentInit (OMX_HANDLETYPE hComp)
+ {
++#ifdef ANDROID
+     __android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s: IN", __FUNCTION__);
++#endif
+     OMX_ERRORTYPE eError = OMX_ErrorNone;
+     OMX_COMPONENTTYPE *pHandle = (OMX_COMPONENTTYPE*) hComp;
+     OMX_PARAM_PORTDEFINITIONTYPE *pPortDef_ip = NULL, *pPortDef_op = NULL;

@@ -1,0 +1,41 @@
+Index: git/audio/src/openmax_il/wbamr_dec/inc/OMX_WbAmrDec_Utils.h
+===================================================================
+--- git.orig/audio/src/openmax_il/wbamr_dec/inc/OMX_WbAmrDec_Utils.h
++++ git/audio/src/openmax_il/wbamr_dec/inc/OMX_WbAmrDec_Utils.h
+@@ -28,7 +28,9 @@
+ 
+ 
+ /* Log for Android system*/
++#ifdef ANDROID
+ #include <utils/Log.h>
++#endif
+ 
+ /* ======================================================================= */
+ /**
+@@ -202,7 +204,7 @@ enum WBAMRDEC_MimeMode {
+  * @def    WBAMR_DEC_EPRINT   Error print macro
+  */
+ /* ======================================================================= */
+-#ifndef UNDER_CE
++#ifdef ANDROID
+         #define WBAMR_DEC_EPRINT(...)    __android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s %d::	",__FUNCTION__, __LINE__);\
+ 	                                __android_log_print(ANDROID_LOG_VERBOSE, __FILE__, __VA_ARGS__);\
+     	                            __android_log_print(ANDROID_LOG_VERBOSE, __FILE__, "\n");
+@@ -214,7 +216,7 @@ enum WBAMRDEC_MimeMode {
+  * @def    WBAMR_DEC_DEBUG   Debug print macro
+  */
+ /* ======================================================================= */
+-#ifndef UNDER_CE
++#ifdef  ANDROID
+ #ifdef  WBAMR_DEC_DEBUG
+         #define WBAMR_DEC_DPRINT(...)    __android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s %d::	",__FUNCTION__, __LINE__);\
+ 	                                __android_log_print(ANDROID_LOG_VERBOSE, __FILE__, __VA_ARGS__);\
+@@ -243,7 +245,7 @@ enum WBAMRDEC_MimeMode {
+         #define WBAMR_DEC_MCP_DPRINT(...)
+ #endif
+ 
+-#else /*UNDER_CE*/
++#else /*NON ANDROID*/
+ 
+ 	#ifdef DEBUG
+ 		 #define WBAMR_DEC_DPRINT printf

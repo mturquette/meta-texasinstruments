@@ -1,0 +1,121 @@
+Index: git/audio/src/openmax_il/nbamr_dec/inc/OMX_AmrDecoder.h
+===================================================================
+--- git.orig/audio/src/openmax_il/nbamr_dec/inc/OMX_AmrDecoder.h
++++ git/audio/src/openmax_il/nbamr_dec/inc/OMX_AmrDecoder.h
+@@ -60,7 +60,9 @@
+ #endif
+ 
+ /* Log for Android system*/
++#ifdef ANDROID
+ #include <utils/Log.h>
++#endif
+ 
+ /* PV opencore capability custom parameter index */
+ #define PV_OMX_COMPONENT_CAPABILITY_TYPE_INDEX 0xFF7A347
+@@ -211,15 +213,28 @@
+ 
+ #ifndef UNDER_CE
+ 
++#ifdef ANDROID
+ #define AMRDEC_EPRINT(...)	__android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s %d:: ERROR	",__FUNCTION__, __LINE__);\
+ 	                                __android_log_print(ANDROID_LOG_VERBOSE, __FILE__, __VA_ARGS__);\
+     	                            __android_log_print(ANDROID_LOG_VERBOSE, __FILE__, "\n");
++#else
++#define AMRDEC_EPRINT(...)	fprintf(stderr,"%s %d:: ERROR	",__FUNCTION__, __LINE__);\
++	                        fprintf(stderr, __VA_ARGS__);\
++    	                        fprintf(stderr, "\n");
++#endif
+ 
+ #ifdef  AMRDEC_DEBUG
++#ifdef  ANDROID
+         #define AMRDEC_DPRINT(...)    __android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s %d::	",__FUNCTION__, __LINE__);\
+ 	                                __android_log_print(ANDROID_LOG_VERBOSE, __FILE__, __VA_ARGS__);\
+     	                            __android_log_print(ANDROID_LOG_VERBOSE, __FILE__, "\n");
+ #else
++        #define AMRDEC_DPRINT(...)    fprintf(stderr,"%s %d::	",__FUNCTION__, __LINE__);\
++	                              fprintf(stderr, __VA_ARGS__);\
++    	                              fprintf(stderr, "\n");
++#endif
++
++#else
+         #define AMRDEC_DPRINT(...)
+ #endif
+ 
+Index: git/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDecoder.c
+===================================================================
+--- git.orig/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDecoder.c
++++ git/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDecoder.c
+@@ -78,7 +78,9 @@
+ #include "OMX_AmrDec_Utils.h"
+ 
+ /* Log for Android system*/
++#ifdef ANDROID
+ #include <utils/Log.h>
++#endif
+ 
+ #ifdef NBAMRDEC_DEBUGMEM
+ 
+@@ -215,7 +217,9 @@ AM_COMMANDDATATYPE cmd_data;
+ /*-------------------------------------------------------------------*/
+ OMX_ERRORTYPE OMX_ComponentInit (OMX_HANDLETYPE hComp)
+ {
++#ifdef ANDROID
+ 	__android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s: IN", __FUNCTION__);
++#endif
+     OMX_PARAM_PORTDEFINITIONTYPE *pPortDef_ip, *pPortDef_op;
+     AMRDEC_COMPONENT_PRIVATE *pComponentPrivate;
+     OMX_AUDIO_PARAM_AMRTYPE *amr_ip;
+@@ -549,7 +553,9 @@ error = NBAMRDEC_StartComponentThread(pH
+ 
+ EXIT:
+     AMRDEC_DPRINT ("%d ::OMX_AmrDecoder.c ::OMX_ComponentInit - returning %d\n", __LINE__,error);
++#ifdef ANDROID
+ 	__android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s: OUT", __FUNCTION__);
++#endif
+     return error;
+ }
+ 
+@@ -1823,7 +1829,9 @@ static OMX_ERRORTYPE AllocateBuffer (OMX
+     AMRDEC_COMPONENT_PRIVATE *pComponentPrivate;
+     OMX_ERRORTYPE eError = OMX_ErrorNone;
+     OMX_BUFFERHEADERTYPE *pBufferHeader;
++#ifdef ANDROID
+ 	__android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s: ALLOCATE BUFFER", __FUNCTION__);
++#endif
+ 
+     pComponentPrivate = (AMRDEC_COMPONENT_PRIVATE *)
+             (((OMX_COMPONENTTYPE*)hComponent)->pComponentPrivate);
+Index: git/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDec_Utils.c
+===================================================================
+--- git.orig/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDec_Utils.c
++++ git/audio/src/openmax_il/nbamr_dec/src/OMX_AmrDec_Utils.c
+@@ -77,7 +77,9 @@
+ #endif
+ 
+ /* Log for Android system*/
++#ifdef ANDROID
+ #include <utils/Log.h>
++#endif
+ 
+ #ifdef NBAMRDEC_DEBUGMEM
+ extern void * mymalloc(int line, char *s, int size);
+@@ -256,7 +258,9 @@ OMX_ERRORTYPE NBAMRDECFill_LCMLInitParam
+     arr[0] = STREAM_COUNT;
+     arr[1] = NBAMRDEC_INPUT_PORT;
+     arr[2] = NBAMRDEC_DMM;
++#ifdef ANDROID
+ 	__android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s: IN %d", __FUNCTION__, pComponentPrivate->pOutputBufferList->numBuffers);
++#endif
+     if (pComponentPrivate->pInputBufferList->numBuffers) {
+         arr[3] = pComponentPrivate->pInputBufferList->numBuffers;
+     }
+@@ -274,7 +278,9 @@ OMX_ERRORTYPE NBAMRDECFill_LCMLInitParam
+     else {
+         AMRDEC_DPRINT("%d :: OMX_AmrDec_Utils.c :: Setting up create phase params for FILE mode\n",__LINE__);
+         arr[5] = NBAMRDEC_DMM;
++#ifdef ANDROID
+ 		__android_log_print(ANDROID_LOG_VERBOSE, __FILE__,"%s: OUT : %d", __FUNCTION__, pComponentPrivate->pOutputBufferList->numBuffers);
++#endif
+ 
+ 		if (pComponentPrivate->pOutputBufferList->numBuffers) {
+             arr[6] = pComponentPrivate->pOutputBufferList->numBuffers;
