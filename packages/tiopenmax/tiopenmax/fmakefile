@@ -1,3 +1,7 @@
+# Imports
+#BRIDGEINCLUDEDIR
+#BRIDGELIBDIR
+
 # Exports
 
 SOURCE_DIR = .
@@ -6,8 +10,8 @@ TARGET_DIR = ./target
 CC = arm-linux-gcc
 DFLAGS = -Wall -g3
 LDFLAGS = -lpthread
-AUDIOMANAGER=1
-RESOURCEMANAGER=1
+#AUDIOMANAGER=1
+#RESOURCEMANAGER=1
 
 # Other flags:
 #   -DDSP_RENDERING_ON
@@ -16,7 +20,7 @@ RESOURCEMANAGER=1
 
 # omx
 OMX_LIBS = -L$(core_DIR) -lOMX_Core
-OMX_CFLAGS = -I$(core_INC)
+OMX_CFLAGS = -I$(core_INC) -I$(common_INC)
 
 ifdef AUDIOMANAGER
 OMX_CFLAGS += -I$(am_INC) -DDSP_RENDERING_ON
@@ -32,13 +36,17 @@ LCML_LIBS = -L$(lcml_DIR) -lLCML
 LCML_CFLAGS = -I$(lcml_INC) -DOMAP_2430 $(BRIDGE_CFLAGS)
 
 # bridge
-BRIDGE_LIBS = -L$(BRIDGE_DIR) -lbridge
-BRIDGE_CFLAGS = -I$(INCLUDE_DIR)/dspbridge -DOMAP_3430
+BRIDGE_LIBS = -L$(BRIDGELIBDIR) -lbridge
+BRIDGE_CFLAGS = -I$(BRIDGEINCLUDEDIR) -DOMAP_3430
 
 # Default target:
 all:
 
 # Targets
+
+# common
+common_DIR = $(SOURCE_DIR)/system/src/openmax_il/common
+common_INC = $(common_DIR)/inc
 
 # core
 core_DIR = $(SOURCE_DIR)/system/src/openmax_il/omx_core/src
@@ -74,7 +82,7 @@ $(clock_TARGET): INCLUDES := -I$(clock_INC) -I$(core_INC)
 $(clock_TARGET): DFLAGS := $(DFLAGS) $(BRIDGE_CFLAGS)
 $(clock_TARGET): LIBS := $(BRIDGE_LIBS)
 
-libraries += $(clock_TARGET)
+#libraries += $(clock_TARGET)
 
 # resource manager proxy
 rmp_DIR = $(SOURCE_DIR)/system/src/openmax_il/resource_manager_proxy/src
@@ -182,7 +190,7 @@ $(postproc_TARGET): INCLUDES := -I$(postproc_INC) -I$(clock_INC) -I$(INCLUDE_DIR
 $(postproc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
 $(postproc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
 
-libraries += $(postproc_TARGET)
+#libraries += $(postproc_TARGET)
 
 # prepostproc
 vpp_DIR = $(SOURCE_DIR)/video/src/openmax_il/prepost_processor/src
@@ -194,7 +202,7 @@ $(vpp_TARGET): INCLUDES := -I$(vpp_INC) -I$(clock_INC) -I$(INCLUDE_DIR)
 $(vpp_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
 $(vpp_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
 
-libraries += $(vpp_TARGET)
+#libraries += $(vpp_TARGET)
 
 
 ##### IMAGE #####
@@ -539,8 +547,8 @@ clean:
 	find . -name "*.o" | xargs rm -rf
 
 install: $(libraries)
-	mkdir -p $(DESTDIR)/usr/lib
-	install $(libraries) $(DESTDIR)/usr/lib
+	mkdir -p $(DESTDIR)/lib
+	install $(libraries) $(DESTDIR)/lib
 
 # from Lauri Leukkunen's build system
 ifdef V
