@@ -1,0 +1,65 @@
+# Exports
+
+SOURCE_DIR = .
+
+CC ?= arm-none-linux-gnueabi-gcc
+DB_CFLAGS = -Wall -g3
+LDFLAGS = -lpthread
+
+# Default target:
+all:
+
+# Targets
+
+# bridge
+bridge_DIR = $(SOURCE_DIR)/bridge
+bridge_TARGET = $(bridge_DIR)/libbridge.so
+
+$(bridge_TARGET): $(bridge_DIR)/DSPManager.o $(bridge_DIR)/DSPProcessor.o $(bridge_DIR)/DSPProcessor_OEM.o $(bridge_DIR)/DSPNode.o $(bridge_DIR)/DSPStrm.o $(bridge_DIR)/perfutils.o $(bridge_DIR)/dsptrap.o
+$(bridge_TARGET): INCLUDES := -I$(bridge_DIR)/../inc
+$(bridge_TARGET): DB_CFLAGS := $(DB_CFLAGS) -DLINUX -DOMAP_3430
+
+libraries += $(bridge_TARGET)
+
+# qos
+qos_DIR = $(SOURCE_DIR)/qos
+qos_TARGET = $(qos_DIR)/libqos.a
+
+$(qos_TARGET): $(qos_DIR)/QOSComponent.o $(qos_DIR)/QOSResource.o $(qos_DIR)/QOSRegistry.o $(qos_DIR)/qosti.o
+$(qos_TARGET): INCLUDES := -I$(bridge_DIR)/../inc
+$(qos_TARGET): DB_CFLAGS := $(DB_CFLAGS) -DLINUX -DOMAP_3430
+
+libraries += $(qos_TARGET)
+
+# Rules
+
+all: $(libraries)
+
+clean:
+	rm -f $(libraries)
+	find . -name "*.o" | xargs rm -rf
+
+install: $(libraries)
+	mkdir -p $(DESTDIR)/usr/lib
+	install $(libraries) $(DESTDIR)/usr/lib
+
+# from Lauri Leukkunen's build system
+ifdef V
+Q =
+P = @printf "" # <- space before hash is important!!!
+else
+P = @printf "[%s] $@\n" # <- space before hash is important!!!
+Q = @
+endif
+
+%.o:: %.c
+	$(P)CC
+	$(Q)$(CC) $(DB_CFLAGS) $(INCLUDES) -o $@ -c $<
+
+%.so::
+	$(P)SHLIB
+	$(Q)$(CC) $(LDFLAGS) -shared -o $@ $^ $(LIBS)
+
+%.a::
+	$(P)STLIB
+	$(Q)$(AR) rcs $@ $^ $(LIBS)
