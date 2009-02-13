@@ -17,9 +17,9 @@ PREFERRED_VERSION_u-boot =		"5.08"
 PREFERRED_VERSION_linux-tiomap =	"2.6.24.7-5.21"
 
 # bridge and friends
-PREFERRED_VERSION_tidspbridge-module =		"23.12"
-PREFERRED_VERSION_tidspbridge-lib =		"23.12"
-PREFERRED_VERSION_tidspbridge-samples =		"4.52-P1"
+PREFERRED_VERSION_tidspbridge-module =		"23.13"
+PREFERRED_VERSION_tidspbridge-lib =		"23.13"
+PREFERRED_VERSION_tidspbridge-samples =		"4.53-P1"
 PREFERRED_VERSION_tidspbridge-extra =		"23.11"
 PREFERRED_VERSION_tidspbridge-cgt6x =		"6.0.7"
 PREFERRED_VERSION_tidspbridge-bios =		"5.33.02"
