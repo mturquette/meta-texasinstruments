@@ -9,7 +9,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"
 
 RDEPENDS = "\
-    tidspbridge-module \
+    virtual/dspbridge-driver \
     tidspbridge-lib \
     tidspbridge-samples \
     tidspbridge-extra \

@@ -4,10 +4,13 @@ DEFAULT_PREFERENCE = "1"
 
 FILESDIR = "${FILE_DIRNAME}/${PN}-git/${MACHINE}"
 
+RPROVIDES += "virtual/dspbridge-driver"
+PROVIDES += "virtual/dspbridge-driver"
+
 # stable-2.6.27.8 tag
 SRCREV = "d74c8c68c38408e0cfc39ca9fbfe84ab8db3ad93"
 
-PV = "2.6.27.8+${PR}+git${SRCREV}"
+PV = "2.6.27.8+git${SRCREV}"
 PR = "r1"
 
 SRC_URI = "git://git.omapzoom.org/repo/omapkernel.git;branch=master;protocol=http"

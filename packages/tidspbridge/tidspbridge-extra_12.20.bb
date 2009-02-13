@@ -2,7 +2,7 @@ PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments MPU/DSP Bridge libraries."
 LICENSE = "LGPL"
 PR = "r1"
-DEPENDS = "tidspbridge-module"
+DEPENDS += "virtual/dspbridge-driver"
 
 PACKAGES = "${PN}"
 

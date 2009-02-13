@@ -5,6 +5,9 @@ LICENSE = "GPL"
 PR = "r0"
 COMPATIBLE_MACHINE = "omap-3430(l|s)dp"
 
+RPROVIDES += "virtual/dspbridge-driver"
+PROVIDES += "virtual/dspbridge-driver"
+
 # We need to override this and make sure it's only -j1
 PARALLEL_MAKE = "-j1"
 
