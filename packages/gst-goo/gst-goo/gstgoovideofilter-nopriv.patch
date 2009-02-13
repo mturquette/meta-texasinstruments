@@ -1,0 +1,20 @@
+Index: gst-goo-5.12/src/gstgoovideofilter.c
+===================================================================
+--- gst-goo-5.12.orig/src/gstgoovideofilter.c	2009-02-11 12:28:45.000000000 -0600
++++ gst-goo-5.12/src/gstgoovideofilter.c	2009-02-11 12:29:19.000000000 -0600
+@@ -983,7 +983,6 @@
+ {
+ 	GstGooVideoFilter* self;
+ 	GstGooVideoFilterClass *klass;
+-	GstGooVideoFilterPrivate* priv;
+ 	GstPad* otherpad;
+ 	GstPad* otherpeer;
+ 	GstCaps* othercaps = NULL;
+@@ -996,7 +995,6 @@
+ 	GST_DEBUG_OBJECT (self, "");
+ 
+ 	g_return_val_if_fail (GST_CAPS_IS_SIMPLE (caps), FALSE);
+-	g_return_val_if_fail (priv != NULL, FALSE);
+ 
+ 	otherpad = (pad == self->srcpad) ? self->sinkpad : self->srcpad;
+ 	otherpeer = gst_pad_get_peer (otherpad);
