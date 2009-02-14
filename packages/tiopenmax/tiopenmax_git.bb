@@ -8,7 +8,7 @@ inherit pkgconfig
 SRCREV = "7bcdc0905e36c95742a686518c28ed518cf41fe2"
 #	file://0002-Conditional-compilation-of-Android-specific-code.patch;patch=1 
 SRC_URI = "\
-	git://git.omapzoom.org/repo/android/hardware/ti/omx.git;protocol=git \
+	git://git.omapzoom.org/platform/hardware/ti/omx.git;protocol=git \
 	file://fmakefile \
 	file://omxcore-noandroidspecific.patch;patch=1 \
 	file://aacdec-noandroidspecific.patch;patch=1 \
