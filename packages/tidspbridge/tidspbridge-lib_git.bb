@@ -11,7 +11,7 @@ FILES_${PN}-dev = "${includedir}/dspbridge"
 
 SRCREV = "2d85c81f9c0d88b3f4eb519aade602dcd91d8d28"
 SRC_URI = " \
-	git://git.omapzoom.org/repo/android/hardware/ti/omap3.git;protocol=git \
+	git://git.omapzoom.org/platform/hardware/ti/omap3.git;protocol=git \
 	file://fmakefile \
 	"
 #	file://23.12-mkcross-api.patch;patch=1 
