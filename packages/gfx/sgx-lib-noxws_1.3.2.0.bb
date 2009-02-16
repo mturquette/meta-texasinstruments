@@ -13,8 +13,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 #PACKAGES = "${PN} ${PN}-dbg"
 #FILES_${PN} = "${bindir} ${libdir} ${sysconfdir} ${libdir}/*.so*"
 
-SRC_URI = "file://ddk_types_fix2.patch;patch=1 \
-	file://noxsupport.patch;patch=1"
+SRC_URI = "file://noxsupport.patch;patch=1"
 
 CCASE_SPEC = "%\
 	element * COMPONENT_ROOT%\

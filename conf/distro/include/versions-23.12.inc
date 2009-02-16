@@ -13,7 +13,7 @@ PREFERRED_VERSION_omap-image-sato.bb =			"1.0
 
 # baseport
 PREFERRED_VERSION_x-load =		"4.60"
-PREFERRED_VERSION_u-boot =		"5.07"
+PREFERRED_VERSION_u-boot =		"5.07P1"
 PREFERRED_VERSION_linux-tiomap =	"2.6.24.7-5.20"
 
 # bridge and friends
@@ -142,7 +142,7 @@ PREFERRED_VERSION_tiopenmax-jpegenc =		"3.18"
 
 # gstreamer
 PREFERRED_VERSION_libgoo =		"5.12"
-PREFERRED_VERSION_gst-goo =		"5.12"
+PREFERRED_VERSION_gst-goo =		"5.12-P1"
 PREFERRED_VERSION_gst-pyapps =		"5.11"
 
 # connectivity
