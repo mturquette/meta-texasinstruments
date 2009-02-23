@@ -1,7 +1,7 @@
 require linux-omap.inc
 inherit ccasefetch
 
-PR = "r0"
+PR = "r1"
 
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp"
 DEFAULT_PREFERENCE = "1"
@@ -25,4 +25,6 @@ ADD_DISTRO_FEATURES += "sed -i 's/# CONFIG_INTERCONNECT_IO_POSTING is not set/CO
 do_stage_append() {
 	install -d ${STAGING_KERNEL_DIR}/drivers/media/video/isp
 	install -m 0644 ${S}/drivers/media/video/isp/*.h ${STAGING_KERNEL_DIR}/drivers/media/video/isp
+	install -d ${STAGING_KERNEL_DIR}/arch/arm/mach-omap2
+	install -m 0644 ${S}/arch/arm/mach-omap2/*.h ${STAGING_KERNEL_DIR}/arch/arm/mach-omap2
 }
