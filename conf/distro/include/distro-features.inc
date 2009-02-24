@@ -13,4 +13,4 @@
 # This is a multimedia-based distribution. We can specify what
 # codecs to enable in this release.
 
-DISTRO_FEATURES += "camera jpegdec jpegenc 720p tiwifi tibluetooth gfx"
+DISTRO_FEATURES += "camera jpegdec jpegenc tiwifi tibluetooth gfx 720p"
