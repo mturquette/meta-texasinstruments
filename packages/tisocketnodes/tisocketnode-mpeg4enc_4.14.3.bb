@@ -3,7 +3,7 @@ PR = "r0"
 DEPENDS += "tisocketnode-mpeg4enc-codec"
 
 CCASE_SPEC = "%\
-	      element /vobs/wtbu/OMAPSW_DSP/video/node/mpeg4/enc/... DSP-MM-TID-IMVID_RLS_${PV}%\
+	      element /vobs/wtbu/OMAPSW_DSP/video/node/mpeg4/enc/... DSP-MM-TII-IMVID_RLS_${PV}%\
 	      element * /main/LATEST%"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/video/node/mpeg4/enc"

@@ -5,7 +5,7 @@ PR = "r0"
 DEPENDS = "baseimage"
 
 CCASE_SPEC = "%\
-	      element /vobs/wtbu/CSSD_MM_Releases/Codecs/video/h264_enc/c64x/mm_tiicodecs/... DSP-MM-TID-IMVID_RLS_${PV}%\
+	      element /vobs/wtbu/CSSD_MM_Releases/Codecs/video/h264_enc/c64x/mm_tiicodecs/... DSP-MM-TII-IMVID_RLS_${PV}%\
 	      element * /main/LATEST%"
 
 CCASE_PATHFETCH = "/vobs/wtbu/CSSD_MM_Releases/Codecs/video/h264_enc/c64x/mm_tiicodecs"
