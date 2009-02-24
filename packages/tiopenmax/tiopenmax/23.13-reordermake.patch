@@ -1,0 +1,18 @@
+Index: tiopenmax-3.19/Makefile
+===================================================================
+--- tiopenmax-3.19.orig/Makefile	2009-02-23 10:59:19.000000000 -0600
++++ tiopenmax-3.19/Makefile	2009-02-23 23:13:35.000000000 -0600
+@@ -24,11 +24,11 @@
+ 
+ DIRS= \
+ 	system/src/openmax_il \
+-	audio/src/openmax_il \
+-	audio/docs/release/unit_test/23.x \
+ 	image/src/openmax_il \
+ 	video/src/openmax_il \
+ 	application/src/openmax_il \
++	audio/src/openmax_il \
++	audio/docs/release/unit_test/23.x \
+ 	video/docs/release/unit_test/23.x
+ ifdef INST2	
+ DIRS+= utilities/src/inst2
