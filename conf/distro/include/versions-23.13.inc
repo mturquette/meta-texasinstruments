@@ -131,7 +131,6 @@ PREFERRED_VERSION_tisocketnode-rageckodec-codec = 	"3.17.2"
 PREFERRED_VERSION_tisocketnode-rv89combodec = 		"4.14.3"
 PREFERRED_VERSION_tisocketnode-rv89combodec-codec =	"4.14.3"
 
-
 # openmax
 #PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax"
 PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax-complete"
@@ -177,3 +176,14 @@ PREFERRED_VERSION_libmms =		"0.3"
 
 # toolchain
 PREFERRED_VERSION_external-csl-toolchain =	"2008q3-72"
+
+# test
+PREFERRED_VERSION_cheese	=	"2.24.3"
+PREFERRED_VERSION_intltool	=	"0.40.0"
+
+# extra (will be replaced by pokyomap in subsequent releases)
+PREFERRED_VERSION_gtk+		=	"2.14.7"
+PREFERRED_VERSION_glib-2.0	=	"2.18.4"
+PREFERRED_VERSION_pango		=	"1.22.4"
+PREFERRED_VERSION_cairo		=	"1.8.6"
+PREFERRED_VERSION_pixman	=	"0.14.0"
