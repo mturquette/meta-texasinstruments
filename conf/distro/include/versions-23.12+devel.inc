@@ -27,16 +27,16 @@ PREFERRED_VERSION_tidspbridge-dllcreate =	"23.11"
 
 # baseimage
 PREFERRED_VERSION_baseimage =				"2.43"
-PREFERRED_VERSION_baseimage-avsync =			"3.27"
-PREFERRED_VERSION_baseimage-dasf =			"3.43"
-PREFERRED_VERSION_baseimage-hal =			"3.43"
+PREFERRED_VERSION_baseimage-avsync =			"3.26"
+PREFERRED_VERSION_baseimage-dasf =			"3.42.1"
+PREFERRED_VERSION_baseimage-hal =			"3.42.1"
 PREFERRED_VERSION_baseimage-inst2 =			"3.02"
 PREFERRED_VERSION_baseimage-make-system =		"2.10"
 PREFERRED_VERSION_baseimage-masterconfig =		"23.x"
-PREFERRED_VERSION_baseimage-samplerateconverter =	"3.43"
-PREFERRED_VERSION_baseimage-tmon =			"3.43"
+PREFERRED_VERSION_baseimage-samplerateconverter =	"3.42.1"
+PREFERRED_VERSION_baseimage-tmon =			"3.42.1"
 PREFERRED_VERSION_baseimage-utils =			"2.43"
-PREFERRED_VERSION_baseimage-vgpop =			"4.14.4"
+PREFERRED_VERSION_baseimage-vgpop =			"3.16"
 
 # socket nodes and codecs
 PREFERRED_VERSION_tisocketnode-algo =			"4.13"
