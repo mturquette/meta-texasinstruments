@@ -1,0 +1,21 @@
+Index: tiopenmax-aacenc-3.19/audio/src/openmax_il/aac_enc/tests/Makefile
+===================================================================
+--- tiopenmax-aacenc-3.19.orig/audio/src/openmax_il/aac_enc/tests/Makefile	2009-02-27 11:23:50.000000000 -0600
++++ tiopenmax-aacenc-3.19/audio/src/openmax_il/aac_enc/tests/Makefile	2009-02-27 11:24:06.000000000 -0600
+@@ -38,7 +38,6 @@
+ 
+ 
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=AacEncTest_common
+ 
+@@ -46,7 +45,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
