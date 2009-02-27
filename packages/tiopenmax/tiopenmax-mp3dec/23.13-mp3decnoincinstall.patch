@@ -1,0 +1,11 @@
+Index: tiopenmax-mp3dec-3.19/audio/src/openmax_il/mp3_dec/inc/Makefile
+===================================================================
+--- tiopenmax-mp3dec-3.19.orig/audio/src/openmax_il/mp3_dec/inc/Makefile	2009-02-27 11:20:33.000000000 -0600
++++ tiopenmax-mp3dec-3.19/audio/src/openmax_il/mp3_dec/inc/Makefile	2009-02-27 11:21:33.000000000 -0600
+@@ -1,5 +1,5 @@
+ 
+-HSRC=TIDspOmx.h
++HSRC=
+ HTARGET=$(HSRC:%=$(OMXINCLUDEDIR)/%)
+ 
+ include $(OMXROOT)/Master.mk
