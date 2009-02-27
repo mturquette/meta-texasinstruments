@@ -1,4 +1,4 @@
-DESCRIPTION = "Texas Instruments OpenMAX IL JPEG Decoder."
+DESCRIPTION = "Texas Instruments OpenMAX IL AAC Decoder."
 DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager"
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-patterns ${PN}-dev ${PN}"
@@ -96,4 +96,3 @@ do_install_cleanup() {
 
 addtask install_cleanup after do_install before do_package
 addtask stage_rm_omxdir after do_populate_staging before do_package_stage
-
