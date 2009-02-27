@@ -12,6 +12,8 @@ CCASE_PATHFETCH = "\
 CCASE_PATHCOMPONENTS = 3
 CCASE_PATHCOMPONENT = "linux"
 
+SRC_URI += "file://TIDspOmx.h"
+
 inherit ccasefetch
 
 do_compile_prepend() {
@@ -36,6 +38,7 @@ do_install() {
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${D} OMXROOT=${S} \
 		common.install
+	install -m 0644 ${FILESDIR}/TIDspOmx.h ${D}/include/omx
 }
 
 do_stage() {
@@ -47,6 +50,7 @@ do_stage() {
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${STAGE_DIR} OMXROOT=${S} \
 		common.install
+	install -m 0644 ${FILESDIR}/TIDspOmx.h ${STAGING_INCDIR}/omx
 }
 
 FILES_${PN} = "\
