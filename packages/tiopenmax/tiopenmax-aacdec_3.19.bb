@@ -14,6 +14,7 @@ CCASE_PATHCOMPONENT = "linux"
 
 SRC_URI = "\
 	file://23.13-aacdecnocore.patch;patch=1 \
+	file://23.13-aacdecnoincinstall.patch;patch=1 \
 	file://23.13-aacdectestnocore.patch;patch=1 \
 	"
 
