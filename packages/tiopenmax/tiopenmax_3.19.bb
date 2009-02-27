@@ -5,6 +5,7 @@ PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
 	# OMX Audio%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/src/openmax_il/armaac_enc/... LINUX-MMAUDIO_RLS_${PV}P1%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_${PV}%\
 	# OMX Video%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/video_encode/... LINUX-MMVIDEO_RLS_${PV}P1%\
