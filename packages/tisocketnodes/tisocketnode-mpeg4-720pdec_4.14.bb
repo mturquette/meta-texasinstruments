@@ -3,7 +3,6 @@ PR = "r0"
 DEPENDS += "tisocketnode-mpeg4-720pdec-codec"
 
 CCASE_SPEC = "%\
-<<<<<<< HEAD:packages/tisocketnodes/tisocketnode-mpeg4-720pdec_4.14.bb
 	      element /vobs/wtbu/OMAPSW_DSP/video/node/mpeg4_ari/dec/... DSP-MM-TII-IMVID_RLS_${PV}%\
 	      element * /main/LATEST%"
 
