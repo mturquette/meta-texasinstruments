@@ -6,6 +6,7 @@
 # * gfx		- Include 3D GFX module and libraries.
 # * tiwifi	- Include support for TI's WLAN stack.
 # * tibluetooth	- Include support for TI's Bluetooth and FM stack.
+# * rarv        - Enable readaudio/realvideo codecs
 
 #DISTRO_FEATURES += "gfx tiwifi tibluetooth"
 

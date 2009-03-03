@@ -1,6 +1,6 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r0"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
@@ -53,6 +53,7 @@ SRC_URI = "\
 	file://23.13-radectestmk.patch;patch=1 \
 	file://23.13-reordermake.patch;patch=1 \
 	file://23.13-rvdecmk.patch;patch=1 \
+        ${@base_contains("DISTRO_FEATURES", "rarv", "", "file://remove-rarv.patch;patch=1", d)} \
 	"
 # these pending update for 23.10/23.11:
 #	file://wbamrencnorm.patch;patch=1 \
