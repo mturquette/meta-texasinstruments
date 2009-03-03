@@ -1,12 +1,15 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r2"
+PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
 	# OMX Audio%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/src/openmax_il/armaac_enc/... LINUX-MMAUDIO_RLS_${PV}P1%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_${PV}%\
 	# OMX Video%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/post_processor/... LINUX-MMVIDEO_RLS_${PV}P1%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/video_encode/... LINUX-MMVIDEO_RLS_${PV}P1%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_${PV}%\
 	# OMX Image%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_${PV}%\
@@ -47,6 +50,9 @@ SRC_URI = "\
 	file://23.11-cameramk.patch;patch=1 \
 	file://23.12-armaacnopatterns.patch;patch=1 \
 	file://fix-amixer-path.patch;patch=1 \
+	file://23.13-radectestmk.patch;patch=1 \
+	file://23.13-reordermake.patch;patch=1 \
+	file://23.13-rvdecmk.patch;patch=1 \
 	"
 # these pending update for 23.10/23.11:
 #	file://wbamrencnorm.patch;patch=1 \
@@ -75,7 +81,7 @@ do_compile() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
-		RAPARSERINCLUDEDIR=${D}/include/omx RVPARSERINCLUDEDIR=${D}/include/omx \
+		RAPARSERINCLUDEDIR=${S}/video/src/openmax_il/rm_parser/inc RVPARSERINCLUDEDIR=${S}/video/src/openmax_il/rm_rvparser/inc \
 		INST2=1 \
 		TARGETDIR=${STAGING_INCDIR}/../ OMXROOT=${S}
 }
@@ -107,6 +113,7 @@ do_install() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
+		RAPARSERINCLUDEDIR=${D}/include/omx RVPARSERINCLUDEDIR=${D}/include/omx \
 		TARGETDIR=${D} OMXROOT=${S} \
 		install
 }
