@@ -1,0 +1,43 @@
+Index: gst-goo-5.13-P2/src/gstdasfsink.c
+===================================================================
+--- gst-goo-5.13-P2.orig/src/gstdasfsink.c	2009-03-03 17:06:12.000000000 -0600
++++ gst-goo-5.13-P2/src/gstdasfsink.c	2009-03-03 17:44:32.000000000 -0600
+@@ -273,7 +273,7 @@
+ 		if (component == NULL)
+ 			return;
+ 
+-		self->component = GOO_TI_AUDIO_COMPONENT (component);
++		self->component = GOO_TI_AUDIO_COMPONENT ( g_object_ref (component) );
+ 
+ 		goo_ti_audio_component_set_dasf_mode (self->component, TRUE);
+ 		GST_DEBUG_OBJECT (self, "set data path");
+@@ -536,7 +536,7 @@
+ 			break;
+ 		case GST_STATE_CHANGE_PAUSED_TO_READY:
+ 			GST_LOG ("GST_STATE_CHANGE_PAUSED_TO_READY");
+-			if (priv->clock_source == OMX_CLOCK)
++			if (self->clock)
+ 			{
+ 				g_object_set (G_OBJECT (self), "halted", FALSE, NULL);
+ 				GST_INFO ("Setting clock to idle");
+@@ -672,7 +672,10 @@
+ 		g_object_unref (self->factory);
+ 	}
+ 
+-	self->component = NULL;
++	if (self->component)
++	{
++		g_object_unref (self->component);
++	}
+ }
+ 
+ static void
+@@ -788,6 +791,8 @@
+ {
+ 	GST_DEBUG ("");
+ 
++	self->clock = NULL;
++
+ 	GstDasfSinkPrivate* priv = GST_DASF_SINK_GET_PRIVATE (self);
+ 	priv->num_input_buffers = NUM_INPUT_BUFFERS_DEFAULT;
+ 	priv->incount = 0;
