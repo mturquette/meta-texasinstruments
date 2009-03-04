@@ -3,13 +3,13 @@
 #
 
 DESCRIPTION = "Tasks for TI's dspbridge"
-PR = "r1"
+PR = "r2"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"
 
 RDEPENDS = "\
-    tidspbridge-module \
+    virtual/dspbridge-module \
     tidspbridge-lib \
     tidspbridge-samples \
     tidspbridge-extra \
