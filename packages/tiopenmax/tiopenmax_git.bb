@@ -1,7 +1,10 @@
 DEPENDS = "tidspbridge-lib"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r0"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}"
+
+# We need to override this and make sure it's only -j1
+PARALLEL_MAKE = "-j1"
 
 inherit pkgconfig
 
