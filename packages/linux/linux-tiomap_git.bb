@@ -12,6 +12,9 @@ PR = "r1"
 
 SRC_URI = "git://git.omapzoom.org/repo/omapkernel.git;branch=master;protocol=http"
 
+SRC_URI_append_omap-3430sdp = " \
+	file://defconfig-omap-3430sdp \
+	"
 SRC_URI_append_omap-zoom2-beta = " \
            file://zoom2-beta-disp-params.diff;patch=1 \
           "
