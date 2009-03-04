@@ -3,7 +3,7 @@ PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments MPU/DSP Bridge libraries."
 LICENSE = "LGPL"
 PR = "r0"
-#DEPENDS = "tidspbridge-module"
+DEPENDS = "virtual/dspbridge-module"
 
 PACKAGES = "${PN} ${PN}-dbg ${PN}-dev"
 FILES_${PN} = "${libdir}/libbridge.so ${libdir}/libbridge.so.2 ${libdir}/libqos.a ${libdir}/libqos.so.2"

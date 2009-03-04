@@ -1,6 +1,6 @@
 DESCRIPTION = "Texas Instruments MPU/DSP Bridge libraries."
-PR = "r1"
-DEPENDS = "tidspbridge-module"
+PR = "r2"
+DEPENDS = "virtual/dspbridge-module"
 
 inherit update-rc.d
 
