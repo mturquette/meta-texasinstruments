@@ -21,8 +21,10 @@ CCASE_SPEC = "\
 	element /vobs/wtbu/OMAPSW_MPU/linux/utilities/src/inst2/... LINUX-MMUTILS_RLS_3.02%\
 	# ROOT folder & Make files%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_${PV}%\
-	\
-	element * /main/LATEST%\
+        # special hack needed because root of vob is not labeled:%\
+        element /vobs/wtbu/OMAPSW_MPU /main/LATEST%\
+        # don't pick up anything that is not labeled%\
+        element * /main/0%\
 	"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux"
