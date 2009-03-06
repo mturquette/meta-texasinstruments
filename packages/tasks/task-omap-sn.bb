@@ -57,6 +57,8 @@ RDEPENDS = "\
     \
     tisocketnode-jpegdec \
     tisocketnode-jpegenc \
+    tisocketnode-rageckodec \
+    tisocketnode-rv89combodec \
     "
 
 DEPENDS = "\

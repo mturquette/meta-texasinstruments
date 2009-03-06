@@ -1,0 +1,8 @@
+--- intltool-0.40.0/intltool-merge.in.orig	2009-02-26 16:06:41.000000000 -0600
++++ intltool-0.40.0/intltool-merge.in	2009-02-26 16:07:27.000000000 -0600
+@@ -1,4 +1,4 @@
+-#!@INTLTOOL_PERL@ -w
++#!@INTLTOOL_PERL@
+ # -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 4  -*-
+ 
+ #

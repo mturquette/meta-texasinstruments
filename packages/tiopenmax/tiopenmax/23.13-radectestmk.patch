@@ -1,0 +1,13 @@
+Index: tiopenmax-3.19/audio/src/openmax_il/ragecko_dec/tests/Makefile
+===================================================================
+--- tiopenmax-3.19.orig/audio/src/openmax_il/ragecko_dec/tests/Makefile	2009-02-23 22:27:07.000000000 -0600
++++ tiopenmax-3.19/audio/src/openmax_il/ragecko_dec/tests/Makefile	2009-02-23 22:27:34.000000000 -0600
+@@ -36,7 +36,7 @@
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
+ $(COMPONENT_TEST): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lOMX_Core -lRM_Parser
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -L../../../../../video/src/openmax_il/rm_parser/src -lOMX_Core -lRM_Parser
+ 
+ $(SRC): $(HSRC)
+ 
