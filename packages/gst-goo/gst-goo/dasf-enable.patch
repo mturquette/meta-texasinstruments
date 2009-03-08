@@ -1,0 +1,37 @@
+Index: gst-goo-5.13-P1/src/gstdasfsink.c
+===================================================================
+--- gst-goo-5.13-P1.orig/src/gstdasfsink.c	2009-03-03 11:33:57.000000000 -0600
++++ gst-goo-5.13-P1/src/gstdasfsink.c	2009-03-03 11:36:53.000000000 -0600
+@@ -274,6 +274,10 @@
+ 			return;
+ 
+ 		self->component = GOO_TI_AUDIO_COMPONENT (component);
++
++		goo_ti_audio_component_set_dasf_mode (self->component, TRUE);
++		GST_DEBUG_OBJECT (self, "set data path");
++		goo_ti_audio_component_set_data_path (self->component, 0);
+ 	}
+ 
+ 	if (self->pp == NULL)
+@@ -283,10 +287,6 @@
+ 		 */
+ 		priv->clock_required = gst_dasf_clock_required (self);
+ 
+-		/* are there cases where there legitimately won't be a
+-		 * postprocessor, not just because it hasn't been created
+-		 * yet??
+-		 */
+ 		if (self->pp == NULL)
+ 			return;
+ 
+@@ -308,10 +308,6 @@
+ 					G_OBJECT(self->clock)->ref_count);
+ 		}
+ 
+-		goo_ti_audio_component_set_dasf_mode (self->component, TRUE);
+-		GST_DEBUG_OBJECT (self, "set data path");
+-		goo_ti_audio_component_set_data_path (self->component, 0);
+-
+ 		if (priv->clock_source == OMX_CLOCK)
+ 		{
+ 			goo_component_set_clock (component, self->clock);
