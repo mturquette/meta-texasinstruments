@@ -1,26 +1,29 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r1"
+PR = "r2"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
+
+# P1 - fix from OMX team
+# P2 - config spec fix to not use 'element * /main/LATEST'
 
 CCASE_SPEC = "\
 	# OMX Audio%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/audio/src/openmax_il/armaac_enc/... LINUX-MMAUDIO_RLS_${PV}P1%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/src/openmax_il/armaac_enc/... LINUX-MMAUDIO_RLS_3.10P1%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.19%\
 	# OMX Video%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/post_processor/... LINUX-MMVIDEO_RLS_${PV}P1%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/video_encode/... LINUX-MMVIDEO_RLS_${PV}P1%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/post_processor/... LINUX-MMVIDEO_RLS_3.19P1%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/video_encode/... LINUX-MMVIDEO_RLS_3.19P1%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_3.19%\
 	# OMX Image%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_3.19%\
 	# LCML & core%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_3.19%\
 	# OMX Application%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_3.19%\
 	# OMX INST2 utilities%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/utilities/src/inst2/... LINUX-MMUTILS_RLS_3.02%\
 	# ROOT folder & Make files%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_3.19%\
         # special hack needed because root of vob is not labeled:%\
         element /vobs/wtbu/OMAPSW_MPU /main/LATEST%\
         # don't pick up anything that is not labeled%\
