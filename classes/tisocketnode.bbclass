@@ -13,6 +13,7 @@ ENV_VAR = "DEPOT=${STAGING_BINDIR}/dspbridge/tools \
 "
 
 RELEASE ?= "release"
+OS="${@base_contains("DISTRO_FEATURES", "opensource", "E", "", d)}
 
 do_compile() {
 	## Getting MasterConfig files
