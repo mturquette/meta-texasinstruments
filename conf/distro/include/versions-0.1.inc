@@ -4,7 +4,6 @@
 #PREFERRED_VERSION_linux-tiomap =	"git"
 
 # bridge and friends
-PREFERRED_PROVIDER_virtual/dspbridge-module =	"linux-tiomap"
 #PREFERRED_VERSION_tidspbridge-module =	"23.12"
 PREFERRED_VERSION_tidspbridge-lib =	"git"
 PREFERRED_VERSION_tidspbridge-samples =	"4.52-P1"
