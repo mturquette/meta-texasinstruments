@@ -9,7 +9,7 @@ PR = "r30"
 
 SRC_URI = "git://github.com/felipec/linux-omap.git;branch=tidspbridge;protocol=git file://defconfig"
 SRCREV = "2c1b5e572b216c1682127a7b69c81493a42ebcab"
-PV = "2.6.29-rc6+${PR}+git${SRCREV}"
+PV = "2.6.28-omap1+${PR}+git${SRCREV}"
 
 #PV = "2.6.29-rc3+${PR}+git${SRCREV}"
 #SRCREV = "350e3d45eada319c41cd716676e72d5284877c59"
