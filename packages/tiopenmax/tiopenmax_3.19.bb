@@ -1,6 +1,6 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r0"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
@@ -108,12 +108,14 @@ do_install() {
 	install -d ${D}/omx
 	install -d ${D}/lib
 	install -d ${D}/bin
+	install -d ${D}/inst2
 	oe_runmake \
 		PREFIX=${D} PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		RAPARSERINCLUDEDIR=${D}/include/omx RVPARSERINCLUDEDIR=${D}/include/omx \
+		INST2=1 \
 		TARGETDIR=${D} OMXROOT=${S} \
 		install
 }
@@ -122,6 +124,7 @@ FILES_${PN} = "\
 	/lib \
 	/bin \
 	/omx \
+	/inst2 \
 	"
 
 FILES_${PN}-patterns = "\
@@ -132,6 +135,7 @@ FILES_${PN}-dbg = "\
 	/omx/.debug \
 	/bin/.debug \
 	/lib/.debug \
+	/inst2/.debug \
 	"
 
 FILES_${PN}-dev = "\
