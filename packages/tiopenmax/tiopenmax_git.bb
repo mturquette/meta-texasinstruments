@@ -18,6 +18,7 @@ SRC_URI = "\
 	file://mp3dec-noandroidspecific.patch;patch=1 \
 	file://nbamrdec-noandroidspecific.patch;patch=1 \
 	file://wbamrdec-noandroidspecific.patch;patch=1 \
+	file://TIOMX_Core.c \
 	"
 S = "${WORKDIR}/git"
 
@@ -25,6 +26,7 @@ do_compile_prepend() {
 	#install -m 0644 ${FILESDIR}/omap24xxvout.h ${S}/video/src/openmax_il/post_processor/inc/omap24xxvout.h
 	install -m 0644 ${FILESDIR}/fmakefile ${S}/Makefile
 	install -m 0644 ${FILESDIR}/libomxil-ti.pc ${S}/libomxil.pc
+	install -m 0644 ${FILESDIR}/TIOMX_Core.c ${S}/system/src/openmax_il/omx_core/src/TIOMX_Core.c
 	install -d ${D}/omx
 }
 

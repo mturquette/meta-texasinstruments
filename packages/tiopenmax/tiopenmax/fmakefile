@@ -8,7 +8,7 @@ SOURCE_DIR = .
 TARGET_DIR = ./target
 
 CC = arm-linux-gcc
-DFLAGS = -Wall -g3
+DFLAGS = -Wall -fpic -pipe -O0 -Wl,--no-undefined
 LDFLAGS = -lpthread
 #AUDIOMANAGER=1
 #RESOURCEMANAGER=1
@@ -53,7 +53,7 @@ core_DIR = $(SOURCE_DIR)/system/src/openmax_il/omx_core/src
 core_INC = $(core_DIR)/../inc
 core_TARGET = $(core_DIR)/libOMX_Core.so
 
-$(core_TARGET): $(core_DIR)/OMX_Core.o
+$(core_TARGET): $(core_DIR)/OMX_Core.o $(core_DIR)/TIOMX_Core.o
 $(core_TARGET): INCLUDES := -I$(core_INC)
 $(core_TARGET): DFLAGS := $(DFLAGS) -DSTATIC_TABLE
 $(core_TARGET): LIBS := -ldl
