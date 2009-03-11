@@ -7,8 +7,8 @@ FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/linux-omap3-git/${MA
 
 PR = "r30"
 
-SRC_URI = "git://github.com/felipec/linux-omap.git;branch=tidspbridge;protocol=git file://defconfig"
-SRCREV = "2c1b5e572b216c1682127a7b69c81493a42ebcab"
+SRC_URI = "git://github.com/felipec/linux-omap.git;branch=tidspbridge-stable;protocol=git file://defconfig"
+SRCREV = "1764d8eef033d40c623e9a9a0dde455e59ac2149"
 PV = "2.6.28-omap1+${PR}+git${SRCREV}"
 
 #PV = "2.6.29-rc3+${PR}+git${SRCREV}"
