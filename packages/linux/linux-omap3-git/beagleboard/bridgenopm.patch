@@ -1,0 +1,13 @@
+Index: git/drivers/dsp/bridge/rmgr/drv_interface.c
+===================================================================
+--- git.orig/drivers/dsp/bridge/rmgr/drv_interface.c
++++ git/drivers/dsp/bridge/rmgr/drv_interface.c
+@@ -100,8 +100,6 @@
+ #include <dspbridge/dbreg.h>
+ #endif
+ 
+-#include <mach/omap-pm.h>
+-
+ #define BRIDGE_NAME "C6410"
+ /*  ----------------------------------- Globals */
+ #define DRIVER_NAME  "DspBridge"
