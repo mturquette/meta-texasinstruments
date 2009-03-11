@@ -17,40 +17,32 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-/* ====================================================================
-*             Texas Instruments OMAP(TM) Platform Software
-* (c) Copyright Texas Instruments, Incorporated. All Rights Reserved.
-*
-* Use of this software is controlled by the terms and conditions found
-* in the license agreement under which this software has been supplied.
-* ==================================================================== */
 
 #include <OMX_Core.h>
 
-
 /* Glue code goes here */
-OMX_ERRORTYPE OMX_Init()
+inline OMX_ERRORTYPE OMX_Init()
 {
     return TIOMX_Init();
 }
 
-OMX_ERRORTYPE OMX_GetHandle( OMX_HANDLETYPE* pHandle, OMX_STRING cComponentName,
+inline OMX_ERRORTYPE OMX_GetHandle( OMX_HANDLETYPE* pHandle, OMX_STRING cComponentName,
     OMX_PTR pAppData, OMX_CALLBACKTYPE* pCallBacks) 
 {
     return TIOMX_GetHandle(pHandle, cComponentName, pAppData, pCallBacks);
 }
  
-OMX_ERRORTYPE OMX_FreeHandle (OMX_HANDLETYPE hComponent)
+inline OMX_ERRORTYPE OMX_FreeHandle (OMX_HANDLETYPE hComponent)
 {
     return TIOMX_FreeHandle (hComponent);
 }
 
-OMX_ERRORTYPE OMX_Deinit()
+inline OMX_ERRORTYPE OMX_Deinit()
 {
     return TIOMX_Deinit();
 }
 
-OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_SetupTunnel(
+inline OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_SetupTunnel(
     OMX_IN  OMX_HANDLETYPE hOutput,
     OMX_IN  OMX_U32 nPortOutput,
     OMX_IN  OMX_HANDLETYPE hInput,
@@ -59,7 +51,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_SetupTunnel(
     return TIOMX_SetupTunnel(hOutput, nPortOutput, hInput, nPortInput);
 }
 
-OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_ComponentNameEnum(
+inline OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_ComponentNameEnum(
     OMX_OUT OMX_STRING cComponentName,
     OMX_IN  OMX_U32 nNameLength,
     OMX_IN  OMX_U32 nIndex)
@@ -67,7 +59,7 @@ OMX_API OMX_ERRORTYPE OMX_APIENTRY OMX_ComponentNameEnum(
     return TIOMX_ComponentNameEnum(cComponentName, nNameLength, nIndex);
 }
 
-OMX_API OMX_ERRORTYPE OMX_GetRolesOfComponent (
+inline OMX_API OMX_ERRORTYPE OMX_GetRolesOfComponent (
     OMX_IN      OMX_STRING cComponentName,
     OMX_INOUT   OMX_U32 *pNumRoles,
     OMX_OUT     OMX_U8 **roles)
@@ -75,7 +67,7 @@ OMX_API OMX_ERRORTYPE OMX_GetRolesOfComponent (
     return TIOMX_GetRolesOfComponent (cComponentName, pNumRoles, roles);
 }
 
-OMX_API OMX_ERRORTYPE OMX_GetComponentsOfRole ( 
+inline OMX_API OMX_ERRORTYPE OMX_GetComponentsOfRole ( 
     OMX_IN      OMX_STRING role,
     OMX_INOUT   OMX_U32 *pNumComps,
     OMX_INOUT   OMX_U8  **compNames)
@@ -83,8 +75,7 @@ OMX_API OMX_ERRORTYPE OMX_GetComponentsOfRole (
     return TIOMX_GetComponentsOfRole (role, pNumComps, compNames);
 }
 
-
-OMX_ERRORTYPE OMX_BuildComponentTable()
+inline OMX_ERRORTYPE OMX_BuildComponentTable()
 {
     return TIOMX_BuildComponentTable();
 }
