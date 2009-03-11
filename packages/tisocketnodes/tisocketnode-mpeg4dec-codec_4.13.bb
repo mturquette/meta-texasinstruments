@@ -13,13 +13,14 @@ CCASE_PATHCOMPONENT = "mm_tiicodecs"
 CCASE_PATHCOMPONENTS = "7"
 
 inherit ccasefetch
+OS="${@base_contains("DISTRO_FEATURES", "opensource", "E", "", d)}"
 
 do_compile() {
-	unzip 100_V_MPEG4_D_SP_c64x+_1_05.zip
+	unzip 100${OS}_V_MPEG4_D_SP_c64x+_1_05.zip
 }
 
 do_stage() {
         chmod -R +w ${S}/*
-	install -d ${STAGING_BINDIR}/dspbridge/Codecs/video/h263_dec/c64x/mm_tiicodecs/100_V_MPEG4_D_SP_c64x+_1_05
-	cp -a ${S}/100_V_MPEG4_D_SP_c64x+_1_05/* ${STAGING_BINDIR}/dspbridge/Codecs/video/h263_dec/c64x/mm_tiicodecs/100_V_MPEG4_D_SP_c64x+_1_05
+	install -d ${STAGING_BINDIR}/dspbridge/Codecs/video/h263_dec/c64x/mm_tiicodecs/100${OS}_V_MPEG4_D_SP_c64x+_1_05
+	cp -a ${S}/100${OS}_V_MPEG4_D_SP_c64x+_1_05/* ${STAGING_BINDIR}/dspbridge/Codecs/video/h263_dec/c64x/mm_tiicodecs/100${OS}_V_MPEG4_D_SP_c64x+_1_05
 }
