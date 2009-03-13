@@ -1,7 +1,10 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r1"
+PR = "r2"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
+
+# P1 - fix from OMX team
+# P2 - config spec fix to not use 'element * /main/LATEST'
 
 CCASE_SPEC = "\
 	# OMX Audio%\
@@ -21,8 +24,10 @@ CCASE_SPEC = "\
 	element /vobs/wtbu/OMAPSW_MPU/linux/utilities/src/inst2/... LINUX-MMUTILS_RLS_3.02%\
 	# ROOT folder & Make files%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_${PV}%\
-	\
-	element * /main/LATEST%\
+        # special hack needed because root of vob is not labeled:%\
+        element /vobs/wtbu/OMAPSW_MPU /main/LATEST%\
+        # don't pick up anything that is not labeled%\
+        element * /main/0%\
 	"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux"
@@ -41,7 +46,6 @@ SRC_URI = "\
 	file://pcmencmk.patch;patch=1 \
 	file://wmadecmk.patch;patch=1 \
 	file://g722encmk.patch;patch=1 \
-	file://23.10-g729encperf.patch;patch=1 \
 	file://jpegdecmk.patch;patch=1 \
 	file://jpegencmk.patch;patch=1 \
 	file://23.11-vppmake.patch;patch=1 \
@@ -51,8 +55,8 @@ SRC_URI = "\
 	file://23.12-armaacnopatterns.patch;patch=1 \
 	file://fix-amixer-path.patch;patch=1 \
 	file://23.13-radectestmk.patch;patch=1 \
-	file://23.13-reordermake.patch;patch=1 \
 	file://23.13-rvdecmk.patch;patch=1 \
+        ${@base_contains("DISTRO_FEATURES", "rarv", "", "file://remove-rarv.patch;patch=1", d)} \
 	"
 # these pending update for 23.10/23.11:
 #	file://wbamrencnorm.patch;patch=1 \

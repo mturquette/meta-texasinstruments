@@ -57,8 +57,8 @@ RDEPENDS = "\
     \
     tisocketnode-jpegdec \
     tisocketnode-jpegenc \
-    tisocketnode-rageckodec \
-    tisocketnode-rv89combodec \
+    ${@base_contains("DISTRO_FEATURES", "rarv", "tisocketnode-rageckodec", "", d)} \
+    ${@base_contains("DISTRO_FEATURES", "rarv", "tisocketnode-rv89combodec", "", d)} \
     "
 
 DEPENDS = "\
