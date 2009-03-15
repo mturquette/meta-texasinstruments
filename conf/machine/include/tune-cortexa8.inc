@@ -3,10 +3,16 @@
 # [2] http://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html 
 # [3] https://support.codesourcery.com/GNUToolchain/kbentry29
 
-TARGET_CC_ARCH = ""
+TARGET_CC_ARCH = "-march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize"
+
 # Override the options for some packages
-TARGET_CC_ARCH_pn-libmad = "-mfpu=neon -mfloat-abi=softfp"
-# Other potentially useful options
-#-ftree-vectorize -ffast-math -fno-omit-frame-pointer
+# Occasionally, specifying '-march=armv7-a' breaks compilation.  Why?
+TARGET_CC_ARCH_pn-liba52 = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize"
+TARGET_CC_ARCH_pn-libmad = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize"
+TARGET_CC_ARCH_pn-js = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize"
+TARGET_CC_ARCH_pn-portmap = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize"
+
+# Other potentially useful (and hazardous) options
+# -ftree-vectorize -ffast-math -fno-omit-frame-pointer
 FEED_ARCH = "armv7a"
 BASE_PACKAGE_ARCH = "armv7a"
