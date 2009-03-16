@@ -1,7 +1,7 @@
 require u-boot.inc
 inherit ccasefetch
 
-PR="r0"
+PR="r1"
 #S=${WORKDIR}/${PN}
 
 CCASE_SPEC = "%\

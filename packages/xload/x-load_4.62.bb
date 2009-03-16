@@ -2,7 +2,7 @@ SECTION = "bootloaders"
 PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments X-Loader boot utility"
 LICENSE = "GPL"
-PR="r0"
+PR="r1"
 DEPENDS="u-boot"
 
 inherit ccasefetch
