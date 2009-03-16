@@ -7,6 +7,7 @@
 #PREFERRED_VERSION_tidspbridge-module =	"23.12"
 PREFERRED_VERSION_tidspbridge-lib =	"git"
 PREFERRED_VERSION_tidspbridge-samples =	"4.52-P1"
+PREFERRED_VERSION_tidspbridge-extra =	"0.1"
 
 # openmax
 #PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax"
