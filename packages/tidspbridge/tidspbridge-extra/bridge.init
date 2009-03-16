@@ -27,31 +27,13 @@ start ()
 {
     cd /dspbridge
     echo -n "Loading up Bridge driver: "
-    /dspbridge/install_bridge /lib/modules/`uname -r`/kernel/drivers/dspbridge/bridgedriver.ko > /dev/null 2>&1
-    /dspbridge/cexec.out -T $BASEIMAGE > /dev/null 2>&1
+    insmod /lib/modules/`uname -r`/kernel/drivers/dsp/bridge/bridgedriver.ko base_img=$BASEIMAGE > /dev/null 2>&1
     [ $? -eq 0 ] || exit $?
     echo "OK"
-    
-    # if this is done at startup (which I guess it should be), maybe we want to fork this off
-    # and run it in background, so we don't add 3 seconds to boot time:
-    if [ "$BASEIMAGE" = "$DEFAULT_BASEIMAGE" ]; then
-        echo -n "Launching OMX Managers: "
-	sleep 1 && OMXAudioManager &
-	sleep 1 && OMXPolicyManager &
-	sleep 1 && OMXResourceManager &
-	echo "OK"
-    fi
 }
 
 stop ()
 {
-    echo -n "Shutting down OpenMAX: "
-    killall OMXAudioManager > /dev/null 2>&1
-    killall OMXPolicyManager > /dev/null 2>&1
-    killall OMXResourceManager > /dev/null 2>&1
-    sleep 3
-    echo "OK"
-
     echo -n "Unloading Bridge driver: "
     rmmod bridgedriver > /dev/null 2>&1
     echo "OK"
