@@ -6,7 +6,8 @@ PR="r0"
 
 CCASE_SPEC = "%\
 	element /vobs/wtbu/OMAPSW_L/u-boot/...  LINUX-U-BOOT-114_RLS_${PV} %\
-	element /vobs/wtbu/OMAPSW_L/... /main/LATEST %\
+	element /vobs/wtbu/OMAPSW_L /main/LATEST %\
+	element * /main/0 %\
 	"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_L/u-boot"

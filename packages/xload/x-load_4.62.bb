@@ -9,7 +9,8 @@ inherit ccasefetch
 
 CCASE_SPEC = "%\
 	element /vobs/wtbu/OMAPSW_L/x-load/...  X-LOAD_RLS_${PV} %\
-	element /vobs/wtbu/OMAPSW_L/... /main/LATEST %\
+	element /vobs/wtbu/OMAPSW_L /main/LATEST %\
+	element * /main/0 %\
 	"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_L/x-load"
