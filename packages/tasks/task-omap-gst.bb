@@ -24,7 +24,6 @@ RDEPENDS_task-omap-gst = "\
 RDEPENDS_task-omap-gst-libs = "\
     check	\
     gstreamer	\
-    libgoo	\
     "
 
 RDEPENDS_task-omap-gst-plugins = "\
@@ -32,7 +31,6 @@ RDEPENDS_task-omap-gst-plugins = "\
     gst-plugins-good	\
     gst-plugins-bad	\
     gst-plugins-ugly	\
-    gst-goo		\
     gst-plugin-mpegaudioparse \
     gst-plugin-audiotestsrc \
     gst-plugin-videotestsrc \
@@ -47,6 +45,8 @@ RDEPENDS_task-omap-gst-plugins = "\
     gst-plugin-rtpmanager \
     gst-plugin-amrnb \
     gst-plugin-amrwb \
+    gst-plugin-alsa \
+    gst-openmax \
     "
 
 RDEPENDS_task-omap-gst-apps = ""
