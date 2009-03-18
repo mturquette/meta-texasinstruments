@@ -4,6 +4,7 @@ DEPENDS += "tisocketnode-mpeg4dec-codec"
 
 CCASE_SPEC = "%\
 	      element /vobs/wtbu/OMAPSW_DSP/video/node/mpeg4/dec/... DSP-MM-TII-IMVID_RLS_${PV}%\
+	      element /vobs/wtbu/OMAPSW_DSP/video/node/mpeg4/dec_pplib_configs/... DSP-MM-TII-IMVID_RLS_4.13%\
 	      element * /main/LATEST%"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/video/node/mpeg4/dec"

@@ -3,7 +3,7 @@ PR = "r0"
 DEPENDS += "tisocketnode-mpeg4aacdec-codec"
 
 CCASE_SPEC = "%\
-	      element /vobs/wtbu/OMAPSW_DSP/audio/node/mpeg4aac/dec/... DSP-MM-TID-AUDIO_RLS_${PV}%\
+	      element /vobs/wtbu/OMAPSW_DSP/audio/node/mpeg4aac/dec/... DSP-MM-TII-AUDIO_RLS_${PV}%\
 	      element * /main/LATEST%"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/audio/node/mpeg4aac/dec"

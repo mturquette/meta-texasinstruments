@@ -2,7 +2,7 @@ DESCRIPTION = "Texas Instruments JPEG Decoder Socket Node Codec."
 PR = "r0"
 
 CCASE_SPEC = "%\
-	element /vobs/wtbu/CSSD_MM_Releases/Codecs/image/jpeg_dec/c64x/mm_tiicodecs/... DSP-MM-TID-IMAGE_RLS_${PV}%\
+	element /vobs/wtbu/CSSD_MM_Releases/Codecs/image/jpeg_dec/c64x/mm_tiicodecs/... DSP-MM-TII-IMVID_RLS_${PV}%\
 	element * /main/LATEST%"
 
 CCASE_PATHFETCH = "/vobs/wtbu/CSSD_MM_Releases/Codecs/image/jpeg_dec/c64x/mm_tiicodecs/"
@@ -13,12 +13,9 @@ inherit ccasefetch
 
 do_unpack2() {
 	unzip 100_I_JPEG_D_PS_c64x+_1_05.zip
-	unzip 100E_I_JPEG_D_PS_c64x+_1_05.zip
 }
 
 do_stage() {
-	install -d ${STAGING_BINDIR}/dspbridge/Codecs/image/jpeg_dec/c64x/mm_tiicodecs/100E_I_JPEG_D_PS_c64x+_1_05
-        cp -a ${S}/100E_I_JPEG_D_PS_c64x+_1_05/* ${STAGING_BINDIR}/dspbridge/Codecs/image/jpeg_dec/c64x/mm_tiicodecs/100E_I_JPEG_D_PS_c64x+_1_05
 	install -d ${STAGING_BINDIR}/dspbridge/Codecs/image/jpeg_dec/c64x/mm_tiicodecs/100_I_JPEG_D_PS_c64x+_1_05
 	cp -a ${S}/100_I_JPEG_D_PS_c64x+_1_05/* ${STAGING_BINDIR}/dspbridge/Codecs/image/jpeg_dec/c64x/mm_tiicodecs/100_I_JPEG_D_PS_c64x+_1_05
 }
