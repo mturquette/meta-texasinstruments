@@ -1,10 +1,11 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r0"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
 	# OMX Audio%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.20P1%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.20%\
 	# OMX Video%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_3.20%\
