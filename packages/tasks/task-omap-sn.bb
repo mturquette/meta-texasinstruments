@@ -3,7 +3,7 @@
 #
 
 DESCRIPTION = "Tasks for TI's Socket Nodes"
-PR = "r1"
+PR = "r2"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"
@@ -57,8 +57,9 @@ RDEPENDS = "\
     \
     tisocketnode-jpegdec \
     tisocketnode-jpegenc \
-    tisocketnode-rageckodec \
-    tisocketnode-rv89combodec \
+    \
+    ${@base_contains("DISTRO_FEATURES", "rarv", "tisocketnode-rageckodec", "", d)} \
+    ${@base_contains("DISTRO_FEATURES", "rarv", "tisocketnode-rv89combodec", "", d)} \
     "
 
 DEPENDS = "\
