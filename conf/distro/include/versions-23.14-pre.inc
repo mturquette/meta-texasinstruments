@@ -39,8 +39,9 @@ PREFERRED_VERSION_baseimage-utils =			"2.43"
 PREFERRED_VERSION_baseimage-vgpop =			"4.14.4"
 
 # socket nodes and codecs
-PREFERRED_VERSION_tisocketnode-algo =			"4.13"
+PREFERRED_VERSION_tisocketnode-ipp =			"4.13"
 PREFERRED_VERSION_tisocketnode-dfgm =			"4.13"
+PREFERRED_VERSION_tisocketnode-algo =			"4.13"
 PREFERRED_VERSION_tisocketnode-usn =			"3.26"
 PREFERRED_VERSION_tisocketnode-control-task =		"3.40"
 PREFERRED_VERSION_tisocketnode-vpp =			"4.14.4"
@@ -109,7 +110,6 @@ PREFERRED_VERSION_tisocketnode-jpegenc-codec =		"4.15"
 #
 PREFERRED_VERSION_tisocketnode-wmv9 =			"4.15"
 PREFERRED_VERSION_tisocketnode-wmv9-codec =		"4.15"
-PREFERRED_VERSION_tisocketnode-ipp =			"4.13"
 PREFERRED_VERSION_tisocketnode-h264dec =		"4.15"
 PREFERRED_VERSION_tisocketnode-h264dec-codec =		"4.15"
 PREFERRED_VERSION_tisocketnode-h264enc =		"4.14.1"
@@ -135,7 +135,7 @@ PREFERRED_VERSION_tisocketnode-rv89combodec-codec =	"4.14.3"
 # openmax
 #PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax"
 PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax-complete"
-PREFERRED_VERSION_tiopenmax =			"3.20-pre"
+PREFERRED_VERSION_tiopenmax =			"3.20"
 PREFERRED_VERSION_tiopenmax-core =		"3.19"
 PREFERRED_VERSION_tiopenmax-clock =		"3.19"
 PREFERRED_VERSION_tiopenmax-perf =		"3.19"
@@ -148,7 +148,7 @@ PREFERRED_VERSION_tiopenmax-jpegenc =		"3.19"
 
 # gstreamer
 PREFERRED_VERSION_libgoo =		"5.14-rc1"
-PREFERRED_VERSION_gst-goo =		"5.14-rc1"
+PREFERRED_VERSION_gst-goo =		"5.14-rc2"
 PREFERRED_VERSION_gst-pyapps =		"5.13"
 
 # connectivity
