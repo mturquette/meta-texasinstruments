@@ -135,6 +135,7 @@ PREFERRED_VERSION_tisocketnode-rv89combodec-codec =	"4.14.3"
 # openmax
 #PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax"
 PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax-complete"
+PREFERRED_VERSION_mm-isp =			"1.13"
 PREFERRED_VERSION_tiopenmax =			"3.20"
 PREFERRED_VERSION_tiopenmax-core =		"3.19"
 PREFERRED_VERSION_tiopenmax-clock =		"3.19"
