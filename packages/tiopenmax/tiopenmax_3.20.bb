@@ -1,6 +1,6 @@
 DEPENDS = "tidspbridge-lib mm-isp"
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r1"
+PR = "r2"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
@@ -20,7 +20,10 @@ CCASE_SPEC = "\
 	# ROOT folder & Make files%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_3.20%\
 	\
-	element * /main/LATEST%\
+	# special hack needed because root of vob is not labeled:%\
+	element /vobs/wtbu/OMAPSW_MPU /main/LATEST%\
+	# don't pick up anything that is not labeled%\
+	element * /main/0%\
 	"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux"
@@ -49,6 +52,7 @@ SRC_URI = "\
 	file://fix-amixer-path.patch;patch=1 \
 	file://23.13-radectestmk.patch;patch=1 \
 	file://23.13-rvdecmk.patch;patch=1 \
+	${@base_contains("DISTRO_FEATURES", "rarv", "", "file://remove-rarv.patch;patch=1", d)} \
 	"
 # these pending update for 23.10/23.11:
 #	file://wbamrencnorm.patch;patch=1 \
