@@ -1,21 +1,7 @@
-Index: tiopenmax-3.19/audio/src/openmax_il/Makefile
+Index: tiopenmax-3.20/video/src/openmax_il/Makefile
 ===================================================================
---- tiopenmax-3.19.orig/audio/src/openmax_il/Makefile	2009-02-03 14:09:19.000000000 -0600
-+++ tiopenmax-3.19/audio/src/openmax_il/Makefile	2009-03-03 13:30:07.000000000 -0600
-@@ -33,8 +33,7 @@
- 	gsmfr_dec\
- 	gsmfr_enc\
- 	gsmhr_dec\
--	gsmhr_enc\
--	ragecko_dec
-+	gsmhr_enc
- 	
- $(BASETARGETS)::
- 	@$(call traverse_dirs,$(DIRS),$@)
-Index: tiopenmax-3.19/video/src/openmax_il/Makefile
-===================================================================
---- tiopenmax-3.19.orig/video/src/openmax_il/Makefile	2009-03-03 13:31:40.000000000 -0600
-+++ tiopenmax-3.19/video/src/openmax_il/Makefile	2009-03-03 13:31:58.000000000 -0600
+--- tiopenmax-3.20.orig/video/src/openmax_il/Makefile	2009-02-17 07:43:46.000000000 -0600
++++ tiopenmax-3.20/video/src/openmax_il/Makefile	2009-03-20 10:21:57.000000000 -0500
 @@ -12,8 +12,7 @@
  	video_encode \
  	video_decode \
@@ -26,3 +12,33 @@ Index: tiopenmax-3.19/video/src/openmax_il/Makefile
  
  
  EXTRA= \
+Index: tiopenmax-3.20/audio/src/openmax_il/Makefile
+===================================================================
+--- tiopenmax-3.20.orig/audio/src/openmax_il/Makefile	2009-02-28 16:28:46.000000000 -0600
++++ tiopenmax-3.20/audio/src/openmax_il/Makefile	2009-03-20 10:21:57.000000000 -0500
+@@ -35,8 +35,7 @@
+ 	gsmhr_dec\
+ 	gsmhr_enc\
+ 	imaadpcm_dec\
+-	imaadpcm_enc\
+-	ragecko_dec
++	imaadpcm_enc
+ 	
+ $(BASETARGETS)::
+ 	@$(call traverse_dirs,$(DIRS),$@)
+Index: tiopenmax-3.20/application/src/openmax_il/Makefile
+===================================================================
+--- tiopenmax-3.20.orig/application/src/openmax_il/Makefile	2009-03-20 10:42:06.000000000 -0500
++++ tiopenmax-3.20/application/src/openmax_il/Makefile	2009-03-20 10:42:17.000000000 -0500
+@@ -6,11 +6,6 @@
+ include $(OMXROOT)/Master.mk
+ 
+ DIRS= \
+-	image_display \
+-	video_display \
+-	video_capture \
+-	avplay \
+-	avrecord \
+ 
+ EXTRA= \
+ 	

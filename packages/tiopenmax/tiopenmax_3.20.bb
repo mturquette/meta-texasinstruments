@@ -4,6 +4,7 @@ PR = "r2"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
 CCASE_SPEC = "\
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "element patterns /main/0", d)}%\
 	# OMX Audio%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.20P1%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.20%\
@@ -53,6 +54,7 @@ SRC_URI = "\
 	file://23.13-radectestmk.patch;patch=1 \
 	file://23.13-rvdecmk.patch;patch=1 \
 	${@base_contains("DISTRO_FEATURES", "rarv", "", "file://remove-rarv.patch;patch=1", d)} \
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "file://remove-patterns.patch;patch=1", d)} \
 	"
 # these pending update for 23.10/23.11:
 #	file://wbamrencnorm.patch;patch=1 \

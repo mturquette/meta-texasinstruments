@@ -7,6 +7,7 @@
 # * tiwifi	- Include support for TI's WLAN stack.
 # * tibluetooth	- Include support for TI's Bluetooth and FM stack.
 # * rarv        - Enable readaudio/realvideo codecs
+# * testpatterns - Include OMX test patterns
 
 #DISTRO_FEATURES += "gfx tiwifi tibluetooth"
 
