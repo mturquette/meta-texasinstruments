@@ -2,9 +2,9 @@ SECTION = "toolchains"
 PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments codegen tools"
 LICENSE = "Texas Instruments"
-PR = "r0"
+PR = "r1"
 
-inherit dfetch
+inherit dfetch native
 
 DIRAC_PATHFETCH = "/data/omapts/linux/dsp-tc/cgt6x-${PV}"
 DIRAC_PATHCOMPONENT = "cgt6x-${PV}"

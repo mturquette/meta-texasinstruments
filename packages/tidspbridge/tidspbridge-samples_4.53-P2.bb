@@ -1,10 +1,10 @@
 PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments MPU/DSP Bridge Socket Node compilation."
 LICENSE = "LGPL"
-PR = "r0"
-DEPENDS = "tidspbridge-bios \
-	   tidspbridge-cgt6x \
-	   tidspbridge-dllcreate"
+PR = "r1"
+DEPENDS = "tidspbridge-bios-native \
+	   tidspbridge-cgt6x-native \
+	   tidspbridge-dllcreate-native"
 FILES_${PN}="/dspbridge"
 
 CCASE_SPEC = "%\
@@ -16,12 +16,12 @@ CCASE_PATHFETCH = "/vobs/SDS/Source/Bridge/dsp"
 CCASE_PATHCOMPONENT = "dsp"
 CCASE_PATHCOMPONENTS = "4"
 
-ENV_VAR = "DEPOT=${STAGING_BINDIR}/dspbridge/tools \
+ENV_VAR = "DEPOT=${STAGING_BINDIR_NATIVE}/dspbridge/tools \
 	   DBS_BRIDGE_DIR_C64=${S} \
-	   DBS_SABIOS_DIR_C64=${STAGING_BINDIR}/dspbridge/tools \
-	   DBS_CGTOOLS_DIR_C64=${STAGING_BINDIR}/dspbridge/tools/cgt6x-6.0.7 \
+	   DBS_SABIOS_DIR_C64=${STAGING_BINDIR_NATIVE}/dspbridge/tools \
+	   DBS_CGTOOLS_DIR_C64=${STAGING_BINDIR_NATIVE}/dspbridge/tools/cgt6x-6.0.7 \
 	   DBS_FC=${S}/bdsptools/framework_components_1_10_04/packages-bld \
-	   DLLCREATE_DIR=${STAGING_BINDIR}/DLLcreate \
+	   DLLCREATE_DIR=${STAGING_BINDIR_NATIVE}/DLLcreate \
 "
 
 SRC_URI = "file://tidspbridge.patch;patch=1"
