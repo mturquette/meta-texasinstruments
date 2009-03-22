@@ -1,7 +1,7 @@
 PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments Baseimage."
 LICENSE = "LGPL"
-PR = "r0"
+PR = "r1"
 DEPENDS = "baseimage-avsync \
    baseimage-dasf \
    baseimage-hal \
@@ -23,11 +23,11 @@ CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/system"
 CCASE_PATHCOMPONENT = "OMAPSW_DSP"
 CCASE_PATHCOMPONENTS = "2"
  
-ENV_VAR = "DEPOT=${STAGING_BINDIR}/dspbridge/tools \
+ENV_VAR = "DEPOT=${STAGING_BINDIR_NATIVE}/dspbridge/tools \
    DSPMAKEROOT=${S}/make \
    DBS_BRIDGE_DIR_C64=${STAGING_BINDIR}/dspbridge/dsp \
-   DBS_SABIOS_DIR_C64=${STAGING_BINDIR}/dspbridge/tools \
-   DBS_CGTOOLS_DIR_C64=${STAGING_BINDIR}/dspbridge/tools/cgt6x-6.0.7 \
+   DBS_SABIOS_DIR_C64=${STAGING_BINDIR_NATIVE}/dspbridge/tools \
+   DBS_CGTOOLS_DIR_C64=${STAGING_BINDIR_NATIVE}/dspbridge/tools/cgt6x-6.0.7 \
    DBS_FC=${STAGING_BINDIR}/dspbridge/dsp/bdsptools/framework_components_1_10_04/packages-bld \
 "
  
@@ -61,7 +61,7 @@ do_compile() {
   cp -a ${STAGING_BINDIR}/dspbridge/make/* ${S}/make
 ## Setting PATH for gmake
   pathorig=$PATH
-  export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
+  export PATH=$PATH:${STAGING_BINDIR_NATIVE}/dspbridge/tools/xdctools
   ${ENV_VAR} oe_runmake -f makefile.linux build=omap3430${RELEASE}
   export PATH=$pathorig
   unset pathorig
