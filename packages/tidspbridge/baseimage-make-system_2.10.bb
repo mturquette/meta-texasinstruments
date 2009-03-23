@@ -4,6 +4,7 @@ LICENSE = "LGPL"
 PR = "r0"
 
 CCASE_SPEC = "%\
+	      element /vobs/wtbu/OMAPSW_DSP/make/... ACT_OMAPS00195241%\
 	      element /vobs/wtbu/OMAPSW_DSP/make/...  DSP-MM-TID-BUILD-SYSTEM_RLS_${PV}%\
 	      element * /main/LATEST%"
 
