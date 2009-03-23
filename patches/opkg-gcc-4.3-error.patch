@@ -1,0 +1,30 @@
+Index: meta/packages/opkg/files/no-werror.patch
+===================================================================
+--- meta/packages/opkg/files/no-werror.patch	(revision 0)
++++ meta/packages/opkg/files/no-werror.patch	(revision 0)
+@@ -0,0 +1,11 @@
++Index: opkg/libopkg/Makefile.am
++===================================================================
++--- opkg.orig/libopkg/Makefile.am	2009-03-22 12:58:35.000000000 -0500
+++++ opkg/libopkg/Makefile.am	2009-03-22 12:58:48.000000000 -0500
++@@ -1,5 +1,5 @@
++ 
++-AM_CFLAGS=-Wall -Werror -DHOST_CPU_STR=\"@host_cpu@\" -DBUILD_CPU=@build_cpu@ -DLIBDIR=\"@libdir@\" -DOPKGLIBDIR=\"@opkglibdir@\" -DDATADIR=\"@datadir@\" -I$(top_srcdir) $(BIGENDIAN_CFLAGS) $(CURL_CFLAGS) $(GPGME_CFLAGS)
+++AM_CFLAGS=-Wall -DHOST_CPU_STR=\"@host_cpu@\" -DBUILD_CPU=@build_cpu@ -DLIBDIR=\"@libdir@\" -DOPKGLIBDIR=\"@opkglibdir@\" -DDATADIR=\"@datadir@\" -I$(top_srcdir) $(BIGENDIAN_CFLAGS) $(CURL_CFLAGS) $(GPGME_CFLAGS)
++ 
++ libopkg_includedir=$(includedir)/libopkg
++ libopkg_include_HEADERS= opkg.h
+Index: meta/packages/opkg/opkg.inc
+===================================================================
+--- meta/packages/opkg/opkg.inc	(revision 5728)
++++ meta/packages/opkg/opkg.inc	(working copy)
+@@ -7,7 +7,8 @@
+ PV = "0.0+svnr${SRCREV}"
+ 
+ SRC_URI = "svn://svn.openmoko.org/trunk/src/target/;module=opkg;proto=http \
+-           file://fix_prototype.patch;patch=1"
++           file://fix_prototype.patch;patch=1 \
++           file://no-werror.patch;patch=1"
+ 
+ S = "${WORKDIR}/opkg"
+ 

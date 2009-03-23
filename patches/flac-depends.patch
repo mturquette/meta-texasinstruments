@@ -1,0 +1,13 @@
+Index: meta/packages/flac/flac_1.1.2.bb
+===================================================================
+--- meta/packages/flac/flac_1.1.2.bb	(revision 5728)
++++ meta/packages/flac/flac_1.1.2.bb	(working copy)
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "FLAC is a Free Lossless Audio Codec."
+ LICENSE = "BSD GPL"
+ SECTION = "libs"
+-DEPENDS = "libogg"
++DEPENDS = "libogg gettext-native"
+ PR = "r5"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/flac/flac-${PV}.tar.gz \
