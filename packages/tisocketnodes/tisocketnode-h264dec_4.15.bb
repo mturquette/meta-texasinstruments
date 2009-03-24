@@ -3,7 +3,9 @@ PR = "r0"
 DEPENDS += "tisocketnode-h264dec-codec"
 
 CCASE_SPEC = "%\
-	      element /vobs/wtbu/OMAPSW_DSP/video/node/h264/dec/... DSP-MM-TID-IMVID_RLS_${PV}%\
+	      element /vobs/wtbu/OMAPSW_DSP/video/node/h264 DSP-MM-TID-IMVID_RLS_4.13%\
+	      element /vobs/wtbu/OMAPSW_DSP/video/node/h264/dec/... DSP-MM-TII-IMVID_RLS_${PV}%\
+	      element /vobs/wtbu/OMAPSW_DSP/video/node/h264/dec_pplib_configs/... DSP-MM-TII-IMVID_RLS_${PV}%\
 	      element * /main/LATEST%"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/video/node/h264/dec"

@@ -1,7 +1,7 @@
 SECTION = "multimedia"
 DESCRIPTION = "Common library for accessing Microsoft Media Server (MMS) media streaming protocol"
 LICENSE = "LGPL-2"
-RDEPENDS = "glib-2.0"
+DEPENDS = "glib-2.0"
 PR = "r0"
 
 inherit autotools pkgconfig

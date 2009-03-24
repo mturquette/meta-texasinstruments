@@ -5,7 +5,7 @@ PR = "r0"
 DEPENDS = "baseimage"
 
 CCASE_SPEC = "%\
-	element /vobs/wtbu/CSSD_MM_Releases/Codecs/audio/mpeg4aac_dec/c64x/mm_tiicodecs/... DSP-MM-TID-AUDIO_RLS_${PV}%\
+	element /vobs/wtbu/CSSD_MM_Releases/Codecs/audio/mpeg4aac_dec/c64x/mm_tiicodecs/... DSP-MM-TII-AUDIO_RLS_${PV}%\
 	element * /main/LATEST%"
 
 CCASE_PATHFETCH = "/vobs/wtbu/CSSD_MM_Releases/Codecs/audio/mpeg4aac_dec/c64x/mm_tiicodecs/"

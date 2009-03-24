@@ -1,0 +1,13 @@
+Index: meta/packages/python/python-pygobject_2.12.3.bb
+===================================================================
+--- meta/packages/python/python-pygobject_2.12.3.bb	(revision 5728)
++++ meta/packages/python/python-pygobject_2.12.3.bb	(working copy)
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Python GObject bindings"
+ SECTION = "devel/python"
+ LICENSE = "LGPL"
+-DEPENDS = "python-pygobject-native"
++DEPENDS = "python-pygobject-native glib-2.0"
+ PR = "r3"
+ 
+ SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/pygobject/2.12/pygobject-${PV}.tar.bz2 \

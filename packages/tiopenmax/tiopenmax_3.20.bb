@@ -3,31 +3,28 @@ DESCRIPTION = "Texas Instruments OpenMAX IL."
 PR = "r2"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
-# P1 - fix from OMX team
-# P2 - config spec fix to not use 'element * /main/LATEST'
-
 CCASE_SPEC = "\
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "element patterns /main/0", d)}%\
 	# OMX Audio%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/audio/src/openmax_il/armaac_enc/... LINUX-MMAUDIO_RLS_3.10P1%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.19%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.20P1%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.20%\
 	# OMX Video%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/post_processor/... LINUX-MMVIDEO_RLS_3.19P1%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/video_encode/... LINUX-MMVIDEO_RLS_3.19P1%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_3.19%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_3.20%\
 	# OMX Image%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_3.19%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_3.20%\
 	# LCML & core%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_3.19%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_3.20%\
 	# OMX Application%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_3.19%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_3.20%\
 	# OMX INST2 utilities%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/utilities/src/inst2/... LINUX-MMUTILS_RLS_3.02%\
 	# ROOT folder & Make files%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_3.19%\
-        # special hack needed because root of vob is not labeled:%\
-        element /vobs/wtbu/OMAPSW_MPU /main/LATEST%\
-        # don't pick up anything that is not labeled%\
-        element * /main/0%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_3.20%\
+	\
+	# special hack needed because root of vob is not labeled:%\
+	element /vobs/wtbu/OMAPSW_MPU /main/LATEST%\
+	# don't pick up anything that is not labeled%\
+	element * /main/0%\
 	"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux"
@@ -46,7 +43,6 @@ SRC_URI = "\
 	file://pcmencmk.patch;patch=1 \
 	file://wmadecmk.patch;patch=1 \
 	file://g722encmk.patch;patch=1 \
-	file://23.10-g729encperf.patch;patch=1 \
 	file://jpegdecmk.patch;patch=1 \
 	file://jpegencmk.patch;patch=1 \
 	file://23.11-vppmake.patch;patch=1 \
@@ -56,9 +52,9 @@ SRC_URI = "\
 	file://23.12-armaacnopatterns.patch;patch=1 \
 	file://fix-amixer-path.patch;patch=1 \
 	file://23.13-radectestmk.patch;patch=1 \
-	file://23.13-reordermake.patch;patch=1 \
 	file://23.13-rvdecmk.patch;patch=1 \
 	${@base_contains("DISTRO_FEATURES", "rarv", "", "file://remove-rarv.patch;patch=1", d)} \
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "file://remove-patterns.patch;patch=1", d)} \
 	"
 # these pending update for 23.10/23.11:
 #	file://wbamrencnorm.patch;patch=1 \
@@ -73,6 +69,9 @@ SRC_URI = "\
 #	file://23.10-nbamrencnorm.patch;patch=1 \
 #	file://23.10-wbamrdecnorm.patch;patch=1 \
 #	file://23.10-addcommon.patch;patch=1 \
+# not needed anymore for 23.14:
+#	file://23.10-g729encperf.patch;patch=1 \
+#	file://23.13-reordermake.patch;patch=1 \
 
 
 do_compile_prepend() {
@@ -120,6 +119,7 @@ do_install() {
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		RAPARSERINCLUDEDIR=${D}/include/omx RVPARSERINCLUDEDIR=${D}/include/omx \
+		INST2=1 \
 		TARGETDIR=${D} OMXROOT=${S} \
 		install
 }

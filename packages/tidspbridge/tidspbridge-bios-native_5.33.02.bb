@@ -2,9 +2,9 @@ SECTION = "toolchains"
 PRIORITY = "optional"
 DESCRIPTION = "Texas Instruments DSP Toolchain"
 LICENSE = "Texas Instruments"
-PR = "r0"
+PR = "r1"
 
-inherit dfetch
+inherit dfetch native
 
 DIRAC_PATHFETCH = "/data/omapts/linux/dsp-tc/BIOS-${PV}"
 DIRAC_PATHCOMPONENT = "BIOS-${PV}"
