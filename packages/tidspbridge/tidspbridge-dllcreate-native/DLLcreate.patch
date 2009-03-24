@@ -1,0 +1,25 @@
+Index: tidspbridge-dllcreate-native-23.11/DLLcreate/src/header.h
+===================================================================
+--- tidspbridge-dllcreate-native-23.11.orig/DLLcreate/src/header.h	2005-04-05 12:08:59.000000000 -0500
++++ tidspbridge-dllcreate-native-23.11/DLLcreate/src/header.h	2009-03-22 09:54:33.000000000 -0500
+@@ -6,6 +6,9 @@
+ /*                                                                     */
+ /***********************************************************************/
+ 
++
++#include <string.h>
++
+ /*-----------------------------------------------------------------*/
+ /* INCLUDE HEADER FILES FOR RUNTIME SUPPORT.                       */
+ /*-----------------------------------------------------------------*/
+@@ -84,8 +87,10 @@
+ #elif defined(__GNUC__)
+ 
+   typedef char* string;
++/*
+   #include <iostream>
+   #include <iomanip>
++*/
+   #include <list>
+   #include <vector>
+   #include <deque>

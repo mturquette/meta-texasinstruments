@@ -2,14 +2,14 @@ DEPENDS += "baseimage \
 	   tisocketnode-ringio \
 	   tisocketnode-usn"
 
-ENV_VAR = "DEPOT=${STAGING_BINDIR}/dspbridge/tools \
+ENV_VAR = "DEPOT=${STAGING_BINDIR_NATIVE}/dspbridge/tools \
            MMCODEC_ROOT=${STAGING_BINDIR}/dspbridge \
 	   DSPMAKEROOT=${S}/make \
 	   DBS_BRIDGE_DIR_C64=${STAGING_BINDIR}/dspbridge/dsp \
-	   DBS_SABIOS_DIR_C64=${STAGING_BINDIR}/dspbridge/tools \
-	   DBS_CGTOOLS_DIR_C64=${STAGING_BINDIR}/dspbridge/tools/cgt6x-6.0.7 \
+	   DBS_SABIOS_DIR_C64=${STAGING_BINDIR_NATIVE}/dspbridge/tools \
+	   DBS_CGTOOLS_DIR_C64=${STAGING_BINDIR_NATIVE}/dspbridge/tools/cgt6x-6.0.7 \
 	   DBS_FC=${STAGING_BINDIR}/dspbridge/dsp/bdsptools/framework_components_1_10_04/packages-bld \
-	   DLLCREATE_DIR=${STAGING_BINDIR}/DLLcreate \
+	   DLLCREATE_DIR=${STAGING_BINDIR_NATIVE}/DLLcreate \
 "
 
 RELEASE ?= "release"
@@ -38,7 +38,7 @@ do_compile() {
 	cp -a ${STAGING_BINDIR}/dspbridge/system/ringio/* ${S}/system/ringio
 ## Setting PATH for gmake
         pathorig=$PATH
-        export PATH=$PATH:${STAGING_BINDIR}/dspbridge/tools/xdctools
+        export PATH=$PATH:${STAGING_BINDIR_NATIVE}/dspbridge/tools/xdctools
 	chmod -R +w ${S}/*	
 	cd ${SN_DIR}
 	sed -e 's%\\%\/%g' makefile > makefile.linux
