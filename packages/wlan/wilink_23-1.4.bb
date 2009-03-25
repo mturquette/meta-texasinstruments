@@ -52,7 +52,7 @@ do_compile () {
 do_install() {
 	install -d ${D}/wlan
 	install -m 755 ${S}/WiLink/platforms/os/linux/wlan_cu ${D}/wlan
-	install -m 755 ${S}/WiLink/platforms/os/linux/wlan_logger ${D}/wlan
+	install -m 755 ${S}/WiLink/platforms/os/linux/tiwlan.ini ${D}/wlan
 	install -m 755 ${S}/WiLink/platforms/os/linux/tiwlan_loader ${D}/wlan
 	install -m 755 ${S}/WiLink/platforms/os/linux/wpa_supplicant ${D}/wlan
 
