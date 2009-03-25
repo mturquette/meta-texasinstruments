@@ -13,6 +13,8 @@ CCASE_PATHCOMPONENTS = "5"
 
 SRC_URI = "file://DLLcreate.patch;patch=1"
 
+S = ${WORKDIR}/${PN}-${PV}
+
 inherit ccasefetch native
 
 # DLLcreate is not portable to 64bit environment, so force it to
