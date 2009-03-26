@@ -1,0 +1,574 @@
+# Imports
+#BRIDGEINCLUDEDIR
+#BRIDGELIBDIR
+
+# Exports
+
+SOURCE_DIR = .
+TARGET_DIR = ./target
+
+CC = arm-linux-gcc
+DFLAGS = -Wall -fpic -pipe -O0 -Wl,--no-undefined
+LDFLAGS = -lpthread
+#AUDIOMANAGER=1
+#RESOURCEMANAGER=1
+
+# Other flags:
+#   -DDSP_RENDERING_ON
+#   -DRESOURCE_MANAGER_ENABLED
+#   -DSTATIC_TABLE <-- don't know why OMX_Core needs it
+
+# omx
+OMX_LIBS = -L$(core_DIR) -lOMX_Core
+OMX_CFLAGS = -I$(core_INC) -I$(common_INC)
+
+ifdef AUDIOMANAGER
+OMX_CFLAGS += -I$(am_INC) -DDSP_RENDERING_ON
+endif
+
+ifdef RESOURCEMANAGER
+OMX_LIBS += -lOMX_ResourceManagerProxy -L$(rmp_DIR)
+OMX_CFLAGS += -I$(rmp_INC) -DRESOURCE_MANAGER_ENABLED
+endif
+
+# lcml
+LCML_LIBS = -L$(lcml_DIR) -lLCML
+LCML_CFLAGS = -I$(lcml_INC) -DOMAP_2430 $(BRIDGE_CFLAGS)
+
+# bridge
+BRIDGE_LIBS = -L$(BRIDGELIBDIR) -lbridge
+BRIDGE_CFLAGS = -I$(BRIDGEINCLUDEDIR) -DOMAP_3430
+
+# Default target:
+all:
+
+# Targets
+
+# common
+common_DIR = $(SOURCE_DIR)/system/src/openmax_il/common
+common_INC = $(common_DIR)/inc
+
+# core
+core_DIR = $(SOURCE_DIR)/system/src/openmax_il/omx_core/src
+core_INC = $(core_DIR)/../inc
+core_TARGET = $(core_DIR)/libOMX_Core.so
+
+$(core_TARGET): $(core_DIR)/OMX_Core.o
+$(core_TARGET): INCLUDES := -I$(core_INC)
+$(core_TARGET): DFLAGS := $(DFLAGS) -DSTATIC_TABLE
+$(core_TARGET): LIBS := -ldl
+
+libraries += $(core_TARGET)
+
+# lcml
+lcml_DIR = $(SOURCE_DIR)/system/src/openmax_il/lcml/src
+lcml_INC = $(lcml_DIR)/../inc
+lcml_TARGET = $(lcml_DIR)/libLCML.so
+
+$(lcml_TARGET): $(lcml_DIR)/LCML_DspCodec.o
+$(lcml_TARGET): INCLUDES := -I$(lcml_DIR)/../inc
+$(lcml_TARGET): DFLAGS := $(DFLAGS) $(BRIDGE_CFLAGS) $(LCML_CFLAGS) $(OMX_CFLAGS)
+$(lcml_TARGET): LIBS := $(BRIDGE_LIBS)
+
+libraries += $(lcml_TARGET)
+
+# clock
+clock_DIR = $(SOURCE_DIR)/system/src/openmax_il/clock_source/src
+clock_INC = $(clock_DIR)/../inc
+clock_TARGET = $(clock_DIR)/libOMX_Clock.so
+
+$(clock_TARGET): $(clock_DIR)/OMX_Clock.o $(clock_DIR)/gpt.o
+$(clock_TARGET): INCLUDES := -I$(clock_INC) -I$(core_INC)
+$(clock_TARGET): DFLAGS := $(DFLAGS) $(BRIDGE_CFLAGS)
+$(clock_TARGET): LIBS := $(BRIDGE_LIBS)
+
+#libraries += $(clock_TARGET)
+
+# resource manager proxy
+rmp_DIR = $(SOURCE_DIR)/system/src/openmax_il/resource_manager_proxy/src
+rmp_INC = $(rmp_DIR)/../inc
+rmp_TARGET = $(rmp_DIR)/libOMX_ResourceManagerProxy.so
+
+$(rmp_TARGET): $(rmp_DIR)/ResourceManagerProxy.o
+$(rmp_TARGET): INCLUDES := -I$(rmp_INC) -I$(core_INC)
+$(rmp_TARGET): DFLAGS := $(DFLAGS)
+$(rmp_TARGET): LIBS := $(BRIDGE_LIBS)
+
+ifdef RESOURCEMANAGER
+libraries += $(rmp_TARGET)
+endif
+
+# audio manager
+am_DIR = $(SOURCE_DIR)/system/src/openmax_il/audio_manager/src
+am_INC = $(am_DIR)/../inc
+am_TARGET = $(am_DIR)/OMXAudioManager
+
+$(am_TARGET): $(am_DIR)/AudioManager.o
+$(am_TARGET): INCLUDES := -I$(am_INC) -I$(core_INC)
+$(am_TARGET): DFLAGS := $(DFLAGS) $(BRIDGE_CFLAGS) -DMMMIXER
+$(am_TARGET): LIBS := $(BRIDGE_LIBS) -lpthread
+
+ifdef AUDIOMANAGER
+libraries += $(am_TARGET)
+endif
+
+# policy manager
+pm_DIR = $(SOURCE_DIR)/system/src/openmax_il/omx_policy_manager/src
+pm_INC = $(pm_DIR)/../inc
+pm_TARGET = $(pm_DIR)/OMXPolicyManager
+
+$(pm_TARGET): $(pm_DIR)/PolicyManager.o
+$(pm_TARGET): INCLUDES := -I$(pm_INC) -I$(core_INC) -I$(rmp_INC)
+$(pm_TARGET): DFLAGS := $(DFLAGS) $(BRIDGE_CFLAGS)
+$(pm_TARGET): LIBS := $(BRIDGE_LIBS) -lpthread
+
+ifdef RESOURCEMANAGER
+libraries += $(pm_TARGET)
+endif
+
+# resource activity monitor
+ram_DIR = $(SOURCE_DIR)/system/src/openmax_il/resource_activity_monitor/src
+ram_INC = $(ram_DIR)/../inc
+ram_TARGET = $(ram_DIR)/libRAM.so
+
+$(ram_TARGET): $(ram_DIR)/Resource_Activity_Monitor.o
+$(ram_TARGET): INCLUDES := -I$(ram_INC) -I$(core_INC)
+$(ram_TARGET): DFLAGS := $(DFLAGS) $(BRIDGE_CFLAGS)
+$(ram_TARGET): LIBS := $(BRIDGE_LIBS) -lpthread -lqos
+
+ifdef RESOURCEMANAGER
+libraries += $(ram_TARGET)
+endif
+
+# resource manager
+rm_DIR = $(SOURCE_DIR)/system/src/openmax_il/resource_manager/src
+rm_INC = $(rm_DIR)/../inc
+rm_TARGET = $(rm_DIR)/OMXResourceManager
+
+$(rm_TARGET): $(rm_DIR)/ResourceManager.o
+$(rm_TARGET): INCLUDES := -I$(rm_INC) -I$(core_INC) -I$(rmp_INC) -I$(ram_INC) -I$(pm_INC)
+$(rm_TARGET): DFLAGS := $(DFLAGS) $(BRIDGE_CFLAGS)
+$(rm_TARGET): LIBS := $(BRIDGE_LIBS) -lRAM -L$(ram_DIR) -lpthread -lqos -lbridge
+
+ifdef RESOURCEMANAGER
+libraries += $(rm_TARGET)
+endif
+
+
+##### VIDEO #####
+# videodec
+videodec_DIR = $(SOURCE_DIR)/video/src/openmax_il/video_decode/src
+videodec_INC = $(videodec_DIR)/../inc
+videodec_TARGET = $(videodec_DIR)/libOMX.TI.Video.Decoder.so
+
+$(videodec_TARGET): $(videodec_DIR)/OMX_VideoDec_Thread.o $(videodec_DIR)/OMX_VideoDec_Utils.o $(videodec_DIR)/OMX_VideoDecoder.o
+$(videodec_TARGET): INCLUDES := -I$(videodec_INC)
+$(videodec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(videodec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+libraries += $(videodec_TARGET)
+
+# videoenc
+videoenc_DIR = $(SOURCE_DIR)/video/src/openmax_il/video_encode/src
+videoenc_INC = $(videoenc_DIR)/../inc
+videoenc_TARGET = $(videoenc_DIR)/libOMX.TI.Video.encoder.so
+
+$(videoenc_TARGET): $(videoenc_DIR)/OMX_VideoEnc_Thread.o $(videoenc_DIR)/OMX_VideoEnc_Utils.o $(videoenc_DIR)/OMX_VideoEncoder.o
+$(videoenc_TARGET): INCLUDES := -I$(videoenc_INC)
+$(videoenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(videoenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(videoenc_TARGET)
+
+# postproc
+postproc_DIR = $(SOURCE_DIR)/video/src/openmax_il/post_processor/src
+postproc_INC = $(postproc_DIR)/../inc
+postproc_TARGET = $(postproc_DIR)/libOMX.TI.PostProc.so
+
+$(postproc_TARGET): $(postproc_DIR)/OMX_PostProc_Thread.o $(postproc_DIR)/OMX_PostProc_Utils.o $(postproc_DIR)/OMX_PostProc.o
+$(postproc_TARGET): INCLUDES := -I$(postproc_INC) -I$(clock_INC) -I$(INCLUDE_DIR)
+$(postproc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(postproc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(postproc_TARGET)
+
+# prepostproc
+vpp_DIR = $(SOURCE_DIR)/video/src/openmax_il/prepost_processor/src
+vpp_INC = $(vpp_DIR)/../inc
+vpp_TARGET = $(vpp_DIR)/libOMX.TI.VPP.so
+
+$(vpp_TARGET): $(vpp_DIR)/OMX_VPP_CompThread.o $(vpp_DIR)/OMX_VPP_Utils.o $(vpp_DIR)/OMX_VPP_ImgConv.o $(vpp_DIR)/OMX_VPP.o
+$(vpp_TARGET): INCLUDES := -I$(vpp_INC) -I$(clock_INC) -I$(INCLUDE_DIR)
+$(vpp_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(vpp_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(vpp_TARGET)
+
+
+##### IMAGE #####
+# jpegdec
+jpegdec_DIR = $(SOURCE_DIR)/image/src/openmax_il/jpeg_dec/src
+jpegdec_INC = $(jpegdec_DIR)/../inc
+jpegdec_TARGET = $(jpegdec_DIR)/libOMX.TI.JPEG.decoder.so
+
+$(jpegdec_TARGET): $(jpegdec_DIR)/OMX_JpegDec_Thread.o $(jpegdec_DIR)/OMX_JpegDec_Utils.o $(jpegdec_DIR)/OMX_JpegDecoder.o
+$(jpegdec_TARGET): INCLUDES := -I$(jpegdec_INC)
+$(jpegdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(jpegdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(jpegdec_TARGET)
+
+# jpegenc
+jpegenc_DIR = $(SOURCE_DIR)/image/src/openmax_il/jpeg_enc/src
+jpegenc_INC = $(jpegenc_DIR)/../inc
+jpegenc_TARGET = $(jpegenc_DIR)/libOMX.TI.JPEG.encoder.so
+
+$(jpegenc_TARGET): $(jpegenc_DIR)/OMX_JpegEnc_Thread.o $(jpegenc_DIR)/OMX_JpegEnc_Utils.o $(jpegenc_DIR)/OMX_JpegEncoder.o
+$(jpegenc_TARGET): INCLUDES := -I$(jpegenc_INC)
+$(jpegenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(jpegenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(jpegenc_TARGET)
+
+
+##### AUDIO #####
+# mp3dec
+mp3dec_DIR = $(SOURCE_DIR)/audio/src/openmax_il/mp3_dec/src
+mp3dec_INC = $(mp3dec_DIR)/../inc
+mp3dec_TARGET = $(mp3dec_DIR)/libOMX.TI.MP3.decode.so
+
+$(mp3dec_TARGET): $(mp3dec_DIR)/OMX_Mp3Dec_CompThread.o $(mp3dec_DIR)/OMX_Mp3Dec_Utils.o $(mp3dec_DIR)/OMX_Mp3Decoder.o
+$(mp3dec_TARGET): INCLUDES := -I$(mp3dec_INC) -I$(rmp_INC)
+$(mp3dec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(mp3dec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(mp3dec_TARGET)
+
+# aacdec
+aacdec_DIR = $(SOURCE_DIR)/audio/src/openmax_il/aac_dec/src
+aacdec_INC = $(aacdec_DIR)/../inc
+aacdec_TARGET = $(aacdec_DIR)/libOMX.TI.AAC.decode.so
+
+$(aacdec_TARGET): $(aacdec_DIR)/OMX_AacDec_CompThread.o $(aacdec_DIR)/OMX_AacDec_Utils.o $(aacdec_DIR)/OMX_AacDecoder.o
+$(aacdec_TARGET): INCLUDES := -I$(aacdec_INC)
+$(aacdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(aacdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+libraries += $(aacdec_TARGET)
+
+# aacenc
+aacenc_DIR = $(SOURCE_DIR)/audio/src/openmax_il/aac_enc/src
+aacenc_INC = $(aacenc_DIR)/../inc
+aacenc_TARGET = $(aacenc_DIR)/libOMX.TI.AAC.encode.so
+
+$(aacenc_TARGET): $(aacenc_DIR)/OMX_AacEnc_CompThread.o $(aacenc_DIR)/OMX_AacEnc_Utils.o $(aacenc_DIR)/OMX_AacEncoder.o
+$(aacenc_TARGET): INCLUDES := -I$(aacenc_INC)
+$(aacenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(aacenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(aacenc_TARGET)
+
+# amrdec
+amrdec_DIR = $(SOURCE_DIR)/audio/src/openmax_il/nbamr_dec/src
+amrdec_INC = $(amrdec_DIR)/../inc
+amrdec_TARGET = $(amrdec_DIR)/libOMX.TI.AMR.decode.so
+
+$(amrdec_TARGET): $(amrdec_DIR)/OMX_AmrDec_ComponentThread.o $(amrdec_DIR)/OMX_AmrDec_Utils.o $(amrdec_DIR)/OMX_AmrDecoder.o
+$(amrdec_TARGET): INCLUDES := -I$(amrdec_INC)
+$(amrdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(amrdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(amrdec_TARGET)
+
+# amrenc
+amrenc_DIR = $(SOURCE_DIR)/audio/src/openmax_il/nbamr_enc/src
+amrenc_INC = $(amrenc_DIR)/../inc
+amrenc_TARGET = $(amrenc_DIR)/libOMX.TI.AMR.encode.so
+
+$(amrenc_TARGET): $(amrenc_DIR)/OMX_AmrEnc_ComponentThread.o $(amrenc_DIR)/OMX_AmrEnc_Utils.o $(amrenc_DIR)/OMX_AmrEncoder.o
+$(amrenc_TARGET): INCLUDES := -I$(amrenc_INC)
+$(amrenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(amrenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(amrenc_TARGET)
+
+# wbamrdec
+wbamrdec_DIR = $(SOURCE_DIR)/audio/src/openmax_il/wbamr_dec/src
+wbamrdec_INC = $(wbamrdec_DIR)/../inc
+wbamrdec_TARGET = $(wbamrdec_DIR)/libOMX.TI.WBAMR.decode.so
+
+$(wbamrdec_TARGET): $(wbamrdec_DIR)/OMX_WbAmrDec_ComponentThread.o $(wbamrdec_DIR)/OMX_WbAmrDec_Utils.o $(wbamrdec_DIR)/OMX_WbAmrDecoder.o
+$(wbamrdec_TARGET): INCLUDES := -I$(wbamrdec_INC)
+$(wbamrdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(wbamrdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(wbamrdec_TARGET)
+
+# wbamrenc
+wbamrenc_DIR = $(SOURCE_DIR)/audio/src/openmax_il/wbamr_enc/src
+wbamrenc_INC =$(wbamrenc_DIR)/../inc
+wbamrenc_TARGET = $(wbamrenc_DIR)/libOMX.TI.WBAMR.encode.so
+
+$(wbamrenc_TARGET): $(wbamrenc_DIR)/OMX_WbAmrEnc_CompThread.o $(wbamrenc_DIR)/OMX_WbAmrEnc_Utils.o $(wbamrenc_DIR)/OMX_WbAmrEncoder.o
+$(wbamrenc_TARGET): INCLUDES := -I$(wbamrenc_INC)
+$(wbamrenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(wbamrenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(wbamrenc_TARGET)
+
+# wmadec
+wmadec_DIR = $(SOURCE_DIR)/audio
+wmadec_TARGET = $(wmadec_DIR)/libOMX.TI.WMA.decode.so
+
+$(wmadec_TARGET): $(wmadec_DIR)/OMX_WmaDec_ComponentThread.o $(wmadec_DIR)/OMX_WmaDec_Utils.o $(wmadec_DIR)/OMX_WmaDecoder.o
+$(wmadec_TARGET): INCLUDES := -I$(wmadec_DIR)
+$(wmadec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(wmadec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(wmadec_TARGET)
+
+# pcmdec
+pcmdec_DIR = $(SOURCE_DIR)/audio
+pcmdec_TARGET = $(pcmdec_DIR)/libOMX.TI.PCM.decode.so
+
+$(pcmdec_TARGET): $(pcmdec_DIR)/OMX_PcmDec_CompThread.o $(pcmdec_DIR)/OMX_PcmDec_Utils.o $(pcmdec_DIR)/OMX_PcmDecoder.o
+$(pcmdec_TARGET): INCLUDES := -I$(pcmdec_DIR)
+$(pcmdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(pcmdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(pcmdec_TARGET)
+
+# pcmenc
+pcmenc_DIR = $(SOURCE_DIR)/audio
+pcmenc_TARGET = $(pcmenc_DIR)/libOMX.TI.PCM.encode.so
+
+$(pcmenc_TARGET): $(pcmenc_DIR)/OMX_PcmEnc_CompThread.o $(pcmenc_DIR)/OMX_PcmEnc_Utils.o $(pcmenc_DIR)/OMX_PcmEncoder.o
+$(pcmenc_TARGET): INCLUDES := -I$(pcmenc_DIR)
+$(pcmenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(pcmenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(pcmenc_TARGET)
+
+# g711dec
+g711dec_DIR = $(SOURCE_DIR)/audio
+g711dec_TARGET = $(g711dec_DIR)/libOMX.TI.G711.decode.so
+
+$(g711dec_TARGET): $(g711dec_DIR)/OMX_G711Dec_ComponentThread.o $(g711dec_DIR)/OMX_G711Dec_Utils.o $(g711dec_DIR)/OMX_G711Decoder.o
+$(g711dec_TARGET): INCLUDES := -I$(g711dec_DIR)
+$(g711dec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g711dec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g711dec_TARGET)
+
+# g711enc
+g711enc_DIR = $(SOURCE_DIR)/audio
+g711enc_TARGET = $(g711enc_DIR)/libOMX.TI.G711.encode.so
+
+$(g711enc_TARGET): $(g711enc_DIR)/OMX_G711Enc_ComponentThread.o $(g711enc_DIR)/OMX_G711Enc_Utils.o $(g711enc_DIR)/OMX_G711Encoder.o
+$(g711enc_TARGET): INCLUDES := -I$(g711enc_DIR)
+$(g711enc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g711enc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g711enc_TARGET)
+
+# g722dec
+g722dec_DIR = $(SOURCE_DIR)/audio
+g722dec_TARGET = $(g722dec_DIR)/libOMX.TI.G722.decode.so
+
+$(g722dec_TARGET): $(g722dec_DIR)/OMX_G722Dec_Utils.o $(g722dec_DIR)/OMX_G722Decoder.o
+$(g722dec_TARGET): INCLUDES := -I$(g722dec_DIR)
+$(g722dec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g722dec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g722dec_TARGET)
+
+# g722enc
+g722enc_DIR = $(SOURCE_DIR)/audio
+g722enc_TARGET = $(g722enc_DIR)/libOMX.TI.G722.encode.so
+
+$(g722enc_TARGET): $(g722enc_DIR)/OMX_G722Enc_Utils.o $(g722enc_DIR)/OMX_G722Encoder.o
+$(g722enc_TARGET): INCLUDES := -I$(g722enc_DIR)
+$(g722enc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g722enc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g722enc_TARGET)
+
+# g723dec
+g723dec_DIR = $(SOURCE_DIR)/audio
+g723dec_TARGET = $(g723dec_DIR)/libOMX.TI.G723.decode.so
+
+$(g723dec_TARGET): $(g723dec_DIR)/OMX_G723Dec_CompThread.o $(g723dec_DIR)/OMX_G723Dec_Utils.o $(g723dec_DIR)/OMX_G723Decoder.o
+$(g723dec_TARGET): INCLUDES := -I$(g723dec_DIR)
+$(g723dec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g723dec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g723dec_TARGET)
+
+# g723enc
+g723enc_DIR = $(SOURCE_DIR)/audio
+g723enc_TARGET = $(g723enc_DIR)/libOMX.TI.G723_1.encode.so
+
+$(g723enc_TARGET): $(g723enc_DIR)/OMX_G723_1Enc_ComponentThread.o $(g723enc_DIR)/OMX_G723_1Enc_Utils.o $(g723enc_DIR)/OMX_G723_1Encoder.o
+$(g723enc_TARGET): INCLUDES := -I$(g723enc_DIR)
+$(g723enc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g723enc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g723enc_TARGET)
+
+# g726dec
+g726dec_DIR = $(SOURCE_DIR)/audio
+g726dec_TARGET = $(g726dec_DIR)/libOMX.TI.G726.decode.so
+
+$(g726dec_TARGET): $(g726dec_DIR)/OMX_G726Dec_CompThread.o $(g726dec_DIR)/OMX_G726Dec_Utils.o $(g726dec_DIR)/OMX_G726Decoder.o
+$(g726dec_TARGET): INCLUDES := -I$(g726dec_DIR)
+$(g726dec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g726dec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g726dec_TARGET)
+
+# g726enc
+g726enc_DIR = $(SOURCE_DIR)/audio
+g726enc_TARGET = $(g726enc_DIR)/libOMX.TI.G726.encode.so
+
+$(g726enc_TARGET): $(g726enc_DIR)/OMX_G726Enc_ComponentThread.o $(g726enc_DIR)/OMX_G726Enc_Utils.o $(g726enc_DIR)/OMX_G726Encoder.o
+$(g726enc_TARGET): INCLUDES := -I$(g726enc_DIR)
+$(g726enc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g726enc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g726enc_TARGET)
+
+# g729dec
+g729dec_DIR = $(SOURCE_DIR)/audio
+g729dec_TARGET = $(g729dec_DIR)/libOMX.TI.G729.decode.so
+
+$(g729dec_TARGET): $(g729dec_DIR)/OMX_G729Dec_ComponentThread.o $(g729dec_DIR)/OMX_G729Dec_Utils.o $(g729dec_DIR)/OMX_G729Decoder.o
+$(g729dec_TARGET): INCLUDES := -I$(g729dec_DIR)
+$(g729dec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g729dec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g729dec_TARGET)
+
+# g729enc
+g729enc_DIR = $(SOURCE_DIR)/audio
+g729enc_TARGET = $(g729enc_DIR)/libOMX.TI.G729.encode.so
+
+$(g729enc_TARGET): $(g729enc_DIR)/OMX_G729Enc_ComponentThread.o $(g729enc_DIR)/OMX_G729Enc_Utils.o $(g729enc_DIR)/OMX_G729Encoder.o
+$(g729enc_TARGET): INCLUDES := -I$(g729enc_DIR)
+$(g729enc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(g729enc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(g729enc_TARGET)
+
+# gsmfrdec
+gsmfrdec_DIR = $(SOURCE_DIR)/audio
+gsmfrdec_TARGET = $(gsmfrdec_DIR)/libOMX.TI.GSMFR.decode.so
+
+$(gsmfrdec_TARGET): $(gsmfrdec_DIR)/OMX_GsmFrDec_ComponentThread.o $(gsmfrdec_DIR)/OMX_GsmFrDec_Utils.o $(gsmfrdec_DIR)/OMX_GsmFrDecoder.o
+$(gsmfrdec_TARGET): INCLUDES := -I$(gsmfrdec_DIR)
+$(gsmfrdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(gsmfrdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(gsmfrdec_TARGET)
+
+# gsmfrenc
+gsmfrenc_DIR = $(SOURCE_DIR)/audio
+gsmfrenc_TARGET = $(gsmfrenc_DIR)/libOMX.TI.GSMFR.encode.so
+
+$(gsmfrenc_TARGET): $(gsmfrenc_DIR)/OMX_GSMFrEnc_ComponentThread.o $(gsmfrenc_DIR)/OMX_GSMFrEnc_Utils.o $(gsmfrenc_DIR)/OMX_GSMFrEncoder.o
+$(gsmfrenc_TARGET): INCLUDES := -I$(gsmfrenc_DIR)
+$(gsmfrenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(gsmfrenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(gsmfrenc_TARGET)
+
+# gsmhrdec
+gsmhrdec_DIR = $(SOURCE_DIR)/audio
+gsmhrdec_TARGET = $(gsmhrdec_DIR)/libOMX.TI.GSMHR.decode.so
+
+$(gsmhrdec_TARGET): $(gsmhrdec_DIR)/OMX_GsmHrDec_ComponentThread.o $(gsmhrdec_DIR)/OMX_GsmHrDec_Utils.o $(gsmhrdec_DIR)/OMX_GsmHrDecoder.o
+$(gsmhrdec_TARGET): INCLUDES := -I$(gsmhrdec_DIR)
+$(gsmhrdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(gsmhrdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(gsmhrdec_TARGET)
+
+# gsmhrenc
+gsmhrenc_DIR = $(SOURCE_DIR)/audio
+gsmhrenc_TARGET = $(gsmhrenc_DIR)/libOMX.TI.GSMHR.encode.so
+
+$(gsmhrenc_TARGET): $(gsmhrenc_DIR)/OMX_GSMHrEnc_ComponentThread.o $(gsmhrenc_DIR)/OMX_GSMHrEnc_Utils.o $(gsmhrenc_DIR)/OMX_GSMHrEncoder.o
+$(gsmhrenc_TARGET): INCLUDES := -I$(gsmhrenc_DIR)
+$(gsmhrenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(gsmhrenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(gsmhrenc_TARGET)
+
+# ilbcdec
+ilbcdec_DIR = $(SOURCE_DIR)/audio
+ilbcdec_TARGET = $(ilbcdec_DIR)/libOMX.TI.ILBC.decode.so
+
+$(ilbcdec_TARGET): $(ilbcdec_DIR)/OMX_iLBCDec_Utils.o $(ilbcdec_DIR)/OMX_iLBCDecoder.o
+$(ilbcdec_TARGET): INCLUDES := -I$(ilbcdec_DIR)
+$(ilbcdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(ilbcdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(ilbcdec_TARGET)
+
+# ilbcenc
+ilbcenc_DIR = $(SOURCE_DIR)/audio
+ilbcenc_TARGET = $(ilbcenc_DIR)/libOMX.TI.ILBC.encode.so
+
+$(ilbcenc_TARGET): $(ilbcenc_DIR)/OMX_iLBCEnc_ComponentThread.o $(ilbcenc_DIR)/OMX_iLBCEnc_Utils.o $(ilbcenc_DIR)/OMX_iLBCEncoder.o
+$(ilbcenc_TARGET): INCLUDES := -I$(ilbcenc_DIR)
+$(ilbcenc_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(ilbcenc_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(ilbcenc_TARGET)
+
+# imaadpcmdec
+imaadpcmdec_DIR = $(SOURCE_DIR)/audio
+imaadpcmdec_TARGET = $(imaadpcmdec_DIR)/libOMX.TI.IMA.decode.so
+
+$(imaadpcmdec_TARGET): $(imaadpcmdec_DIR)/OMX_ImaAdpcmDec_Utils.o $(imaadpcmdec_DIR)/OMX_ImaAdpcmDecoder.o
+$(imaadpcmdec_TARGET): INCLUDES := -I$(imaadpcmdec_DIR)
+$(imaadpcmdec_TARGET): DFLAGS := $(DFLAGS) $(OMX_CFLAGS) $(LCML_CFLAGS)
+$(imaadpcmdec_TARGET): LIBS := $(OMX_LIBS) $(LCML_LIBS)
+
+#libraries += $(imaadpcmdec_TARGET)
+
+
+
+# Rules
+
+all: $(libraries)
+
+clean:
+	rm -f $(libraries)
+	find . -name "*.o" | xargs rm -rf
+
+install: $(libraries)
+	mkdir -p $(DESTDIR)/lib
+	install $(libraries) $(DESTDIR)/lib
+
+# from Lauri Leukkunen's build system
+ifdef V
+Q = 
+P = @printf "" # <- space before hash is important!!!
+else
+P = @printf "[%s] $@\n" # <- space before hash is important!!!
+Q = @
+endif
+
+%.o:: %.c
+	$(P)CC
+	$(Q)$(CC) $(DFLAGS) $(INCLUDES) -o $@ -c $<
+
+%.so::
+	$(P)SHLIB
+	$(Q)$(CC) $(LDFLAGS) -shared -o $@ $^ $(LIBS)
+
+%::
+	$(P)CC
+	$(Q)$(CC) $(DFLAGS) $(LIBS) -o $@ $<
+
+.PHONY: all
