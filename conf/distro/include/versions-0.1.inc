@@ -12,7 +12,7 @@ PREFERRED_VERSION_tidspbridge-extra =	"0.1"
 # openmax
 #PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax"
 PREFERRED_PROVIDER_virtual/openmax-il =		"meta-tiopenmax-complete"
-#PREFERRED_VERSION_tiopenmax =			"3.18"
+PREFERRED_VERSION_tiopenmax =			"0.3.5"
 PREFERRED_VERSION_tiopenmax-core =		"3.18"
 PREFERRED_VERSION_tiopenmax-clock =		"3.18"
 PREFERRED_VERSION_tiopenmax-perf =		"3.18"
