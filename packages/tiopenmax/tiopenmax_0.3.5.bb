@@ -12,7 +12,7 @@ PARALLEL_MAKE = "-j1"
 inherit pkgconfig
 
 #SRC_URI = "http://omapssp.dal.design.ti.com/VOBS/CSSD_Linux_Releases/3430/Linux_12.x/CSSD_Linux_${PV}RC1.tar.bz2 \
-SRC_URI = "https://omapzoom.org/gf/download/frsrelease/170/1399/tiopenmax-${PV}.tar.gz \
+SRC_URI = "https://www.omapzoom.org/gf/download/frsrelease/170/1399/tiopenmax-${PV}.tar.gz \
 	file://fmakefile-0.3.5 \
 	file://libomxil-ti.pc \
 	file://omap24xxvout.h"
