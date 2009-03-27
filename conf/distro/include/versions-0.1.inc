@@ -24,8 +24,8 @@ PREFERRED_VERSION_tiopenmax-jpegdec =		"3.18"
 PREFERRED_VERSION_tiopenmax-jpegenc =		"3.18"
 
 # gstreamer
-PREFERRED_VERSION_libgoo =		"5.11"
-PREFERRED_VERSION_gst-goo =		"5.11"
+PREFERRED_VERSION_libgoo =		"5.14-os"
+PREFERRED_VERSION_gst-goo =		"5.14"
 PREFERRED_VERSION_gst-pyapps =		"5.11"
 
 # connectivity
