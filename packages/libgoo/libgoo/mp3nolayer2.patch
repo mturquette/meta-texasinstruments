@@ -1,0 +1,28 @@
+Index: git/libgoo-ti/goo-ti-mp3dec.c
+===================================================================
+--- git.orig/libgoo-ti/goo-ti-mp3dec.c
++++ git/libgoo-ti/goo-ti-mp3dec.c
+@@ -247,17 +247,23 @@ void _goo_ti_mp3dec_set_layer(GooTiMp3De
+ 	g_assert (layer == 2 || layer == 3);
+ 	GooTiAudioComponent *component = GOO_TI_AUDIO_COMPONENT(self);
+ 
++	/* Not available in this release
+ 	gboolean retval = FALSE;
+ 	component->audioinfo->mpeg1_layer2 = (layer == 2) ? 1 : 0;
+ 	retval = goo_component_set_config_by_name (GOO_COMPONENT (self),
+ 						   component->dasf_param_name,
+ 						   component->audioinfo);
+ 	if (retval == TRUE)
++	*/
+ 	{
+ 		self->layer = layer;
+ 
++		/* Not available in this release
+ 		GOO_OBJECT_INFO (self, "mpeg1_layer2 = %d",
+ 				 component->audioinfo->mpeg1_layer2);
++		*/
++
++		GOO_OBJECT_INFO (self, "mpeg1_layer2 cannot be set");
+ 	}
+ }
+ 
