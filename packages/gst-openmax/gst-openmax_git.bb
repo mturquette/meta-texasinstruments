@@ -1,4 +1,5 @@
 DEPENDS = "gstreamer virtual/openmax-il"
+PR = "r1"
 
 SRC_URI = "git://github.com/felipec/gst-openmax.git;protocol=git"
 # From omap branch:
