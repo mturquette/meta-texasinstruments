@@ -1,0 +1,11 @@
+--- openobex-1.3/include/obex_const_org.h	2009-03-17 16:58:06.000000000 +0530
++++ openobex-1.3/include/obex_const.h	2009-03-17 16:59:11.000000000 +0530
+@@ -192,7 +192,7 @@
+ #define OBEX_RSP_DATABASE_LOCKED	0x61
+ 
+ /* Min, Max and default transport MTU */
+-#define OBEX_DEFAULT_MTU	1024
++#define OBEX_DEFAULT_MTU	16384 /* 16K */
+ #define OBEX_MINIMUM_MTU	255
+ #define OBEX_MAXIMUM_MTU	65535
+ 
