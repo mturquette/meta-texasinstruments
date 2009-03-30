@@ -1,7 +1,7 @@
 DESCRIPTION = "Bluetooth and FM modules for OMAP"
 SECTION = "libs"
 PRIORITY = "optional"
-RDEPENDS = "expat dbus bluez-libs bluez-utils openobex obexftp"
+RDEPENDS = "expat dbus bluez-libs bluez-utils bluez-utils-alsa openobex obexftp"
 PR = "r2"
 
 inherit ccasefetch
@@ -24,6 +24,7 @@ do_install() {
 	install -m 755 ${S}/fm_rx_init_1273.1.bts ${D}${base_libdir}/firmware
 	install -m 755 ${S}/fm_tx_init_1273.1.bts ${D}${base_libdir}/firmware
 	install -m 755 ${S}/fmc_init_1273.1.bts ${D}${base_libdir}/firmware
+       install -m 755 ${S}/TIInit_7.2.31.bts ${D}${base_libdir}/firmware
 }
 
 PACKAGES = "${PN}"
