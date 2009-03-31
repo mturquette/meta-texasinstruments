@@ -9,9 +9,12 @@
 # * rarv        - Enable readaudio/realvideo codecs
 # * testpatterns - Include OMX test patterns
 
-#DISTRO_FEATURES += "gfx tiwifi tibluetooth"
+# The following are standard Poky DISTRO_FEATURES, not specific to
+# OMAP.  Do not touch these unless you know what you are doing.
 
+DISTRO_FEATURES += "alsa bluetooth ext2 irda pcmcia usbgadget usbhost wifi nfs zeroconf pci"
 
+# Below are OMAP-specific DISTRO_FEATURES.  Hack away!
 # This is a multimedia-based distribution. We can specify what
 # codecs to enable in this release.
 
