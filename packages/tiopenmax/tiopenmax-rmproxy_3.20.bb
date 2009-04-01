@@ -45,6 +45,8 @@ do_install() {
 do_stage() {
 	# Somehow, ${STAGING_DIR}/${HOST_SYS} != ${STAGING_LIBDIR}/../
 	STAGE_DIR=${STAGING_LIBDIR}/../
+
+	mkdir -p ${STAGING_LIBDIR}/../omx || :
 	oe_runmake \
 		PREFIX=${STAGE_DIR} PKGDIR=${S} \
 		CROSS=${AR%-*}- \
