@@ -11,9 +11,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp|omap-zoom2-(alpha|beta)"
 
 CCASE_SPEC = "%\
-	element /vobs/WiLink/... LINUX-WCG-WLAN_RLS_${PV} %\
-	element /vobs/WCGDev/... LINUX-WCG-WLAN_RLS_${PV} %\
-	element /vobs/MCP_3P_OpenWPA/... LINUX-WCG-WLAN_RLS_${PV} %\
+	element /vobs/WiLink/... LINUX-WCG-WLAN_RLS_${PV}-P1 %\
+	element /vobs/WCGDev/... LINUX-WCG-WLAN_RLS_${PV}-P1 %\
+	element /vobs/MCP_3P_OpenWPA/... LINUX-WCG-WLAN_RLS_${PV}-P1 %\
 	"
 	
 #	element /vobs/WiLink/...	LINUX-WCG-WLAN_RLS_${PV} %\
@@ -52,7 +52,7 @@ do_compile () {
 do_install() {
 	install -d ${D}/wlan
 	install -m 755 ${S}/WiLink/platforms/os/linux/wlan_cu ${D}/wlan
-	install -m 755 ${S}/WiLink/platforms/os/linux/wlan_logger ${D}/wlan
+	install -m 755 ${S}/WiLink/platforms/os/linux/tiwlan.ini ${D}/wlan
 	install -m 755 ${S}/WiLink/platforms/os/linux/tiwlan_loader ${D}/wlan
 	install -m 755 ${S}/WiLink/platforms/os/linux/wpa_supplicant ${D}/wlan
 

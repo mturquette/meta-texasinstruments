@@ -3,19 +3,13 @@ PRIORITY = "optional"
 DEPENDS = "glib-2.0 libgoo gst-plugins-base"
 DESCRIPTION = "GStreamer plug-ins for OpenMAX IL based on LibGoo"
 LICENSE = "LGPL"
-PR = "r1"
+PR = "r0"
 
-#SRC_URI = "http://afuera.cortijodelrio.net/~ddiaz/goo/gst-goo-${PV}.tar.gz"
-CCASE_SPEC = "%\
-element /vobs/wtbu/OMAPSW_L/mmframework/... MMFRAMEWORK_REL_${PV}%\
-element * /main/LATEST%\
-"
+SRCREV = "f9775fee1020bd7222c22d1b2062c4797520b220"
+SRC_URI = "git://github.com/mrchapp/gst-goo.git;protocol=http;branch=master"
+S = "${WORKDIR}/git"
 
-CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_L/mmframework/plugins/gstomxti/gst-goo"
-CCASE_PATHCOMPONENT = "gst-goo"
-CCASE_PATHCOMPONENTS = 6
-
-inherit autotools pkgconfig ccasefetch
+inherit autotools pkgconfig
 
 FILES_${PN} += "${libdir}/gstreamer-0.10/libgstgoo.so"
 FILES_${PN}-dev += "${libdir}/gstreamer-0.10/libgstgoo.*a"

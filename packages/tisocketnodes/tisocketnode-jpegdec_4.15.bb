@@ -3,9 +3,7 @@ PR = "r0"
 DEPENDS += "tisocketnode-jpegdec-codec"
 
 CCASE_SPEC = "%\
-	      element /vobs/wtbu/OMAPSW_DSP/image/node/jpeg DSP-MM-TID-IMAGE_RLS_3.16%\
 	      element /vobs/wtbu/OMAPSW_DSP/image/node/jpeg/dec/... DSP-MM-TII-IMVID_RLS_${PV}%\
-	      element /vobs/wtbu/OMAPSW_DSP/image/node/jpeg/dec_pplib_configs/... DSP-MM-TII-IMVID_RLS_${PV}%\
 	      element * /main/LATEST%"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/image/node/jpeg/dec"

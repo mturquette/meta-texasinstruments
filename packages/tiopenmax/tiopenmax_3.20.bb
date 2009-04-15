@@ -6,25 +6,26 @@ PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 CCASE_SPEC = "\
 	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "element patterns /main/0", d)}%\
 	# OMX Audio%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.20P1%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_3.20%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_${PV}P2%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_${PV}%\
 	# OMX Video%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_3.20%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/src/openmax_il/video_decode/... LINUX-MMVIDEO_RLS_${PV}P1%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/... LINUX-MMVIDEO_RLS_${PV}%\
 	# OMX Image%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_3.20%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_${PV}%\
 	# LCML & core%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_3.20%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_${PV}%\
 	# OMX Application%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_3.20%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_${PV}%\
 	# OMX INST2 utilities%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/utilities/src/inst2/... LINUX-MMUTILS_RLS_3.02%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/utilities/... /main/LATEST%\
 	# ROOT folder & Make files%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_3.20%\
-	\
-	# special hack needed because root of vob is not labeled:%\
-	element /vobs/wtbu/OMAPSW_MPU /main/LATEST%\
-	# don't pick up anything that is not labeled%\
-	element * /main/0%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_${PV}%\
+        # special hack needed because root of vob is not labeled:%\
+        element /vobs/wtbu/OMAPSW_MPU /main/LATEST%\
+        # don't pick up anything that is not labeled%\
+        element * /main/0%\
 	"
 
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux"
@@ -51,8 +52,8 @@ SRC_URI = "\
 	file://23.11-cameramk.patch;patch=1 \
 	file://23.12-armaacnopatterns.patch;patch=1 \
 	file://fix-amixer-path.patch;patch=1 \
-	file://23.13-radectestmk.patch;patch=1 \
-	file://23.13-rvdecmk.patch;patch=1 \
+	${@base_contains("DISTRO_FEATURES", "rarv", "file://23.13-radectestmk.patch;patch=1", "", d)} \
+	${@base_contains("DISTRO_FEATURES", "rarv", "file://23.13-rvdecmk.patch;patch=1", "", d)} \
 	${@base_contains("DISTRO_FEATURES", "rarv", "", "file://remove-rarv.patch;patch=1", d)} \
 	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "file://remove-patterns.patch;patch=1", d)} \
 	"
@@ -113,6 +114,7 @@ do_install() {
 	install -d ${D}/omx
 	install -d ${D}/lib
 	install -d ${D}/bin
+	install -d ${D}/inst2
 	oe_runmake \
 		PREFIX=${D} PKGDIR=${S} \
 		CROSS=${AR%-*}- \
@@ -128,6 +130,7 @@ FILES_${PN} = "\
 	/lib \
 	/bin \
 	/omx \
+	/inst2 \
 	"
 
 FILES_${PN}-patterns = "\
@@ -138,6 +141,7 @@ FILES_${PN}-dbg = "\
 	/omx/.debug \
 	/bin/.debug \
 	/lib/.debug \
+	/inst2/.debug \
 	"
 
 FILES_${PN}-dev = "\

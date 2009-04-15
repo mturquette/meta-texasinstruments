@@ -17,7 +17,7 @@ SRC_URI = " \
 
 CCASE_SPEC = "%\
 	element * COMPONENT_ROOT%\
-	element /vobs/wtbu/OMAPSW_MPU/dspbridge/... ACT_PRE-L-BRIDGE-MPU-RLS-23.14%\
+	element /vobs/wtbu/OMAPSW_MPU/dspbridge/...  L-BRIDGE-MPU_RLS_${PV}%\
 	element * /main/LATEST%\
 	"
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/dspbridge"

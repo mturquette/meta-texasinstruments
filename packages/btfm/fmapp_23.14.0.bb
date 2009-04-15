@@ -2,7 +2,6 @@ DESCRIPTION = "FM radio test app"
 SECTION = "console/multimedia"
 PRIORITY = "optional"
 RDEPENDS = "btfm"
-DEPENDS = "bluez-libs"
 PR = "r0"
 
 inherit ccasefetch

@@ -1,21 +1,23 @@
 Index: tiopenmax-3.20/video/src/openmax_il/Makefile
 ===================================================================
 --- tiopenmax-3.20.orig/video/src/openmax_il/Makefile	2009-02-17 07:43:46.000000000 -0600
-+++ tiopenmax-3.20/video/src/openmax_il/Makefile	2009-03-20 10:21:57.000000000 -0500
-@@ -12,8 +12,7 @@
++++ tiopenmax-3.20/video/src/openmax_il/Makefile	2009-03-28 18:55:05.000000000 -0500
+@@ -10,10 +10,7 @@
+ 	camera \
+ 	prepost_processor \
  	video_encode \
- 	video_decode \
- 	rm_parser \
+-	video_decode \
+-	rm_parser \
 -	rm_rvparser \
 -	rv_decode
-+	rm_rvparser
++	video_decode
  
  
  EXTRA= \
 Index: tiopenmax-3.20/audio/src/openmax_il/Makefile
 ===================================================================
 --- tiopenmax-3.20.orig/audio/src/openmax_il/Makefile	2009-02-28 16:28:46.000000000 -0600
-+++ tiopenmax-3.20/audio/src/openmax_il/Makefile	2009-03-20 10:21:57.000000000 -0500
++++ tiopenmax-3.20/audio/src/openmax_il/Makefile	2009-03-28 18:55:05.000000000 -0500
 @@ -35,8 +35,7 @@
  	gsmhr_dec\
  	gsmhr_enc\
@@ -26,19 +28,49 @@ Index: tiopenmax-3.20/audio/src/openmax_il/Makefile
  	
  $(BASETARGETS)::
  	@$(call traverse_dirs,$(DIRS),$@)
-Index: tiopenmax-3.20/application/src/openmax_il/Makefile
+Index: tiopenmax-3.20/application/src/openmax_il/avplay/src/Makefile
 ===================================================================
---- tiopenmax-3.20.orig/application/src/openmax_il/Makefile	2009-03-20 10:42:06.000000000 -0500
-+++ tiopenmax-3.20/application/src/openmax_il/Makefile	2009-03-20 10:42:17.000000000 -0500
-@@ -6,11 +6,6 @@
- include $(OMXROOT)/Master.mk
+--- tiopenmax-3.20.orig/application/src/openmax_il/avplay/src/Makefile	2009-03-13 12:00:48.000000000 -0500
++++ tiopenmax-3.20/application/src/openmax_il/avplay/src/Makefile	2009-03-28 18:57:13.000000000 -0500
+@@ -6,8 +6,7 @@
  
- DIRS= \
--	image_display \
--	video_display \
--	video_capture \
--	avplay \
--	avrecord \
+ SRC=\
+ 	AvPlayTest.c \
+-	AvPlayTest_WMV.c \
+-    AvPlayTest_Real.c
++	AvPlayTest_WMV.c
  
- EXTRA= \
+ HSRC=$(wildcard ../inc/*)
+ 
+@@ -50,7 +49,7 @@
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
+ $(COMPONENT_TEST): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -ldl -lOMX_Core -lpthread -lRM_Parser
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -ldl -lOMX_Core -lpthread 
  	
+ $(SRC): $(HSRC)
+ 
+Index: tiopenmax-3.20/application/src/openmax_il/avplay/src/AvPlayTest.c
+===================================================================
+--- tiopenmax-3.20.orig/application/src/openmax_il/avplay/src/AvPlayTest.c	2009-03-13 12:00:37.000000000 -0500
++++ tiopenmax-3.20/application/src/openmax_il/avplay/src/AvPlayTest.c	2009-03-28 18:55:05.000000000 -0500
+@@ -113,7 +113,6 @@
+ int Test_AVSync_Video_BAMR(int argc, char** argv);
+ int Test_AVSync_Video_AAC(int argc, char** argv, int bARMCodec);
+ extern int WmaWmvTest(int argc, char** argv);
+-extern int Test_AVSync_Video_RA(int argc, char** argv);
+ 
+ int nPostProcInPipe[2];
+ int VPP_IpBuf_Pipe[2];
+@@ -652,10 +651,6 @@
+         /* With MP3 */
+         eError = Test_AVSync_Video_MPEG1L2(argc,argv);
+     }
+-    else if (atoi(argv[1]) == 18) {
+-        /* With RA */
+-        eError = Test_AVSync_Video_RA(argc,argv);
+-    }
+ 
+ 
+ 	muntrace();

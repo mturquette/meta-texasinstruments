@@ -63,6 +63,7 @@ do_install() {
 	install -m 755 gles2test1 ${D}${bindir}
 	install -m 755 gles1test1 ${D}${bindir}
 	install -m 755 gles1_texture_stream ${D}${bindir}
+	install -m 755 gles2_texture_stream ${D}${bindir}
 	install -m 755 ovg_unit_test ${D}${bindir}
 	install -m 755 services_test ${D}${bindir}
 	install -m 755 sgx_blit_test ${D}${bindir}

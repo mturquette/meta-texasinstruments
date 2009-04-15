@@ -9,11 +9,12 @@ PR = "r0"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/openobex/openobex-${PV}.tar.gz \
            file://disable-cable-test.patch;patch=1 \
-           file://libusb_crosscompile_check.patch;patch=1"
+           file://libusb_crosscompile_check.patch;patch=1 \
+           file://obex-default-mtu-fix.patch;patch=1"
 
 inherit autotools binconfig pkgconfig
 
-EXTRA_OECONF = "--enable-apps --enable-syslog --enable-dump \
+EXTRA_OECONF = "--enable-apps --enable-syslog \
                 --with-usb=${STAGING_LIBDIR}/.. --with-bluez=${STAGING_LIBDIR}/.."
 
 do_stage() {

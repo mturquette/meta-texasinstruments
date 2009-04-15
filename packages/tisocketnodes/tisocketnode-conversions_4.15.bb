@@ -8,7 +8,7 @@ CCASE_SPEC = "%\
 	      element /vobs/wtbu/OMAPSW_DSP/video/... DSP-MM-TII-IMVID_RLS_${PV}%\
 	      element * /main/LATEST%"
 
-CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/video/lib"
+CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_DSP/video/lib/conversions"
 CCASE_PATHCOMPONENT = "OMAPSW_DSP"
 CCASE_PATHCOMPONENTS = "2"
 

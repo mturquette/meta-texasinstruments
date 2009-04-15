@@ -4,8 +4,8 @@ DESCRIPTION = "Library for interacting OpenMAX IL."
 LICENSE = "LGPL"
 PR = "r0"
 
-SRCREV = "d4da59acfecd464309787a00233fa82739db61c5"
-SRC_URI = "git://github.com/mrchapp/libgoo.git;protocol=http;branch=libgoo-5.14-rc2"
+SRCREV = "d3298e6307c31c3154ff701bce2cafddc81d7d18"
+SRC_URI = "git://github.com/mrchapp/libgoo.git;protocol=http;branch=master"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "--enable-ti-camera --enable-ti-clock"

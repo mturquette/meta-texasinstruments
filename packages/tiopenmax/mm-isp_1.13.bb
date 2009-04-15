@@ -1,7 +1,7 @@
 DEPENDS = "tidspbridge-lib virtual/kernel"
 DESCRIPTION = "Texas Instruments Camera and ISP Algorithms."
 LICENSE = "LGPL"
-PR = "r0"
+PR = "r4"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}"
 

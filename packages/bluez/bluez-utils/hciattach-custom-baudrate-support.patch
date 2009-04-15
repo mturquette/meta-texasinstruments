@@ -1,0 +1,44 @@
+--- ./tools/hciattach_org.c	2009-03-11 12:51:49.461702592 +0530
++++ ./tools/hciattach.c	2009-03-11 12:53:14.424786240 +0530
+@@ -77,6 +77,19 @@
+ 
+ #define FLOW_CTL	0x0001
+ 
++#define  BOTHER   0x00001000
++#define  ARM_NCCS 19
++struct termios2 {
++        tcflag_t c_iflag;               /* input mode flags */
++        tcflag_t c_oflag;               /* output mode flags */
++        tcflag_t c_cflag;               /* control mode flags */
++        tcflag_t c_lflag;               /* local mode flags */
++        cc_t c_line;                    /* line discipline */
++        cc_t c_cc[ARM_NCCS];            /* control characters */
++        speed_t c_ispeed;               /* input speed */
++        speed_t c_ospeed;               /* output speed */
++};
++
+ static volatile sig_atomic_t __io_canceled = 0;
+ 
+ static void sig_hup(int sig)
+@@ -148,9 +161,21 @@
+ 
+ int set_speed(int fd, struct termios *ti, int speed)
+ {
++      struct termios2 ti2;
++      if((speed != 57600) && (uart_speed(speed) == B57600)) /* customized baud rate */
++      {
++        ioctl(fd, TCGETS2, &ti2);
++        ti2.c_cflag &= ~CBAUD;
++        ti2.c_cflag |= BOTHER;
++        ti2.c_ospeed = speed;
++        return(ioctl(fd, TCSETS2, &ti2));
++      }
++      else
++      {
+ 	cfsetospeed(ti, uart_speed(speed));
+ 	cfsetispeed(ti, uart_speed(speed));
+ 	return tcsetattr(fd, TCSANOW, ti);
++      }
+ }
+ 
+ /* 
