@@ -5,8 +5,8 @@ diff -Naur OMAPSW_MPU.orig/linux/mm_isp/camera_algo_frmwk/src/Makefile OMAPSW_MP
  
  include $(MMISPROOT)/Master.mk
  
--CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/drivers/media/video/isp -Wall -fpic -pipe
-+CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/drivers/media/video/isp -I../../../../algo/camera/isphal/inc -Wall -fpic -pipe
+-CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/include/asm-arm/arch-omap -Wall -fpic -pipe
++CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/include/asm-arm/arch-omap -I../../../../algo/camera/isphal/inc -Wall -fpic -pipe
  ifeq ($(USE_HWP), 1)
  CFLAGS+=-DUSE_HWP=1
  else
