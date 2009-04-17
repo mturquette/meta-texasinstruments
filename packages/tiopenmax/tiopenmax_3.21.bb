@@ -49,7 +49,6 @@ SRC_URI = "\
 	file://videodecmk.patch;patch=1 \
 	file://23.11-cameramk.patch;patch=1 \
 	file://23.12-armaacnopatterns.patch;patch=1 \
-	file://fix-amixer-path.patch;patch=1 \
 	${@base_contains("DISTRO_FEATURES", "rarv", "file://23.13-radectestmk.patch;patch=1", "", d)} \
 	${@base_contains("DISTRO_FEATURES", "rarv", "file://23.13-rvdecmk.patch;patch=1", "", d)} \
 	${@base_contains("DISTRO_FEATURES", "rarv", "", "file://remove-rarv.patch;patch=1", d)} \
