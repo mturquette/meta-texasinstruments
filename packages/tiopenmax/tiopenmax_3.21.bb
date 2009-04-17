@@ -8,18 +8,18 @@ CCASE_SPEC = "\
 	# OMX Audio%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_${PV}%\
 	# OMX Video%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/video/... ACT-MMVIDEOPREREL-${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/video/... ACT_MMVIDEOPREREL-${PV}%\
 	# OMX Image%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/image/... ACT-MMIMAGEPREREL-${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/image/... ACT_MMIMAGEPREREL-${PV}%\
 	# LCML & core%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_${PV}%\
 	# OMX Application%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/application/... ACT-MMAPPLICATIONPREREL-${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/application/... ACT_MMAPPLICATIONPREREL-${PV}%\
 	# OMX INST2 utilities%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/utilities/src/inst2/... LINUX-MMUTILS_RLS_3.02%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/utilities/... /main/LATEST%\
 	# ROOT folder & Make files%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/... LINUX-MMROOT_RLS_3.20%\
         # special hack needed because root of vob is not labeled:%\
         element /vobs/wtbu/OMAPSW_MPU /main/LATEST%\
         # don't pick up anything that is not labeled%\
