@@ -6,7 +6,8 @@ RRECOMMENDS = "gnome-icon-theme"
 
 PR = "r4"
 
-SRC_URI = "http://bluez.sourceforge.net/download/${P}.tar.gz"
+SRC_URI = "http://bluez.sourceforge.net/download/${P}.tar.gz \
+           file://a2dp-dynamic-switching-support.patch;patch=1"
 
 #inherit autotools pkgconfig gconf mime
 inherit autotools pkgconfig gconf
