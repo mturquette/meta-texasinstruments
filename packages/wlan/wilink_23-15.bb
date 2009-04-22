@@ -11,9 +11,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp|omap-zoom2-(alpha|beta)"
 
 CCASE_SPEC = "%\
-	element /vobs/WiLink/... LINUX-WCG-WLAN_RLS_${PV} %\
-	element /vobs/WCGDev/... LINUX-WCG-WLAN_RLS_${PV} %\
-	element /vobs/MCP_3P_OpenWPA/... LINUX-WCG-WLAN_RLS_${PV} %\
+	element /vobs/WiLink/... LINUX-WCG-WLAN_RLS_L${PV} %\
+	element /vobs/WCGDev/... LINUX-WCG-WLAN_RLS_L${PV} %\
+	element /vobs/MCP_3P_OpenWPA/... LINUX-WCG-WLAN_RLS_L${PV} %\
 	"
 	
 #	element /vobs/WiLink/...	LINUX-WCG-WLAN_RLS_${PV} %\
