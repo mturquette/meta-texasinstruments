@@ -1,0 +1,87 @@
+#!/bin/sh
+#
+# gpsd	This shell script starts and stops gpsd.
+#
+# chkconfig: 345 90 40
+# description: Gpsd manages access to a serial- or USB-connected GPS
+# processname: gpsd
+
+# Source function library.
+#. /etc/rc.d/init.d/functions
+
+RETVAL=0
+DAEMON=/usr/sbin/gpsd
+prog="gpsd"
+
+test -f /etc/default/$prog && . /etc/default/$prog
+
+start() {
+	# Start daemons.
+	echo -n "Starting $prog: "
+	# We don't use the daemon function here because of a known bug
+	# in initlog -- it spuriously returns a nonzero status when 
+	# starting daemons that fork themselves.  See
+	# http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=130629
+	# for discussion.  Fortunately:
+	#
+	# 1. gpsd startup can't fail, or at least not in the absence of
+	# much larger resource-exhaustion problems that would be very obvious.
+	#
+	# 2. We don't need all the logging crud that daemon/initlog sets
+	# up -- gpsd does its own syslog calls.
+	#
+	
+	if test -x /etc/init.d/gps-hardware
+	then
+		if ! ( /etc/init.d/gps-hardware status | grep -q "ready" )
+		then
+			/etc/init.d/gps-hardware start
+		fi
+	fi
+	
+	if [ -e "${GPS_DEV}" ]
+	then
+	    start-stop-daemon -S -x ${DAEMON} -- ${GPSD_OPTS} ${GPS_DEV}
+	    echo "success"
+	else
+	    # User needs to symlink ${GPS_DEV} to the right thing
+	    echo "No ${GPS_DEV} GPS device, aborting gpsd startup. Check /etc/default/$prog"
+	fi
+	RETVAL=$?
+	echo
+	return $RETVAL
+}
+
+stop() {
+	# Stop daemons.
+	echo -n "Shutting down $prog: "
+        start-stop-daemon -K -x ${DAEMON}
+#        killproc gpsd
+	RETVAL=$?
+	echo
+	return $RETVAL
+}
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart|reload)
+	stop
+	start
+	RETVAL=$?
+	;;
+  status)
+#	status gpsd
+#	RETVAL=$?
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart|status}"
+	exit 1
+esac
+
+exit $RETVAL
