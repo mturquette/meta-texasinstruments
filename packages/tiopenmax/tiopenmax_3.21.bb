@@ -12,7 +12,9 @@ CCASE_SPEC = "\
 	# OMX Image%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGE_RLS_${PV}%\
 	# LCML & core%\
-	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_3.20%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/system/src/openmax_il/lcml/... LINUX-MMSYSTEM_RLS_3.20%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/system/src/openmax_il/resource_manager/... LINUX-MMSYSTEM_RLS_3.20%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/system/... LINUX-MMSYSTEM_RLS_${PV}%\
 	# OMX Application%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/application/... LINUX-MMAPPLICATION_RLS_${PV}%\
 	# OMX INST2 utilities%\
