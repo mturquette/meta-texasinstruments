@@ -40,6 +40,9 @@ do_configure_prepend() {
 				sed -i "s/# CONFIG_FB_OMAP_LCD_VGA is not set/CONFIG_FB_OMAP_LCD_VGA=y/" \
 					${S}/.config
 				;;
+			beagleboard)
+				yes '' | oe_runmake omap3_beagle_defconfig
+				;;
 			omap-zoom2-beta)
 				yes '' | oe_runmake omap_zoom2_defconfig
 				;;
