@@ -1,0 +1,18 @@
+--- tiopenmax-rageckodec-3.20.orig/audio/src/openmax_il/ragecko_dec/tests/Makefile     2009-04-20 18:17:16.000000000 -0500
++++ tiopenmax-rageckodec-3.20/audio/src/openmax_il/ragecko_dec/tests/Makefile	2009-04-20 18:23:38.000000000 -0500
+@@ -24,14 +24,13 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=RAGeckoDecTest
+ 
+ COMPONENT_TARGET=$(OMXTESTDIR)/$(COMPONENT_TEST)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
