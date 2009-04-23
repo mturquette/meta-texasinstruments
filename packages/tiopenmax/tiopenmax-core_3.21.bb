@@ -4,6 +4,7 @@ PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}"
 
 require tiopenmax-cspec-${PV}.inc
+
 CCASE_PATHFETCH = "\
 	/vobs/wtbu/OMAPSW_MPU/linux/system/src/openmax_il/omx_core \
 	/vobs/wtbu/OMAPSW_MPU/linux/Makefile \
@@ -20,52 +21,50 @@ SRC_URI = "\
 
 do_compile_prepend() {
 	install -m 0644 ${FILESDIR}/libomxil-ti.pc ${S}/libomxil.pc
-	install -d ${D}/omx
-	install -d ${D}/lib
-	install -d ${D}/bin
+	install -d ${D}/usr/lib
+	install -d ${D}/usr/bin
 }
+#	install -d ${D}/usr/omx
 
 do_compile() {
 	oe_runmake \
-		PREFIX=${D} PKGDIR=${S} \
+		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D} OMXROOT=${S} \
+		TARGETDIR=${D}/usr OMXROOT=${S} \
 		core
 }
 
 do_install() {
 	oe_runmake \
-		PREFIX=${D} PKGDIR=${S} \
+		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D} OMXROOT=${S} \
+		TARGETDIR=${D}/usr OMXROOT=${S} \
 		core.install
 }
 
 do_stage() {
-	# Somehow, ${STAGING_DIR}/${HOST_SYS} != ${STAGING_LIBDIR}/../
-	STAGE_DIR=${STAGING_LIBDIR}/../
 	oe_runmake \
-		PREFIX=${STAGE_DIR} PKGDIR=${S} \
+		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${STAGE_DIR} OMXROOT=${S} \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXROOT=${S} \
 		core.install
 }
 
 FILES_${PN} = "\
-	/lib \
-	/bin \
-	/omx \
+	/usr/lib \
+	/usr/bin \
 	"
+#	/usr/omx \
 
 FILES_${PN}-dbg = "\
-	/omx/.debug \
-	/bin/.debug \
-	/lib/.debug \
+	/usr/bin/.debug \
+	/usr/lib/.debug \
 	"
+#	/usr/omx/.debug \
 
 FILES_${PN}-dev = "\
-	/include \
+	/usr/include \
 	"
