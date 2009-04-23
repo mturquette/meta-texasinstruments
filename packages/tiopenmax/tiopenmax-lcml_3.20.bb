@@ -1,19 +1,19 @@
 DEPENDS = "tidspbridge-lib tiopenmax-core"
-DESCRIPTION = "Texas Instruments OpenMAX IL Clock."
+DESCRIPTION = "Texas Instruments Linux Common Media Library for OpenMAX IL."
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}"
 
 require tiopenmax-cspec-${PV}.inc
 
 CCASE_PATHFETCH = "\
-	/vobs/wtbu/OMAPSW_MPU/linux/system/src/openmax_il/clock_source \
+	/vobs/wtbu/OMAPSW_MPU/linux/system/src/openmax_il/lcml \
 	/vobs/wtbu/OMAPSW_MPU/linux/Makefile \
 	/vobs/wtbu/OMAPSW_MPU/linux/Master.mk \
 	"
 CCASE_PATHCOMPONENTS = 3
 CCASE_PATHCOMPONENT = "linux"
 
-SRC_URI = "file://23.11-clocknocore.patch;patch=1"
+SRC_URI = "file://23.11-lcmlnocore.patch;patch=1"
 
 inherit ccasefetch
 
@@ -30,7 +30,7 @@ do_compile() {
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${D}/usr OMXROOT=${S} \
 		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
-		clock
+		lcml
 }
 
 do_install() {
@@ -39,7 +39,7 @@ do_install() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${D}/usr OMXROOT=${S} \
-		clock.install
+		lcml.install
 }
 
 do_stage() {
@@ -48,7 +48,7 @@ do_stage() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXROOT=${S} \
-		clock.install
+		lcml.install
 }
 
 FILES_${PN} = "\

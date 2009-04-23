@@ -1,0 +1,18 @@
+--- tiopenmax-rageckodec-3.20.orig/audio/src/openmax_il/ragecko_dec/src/Makefile	2009-04-20 18:17:16.000000000 -0500
++++ tiopenmax-rageckodec-3.20/audio/src/openmax_il/ragecko_dec/src/Makefile	2009-04-20 18:18:07.000000000 -0500
+@@ -29,14 +29,13 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.RAG.decode.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 
