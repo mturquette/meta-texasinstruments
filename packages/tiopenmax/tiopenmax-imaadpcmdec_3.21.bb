@@ -1,5 +1,5 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL imaPCM Decoder."
-DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager"
+DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-audiomanager"
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-patterns ${PN}-dev ${PN}"
 
@@ -23,7 +23,7 @@ inherit ccasefetch
 do_compile_prepend() {
 	install -d ${D}/usr/omx/patterns
 	install -d ${D}/usr/lib
-	install -d ${D}/bin
+	install -d ${D}/usr/bin
 }
 
 do_compile() {

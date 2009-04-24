@@ -1,0 +1,14 @@
+--- tiopenmax-imaadpcmenc-3.21.orig/audio/src/openmax_il/imaadpcm_enc/tests/ImaAdpcmEncTest.mk	2009-04-24 12:56:06.000000000 -0500
++++ tiopenmax-imaadpcmenc-3.21/audio/src/openmax_il/imaadpcm_enc/tests/ImaAdpcmEncTest.mk	2009-04-24 13:27:44.000000000 -0500
+@@ -1,8 +1,8 @@
+-TEST_COMPONENT = G726EncTest
+-OBJ_FILES = G726EncTest.o 
++TEST_COMPONENT = ImaAdpcmEncTest
++OBJ_FILES = ImaAdpcmEncTest.o 
+ 
+ # library files to link with when building
+-LIBRARIES += -ldl -lLCML -lOMX_Core -lpthread -lOMX_AmrEncoder
++LIBRARIES += -ldl -lLCML -lOMX_Core -lpthread -lOMX_ImaAdpcmEncoder 
+ 
+ 
+ TOP_DIR = ../
