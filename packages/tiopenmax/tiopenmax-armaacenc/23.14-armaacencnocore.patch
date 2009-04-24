@@ -1,5 +1,5 @@
---- tiopenmax-armaacenc-3.20.orig/audio/src/openmax_il/armaac_enc/src/Makefile	2009-04-17 13:39:52.000000000 -0500
-+++ tiopenmax-armaacenc-3.20/audio/src/openmax_il/armaac_enc/src/Makefile	2009-04-17 13:40:58.000000000 -0500
+--- tiopenmax-armaacenc-3.21.orig/audio/src/openmax_il/armaac_enc/src/Makefile	2009-04-17 13:39:52.000000000 -0500
++++ tiopenmax-armaacenc-3.21/audio/src/openmax_il/armaac_enc/src/Makefile	2009-04-17 13:40:58.000000000 -0500
 @@ -36,7 +36,6 @@
  
  

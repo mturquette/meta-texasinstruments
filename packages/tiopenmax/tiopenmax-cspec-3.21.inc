@@ -3,6 +3,7 @@ CCASE_SPEC = "\
 	element /vobs/wtbu/OMAPSW_MPU/linux/audio/... LINUX-MMAUDIO_RLS_${PV}%\
 	# OMX Video%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/video/... ACT-MMVIDEOPREREL-${PV}%\
+	#element /vobs/wtbu/OMAPSW_MPU/linux/video/... ACT-MMVIDEO_RLS_${PV}%\
 	# OMX Image%\
 	element /vobs/wtbu/OMAPSW_MPU/linux/image/... LINUX-MMIMAGEPREREL-${PV}%\
 	# LCML & core%\

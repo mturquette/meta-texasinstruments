@@ -1,5 +1,5 @@
---- tiopenmax-pcmdec-3.20.orig/audio/src/openmax_il/pcm_dec/src/Makefile	2009-04-17 11:12:04.000000000 -0500
-+++ tiopenmax-pcmdec-3.20/audio/src/openmax_il/pcm_dec/src/Makefile	2009-04-17 11:15:13.000000000 -0500
+--- tiopenmax-pcmdec-3.21.orig/audio/src/openmax_il/pcm_dec/src/Makefile	2009-04-17 11:12:04.000000000 -0500
++++ tiopenmax-pcmdec-3.21/audio/src/openmax_il/pcm_dec/src/Makefile	2009-04-17 11:15:13.000000000 -0500
 @@ -34,15 +34,13 @@
      CFLAGS += -DRESOURCE_MANAGER_ENABLED
  endif

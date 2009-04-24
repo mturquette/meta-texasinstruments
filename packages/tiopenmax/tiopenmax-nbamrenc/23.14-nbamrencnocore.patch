@@ -1,5 +1,5 @@
---- tiopenmax-nbamrenc-3.20.orig/audio/src/openmax_il/nbamr_enc/src/Makefile	2009-04-17 01:16:53.000000000 -0500
-+++ tiopenmax-nbamrenc-3.20/audio/src/openmax_il/nbamr_enc/src/Makefile	2009-04-17 01:35:35.000000000 -0500
+--- tiopenmax-nbamrenc-3.21.orig/audio/src/openmax_il/nbamr_enc/src/Makefile	2009-04-17 01:16:53.000000000 -0500
++++ tiopenmax-nbamrenc-3.21/audio/src/openmax_il/nbamr_enc/src/Makefile	2009-04-17 01:35:35.000000000 -0500
 @@ -38,14 +38,13 @@
      CFLAGS += -DRESOURCE_MANAGER_ENABLED
  endif

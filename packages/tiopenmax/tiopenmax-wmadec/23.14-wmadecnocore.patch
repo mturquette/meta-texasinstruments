@@ -1,11 +1,12 @@
---- tiopenmax-rageckodec-3.21.orig/audio/src/openmax_il/ragecko_dec/src/Makefile	2009-04-24 02:33:47.000000000 -0500
-+++ tiopenmax-rageckodec-3.21/audio/src/openmax_il/ragecko_dec/src/Makefile	2009-04-24 02:34:26.000000000 -0500
-@@ -29,14 +29,13 @@
-     CFLAGS += -DOMX_DEBUG=1
+--- tiopenmax-wmadec-3.21.orig/audio/src/openmax_il/wma_dec/src/Makefile	2009-04-16 23:10:38.000000000 -0500
++++ tiopenmax-wmadec-3.21/audio/src/openmax_il/wma_dec/src/Makefile	2009-04-16 23:11:46.000000000 -0500
+@@ -38,15 +38,13 @@
+     CFLAGS += -DRESOURCE_MANAGER_ENABLED
  endif
  
+-
 -OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
- COMPONENT_LIB=libOMX.TI.RAG.decode.so
+ COMPONENT_LIB=libOMX.TI.WMA.decode.so
  
  COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
  

@@ -1,5 +1,5 @@
---- tiopenmax-nbamrenc-3.20.orig/audio/src/openmax_il/nbamr_enc/tests/Makefile	2009-04-17 01:16:53.000000000 -0500
-+++ tiopenmax-nbamrenc-3.20/audio/src/openmax_il/nbamr_enc/tests/Makefile	2009-04-17 01:53:52.000000000 -0500
+--- tiopenmax-nbamrenc-3.21.orig/audio/src/openmax_il/nbamr_enc/tests/Makefile	2009-04-17 01:16:53.000000000 -0500
++++ tiopenmax-nbamrenc-3.21/audio/src/openmax_il/nbamr_enc/tests/Makefile	2009-04-17 01:53:52.000000000 -0500
 @@ -40,7 +40,6 @@
      CFLAGS += -DDSP_RENDERING_ON
  endif
