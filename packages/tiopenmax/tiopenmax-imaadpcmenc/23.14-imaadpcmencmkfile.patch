@@ -1,0 +1,35 @@
+--- tiopenmax-imaadpcmenc-3.21.orig/audio/src/openmax_il/imaadpcm_enc/src/Makefile	2009-04-24 12:56:06.000000000 -0500
++++ tiopenmax-imaadpcmenc-3.21/audio/src/openmax_il/imaadpcm_enc/src/Makefile	2009-04-24 13:14:29.000000000 -0500
+@@ -8,7 +8,7 @@
+ # 1 - use Audio Manager/DASF, this is Default mode for Linux
+ # 0 - don't use Audio Manager/DASF
+ 
+-DSP_RENDERING_ON ?= 1 
++DSP_RENDERING_ON ?= 0
+ 
+ SRC=\
+ 	OMX_ImaAdpcmEnc_ComponentThread.c \
+@@ -22,7 +22,7 @@
+ 
+ include $(OMXROOT)/Master.mk
+ 
+-CFLAGS+=-I../inc -I$(OMXINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -I$(BRIDGEINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -Wall -fpic -pipe -DOMAP_2430 -DOMX_DEBUG -DDSP_RENDERING_ON -DRESOURCE_MANAGER_ENABLED
++CFLAGS+=-I../inc -I$(OMXINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -I$(BRIDGEINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -Wall -fpic -pipe -DOMAP_2430 -DOMX_DEBUG
+ ifeq ($(OMX_DEBUG), 1)
+     CFLAGS += -O0
+ else
+@@ -33,6 +33,14 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
++ifneq ($(OMX_RESOURCEMANAGER_DISBLE), 1)
++     CFLAGS += -DRESOURCE_MANAGER_ENABLED
++endif
++
++ifneq ($(OMX_RENDERING_DISBLE), 1)
++     CFLAGS += -DDSP_RENDERING_ON
++endif
++
+ COMPONENT_LIB=libOMX.TI.IMA.encode.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)

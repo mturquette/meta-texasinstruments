@@ -1,0 +1,36 @@
+--- tiopenmax-imaadpcmenc-3.21.orig/audio/src/openmax_il/imaadpcm_enc/tests/Makefile	2009-04-24 12:56:06.000000000 -0500
++++ tiopenmax-imaadpcmenc-3.21/audio/src/openmax_il/imaadpcm_enc/tests/Makefile	2009-04-24 13:52:58.000000000 -0500
+@@ -8,13 +8,13 @@
+ # 1 - use Audio Manager/DASF, this is Default mode for Linux
+ # 0 - don't use Audio Manager/DASF
+ 
+-#DSP_RENDERING_ON ?= 1  
++DSP_RENDERING_ON ?= 1  
+ 
+ SRC=\
+ 	ImaAdpcmEncTest.c \
+ 	
+ ifeq ($(OMX_GTTOOLS),1)
+-    SRC +=            $(GTTOOLSSRCDIR)/OMX_Common_Utils.c
++    SRC += $(GTTOOLSSRCDIR)/OMX_Common_Utils.c
+ endif  
+ 
+ HSRC=$(wildcard ../inc/*)
+@@ -23,7 +23,7 @@
+ 
+ include $(OMXROOT)/Master.mk
+ 
+-CFLAGS+=-I../inc -I$(OMXINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -I$(BRIDGEINCLUDEDIR) -I$(GTTOOLSINCDIR) -Wall -fpic -pipe -DOMAP_2430 -DETEEDN_PATH -DDSP_RENDERING_ON
++CFLAGS+=-I../inc -I$(OMXINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -I$(BRIDGEINCLUDEDIR) -I$(GTTOOLSINCDIR) -Wall -ansi -fpic -pipe -DOMAP_2430 -DETEEDN_PATH -DDSP_RENDERING_ON
+ 
+ ifeq ($(OMX_DEBUG), 1)
+     CFLAGS += -O0
+@@ -46,7 +46,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR}
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

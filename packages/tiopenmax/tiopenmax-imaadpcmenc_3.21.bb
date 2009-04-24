@@ -1,5 +1,5 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL imaPCM Encoder."
-DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager"
+DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-audiomanager"
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-patterns ${PN}-dev ${PN}"
 
@@ -15,7 +15,10 @@ CCASE_PATHCOMPONENT = "linux"
 SRC_URI = "\
 	file://23.14-imaadpcmencnocore.patch;patch=1 \
 	file://23.14-imaadpcmenctestnocore.patch;patch=1 \
-	file://23.14-imaadpcmenctestnocore_2.patch;patch=1 \
+	file://23.14-imaadpcmencmkfile.patch;patch=1 \	
+	file://23.14-imaadpcmencmktest.patch;patch=1 \
+	file://23.14-imaadpcmencmsttest.patch;patch=1 \
+#	file://23.14-imaadpcmencnodsp1.patch;patch=1 \
 	"
 
 inherit ccasefetch
@@ -23,13 +26,13 @@ inherit ccasefetch
 do_compile_prepend() {
 	install -d ${D}/usr/omx/patterns
 	install -d ${D}/usr/lib
-	install -d ${D}/bin
+	install -d ${D}/usr/bin
 }
 
 do_compile() {
 	cd ${S}/audio/src/openmax_il/imaadpcm_enc
-#	rm inc/TIDspOmx.h
-#       cp  ${STAGING_INCDIR}/omx/TIDspOmx.h inc/
+	rm inc/TIDspOmx.h
+        cp  ${STAGING_INCDIR}/omx/TIDspOmx.h inc/
 	oe_runmake \
 		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
