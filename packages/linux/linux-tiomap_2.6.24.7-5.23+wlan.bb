@@ -8,7 +8,7 @@ DEFAULT_PREFERENCE = "1"
 
 CCASE_SPEC = "\
 	element /vobs/wtbu/CSSD_L_GIT_2.6/linux/kernel_org/2.6_kernel/... LINUX-WCG-WLAN_RLS_L23-15%\
-	element /vobs/wtbu/CSSD_L_GIT_2.6/linux/kernel_org/2.6_kernel/... LINUX-GIT-2.6.24K_RLS_5.23%\
+	element /vobs/wtbu/CSSD_L_GIT_2.6/linux/kernel_org/2.6_kernel/... LINUX-GIT-2.6.24K_RLS_5.23-P1%\
 	element	/vobs/wtbu/CSSD_L_GIT_2.6/linux/kernel_org	/main/LATEST%\
 	element	/vobs/wtbu/CSSD_L_GIT_2.6/linux			/main/LATEST%\
 	element	/vobs/wtbu/CSSD_L_GIT_2.6			/main/LATEST%\
