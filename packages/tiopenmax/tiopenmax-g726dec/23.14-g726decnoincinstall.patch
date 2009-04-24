@@ -1,5 +1,5 @@
---- tiopenmax-g726dec-3.20.orig//audio/src/openmax_il/g726_dec/tests/Makefile	2009-04-17 02:50:47.000000000 -0500
-+++ tiopenmax-g726dec-3.20/audio/src/openmax_il/g726_dec/tests/Makefile	2009-04-17 03:03:16.000000000 -0500
+--- tiopenmax-g726dec-3.21.orig//audio/src/openmax_il/g726_dec/tests/Makefile	2009-04-17 02:50:47.000000000 -0500
++++ tiopenmax-g726dec-3.21/audio/src/openmax_il/g726_dec/tests/Makefile	2009-04-17 03:03:16.000000000 -0500
 @@ -36,7 +36,6 @@
      CFLAGS += -DDSP_RENDERING_ON
  endif

@@ -1,14 +1,14 @@
---- tiopenmax-g729dec-3.21.orig/audio/src/openmax_il/g729_dec/tests/Makefile	2009-04-17 03:35:57.000000000 -0500
-+++ tiopenmax-g729dec-3.21/audio/src/openmax_il/g729_dec/tests/Makefile	2009-04-17 03:40:58.000000000 -0500
-@@ -36,7 +36,6 @@
+--- tiopenmax-mp3-3.21.orig/audio/src/openmax_il/mp3_dec/tests/Makefile	2009-04-17 12:09:54.000000000 -0500
++++ tiopenmax-mp3-3.21/audio/src/openmax_il/mp3_dec/tests/Makefile	2009-04-17 12:24:43.000000000 -0500
+@@ -40,7 +40,6 @@
      CFLAGS += -DDSP_RENDERING_ON
  endif
  
 -OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
  OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
- COMPONENT_TEST=G729DecTest
+ COMPONENT_TEST=Mp3DecoderTest
  
-@@ -44,7 +43,7 @@
+@@ -48,7 +47,7 @@
  
  all install:: $(COMPONENT_TARGET)
  

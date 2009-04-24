@@ -1,5 +1,5 @@
---- tiopenmax-g711dec-3.20.orig/audio/src/openmax_il/g711_dec/tests/Makefile	2009-04-17 00:25:34.000000000 -0500
-+++ tiopenmax-g711dec-3.20/audio/src/openmax_il/g711_dec/tests/Makefile	2009-04-17 00:29:45.000000000 -0500
+--- tiopenmax-g711dec-3.21.orig/audio/src/openmax_il/g711_dec/tests/Makefile	2009-04-17 00:25:34.000000000 -0500
++++ tiopenmax-g711dec-3.21/audio/src/openmax_il/g711_dec/tests/Makefile	2009-04-17 00:29:45.000000000 -0500
 @@ -39,7 +39,6 @@
  endif
  

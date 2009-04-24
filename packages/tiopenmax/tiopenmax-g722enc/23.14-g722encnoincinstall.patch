@@ -1,5 +1,5 @@
---- tiopenmax-g722enc-3.20.orig/audio/src/openmax_il/g722_enc/tests/Makefile	2009-04-17 01:45:41.000000000 -0500
-+++ tiopenmax-g722enc-3.20/audio/src/openmax_il/g722_enc/tests/Makefile	2009-04-17 01:57:44.000000000 -0500
+--- tiopenmax-g722enc-3.21.orig/audio/src/openmax_il/g722_enc/tests/Makefile	2009-04-17 01:45:41.000000000 -0500
++++ tiopenmax-g722enc-3.21/audio/src/openmax_il/g722_enc/tests/Makefile	2009-04-17 01:57:44.000000000 -0500
 @@ -39,7 +39,6 @@
  
  

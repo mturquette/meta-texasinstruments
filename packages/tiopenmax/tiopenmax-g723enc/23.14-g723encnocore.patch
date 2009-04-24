@@ -1,5 +1,5 @@
---- tiopenmax-g723enc-3.20.orig/audio/src/openmax_il/g723_enc/src/Makefile	2009-04-17 02:30:49.000000000 -0500
-+++ tiopenmax-g723enc-3.20/audio/src/openmax_il/g723_enc/src/Makefile	2009-04-17 02:31:51.000000000 -0500
+--- tiopenmax-g723enc-3.21.orig/audio/src/openmax_il/g723_enc/src/Makefile	2009-04-17 02:30:49.000000000 -0500
++++ tiopenmax-g723enc-3.21/audio/src/openmax_il/g723_enc/src/Makefile	2009-04-17 02:31:51.000000000 -0500
 @@ -40,14 +40,13 @@
      CFLAGS += -DRESOURCE_MANAGER_ENABLED
  endif
