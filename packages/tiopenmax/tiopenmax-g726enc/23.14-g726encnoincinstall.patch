@@ -1,5 +1,5 @@
---- tiopenmax-g726enc-3.20.orig/audio/src/openmax_il/g726_enc/tests/Makefile	2009-04-17 03:07:57.000000000 -0500
-+++ tiopenmax-g726enc-3.20/audio/src/openmax_il/g726_enc/tests/Makefile	2009-04-17 03:30:41.000000000 -0500
+--- tiopenmax-g726enc-3.21.orig/audio/src/openmax_il/g726_enc/tests/Makefile	2009-04-17 03:07:57.000000000 -0500
++++ tiopenmax-g726enc-3.21/audio/src/openmax_il/g726_enc/tests/Makefile	2009-04-17 03:30:41.000000000 -0500
 @@ -42,7 +42,6 @@
  endif
  

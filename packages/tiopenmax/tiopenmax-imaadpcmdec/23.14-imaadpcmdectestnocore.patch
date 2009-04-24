@@ -1,0 +1,19 @@
+--- tiopenmax-imaadpcmdec-3.21.orig/audio/src/openmax_il/imaadpcm_dec/tests/Makefile	2009-04-24 04:06:58.000000000 -0500
++++ tiopenmax-imaadpcmdec-3.21/audio/src/openmax_il/imaadpcm_dec/tests/Makefile	2009-04-24 04:10:21.000000000 -0500
+@@ -38,7 +38,6 @@
+ 	CFLAGS += -DOMX_GETTIME
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=IMADecoderTest
+ 
+@@ -47,7 +46,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
