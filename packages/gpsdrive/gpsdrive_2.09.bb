@@ -9,7 +9,7 @@ SRC_URI = "http://www.gpsdrive.de/packages/gpsdrive-${PV}.tar.gz"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = " \
- 	 --disable-garmin \
+ 	     --disable-garmin \
          --target=arm-none-linux-gnueabi \
          --host=i686-pc-linux-gnu "
 
