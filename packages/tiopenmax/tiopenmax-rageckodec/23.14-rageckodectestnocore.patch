@@ -1,5 +1,5 @@
---- tiopenmax-rageckodec-3.20/audio/src/openmax_il/ragecko_dec/tests/Makefile.orig	2009-04-20 18:17:16.000000000 -0500
-+++ tiopenmax-rageckodec-3.20/audio/src/openmax_il/ragecko_dec/tests/Makefile	2009-04-20 18:23:38.000000000 -0500
+--- tiopenmax-rageckodec-3.21.orig/audio/src/openmax_il/ragecko_dec/tests/Makefile	2009-04-24 02:33:47.000000000 -0500
++++ tiopenmax-rageckodec-3.21/audio/src/openmax_il/ragecko_dec/tests/Makefile	2009-04-24 02:36:59.000000000 -0500
 @@ -24,14 +24,13 @@
      CFLAGS += -DOMX_DEBUG=1
  endif

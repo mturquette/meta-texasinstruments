@@ -1,5 +1,5 @@
---- tiopenmax-gsmfrenc-3.20.orig/audio/src/openmax_il/gsmfr_enc/tests/Makefile	2009-04-17 02:32:39.000000000 -0500
-+++ tiopenmax-gsmfrenc-3.20/audio/src/openmax_il/gsmfr_enc/tests/Makefile	2009-04-17 02:37:16.000000000 -0500
+--- tiopenmax-gsmfrenc-3.21.orig/audio/src/openmax_il/gsmfr_enc/tests/Makefile	2009-04-17 02:32:39.000000000 -0500
++++ tiopenmax-gsmfrenc-3.21/audio/src/openmax_il/gsmfr_enc/tests/Makefile	2009-04-17 02:37:16.000000000 -0500
 @@ -40,7 +40,7 @@
      CFLAGS += -DDSP_RENDERING_ON
  endif

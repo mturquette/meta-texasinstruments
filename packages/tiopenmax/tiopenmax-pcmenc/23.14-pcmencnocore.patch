@@ -1,5 +1,5 @@
---- tiopenmax-pcmenc-3.20.orig/audio/src/openmax_il/pcm_enc/src/Makefile	2009-04-17 13:02:21.000000000 -0500
-+++ tiopenmax-pcmenc-3.20/audio/src/openmax_il/pcm_enc/src/Makefile	2009-04-17 13:03:09.000000000 -0500
+--- tiopenmax-pcmenc-3.21.orig/audio/src/openmax_il/pcm_enc/src/Makefile	2009-04-17 13:02:21.000000000 -0500
++++ tiopenmax-pcmenc-3.21/audio/src/openmax_il/pcm_enc/src/Makefile	2009-04-17 13:03:09.000000000 -0500
 @@ -40,15 +40,13 @@
  endif
  
