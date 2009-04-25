@@ -159,7 +159,7 @@ PREFERRED_VERSION_gst-pyapps =		"5.13"
 # connectivity
 PREFERRED_VERSION_wilink = 		"23-15"
 PREFERRED_VERSION_btfm = 		"23.15.0"
-PREFERRED_VERSION_fmapp = 		"23.15.0"
+PREFERRED_VERSION_fmapp = 		"23.15.0-P1"
 
 # graphics
 PREFERRED_VERSION_sgx-kernel-module =	"1.3.2.3"
