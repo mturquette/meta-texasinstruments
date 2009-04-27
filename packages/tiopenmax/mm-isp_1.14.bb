@@ -10,8 +10,8 @@ PARALLEL_MAKE = "-j1"
 
 CCASE_SPEC = "\
 	# MM ISP%\
-	element /vobs/wtbu/OMAPSW_MPU/algo/... ACT_X0092241-KERNEL-HEADERS-UPDATEP1 %\
-	element /vobs/wtbu/OMAPSW_MPU/linux/mm_isp/... ACT_X0092241-KERNEL-HEADERS-UPDATEP1 %\
+	element /vobs/wtbu/OMAPSW_MPU/algo/... LINUX-TID-MMISP_RLS_${PV}%\
+	element /vobs/wtbu/OMAPSW_MPU/linux/mm_isp/... LINUX-TID-MMISP_RLS_${PV}%\
 	element * /main/LATEST%\
 	"
 CCASE_PATHFETCH = "/vobs/wtbu/OMAPSW_MPU/linux/mm_isp /vobs/wtbu/OMAPSW_MPU/algo"
