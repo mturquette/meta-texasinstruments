@@ -1,0 +1,13 @@
+Index: git/omapfb.h
+===================================================================
+--- git.orig/omapfb.h
++++ git/omapfb.h
+@@ -24,7 +24,7 @@
+ #include <gst/video/video.h>
+ 
+ #include <linux/fb.h>
+-#include <mach/omapfb.h>
++#include <linux/omapfb.h>
+ 
+ G_BEGIN_DECLS
+ 
