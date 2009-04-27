@@ -6,6 +6,7 @@
 # * gfx		- Include 3D GFX module and libraries.
 # * tiwifi	- Include support for TI's WLAN stack.
 # * tibluetooth	- Include support for TI's Bluetooth and FM stack.
+# * gps		- Include support for TI's GPS
 # * rarv        - Enable readaudio/realvideo codecs
 # * testpatterns - Include OMX test patterns
 
@@ -18,4 +19,4 @@ DISTRO_FEATURES += "alsa bluetooth ext2 irda pcmcia usbgadget usbhost wifi nfs z
 # This is a multimedia-based distribution. We can specify what
 # codecs to enable in this release.
 
-DISTRO_FEATURES += "camera jpegdec jpegenc gfx 720p rarv tibluetooth tiwifi"
+DISTRO_FEATURES += "camera jpegdec jpegenc gfx 720p rarv tibluetooth tiwifii gps"
