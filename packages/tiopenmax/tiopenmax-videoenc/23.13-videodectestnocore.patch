@@ -1,0 +1,20 @@
+Index: tiopenmax-videodec-3.19/video/src/openmax_il/video_decode/test/Makefile
+===================================================================
+--- tiopenmax-videodec-3.19.orig/video/src/openmax_il/video_decode/test/Makefile	2009-02-27 13:20:43.000000000 -0600
++++ tiopenmax-videodec-3.19/video/src/openmax_il/video_decode/test/Makefile	2009-02-27 13:20:55.000000000 -0600
+@@ -36,14 +36,13 @@
+ 	CFLAGS += -D__GET_BC_VOP__
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=VidDecTest_common
+ 
+ COMPONENT_TARGET=$(OMXTESTDIR)/$(COMPONENT_TEST)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
