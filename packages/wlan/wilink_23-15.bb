@@ -11,18 +11,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "omap-3430ldp|omap-3430sdp|omap-zoom2-(alpha|beta)"
 
 CCASE_SPEC = "%\
-	element /vobs/WiLink/... LINUX-WCG-WLAN_RLS_L${PV} %\
-	element /vobs/WCGDev/... LINUX-WCG-WLAN_RLS_L${PV} %\
-	element /vobs/MCP_3P_OpenWPA/... LINUX-WCG-WLAN_RLS_L${PV} %\
+	element /vobs/WiLink/... LINUX-WCG-WLAN_RLS_L${PV}-P1 %\
+	element /vobs/WCGDev/... LINUX-WCG-WLAN_RLS_L${PV}-P1 %\
 	"
-	
-#	element /vobs/WiLink/...	LINUX-WCG-WLAN_RLS_${PV} %\
-#	element * /main/LATEST %\
-#	"
 
 CCASE_PATHFETCH = "/vobs/WiLink/ \
 	/vobs/WCGDev \
-	/vobs/MCP_3P_OpenWPA \
 	"
 CCASE_PATHCOMPONENTS = 0
 CCASE_PATHCOMPONENT = "vobs"
@@ -40,6 +34,7 @@ FILES_${PN} += "/wlan"
 do_configure () {
 	sed -i s#/vobs#${S}# \
 		${S}/WiLink/external_drivers/omap3430/Linux/sdio/Makefile
+	ln -fs ${S}/../../../armv7a-none-linux-gnueabi/wpa-supplicant-0.5.8-r5/wpa_supplicant-0.5.8 ${S}/WiLink/CUDK/wpa_suppl
 }
 
 do_compile () {
@@ -47,6 +42,7 @@ do_compile () {
 	cd ${S}/WiLink/platforms/os/linux
 	make CROSS_COMPILE=${AR%-*}- ARCH=arm HOST_PLATFORM=omap3430 KERNEL_DIR=${STAGING_KERNEL_DIR} clean
 	make CROSS_COMPILE=${AR%-*}- ARCH=arm HOST_PLATFORM=omap3430 KERNEL_DIR=${STAGING_KERNEL_DIR}
+	unlink ${S}/WiLink/CUDK/wpa_suppl
 }
 
 do_install() {
@@ -76,11 +72,9 @@ do_install() {
 	install -m 755 ${S}/WiLink/platforms/os/linux/wlan_cu ${D}/wlan
 	install -m 755 ${S}/WiLink/platforms/os/linux/tiwlan.ini ${D}/wlan
 	install -m 755 ${S}/WiLink/platforms/os/linux/tiwlan_loader ${D}/wlan
-	install -m 755 ${S}/WiLink/platforms/os/linux/wpa_supplicant ${D}/wlan
 
 	install -m 644 ${S}/WiLink/platforms/os/linux/tiwlan_drv.ko ${D}/wlan
 	install -m 644 ${S}/WiLink/platforms/os/linux/firmware.bin ${D}/wlan
-	install -m 644 ${S}/WiLink/platforms/os/linux/wpa_supplicant.txt ${D}/wlan
 
 	install -m 644 ${S}/WiLink/external_drivers/omap3430/Linux/sdio/sdio.ko\
 		${D}/wlan
