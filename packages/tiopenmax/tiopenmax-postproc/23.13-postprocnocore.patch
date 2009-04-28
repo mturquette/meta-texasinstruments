@@ -1,0 +1,20 @@
+Index: tiopenmax-postproc-3.19/video/src/openmax_il/post_processor/src/Makefile
+===================================================================
+--- tiopenmax-postproc-3.19.orig/video/src/openmax_il/post_processor/src/Makefile	2009-02-27 16:03:30.000000000 -0600
++++ tiopenmax-postproc-3.19/video/src/openmax_il/post_processor/src/Makefile	2009-02-27 16:03:43.000000000 -0600
+@@ -32,14 +32,13 @@
+     CFLAGS += -DRESOURCE_MANAGER_ENABLED
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.PostProc.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 
