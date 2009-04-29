@@ -3,7 +3,7 @@ LICENSE = "GPL"
 SECTION = "base"
 PR = "r0"
 
-DEPENDS += "libpcre-native pcre"
+DEPENDS += "libpcre-native pcre gtk+"
 
 SRC_URI = "http://www.gpsdrive.de/packages/gpsdrive-${PV}.tar.gz"
 inherit autotools pkgconfig
