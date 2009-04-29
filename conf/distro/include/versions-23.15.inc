@@ -186,7 +186,7 @@ PREFERRED_VERSION_tiopenmax-videoenc	= "3.21"
 PREFERRED_VERSION_tiopenmax-wbamrdec	= "3.21"
 PREFERRED_VERSION_tiopenmax-wbamrenc	= "3.21"
 PREFERRED_VERSION_tiopenmax-wmadec	= "3.21"
-PREFERRED_VERSION_mm-isp	= "1.14-pre"
+PREFERRED_VERSION_mm-isp	= "1.14"
 
 # gstreamer
 PREFERRED_VERSION_libgoo =		"5.15"
