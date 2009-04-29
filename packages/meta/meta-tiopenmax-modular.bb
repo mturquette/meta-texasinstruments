@@ -40,7 +40,7 @@ DEPENDS = "\
 	tiopenmax-pcmenc \
 	tiopenmax-perf \
 	tiopenmax-policymanager \
-	tiopenmax-postproc
+	tiopenmax-postproc \
 	${@base_contains("DISTRO_FEATURES", "rarv", "tiopenmax-rageckodec ", "", d)} \
 	tiopenmax-ram \
 	tiopenmax-resourcemanager \
