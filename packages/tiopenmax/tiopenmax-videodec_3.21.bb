@@ -97,5 +97,5 @@ do_install_cleanup() {
 	mv ${D}/omx/monster_*.length ${D}/omx/patterns
 }
 
-addtask install_cleanup after do_install before do_package
-addtask stage_rm_omxdir after do_populate_staging before do_package_stage
+#addtask install_cleanup after do_install before do_package
+#addtask stage_rm_omxdir after do_populate_staging before do_package_stage
