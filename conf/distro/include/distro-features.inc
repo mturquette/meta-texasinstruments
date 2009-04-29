@@ -19,4 +19,4 @@ DISTRO_FEATURES += "alsa bluetooth ext2 irda pcmcia usbgadget usbhost wifi nfs z
 # This is a multimedia-based distribution. We can specify what
 # codecs to enable in this release.
 
-DISTRO_FEATURES += "camera jpegdec jpegenc gfx 720p rarv tibluetooth tiwifii gps"
+DISTRO_FEATURES += "camera jpegdec jpegenc gfx 720p rarv tibluetooth tiwifi gps"
