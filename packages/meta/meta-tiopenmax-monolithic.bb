@@ -1,4 +1,6 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL."
-PR = "r0"
+PR = "r1"
 PROVIDES = "virtual/openmax-il"
+RPROVIDES = "virtual/openmax-il"
+
 DEPENDS = "tiopenmax"
