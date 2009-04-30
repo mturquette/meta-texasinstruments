@@ -157,6 +157,19 @@ do_stage() {
 		BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${STAGING_LIBDIR}/../ \
 		capl.install ipp.install il3p.install caf.install
+
+	install -d ${STAGING_INCDIR}/capl/inc
+	install -m 0644 ${S}/linux/mm_isp/capl/inc/*.h ${STAGING_INCDIR}/capl/inc/
+
+	install -d ${STAGING_INCDIR}/mmisp
+	install -m 0644 ${D}/include/mmisp/*.h ${STAGING_INCDIR}/mmisp/
+
+	install -d ${STAGING_INCDIR}/camera_algo_frmwk/inc
+	install -m 0644 ${S}/linux/mm_isp/camera_algo_frmwk/inc/*.h ${STAGING_INCDIR}/camera_algo_frmwk/inc/
+
+	install -d ${STAGING_INCDIR}/ipp/inc
+	install -m 0644 ${S}/linux/mm_isp/ipp/inc/*.h ${STAGING_INCDIR}/ipp/inc/
+
 }
 
 FILES_${PN} = "\
