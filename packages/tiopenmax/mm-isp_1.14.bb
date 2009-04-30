@@ -28,6 +28,7 @@ inherit ccasefetch
 
 do_compile() {
 	# make'ing "all" will also install... let's be prepared
+	install -d ${D}/bin
 	install -d ${D}/lib
 	install -d ${D}/include
 
@@ -57,6 +58,8 @@ do_compile() {
 
 do_install() {
 	install -d ${D}/lib
+	install -d ${D}/bin
+	install -d ${D}/include
 
 	cd ${S}/algo/camera/vstab/make/linux/
 	oe_runmake \
@@ -119,7 +122,7 @@ do_stage() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
 		BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${STAGING_LIBDIR}/../ \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr \
 		install
 
 	cd ${S}/algo/camera/isphal/make/linux/
@@ -155,7 +158,7 @@ do_stage() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
 		BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${STAGING_LIBDIR}/../ \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr/ \
 		capl.install ipp.install il3p.install caf.install
 
 	install -d ${STAGING_INCDIR}/capl/inc
@@ -174,10 +177,12 @@ do_stage() {
 
 FILES_${PN} = "\
 	/lib \
+	/bin \
 	"
 
 FILES_${PN}-dbg = "\
 	/lib/.debug \
+	/bin/.debug \
 	"
 
 FILES_${PN}-dev = "\
