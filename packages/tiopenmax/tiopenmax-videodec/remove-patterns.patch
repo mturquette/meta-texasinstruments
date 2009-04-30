@@ -1,0 +1,12 @@
+Index: tiopenmax-3.20/Master.mk
+===================================================================
+--- tiopenmax-3.20.orig/Master.mk	2009-03-20 10:14:27.000000000 -0500
++++ tiopenmax-3.20/Master.mk	2009-03-20 10:15:22.000000000 -0500
+@@ -132,6 +132,7 @@
+ 	for i in $(1); do \
+ 		(\
+ 		if [ ! -d $$i ]; then continue; fi; \
++		if [ "patterns" = $$i ]; then continue; fi; \
+ 		cd $$i; \
+ 		$(MAKE) $(2); \
+ 		); \

@@ -18,9 +18,7 @@ SRC_URI = "file://23.11-clocknocore.patch;patch=1"
 inherit ccasefetch
 
 do_compile_prepend() {
-	install -d ${D}/usr/omx
 	install -d ${D}/usr/lib
-	install -d ${D}/usr/bin
 }
 
 do_compile() {
@@ -53,15 +51,11 @@ do_stage() {
 
 FILES_${PN} = "\
 	/usr/lib \
-	/usr/bin \
 	"
-#	/usr/omx \
 
 FILES_${PN}-dbg = "\
-	/usr/bin/.debug \
 	/usr/lib/.debug \
 	"
-#	/usr/omx/.debug \
 
 FILES_${PN}-dev = "\
 	/usr/include \

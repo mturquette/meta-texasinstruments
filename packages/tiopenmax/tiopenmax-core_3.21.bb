@@ -21,10 +21,8 @@ SRC_URI = "\
 
 do_compile_prepend() {
 	install -m 0644 ${FILESDIR}/libomxil-ti.pc ${S}/libomxil.pc
-	install -d ${D}/usr/lib
-	install -d ${D}/usr/bin
+	install -d ${D}${libdir}
 }
-#	install -d ${D}/usr/omx
 
 do_compile() {
 	oe_runmake \
@@ -55,15 +53,11 @@ do_stage() {
 
 FILES_${PN} = "\
 	/usr/lib \
-	/usr/bin \
 	"
-#	/usr/omx \
 
 FILES_${PN}-dbg = "\
-	/usr/bin/.debug \
 	/usr/lib/.debug \
 	"
-#	/usr/omx/.debug \
 
 FILES_${PN}-dev = "\
 	/usr/include \

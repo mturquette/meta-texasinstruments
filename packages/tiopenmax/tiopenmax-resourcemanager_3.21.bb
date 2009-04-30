@@ -23,7 +23,6 @@ do_compile_prepend() {
 	install -d ${D}/usr/lib
 	install -d ${D}/usr/bin
 }
-#	install -d ${D}/usr/omx
 
 do_compile() {
 	cd ${S}/system/src/openmax_il/resource_manager
@@ -62,13 +61,11 @@ FILES_${PN} = "\
 	/usr/lib \
 	/usr/bin \
 	"
-#	/omx \
 
 FILES_${PN}-dbg = "\
 	/usr/bin/.debug \
 	/usr/lib/.debug \
 	"
-#	/omx/.debug \
 
 FILES_${PN}-dev = "\
 	/usr/include \

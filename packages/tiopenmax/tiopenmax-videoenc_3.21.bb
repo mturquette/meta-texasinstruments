@@ -17,85 +17,79 @@ SRC_URI = "\
 	file://3.21-videoencnocore.patch;patch=1 \
 	file://3.21-videoenctestpthread.patch;patch=1 \
 	file://3.21-videoenctestnocore.patch;patch=1 \
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "file://remove-patterns.patch;patch=1", d)} \
 	"
 
 inherit ccasefetch
 
 do_compile_prepend() {
-	install -d ${D}/omx
-	install -d ${D}/lib
-	install -d ${D}/bin
+	install -d ${D}/usr/omx
+	install -d ${D}/usr/lib
+	install -d ${D}/usr/bin
 }
 
 do_compile() {
 	cd ${S}/video/src/openmax_il/video_encode
 	oe_runmake \
-		PREFIX=${D} PKGDIR=${S} \
+		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D} OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
 		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
 		all
 }
 
 do_install() {
+	install -d ${D}/usr/bin
 	cd ${S}/video/src/openmax_il/video_encode
 	oe_runmake \
-		PREFIX=${D} PKGDIR=${S} \
+		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D} OMXROOT=${S} \
-		SYSTEMINCLUDEDIR=${D}/include/omx \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} \
+		SYSTEMINCLUDEDIR=${D}/usr/include/omx \
 		install
 }
 
 do_stage() {
-	# Somehow, ${STAGING_DIR}/${HOST_SYS} != ${STAGING_LIBDIR}/../
-	STAGE_DIR=${STAGING_LIBDIR}/../
-
 	cd ${S}/video/src/openmax_il/video_encode
 	oe_runmake \
-		PREFIX=${STAGE_DIR} PKGDIR=${S} \
+		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${STAGE_DIR} OMXROOT=${S} \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXTESTDIR=${STAGING_BINDIR} OMXROOT=${S} \
 		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		install
 }
 
 FILES_${PN} = "\
-	/lib \
-	/bin \
-	/omx \
+	/usr/lib \
+	/usr/bin \
 	"
 
 FILES_${PN}-patterns = "\
-	/omx/patterns \
+	/usr/omx/patterns \
 	"
 
 FILES_${PN}-dbg = "\
-	/omx/.debug \
-	/bin/.debug \
-	/lib/.debug \
+	/usr/bin/.debug \
+	/usr/lib/.debug \
 	"
 
 FILES_${PN}-dev = "\
-	/include \
+	/usr/include \
 	"
 
 do_stage_rm_omxdir() {
-	# Somehow, ${STAGING_DIR}/${HOST_SYS} != ${STAGING_LIBDIR}/../
-	STAGE_DIR=${STAGING_LIBDIR}/../
-	
-	# Clean up undesired staging
-	rm -rf ${STAGE_DIR}/omx/
+	# Clean up undesired staging only if test patterns exist
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "rm -rf ${STAGING_DIR_TARGET}/usr/omx/", "echo nothing to do here!", d)}
 }
 
 do_install_cleanup() {
-	mv ${D}/omx/video_encoder.* ${D}/omx/patterns
-	mv ${D}/omx/pinball_*.length ${D}/omx/patterns
-	mv ${D}/omx/monster_*.length ${D}/omx/patterns
+	# move test files out of /usr/bin/ to /usr/omx only if test patterns exist
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "mv ${D}${bindir}/video_encoder.* ${D}/usr/omx/patterns", "echo nothing to do here!", d)}
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "mv ${D}${bindir}/qcif_420_300.yuv* ${D}/usr/omx/patterns", "echo nothing to do here!", d)}
 }
 
-#addtask install_cleanup after do_install before do_package
-#addtask stage_rm_omxdir after do_populate_staging before do_package_stage
+addtask install_cleanup after do_install before do_package
+addtask stage_rm_omxdir after do_populate_staging before do_package_stage

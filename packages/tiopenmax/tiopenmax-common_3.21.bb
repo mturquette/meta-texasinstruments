@@ -14,19 +14,11 @@ CCASE_PATHFETCH = "\
 CCASE_PATHCOMPONENTS = 3
 CCASE_PATHCOMPONENT = "linux"
 
-# we should really FETCH TIDspOmx.h from
-# /vobs/wtbu/OMAPSW_MPU/linux/audio/src/openmax_il/aac_dec
-#SRC_URI += "file://TIDspOmx.h\
-#	"
-
 inherit ccasefetch
 
 do_compile_prepend() {
-#	install -d ${D}/usr/lib
-#	install -d ${D}/usr/bin
 	install -d ${D}/usr/include
 }
-#	install -d ${D}/usr/omx
 
 do_compile() {
 	oe_runmake \
@@ -44,8 +36,6 @@ do_install() {
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${D}/usr OMXROOT=${S} \
 		common.install
-# is this neccessary?
-#	install -m 0644 ${FILESDIR}/TIDspOmx.h ${D}/include/omx
 }
 
 do_stage() {

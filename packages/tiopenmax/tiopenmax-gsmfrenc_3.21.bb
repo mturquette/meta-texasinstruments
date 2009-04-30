@@ -13,9 +13,10 @@ CCASE_PATHCOMPONENTS = 3
 CCASE_PATHCOMPONENT = "linux"
 
 SRC_URI = "\
- 	   file://23.14-gsmfrencnocore.patch;patch=1 \
-           file://23.14-gsmfrenctestnocore.patch;patch=1 \
-	   "
+	file://23.14-gsmfrencnocore.patch;patch=1 \
+	file://23.14-gsmfrenctestnocore.patch;patch=1 \
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "file://remove-patterns.patch;patch=1", d)} \
+	"
 
 inherit ccasefetch
 
@@ -33,7 +34,7 @@ do_compile() {
 		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D}/usr OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
 		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
 		all
 }
@@ -44,7 +45,7 @@ do_install() {
 		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D}/usr OMXROOT=${S} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} \
 		SYSTEMINCLUDEDIR=${D}/usr/include/omx \
 		install
 }
@@ -55,7 +56,7 @@ do_stage() {
 		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXROOT=${S} \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXTESTDIR=${STAGING_BINDIR} OMXROOT=${S} \
 		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		install
 }
@@ -79,7 +80,8 @@ FILES_${PN}-dev = "\
 	"
 
 do_stage_rm_omxdir() {
-	# Clean up undesired staging
-	rm -rf ${STAGING_DIR_TARGET}/usr/omx/
+	# Clean up undesired staging only if test patterns exist
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "rm -rf ${STAGING_DIR_TARGET}/usr/omx/", "echo nothing to do here!", d)}
 }
+
 addtask stage_rm_omxdir after do_populate_staging before do_package_stage

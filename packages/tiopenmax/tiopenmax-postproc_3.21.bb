@@ -16,6 +16,7 @@ CCASE_PATHCOMPONENT = "linux"
 SRC_URI = "\
 	file://23.13-postprocnocore.patch;patch=1 \
 	file://23.13-postproctestnocore.patch;patch=1 \
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "file://remove-patterns.patch;patch=1", d)} \
 	"
 
 inherit ccasefetch
@@ -32,7 +33,7 @@ do_compile() {
 		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D}/usr OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
 		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
 		all
 }
@@ -43,51 +44,43 @@ do_install() {
 		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D}/usr OMXROOT=${S} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} \
 		SYSTEMINCLUDEDIR=${D}/usr/include/omx \
 		install
 }
 
 do_stage() {
-	# Somehow, ${STAGING_DIR}/${HOST_SYS} != ${STAGING_LIBDIR}/../
-	STAGE_DIR=${STAGING_LIBDIR}/../
-
 	cd ${S}/video/src/openmax_il/post_processor
 	oe_runmake \
-		PREFIX=${STAGE_DIR} PKGDIR=${S} \
+		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${STAGE_DIR} OMXROOT=${S} \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXTESTDIR=${STAGING_BIDIR} OMXROOT=${S} \
 		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		install
 }
 
 FILES_${PN} = "\
-	/lib \
-	/bin \
-	/omx \
+	/usr/lib \
+	/usr/bin \
 	"
 
 FILES_${PN}-patterns = "\
-	/omx/patterns \
+	/usr/omx/patterns \
 	"
 
 FILES_${PN}-dbg = "\
-	/omx/.debug \
-	/bin/.debug \
-	/lib/.debug \
+	/usr/bin/.debug \
+	/usr/lib/.debug \
 	"
 
 FILES_${PN}-dev = "\
-	/include \
+	/usr/include \
 	"
 
 do_stage_rm_omxdir() {
-	# Somehow, ${STAGING_DIR}/${HOST_SYS} != ${STAGING_LIBDIR}/../
-	STAGE_DIR=${STAGING_LIBDIR}/../
-	
-	# Clean up undesired staging
-	rm -rf ${STAGE_DIR}/omx/
+	# Clean up undesired staging only if test patterns exist
+	${@base_contains("DISTRO_FEATURES", "testpatterns", "rm -rf ${STAGING_DIR_TARGET}/usr/omx/", "echo nothing to do here!", d)}
 }
 
 addtask stage_rm_omxdir after do_populate_staging before do_package_stage

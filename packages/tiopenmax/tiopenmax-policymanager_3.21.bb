@@ -28,7 +28,7 @@ do_compile() {
 		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D}/usr OMXROOT=${S} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} \
 		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
 		omx_policy_manager
 }
@@ -38,7 +38,7 @@ do_install() {
 		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D}/usr OMXROOT=${S} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} \
 		SYSTEMINCLUDEDIR=${D}/usr/include/omx \
 		omx_policy_manager.install
 }
@@ -53,7 +53,7 @@ do_stage() {
 		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXROOT=${S} \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXTESTDIR=${STAGING_BINDIR} OMXROOT=${S} \
 		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		omx_policy_manager.install
 }
@@ -62,13 +62,11 @@ FILES_${PN} = "\
 	/usr/lib \
 	/usr/bin \
 	"
-#	/omx \
 
 FILES_${PN}-dbg = "\
 	/usr/bin/.debug \
 	/usr/lib/.debug \
 	"
-#	/omx/.debug \
 
 FILES_${PN}-dev = "\
 	/usr/include \

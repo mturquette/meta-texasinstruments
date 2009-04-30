@@ -56,13 +56,11 @@ FILES_${PN} = "\
 	/usr/lib \
 	/usr/bin \
 	"
-#	/omx \
 
 FILES_${PN}-dbg = "\
 	/usr/bin/.debug \
 	/usr/lib/.debug \
 	"
-#	/omx/.debug \
 
 FILES_${PN}-dev = "\
 	/usr/include \
