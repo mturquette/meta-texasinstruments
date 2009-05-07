@@ -61,12 +61,14 @@ do_install() {
 	install -d ${D}/etc/rc6.d
 
 	install -m 755 ${S}/WiLink/CUDK/wlan ${D}/etc/init.d/
-	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc0.d/K23Wlan
-	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc3.d/S23Wlan
-	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc2.d/S23Wlan
-	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc5.d/S23Wlan
-	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc6.d/K23Wlan
-	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc1.d/K23Wlan
+
+#	Cannot create symlinks when installing an ipk. This needs a fix:
+#	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc0.d/K23Wlan
+#	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc3.d/S23Wlan
+#	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc2.d/S23Wlan
+#	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc5.d/S23Wlan
+#	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc6.d/K23Wlan
+#	ln -s ${D}/etc/init.d/wlan ${D}/etc/rc1.d/K23Wlan
 #CHANGES end
 
 	install -m 755 ${S}/WiLink/platforms/os/linux/wlan_cu ${D}/wlan
@@ -78,4 +80,6 @@ do_install() {
 
 	install -m 644 ${S}/WiLink/external_drivers/omap3430/Linux/sdio/sdio.ko\
 		${D}/wlan
+	install -m 644 ${S}/WiLink/platforms/os/linux/wpa_supplicant.txt ${D}/wlan
+	install -m 755 ${S}/WiLink/platforms/os/linux/wpa_supplicant ${D}/wlan
 }
