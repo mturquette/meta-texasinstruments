@@ -10,6 +10,7 @@ inherit pkgconfig
 
 SRC_URI = "git://github.com/felipec/gst-omapfb.git;protocol=http \
 	file://headerinc.patch;patch=1 \
+	file://renderfunc.patch;patch=1 \
 	"
 SRCREV = "6f0b1cb50d1c67c3a3db2f11246256060ac871de"
 S = "${WORKDIR}/git"
