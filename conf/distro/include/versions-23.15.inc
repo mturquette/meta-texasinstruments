@@ -190,7 +190,7 @@ PREFERRED_VERSION_mm-isp	= "1.14"
 
 # gstreamer
 PREFERRED_VERSION_libgoo =		"5.15"
-PREFERRED_VERSION_gst-goo =		"5.15"
+PREFERRED_VERSION_gst-goo =		"5.15-P1"
 PREFERRED_VERSION_gst-pyapps =		"5.15"
 
 # connectivity
