@@ -49,6 +49,7 @@ RDEPENDS_task-omap-gst-plugins = "\
     gst-plugin-alsa \
     gst-openmax \
     gst-goo \
+    gst-omapfb \
     "
 
 RDEPENDS_task-omap-gst-apps = ""
