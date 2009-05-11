@@ -1,0 +1,18 @@
+--- tiopenmax-pcmenc-3.21.orig/audio/src/openmax_il/pcm_enc/tests/Makefile	2009-04-17 13:02:21.000000000 -0500
++++ tiopenmax-pcmenc-3.21/audio/src/openmax_il/pcm_enc/tests/Makefile	2009-04-17 13:09:21.000000000 -0500
+@@ -42,14 +42,13 @@
+ endif   
+ #end of performance code
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=PcmEncTest_common
+ 
+ COMPONENT_TARGET=$(OMXTESTDIR)/$(COMPONENT_TEST)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

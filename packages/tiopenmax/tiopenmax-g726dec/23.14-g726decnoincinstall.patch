@@ -1,0 +1,19 @@
+--- tiopenmax-g726dec-3.21.orig//audio/src/openmax_il/g726_dec/tests/Makefile	2009-04-17 02:50:47.000000000 -0500
++++ tiopenmax-g726dec-3.21/audio/src/openmax_il/g726_dec/tests/Makefile	2009-04-17 03:03:16.000000000 -0500
+@@ -36,7 +36,6 @@
+     CFLAGS += -DDSP_RENDERING_ON
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=G726DecTest
+ 
+@@ -44,7 +43,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)  
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

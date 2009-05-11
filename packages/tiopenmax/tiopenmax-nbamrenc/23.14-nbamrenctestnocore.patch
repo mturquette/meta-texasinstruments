@@ -1,0 +1,19 @@
+--- tiopenmax-nbamrenc-3.21.orig/audio/src/openmax_il/nbamr_enc/tests/Makefile	2009-04-17 01:16:53.000000000 -0500
++++ tiopenmax-nbamrenc-3.21/audio/src/openmax_il/nbamr_enc/tests/Makefile	2009-04-17 01:53:52.000000000 -0500
+@@ -40,7 +40,6 @@
+     CFLAGS += -DDSP_RENDERING_ON
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=AmrEncTest_common
+ 
+@@ -48,7 +47,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

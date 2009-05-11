@@ -1,0 +1,21 @@
+--- tiopenmax-aacenc-3.21.orig/audio/src/openmax_il/aac_enc/tests/Makefile	2009-04-16 21:07:21.000000000 -0500
++++ tiopenmax-aacenc-3.21/audio/src/openmax_il/aac_enc/tests/Makefile	2009-04-16 22:51:06.000000000 -0500
+@@ -36,9 +36,6 @@
+     CFLAGS += -DDSP_RENDERING_ON
+ endif
+ 
+-
+-
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=AacEncTest_common
+ 
+@@ -46,7 +43,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

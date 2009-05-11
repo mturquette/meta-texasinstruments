@@ -1,0 +1,20 @@
+--- tiopenmax-gsmfrenc-3.21.orig/audio/src/openmax_il/gsmfr_enc/tests/Makefile	2009-04-17 02:32:39.000000000 -0500
++++ tiopenmax-gsmfrenc-3.21/audio/src/openmax_il/gsmfr_enc/tests/Makefile	2009-04-17 02:37:16.000000000 -0500
+@@ -40,7 +40,7 @@
+     CFLAGS += -DDSP_RENDERING_ON
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
++
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=GSMFrEncTest_common
+ 
+@@ -48,7 +48,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)   
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

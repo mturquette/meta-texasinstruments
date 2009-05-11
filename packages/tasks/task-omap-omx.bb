@@ -3,24 +3,15 @@
 #
 
 DESCRIPTION = "Tasks for TI's OpenMAX IL"
-PR = "r1"
-
-PACKAGES = "\
-    task-omap-omx \
-    task-omap-omx-libs \
-    task-omap-omx-apps \
-    "
+PR = "r3"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY = "1"
 
-RDEPENDS_task-omap-omx = "\
-    task-omap-omx-libs \
-    task-omap-omx-apps \
-    "
+# NOTE! The contents of this file should be replaced by the contents of
+# meta-tiopenmax-modular.bb after the original tiopenmax_*.bb is phased out.
+# Until then this file simply RDEPENDS on virtual/openmax-il.  Food for thought:
+# should we keep this mechanism around to allow for other OpenMAX
+# implementations?
 
-RDEPENDS_task-omap-omx-libs = "\
-    tiopenmax \
-    "
-
-RDEPENDS_task-omap-omx-apps = ""
+RDEPENDS = "virtual/openmax-il"

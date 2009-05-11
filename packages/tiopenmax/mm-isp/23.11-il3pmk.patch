@@ -5,8 +5,8 @@ diff -Naur OMAPSW_MPU.orig/linux/mm_isp/il3p/src/Makefile OMAPSW_MPU/linux/mm_is
  
  FRMWRKINCLUDEDIR=$(MMISPROOT)/camera_algo_frmwk/inc
  
--CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(FRMWRKINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/drivers/media/video/isp
-+CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(FRMWRKINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/drivers/media/video/isp -I../../../../algo/camera/isphal/inc
+-CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(FRMWRKINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/include/asm-arm/arch-omap
++CFLAGS+=-I../inc -I$(MMISPINCLUDEDIR) -I$(FRMWRKINCLUDEDIR) -I$(KERNISPINCLUDEDIR)/include/asm-arm/arch-omap -I../../../../algo/camera/isphal/inc
  
  COMPONENT_NAME=ALG.IL3P
  COMPONENT_LIB=lib$(COMPONENT_NAME).so

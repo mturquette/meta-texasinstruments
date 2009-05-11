@@ -1,0 +1,19 @@
+--- tiopenmax-wbamrenc-3.21.orig/audio/src/openmax_il/wbamr_enc/src/Makefile	2009-04-17 00:33:19.000000000 -0500
++++ tiopenmax-wbamrenc-3.21/audio/src/openmax_il/wbamr_enc/src/Makefile	2009-04-17 00:34:48.000000000 -0500
+@@ -38,15 +38,13 @@
+     CFLAGS += -DRESOURCE_MANAGER_ENABLED
+ endif
+ 
+-
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.WBAMR.encode.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 

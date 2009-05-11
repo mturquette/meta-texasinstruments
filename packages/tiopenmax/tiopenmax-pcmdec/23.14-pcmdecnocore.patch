@@ -1,0 +1,19 @@
+--- tiopenmax-pcmdec-3.21.orig/audio/src/openmax_il/pcm_dec/src/Makefile	2009-04-17 11:12:04.000000000 -0500
++++ tiopenmax-pcmdec-3.21/audio/src/openmax_il/pcm_dec/src/Makefile	2009-04-17 11:15:13.000000000 -0500
+@@ -34,15 +34,13 @@
+     CFLAGS += -DRESOURCE_MANAGER_ENABLED
+ endif
+ 
+-
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.PCM.decode.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 

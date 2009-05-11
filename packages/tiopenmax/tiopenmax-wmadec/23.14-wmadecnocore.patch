@@ -1,0 +1,19 @@
+--- tiopenmax-wmadec-3.21.orig/audio/src/openmax_il/wma_dec/src/Makefile	2009-04-16 23:10:38.000000000 -0500
++++ tiopenmax-wmadec-3.21/audio/src/openmax_il/wma_dec/src/Makefile	2009-04-16 23:11:46.000000000 -0500
+@@ -38,15 +38,13 @@
+     CFLAGS += -DRESOURCE_MANAGER_ENABLED
+ endif
+ 
+-
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.WMA.decode.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 

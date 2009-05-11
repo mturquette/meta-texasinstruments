@@ -1,0 +1,121 @@
+--- ./applet/main_org.c	2008-02-12 07:55:12.000000000 +0530
++++ ./applet/main.c	2009-04-20 16:28:40.000000000 +0530
+@@ -82,6 +82,100 @@
+ static GtkWidget *menuitem_sendto = NULL;
+ static GtkWidget *menuitem_browse = NULL;
+ 
++#define IS_THIS_BT_HEADSET(class) ((((class & 0x1f00) >> 8) == 0x04) && \
++                                    ((((class & 0xfc) >> 2) == 0x01) || \
++                                    (((class & 0xfc) >> 2) == 0x02))) ? 1:0  
++#define  DEVICE_BONDED     1
++#define  DEVICE_UNBONDED   2
++
++static void inspect_device_for_a2dp(DBusGProxy *object,const char *address,char flag)
++{
++	guint32 class = 0;
++        GValue *value;
++        GHashTable *hash = NULL;
++        FILE *fp;
++        GConfClient *client;  
++
++	dbus_g_proxy_call(object, "GetRemoteInfo", NULL,
++                                G_TYPE_STRING, address, G_TYPE_INVALID,
++                                dbus_g_type_get_map("GHashTable",
++                                G_TYPE_STRING, G_TYPE_VALUE),
++                                &hash, G_TYPE_INVALID);
++
++        /* read bonded device's class */
++        value = (hash == NULL) ? NULL : g_hash_table_lookup(hash, "class");
++        if (value == NULL) {
++              dbus_g_proxy_call(object, "GetRemoteClass", NULL,
++                         G_TYPE_STRING, address, G_TYPE_INVALID,
++                         G_TYPE_UINT, &class, G_TYPE_INVALID);
++        } else
++              class = g_value_get_uint(value);
++
++        /* Is the bonded device a BT headset ? */
++        if(IS_THIS_BT_HEADSET(class))
++        {
++           char filename[100]={0x0};
++           char tmp[256]={0x0};
++           char bt_entry_found = 0;
++
++           /* 1) create virtual device for Bluetooth A2DP streaming in ~/.asoundrc 
++              file. If already ~/.asoundrc has entry for Bluetooth , just update 
++              this headset BD address in that.
++
++              2) The music player like GAKU, reads sink devices (where to play) 
++              from Gconf. So update Bluetooth virtual device name in Gconf 
++              'audiosink' elements to route audio to Bluetooth headset(by default).              
++           */ 
++
++           /* get home directory path */
++  	   sprintf(filename,"%s/.asoundrc",getenv ("HOME"));
++	   fp = fopen(filename, "r");
++
++           /* check ~/.asoundrc file has any entry for Bluetooth */
++	   while(fp != NULL && fgets(tmp, sizeof(tmp),fp) != NULL)
++           {
++             if (strstr(tmp,"type bluetooth"))
++                    bt_entry_found = 1;
++           }
++           /* if entry found , just update BD address of headset */
++	   if(fp != NULL && bt_entry_found == 1)
++	   {
++	       char cmd[500]={0x0};
++	       fclose(fp);
++               sprintf(cmd,"sed '/type bluetooth/{n;d}' ~/.asoundrc | "
++                           "sed 's/type bluetooth/type bluetooth\\n\t device %s/' > ~/.asoundrc_new",
++                            (flag == DEVICE_BONDED)? address : "XX:XX:XX:XX:XX:XX");
++               system(cmd);
++               remove( "~/.asoundrc");
++               system("mv ~/.asoundrc_new ~/.asoundrc");
++           }
++           else 
++           {   
++              /* no entry found , so include all necessary statement to create a 
++                 virtual device for BT 
++              */
++               if(fp != NULL) 
++   	           fclose(fp);
++
++               fp = fopen(filename, "a+");
++               
++               fprintf(fp,"# virtual device for Bluetooth A2DP streaming\n"
++                          " pcm.bluetooth {\n"
++                          "\t type bluetooth\n"
++                          "\t device %s\n"
++                          "\t profile \"auto\"\n"
++                          " }\n",(flag == DEVICE_BONDED)?address:"XX:XX:XX:XX:XX:XX");
++               fclose(fp);
++           }
++
++           /* this is time to mark Bluetooth headset as default sink device 
++              in Gconf. 
++           */
++	    client = gconf_client_get_default();
++ 	    gconf_client_set_string (client,"/system/gstreamer/0.10/default/audiosink",
++               (flag == DEVICE_BONDED)? "alsasink device=bluetooth" : "autoaudiosink" ,NULL);
++         }             
++}
+ static void bonding_created(DBusGProxy *object,
+ 				const char *address, gpointer user_data)
+ {
+@@ -103,6 +197,8 @@
+ 	} else
+ 		device = g_strdup(address);
+ 
++        inspect_device_for_a2dp(object,address,DEVICE_BONDED);
++
+ 	text = g_strdup_printf(_("Created bonding with %s"), device);
+ 
+ 	g_free(device);
+@@ -134,6 +230,8 @@
+ 	} else
+ 		device = g_strdup(address);
+ 
++        inspect_device_for_a2dp(object,address,DEVICE_UNBONDED);
++
+ 	text = g_strdup_printf(_("Removed bonding with %s"), device);
+ 
+ 	g_free(device);

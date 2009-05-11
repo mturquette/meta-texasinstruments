@@ -1,0 +1,11 @@
+--- tiopenmax-g729enc-3.20.orig/audio/src/openmax_il/g729_enc/src/Makefile	2009-04-20 20:37:36.000000000 -0500
++++ tiopenmax-g729enc-3.20/audio/src/openmax_il/g729_enc/src/Makefile	2009-04-20 20:39:22.000000000 -0500
+@@ -19,7 +19,7 @@
+ 
+ include $(OMXROOT)/Master.mk
+ 
+-CFLAGS+=-I../inc -I$(OMXINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -I$(BRIDGEINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -Wall -fpic -pipe -DOMAP_2430 -DOMX_DEBUG 
++CFLAGS+=-I../inc -I$(OMXINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -I$(BRIDGEINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -Wall -fpic -pipe -DOMAP_2430 -DOMX_DEBUG -D__PERF_INSTRUMENTATION__
+ ifeq ($(OMX_DEBUG), 1)
+     CFLAGS += -O0
+ else

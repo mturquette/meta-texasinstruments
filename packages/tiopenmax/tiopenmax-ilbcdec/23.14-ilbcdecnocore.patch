@@ -1,0 +1,25 @@
+--- tiopenmax-ilbcdec-3.21.orig/audio/src/openmax_il/ilbc_dec/src/Makefile	2009-04-17 13:30:25.000000000 -0500
++++ tiopenmax-ilbcdec-3.21/audio/src/openmax_il/ilbc_dec/src/Makefile	2009-04-17 13:31:22.000000000 -0500
+@@ -33,20 +33,19 @@
+     CFLAGS += -DRESOURCE_MANAGER_ENABLED
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.ILBC.decode.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 
+ $(COMPONENT_LIB): $(OBJ)
+ 	$(CROSS)gcc $(CFLAGS) -shared -o $(COMPONENT_LIB) $(OBJ) -L$(OMXLIBDIR) -lOMX_ResourceManagerProxy 
+-#	$(CROSS)gcc $(CFLAGS) -shared -o ../bin $(OBJ) -L$(OMXLIBDIR) -lOMX_ResourceManagerProxy
++
+ 
+ $(SRC): $(HSRC)
+ 

@@ -1,0 +1,20 @@
+Index: tiopenmax-postproc-3.19/video/src/openmax_il/post_processor/test/Makefile
+===================================================================
+--- tiopenmax-postproc-3.19.orig/video/src/openmax_il/post_processor/test/Makefile	2009-02-27 16:08:45.000000000 -0600
++++ tiopenmax-postproc-3.19/video/src/openmax_il/post_processor/test/Makefile	2009-02-27 16:08:56.000000000 -0600
+@@ -24,14 +24,13 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=PostProcTest
+ 
+ COMPONENT_TARGET=$(OMXTESTDIR)/$(COMPONENT_TEST)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

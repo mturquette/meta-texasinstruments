@@ -1,0 +1,18 @@
+--- tiopenmax-imaadpcmdec-3.21.orig/audio/src/openmax_il/imaadpcm_dec/src/Makefile	2009-04-24 04:06:58.000000000 -0500
++++ tiopenmax-imaadpcmdec-3.21/audio/src/openmax_il/imaadpcm_dec/src/Makefile	2009-04-24 04:07:44.000000000 -0500
+@@ -37,14 +37,13 @@
+ endif
+ 
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.IMA.decode.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 

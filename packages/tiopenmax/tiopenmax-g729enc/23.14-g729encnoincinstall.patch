@@ -1,0 +1,19 @@
+--- tiopenmax-g729enc-3.20.orig/audio/src/openmax_il/g729_enc/tests/Makefile	2009-04-17 11:26:10.000000000 -0500
++++ tiopenmax-g729enc-3.20/audio/src/openmax_il/g729_enc/tests/Makefile	2009-04-17 11:58:35.000000000 -0500
+@@ -41,7 +41,6 @@
+     CFLAGS += -DDSP_RENDERING_ON
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=G729EncTest_common
+ 
+@@ -49,7 +48,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)  
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

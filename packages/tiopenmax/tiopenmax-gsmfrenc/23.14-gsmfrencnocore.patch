@@ -1,0 +1,18 @@
+--- tiopenmax-gsmfrenc-3.21.orig/audio/src/openmax_il/gsmfr_enc/src/Makefile	2009-04-17 02:32:39.000000000 -0500
++++ tiopenmax-gsmfrenc-3.21/audio/src/openmax_il/gsmfr_enc/src/Makefile	2009-04-17 02:33:36.000000000 -0500
+@@ -38,14 +38,13 @@
+     CFLAGS += -DRESOURCE_MANAGER_ENABLED
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.GSMFR.encode.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 

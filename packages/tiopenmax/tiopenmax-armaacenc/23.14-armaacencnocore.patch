@@ -1,0 +1,19 @@
+--- tiopenmax-armaacenc-3.21.orig/audio/src/openmax_il/armaac_enc/src/Makefile	2009-04-17 13:39:52.000000000 -0500
++++ tiopenmax-armaacenc-3.21/audio/src/openmax_il/armaac_enc/src/Makefile	2009-04-17 13:40:58.000000000 -0500
+@@ -36,7 +36,6 @@
+ 
+ 
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.ARMAAC.encode.so
+ COMPONENT_LIB_PREBUILT=libEmMp4AACEnc.so
+ 
+@@ -44,7 +43,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 	@echo "Installing $(COMPONENT_LIB_PREBUILT)"

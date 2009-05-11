@@ -1,0 +1,19 @@
+--- tiopenmax-g722dec-3.21.orig/audio/src/openmax_il/g722_dec/tests/Makefile	2009-04-17 01:35:04.000000000 -0500
++++ tiopenmax-g722dec-3.21/audio/src/openmax_il/g722_dec/tests/Makefile	2009-04-17 01:35:56.000000000 -0500
+@@ -42,7 +42,6 @@
+ endif
+ 
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=G722DecoderTest
+ 
+@@ -51,7 +50,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)  
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

@@ -1,0 +1,19 @@
+--- tiopenmax-armaacdec-3.21.orig/audio/src/openmax_il/armaac_dec/tests/Makefile	2009-04-24 01:20:18.000000000 -0500
++++ tiopenmax-armaacdec-3.21/audio/src/openmax_il/armaac_dec/tests/Makefile	2009-04-24 01:27:27.000000000 -0500
+@@ -36,7 +36,6 @@
+ endif
+ 
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=ArmAacDecoder_Test
+ 
+@@ -44,7 +43,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) 
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

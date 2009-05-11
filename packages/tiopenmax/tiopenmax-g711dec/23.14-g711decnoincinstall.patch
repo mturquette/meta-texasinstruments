@@ -1,0 +1,19 @@
+--- tiopenmax-g711dec-3.21.orig/audio/src/openmax_il/g711_dec/tests/Makefile	2009-04-17 00:25:34.000000000 -0500
++++ tiopenmax-g711dec-3.21/audio/src/openmax_il/g711_dec/tests/Makefile	2009-04-17 00:29:45.000000000 -0500
+@@ -39,7 +39,6 @@
+ endif
+ 
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ OMXRMPROXY_LIB=$(OMXLIBDIR)/libOMX_ResourceManagerProxy.so
+ COMPONENT_TEST=G711DecTest_common
+ 
+@@ -47,7 +46,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)  
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

@@ -20,18 +20,18 @@ SRC_URI = "\
 inherit ccasefetch
 
 do_compile_prepend() {
-	install -d ${D}/omx
-	install -d ${D}/lib
-	install -d ${D}/bin
+	install -d ${D}/usr/lib
+	install -d ${D}/usr/bin
 }
+#	install -d ${D}/usr/omx
 
 do_compile() {
 	cd ${S}/system/src/openmax_il/resource_manager
 	oe_runmake \
-		PREFIX=${D} PKGDIR=${S} \
+		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D} OMXROOT=${S} \
+		TARGETDIR=${D}/usr OMXROOT=${S} \
 		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
 		all
 }
@@ -39,40 +39,37 @@ do_compile() {
 do_install() {
 	cd ${S}/system/src/openmax_il/resource_manager
 	oe_runmake \
-		PREFIX=${D} PKGDIR=${S} \
+		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D} OMXROOT=${S} \
-		SYSTEMINCLUDEDIR=${D}/include/omx \
+		TARGETDIR=${D}/usr OMXROOT=${S} \
+		SYSTEMINCLUDEDIR=${D}/usr/include/omx \
 		install
 }
 
 do_stage() {
-	# Somehow, ${STAGING_DIR}/${HOST_SYS} != ${STAGING_LIBDIR}/../
-	STAGE_DIR=${STAGING_LIBDIR}/../
-
 	cd ${S}/system/src/openmax_il/resource_manager
 	oe_runmake \
-		PREFIX=${STAGE_DIR} PKGDIR=${S} \
+		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${STAGE_DIR} OMXROOT=${S} \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXROOT=${S} \
 		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		install
 }
 
 FILES_${PN} = "\
-	/lib \
-	/bin \
-	/omx \
+	/usr/lib \
+	/usr/bin \
 	"
+#	/omx \
 
 FILES_${PN}-dbg = "\
-	/omx/.debug \
-	/bin/.debug \
-	/lib/.debug \
+	/usr/bin/.debug \
+	/usr/lib/.debug \
 	"
+#	/omx/.debug \
 
 FILES_${PN}-dev = "\
-	/include \
+	/usr/include \
 	"

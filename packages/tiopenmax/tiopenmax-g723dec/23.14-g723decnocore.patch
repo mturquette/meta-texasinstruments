@@ -1,0 +1,18 @@
+--- tiopenmax-g723dec-3.21.orig/audio/src/openmax_il/g723_dec/src/Makefile	2009-04-17 02:12:29.000000000 -0500
++++ tiopenmax-g723dec-3.21/audio/src/openmax_il/g723_dec/src/Makefile	2009-04-17 02:13:39.000000000 -0500
+@@ -35,14 +35,13 @@
+ endif
+ 
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.G723.decode.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 
