@@ -1,0 +1,20 @@
+Index: tiopenmax-rmparser-3.21/video/src/openmax_il/rm_parser/src/Makefile
+===================================================================
+--- tiopenmax-rmparser-3.21.orig/video/src/openmax_il/rm_parser/src/Makefile	2009-05-12 12:23:27.570051000 -0500
++++ tiopenmax-rmparser-3.21/video/src/openmax_il/rm_parser/src/Makefile	2009-05-12 12:24:43.937541000 -0500
+@@ -43,14 +43,13 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libRM_Parser.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 
