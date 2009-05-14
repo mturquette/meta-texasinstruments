@@ -41,7 +41,7 @@ do_install() {
 		PREFIX=${D}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D}/usr OMXROOT=${S} \
+		TARGETDIR=${D}/usr OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
 		SYSTEMINCLUDEDIR=${D}/usr/include/omx \
 		RAPARSERINCLUDEDIR=${S}/video/src/openmax_il/rm_parser/inc \
 		install
@@ -53,7 +53,7 @@ do_stage() {
 		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXROOT=${S} \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
 		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		RAPARSERINCLUDEDIR=${S}/video/src/openmax_il/rm_parser/inc \
 		install
