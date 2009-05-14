@@ -1,5 +1,5 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL RAGECKO Decoder."
-DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-audiomanager"
+DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-audiomanager tiopenmax-rmparser"
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-patterns ${PN}-dev ${PN}"
 
@@ -29,7 +29,6 @@ do_compile_prepend() {
 }
 
 do_compile() {
-	cp  ${S}/video/src/openmax_il/rm_parser/inc/*.h ${S}/audio/src/openmax_il/ragecko_dec/inc
 	cd ${S}/audio/src/openmax_il/ragecko_dec
 	rm inc/TIDspOmx.h
         cp ${STAGING_INCDIR}/omx/TIDspOmx.h inc/
