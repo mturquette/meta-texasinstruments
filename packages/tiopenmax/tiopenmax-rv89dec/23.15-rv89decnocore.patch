@@ -1,0 +1,20 @@
+Index: tiopenmax-rv89dec-3.21/video/src/openmax_il/rv_decode/src/Makefile
+===================================================================
+--- tiopenmax-rv89dec-3.21.orig/video/src/openmax_il/rv_decode/src/Makefile	2009-05-14 17:52:22.739160000 -0500
++++ tiopenmax-rv89dec-3.21/video/src/openmax_il/rv_decode/src/Makefile	2009-05-14 17:53:21.409862000 -0500
+@@ -36,14 +36,13 @@
+ 
+ CFLAGS+=-I../inc -I$(OMXINCLUDEDIR) -I$(SYSTEMINCLUDEDIR) -I$(BRIDGEINCLUDEDIR) -Wall -ansi -fpic -pipe -DOMAP_2430 -DRESOURCE_MANAGER_ENABLED
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_LIB=libOMX.TI.RV89.Decoder.so
+ 
+ COMPONENT_TARGET=$(OMXLIBDIR)/$(COMPONENT_LIB)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 

@@ -1,0 +1,20 @@
+Index: tiopenmax-rv89dec-3.21/video/src/openmax_il/rv_decode/test/Makefile
+===================================================================
+--- tiopenmax-rv89dec-3.21.orig/video/src/openmax_il/rv_decode/test/Makefile	2009-05-14 18:02:37.913861000 -0500
++++ tiopenmax-rv89dec-3.21/video/src/openmax_il/rv_decode/test/Makefile	2009-05-14 18:03:07.139471000 -0500
+@@ -32,14 +32,13 @@
+ 	CFLAGS += -D__GET_BC_VOP__
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=RV89ComboDecTest
+ 
+ COMPONENT_TARGET=$(OMXTESTDIR)/$(COMPONENT_TEST)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
