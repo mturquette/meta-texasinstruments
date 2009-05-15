@@ -1,0 +1,13 @@
+Index: tiopenmax-rv89dec-3.21/video/src/openmax_il/rv_decode/test/Makefile
+===================================================================
+--- tiopenmax-rv89dec-3.21.orig/video/src/openmax_il/rv_decode/test/Makefile	2009-01-30 00:01:53.000000000 -0600
++++ tiopenmax-rv89dec-3.21/video/src/openmax_il/rv_decode/test/Makefile	2009-05-14 10:57:54.028914000 -0500
+@@ -45,7 +45,7 @@
+ 
+ $(COMPONENT_TEST): $(OBJ)
+ #	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -L$(BRIDGELIBDIR) -ldl -lOMX_Core -lpthread -lOMX_RV89Decoder -lbridge -lOMX_ResourceManagerProxy
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -lbridge -lOMX_Core -lRM_Parser
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -L$(BRIDGELIBDIR) -lbridge -lOMX_Core -lpthread -lRM_Parser
+ 
+ $(SRC): $(HSRC)
+ 
