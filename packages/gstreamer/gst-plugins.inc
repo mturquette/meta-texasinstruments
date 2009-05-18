@@ -13,7 +13,7 @@ acpaths = "-I ${S}/common/m4 -I ${S}/m4"
 
 LIBV = "0.10"
 PACKAGES_DYNAMIC = "gst-plugin-*"
-FILES_${PN} += "${libdir}/gstreamer-${LIBV}/*.so"
+#FILES_${PN} += "${libdir}/gstreamer-${LIBV}/*.so"
 #FILES_${PN}-dev += "${libdir}/gstreamer-${LIBV}/*.la ${libdir}/gstreamer-${LIBV}/*.a"
 FILES_${PN}-dbg += "${libdir}/gstreamer-${LIBV}/.debug"
 
