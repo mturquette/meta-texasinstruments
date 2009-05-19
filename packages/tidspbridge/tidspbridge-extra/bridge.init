@@ -27,7 +27,7 @@ start ()
 {
     cd /dspbridge
     echo -n "Loading up Bridge driver: "
-    /dspbridge/install_bridge /lib/modules/`uname -r`/kernel/drivers/dspbridge/bridgedriver.ko > /dev/null 2>&1
+    /dspbridge/install_bridge /lib/modules/`uname -r`/kernel/drivers/dspbridge/bridgedriver.ko shm_size=0x500000 > /dev/null 2>&1
     /dspbridge/cexec.out -T $BASEIMAGE > /dev/null 2>&1
     [ $? -eq 0 ] || exit $?
     echo "OK"

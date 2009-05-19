@@ -47,7 +47,7 @@ fi
 
 if [ $# -lt 1 ]
 then
-    insmod  ./$BridgeDriver phys_mempool_base=0x87000000  phys_mempool_size=0x600000 shm_size=0x400000   $* || exit 1
+    insmod  ./$BridgeDriver phys_mempool_base=0x87000000  phys_mempool_size=0x600000 shm_size=0x500000   $* || exit 1
 
 else
 allArgs=$*
@@ -86,9 +86,9 @@ fi
 else
 if [ $flag_bridgepath -eq 0 ]
 then
-   insmod  ./$BridgeDriver phys_mempool_base=0x87000000  phys_mempool_size=0x600000 shm_size=0x400000  $allArgs  || exit 1
+   insmod  ./$BridgeDriver phys_mempool_base=0x87000000  phys_mempool_size=0x600000 shm_size=0x500000  $allArgs  || exit 1
 else
-   insmod  $allArgs phys_mempool_base=0x87000000  phys_mempool_size=0x600000 shm_size=0x400000   || exit 1
+   insmod  $allArgs phys_mempool_base=0x87000000  phys_mempool_size=0x600000 shm_size=0x500000   || exit 1
 fi
 
 fi
