@@ -14,7 +14,6 @@ CCASE_PATHCOMPONENT = "linux"
 
 SRC_URI = "\
 	file://23.11-jpegencnocore.patch;patch=1 \
-	file://23.11-jpegenctestpth.patch;patch=1 \
 	file://23.11-jpegenctestnocore.patch;patch=1 \
 	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "file://remove-patterns.patch;patch=1", d)} \
 	"
