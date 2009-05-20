@@ -13,7 +13,7 @@ CCASE_PATHCOMPONENTS = 3
 CCASE_PATHCOMPONENT = "linux"
 
 SRC_URI = " \
-	file://23.14-wmadecnocore.patch;patch=1 \ 
+	file://23.14-wmadecnocore.patch;patch=1 \
 	file://23.14-wmadectestnocore.patch;patch=1 \
 	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "file://remove-patterns.patch;patch=1", d)} \
 	"

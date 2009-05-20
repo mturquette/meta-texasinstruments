@@ -12,8 +12,8 @@ CCASE_PATHFETCH = "\
 CCASE_PATHCOMPONENTS = 3
 CCASE_PATHCOMPONENT = "linux"
 
-SRC_URI = "\ 
-	file://23.14-gsmfrdecnocore.patch;patch=1 \ 
+SRC_URI = "\
+	file://23.14-gsmfrdecnocore.patch;patch=1 \
 	file://23.14-gsmfrdectestnocore.patch;patch=1 \
 	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "file://remove-patterns.patch;patch=1", d)} \
 	"
