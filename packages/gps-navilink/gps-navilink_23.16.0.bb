@@ -15,7 +15,7 @@ inherit ccasefetch
 COMPATIBLE_MACHINE = "omap-3430(l|s)dp"
  
 CCASE_SPEC = "%\
-        element /vobs/WCGDev/... LINUX-WCG-GPS_PreRLS_L${PV}%\
+        element /vobs/WCGDev/... LINUX-WCG-GPS_REL_${PV}%\
         element * /main/LATEST %\
         "
  
