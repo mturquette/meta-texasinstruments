@@ -1,0 +1,11 @@
+--- ./gnome-bluetooth-0.11.0/configure.in-org	2009-04-30 23:42:15.000000000 +0530
++++ gnome-bluetooth-0.11.0/configure.in	2009-04-30 23:28:07.000000000 +0530
+@@ -49,7 +49,7 @@
+ 
+ AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal, no)
+ PKG_CHECK_MODULES(GNOME_BLUETOOTH, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 libbtctl >= $BTCTL_REQUIRED gconf-2.0 >= $GCONF_REQUIRED gtk+-2.0 >= 2.10)
+-PKG_CHECK_MODULES(GNOME_BLUETOOTH_PYTHON, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 pygtk-2.0 libbtctl >= $BTCTL_REQUIRED)
++PKG_CHECK_MODULES(GNOME_BLUETOOTH_PYTHON, libglade-2.0 gobject-2.0 libgnomeui-2.0 >= 1.110.0 gconf-2.0 pygtk-2.0 <= 2.12.1 libbtctl >= $BTCTL_REQUIRED,,[AC_MSG_ERROR(Please Downgrade to pygtk <= 2.12.1 OR Consider excluding gnome-bluetooth recipe file from the build)])
+ AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
+ 
+ DEFSDIR=`pkg-config --variable=defsdir pygtk-2.0`
