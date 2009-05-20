@@ -202,13 +202,14 @@ PREFERRED_VERSION_gst-goo =		"5.16-rc5"
 PREFERRED_VERSION_gst-pyapps =		"5.15"
 
 # connectivity
-PREFERRED_VERSION_wilink = 		"23-15"
+PREFERRED_VERSION_wilink = 		"23-16"
 PREFERRED_VERSION_btfm = 		"23.16.0"
 PREFERRED_VERSION_fmapp = 		"23.16.0"
+PREFERRED_VERSION_gps-navilink =	"23.16.0"
 
 # graphics
-PREFERRED_VERSION_sgx-kernel-module =	"1.3.2.3"
-PREFFERED_VERSION_sgx-lib-noxws =	"1.3.2.3"
+PREFERRED_VERSION_sgx-kernel-module =	"1.3.2.4"
+PREFFERED_VERSION_sgx-lib-noxws =	"1.3.2.4"
 
 # open source dependencies
 PREFERRED_VERSION_gst-plugins-bad =	"0.10.8"
