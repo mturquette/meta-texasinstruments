@@ -20,13 +20,13 @@ DFLAGS = "-L/usr/lib/"
 do_install_append(){
 
  install -d ${D}${bindir}/gps
- install -m 0755 ${S}/../initscript/gpsdrive.ini  ${D}${datadir}/applications/ 
+ install -m 0755 ${S}/../initscript/gpsdrive.ini  ${D}${datadir}/applications/
 
 #remove gpsd from bin dir, we have it installed separately in sbin dir
  rm ${D}${bindir}/gpsd
 
 # remove this default file, we will create our own
- rm ${D}${datadir}/applications/gpsdrive.desktop 
+ rm ${D}${datadir}/applications/gpsdrive.desktop
 
  cat > ${D}/usr/share/applications/gpsdrive.desktop <<_EOF
 [Desktop Entry]
@@ -43,4 +43,3 @@ StartupNotify=true
 _EOF
 
 }
- 
