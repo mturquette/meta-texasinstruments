@@ -21,11 +21,11 @@ do_install() {
 	install -d ${D}${base_libdir}/firmware
 	install -m 755 ${S}/TIInit_7.1.24.bts ${D}${base_libdir}/firmware
 	install -m 755 ${S}/TIInit_7.1.24.bts.3000000 ${D}${base_libdir}/firmware
-	
+
 	install -m 755 ${S}/fm_rx_init_1273.1.bts ${D}${base_libdir}/firmware
         install -m 755 ${S}/fm_tx_init_1273.1.bts ${D}${base_libdir}/firmware
         install -m 755 ${S}/fmc_init_1273.1.bts ${D}${base_libdir}/firmware
-	
+
 	install -m 755 ${S}/fm_rx_init_1273.2.bts ${D}${base_libdir}/firmware
 	install -m 755 ${S}/fm_tx_init_1273.2.bts ${D}${base_libdir}/firmware
 	install -m 755 ${S}/fmc_init_1273.2.bts ${D}${base_libdir}/firmware

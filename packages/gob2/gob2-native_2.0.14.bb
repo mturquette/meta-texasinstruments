@@ -8,10 +8,10 @@ SRC_URI = "http://ftp.5z.com/pub/gob/old/gob2-${PV}.tar.gz"
 S = "${WORKDIR}/gob2-${PV}"
 
 inherit autotools
-inherit native 
+inherit native
 
 PR = "r2"
  
-DEPENDS = "bison-native flex-native" 
+DEPENDS = "bison-native flex-native"
 
 
