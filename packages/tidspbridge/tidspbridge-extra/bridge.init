@@ -36,9 +36,9 @@ start ()
     # and run it in background, so we don't add 3 seconds to boot time:
     if [ "$BASEIMAGE" = "$DEFAULT_BASEIMAGE" ]; then
         echo -n "Launching OMX Managers: "
-	sleep 1 && OMXAudioManager &
-	sleep 1 && OMXPolicyManager &
-	sleep 1 && OMXResourceManager &
+	OMXAudioManager &
+	OMXPolicyManager &
+	OMXResourceManager &
 	echo "OK"
     fi
 }
@@ -49,7 +49,6 @@ stop ()
     killall OMXAudioManager > /dev/null 2>&1
     killall OMXPolicyManager > /dev/null 2>&1
     killall OMXResourceManager > /dev/null 2>&1
-    sleep 3
     echo "OK"
 
     echo -n "Unloading Bridge driver: "
