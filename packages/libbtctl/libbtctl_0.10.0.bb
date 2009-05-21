@@ -1,7 +1,7 @@
 DESCRIPTION = "Bluetooth helper library for Glib/GTK/GNOME applications"
 LICENSE="GNU+GPL"
 
-DEPENDS = "glib-2.0 bluez-libs openobex"
+DEPENDS = "glib-2.0 bluez-libs openobex gtk-sato-engine"
 
 PR = "r0"
 
