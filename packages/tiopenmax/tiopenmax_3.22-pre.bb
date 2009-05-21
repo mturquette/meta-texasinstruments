@@ -3,6 +3,9 @@ DESCRIPTION = "Texas Instruments OpenMAX IL."
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-patterns ${PN}"
 
+PROVIDES = "virtual/openmax-il"
+RPROVIDES = "virtual/openmax-il"
+
 CCASE_SPEC = "\
 	${@base_contains("DISTRO_FEATURES", "testpatterns", "", "element patterns /main/0", d)}%\
 	# OMX Audio%\
