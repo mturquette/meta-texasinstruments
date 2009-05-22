@@ -5,12 +5,13 @@ RPROVIDES = "virtual/openmax-il"
 
 ALLOW_EMPTY = "1"
 
-DEPENDS = "\
+RDEPENDS = "\
 	tiopenmax-aacdec \
 	tiopenmax-aacenc \
 	${@base_contains("DISTRO_FEATURES", "720p", "tiopenmax-armaacdec", "", d)} \
-	${@base_contains("DISTRO_FEATURES", "720p", "tiopenmax-armaacenc ", "", d)} \
+	${@base_contains("DISTRO_FEATURES", "720p", "tiopenmax-armaacenc", "", d)} \
 	tiopenmax-audiomanager \
+	${@base_contains("DISTRO_FEATURES", "camera", "tiopenmax-camera", "", d)} \
 	tiopenmax-clock \
 	tiopenmax-common \
 	tiopenmax-core \
@@ -32,8 +33,8 @@ DEPENDS = "\
 	tiopenmax-ilbcenc \
 	tiopenmax-imaadpcmdec \
 	tiopenmax-imaadpcmenc \
-	${@base_contains("DISTRO_FEATURES", "jpegdec", "tiopenmax-jpegdec ", "", d)} \
-	${@base_contains("DISTRO_FEATURES", "jpegenc", "tiopenmax-jpegenc ", "", d)} \
+	${@base_contains("DISTRO_FEATURES", "jpegdec", "tiopenmax-jpegdec", "", d)} \
+	${@base_contains("DISTRO_FEATURES", "jpegenc", "tiopenmax-jpegenc", "", d)} \
 	tiopenmax-lcml \
 	tiopenmax-mp3 \
 	tiopenmax-nbamrdec \
@@ -43,7 +44,7 @@ DEPENDS = "\
 	tiopenmax-perf \
 	tiopenmax-policymanager \
 	tiopenmax-postproc \
-	${@base_contains("DISTRO_FEATURES", "rarv", "tiopenmax-rageckodec ", "", d)} \
+	${@base_contains("DISTRO_FEATURES", "rarv", "tiopenmax-rageckodec", "", d)} \
 	tiopenmax-ram \
 	tiopenmax-resourcemanager \
 	tiopenmax-rmproxy \
@@ -53,3 +54,5 @@ DEPENDS = "\
 	tiopenmax-wbamrenc \
 	tiopenmax-wmadec \
 	"
+
+DEPENDS="${RDEPENDS}"
