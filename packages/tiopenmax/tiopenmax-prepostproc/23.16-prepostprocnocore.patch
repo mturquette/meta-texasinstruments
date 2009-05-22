@@ -1,0 +1,19 @@
+--- tiopenmax-prepostproc-3.22/video/src/openmax_il/prepost_processor/src/Makefile.orig	2009-05-22 17:40:43.000000000 -0500
++++ tiopenmax-prepostproc-3.22/video/src/openmax_il/prepost_processor/src/Makefile	2009-05-22 17:44:16.000000000 -0500
+@@ -35,7 +35,6 @@
+     CFLAGS += -DRESOURCE_MANAGER_ENABLED
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ #COMPONENT_LIB=libOMX_VPP.so
+ COMPONENT_LIB=libOMX.TI.VPP.so
+ 
+@@ -43,7 +42,7 @@
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR) $(OMXCORE_LIB)
++$(COMPONENT_TARGET): $(COMPONENT_LIB) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_LIB)"
+ 	cp -f $(COMPONENT_LIB) $(COMPONENT_TARGET)
+ 

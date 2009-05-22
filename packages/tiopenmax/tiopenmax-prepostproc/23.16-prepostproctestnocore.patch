@@ -1,0 +1,18 @@
+--- tiopenmax-prepostproc-3.22/video/src/openmax_il/prepost_processor/tests/Makefile.orig	2009-05-22 17:47:22.000000000 -0500
++++ tiopenmax-prepostproc-3.22/video/src/openmax_il/prepost_processor/tests/Makefile	2009-05-22 17:48:35.000000000 -0500
+@@ -24,14 +24,13 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=VPPTest_common
+ 
+ COMPONENT_TARGET=$(OMXTESTDIR)/$(COMPONENT_TEST)
+ 
+ all install:: $(COMPONENT_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
