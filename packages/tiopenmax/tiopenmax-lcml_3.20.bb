@@ -3,7 +3,7 @@ DESCRIPTION = "Texas Instruments Linux Common Media Library for OpenMAX IL."
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}"
 
-require tiopenmax-cspec-${PV}.inc
+require tiopenmax-cspec-3.22.inc
 
 CCASE_PATHFETCH = "\
 	/vobs/wtbu/OMAPSW_MPU/linux/system/src/openmax_il/lcml \
