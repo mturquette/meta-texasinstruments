@@ -1,5 +1,5 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL RV89 Decoder."
-DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-rmparser tiopenmax-rvparser"
+DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-rmparser tiopenmax-rvparser tiopenmax-perf"
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-patterns ${PN}-dev ${PN}"
 
@@ -41,6 +41,7 @@ do_compile() {
 		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
 		RVPARSERINCLUDEDIR=${S}/video/src/openmax_il/rm_rvparser/inc \
 		RAPARSERINCLUDEDIR=${S}/video/src/openmax_il/rm_parser/inc \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		all
 }
 
@@ -54,6 +55,7 @@ do_install() {
 		SYSTEMINCLUDEDIR=${D}/usr/include/omx \
 		RVPARSERINCLUDEDIR=${S}/video/src/openmax_il/rm_rvparser/inc \
 		RAPARSERINCLUDEDIR=${S}/video/src/openmax_il/rm_parser/inc \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		install
 }
 
@@ -64,6 +66,7 @@ do_stage() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXROOT=${S} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		install
 }

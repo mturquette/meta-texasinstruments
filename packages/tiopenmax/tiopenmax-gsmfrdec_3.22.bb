@@ -1,5 +1,5 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL GSMFR Decoder."
-DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-audiomanager"
+DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-audiomanager tiopenmax-perf"
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-patterns ${PN}-dev ${PN}"
 
@@ -35,6 +35,7 @@ do_compile() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
 		all
 }
@@ -47,6 +48,7 @@ do_install() {
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} \
 		SYSTEMINCLUDEDIR=${D}/usr/include/omx \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		install
 }
 
@@ -57,6 +59,7 @@ do_stage() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${STAGE_DIR} OMXTESTDIR=${STAGING_BINDIR} OMXROOT=${S} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		install
 }
