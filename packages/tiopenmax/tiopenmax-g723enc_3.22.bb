@@ -23,8 +23,8 @@ inherit ccasefetch
 
 do_compile_prepend() {
 	install -d ${D}/usr/omx/patterns
-  	install -d ${D}/usr/lib
-  	install -d ${D}/usr/bin
+	install -d ${D}/usr/lib
+	install -d ${D}/usr/bin
 }
 
 do_compile() {
@@ -33,10 +33,11 @@ do_compile() {
         cp  ${STAGING_INCDIR}/omx/TIDspOmx.h inc/
 	oe_runmake \
 		PREFIX=${D}/usr PKGDIR=${S} \
-   		CROSS=${AR%-*}- \
-   		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-    		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
-    		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
+		CROSS=${AR%-*}- \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
+		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
 		all
 }
 
@@ -47,6 +48,7 @@ do_install() {
 		CROSS=${AR%-*}- \
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		SYSTEMINCLUDEDIR=${D}/include/omx \
 		install
 }
@@ -57,10 +59,11 @@ do_stage() {
 	cd ${S}/audio/src/openmax_il/g723_enc
 	oe_runmake \
 		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
-    		CROSS=${AR%-*}- \
-    		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-    		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXTESTDIR=${STAGING_BINDIR} OMXROOT=${S} \
-    		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
+		CROSS=${AR%-*}- \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXTESTDIR=${STAGING_BINDIR} OMXROOT=${S} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
+		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		install
 }
 
