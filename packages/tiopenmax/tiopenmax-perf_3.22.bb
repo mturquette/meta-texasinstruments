@@ -19,32 +19,34 @@ do_compile_prepend() {
 	install -d ${D}${bindir}
 	install -d ${D}${libdir}
 }
-#	install -d ${D}/usr/omx
 
 do_compile() {
 	oe_runmake \
 		PREFIX=${D}/usr PKGDIR=${S} \
-		CROSS=${AR%-*}- OMX_PERF_INSTRUMENTATION=1 OMXTESTDIR=${D}${bindir} \
-		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D}/usr OMXROOT=${S} \
+		CROSS=${AR%-*}- OMXTESTDIR=${D}${bindir} \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
+		BRIDGELIBDIR=${STAGING_LIBDIR} TARGETDIR=${D}/usr OMXROOT=${S} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		perf
 }
 
 do_install() {
 	oe_runmake \
 		PREFIX=${D}/usr PKGDIR=${S} \
-		CROSS=${AR%-*}- OMX_PERF_INSTRUMENTATION=1 OMXTESTDIR=${D}${bindir} \
-		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-		TARGETDIR=${D}/usr OMXROOT=${S} \
+		CROSS=${AR%-*}- OMXTESTDIR=${D}${bindir} \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge \
+		BRIDGELIBDIR=${STAGING_LIBDIR} TARGETDIR=${D}/usr OMXROOT=${S} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		perf.install
 }
 
 do_stage() {
 	oe_runmake \
 		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
-		CROSS=${AR%-*}- OMX_PERF_INSTRUMENTATION=1 OMXTESTDIR=${STAGING_BINDIR}\
+		CROSS=${AR%-*}- OMXTESTDIR=${STAGING_BINDIR}\
 		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
 		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXROOT=${S} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		perf.install
 }
 
@@ -52,13 +54,11 @@ FILES_${PN} = "\
 	/usr/lib \
 	/usr/bin \
 	"
-#	/usr/omx \
 
 FILES_${PN}-dbg = "\
 	/usr/bin/.debug \
 	/usr/lib/.debug \
 	"
-#	/usr/omx/.debug \
 
 FILES_${PN}-dev = "\
 	/usr/include \

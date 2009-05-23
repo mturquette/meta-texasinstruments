@@ -1,5 +1,5 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL g726 Decoder."
-DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-audiomanager"
+DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-audiomanager tiopenmax-perf"
 PR = "r0"
 PACKAGES = "${PN}-dbg ${PN}-patterns ${PN}-dev ${PN}"
 
@@ -33,10 +33,11 @@ do_compile() {
         cp  ${STAGING_INCDIR}/omx/TIDspOmx.h inc/
 	oe_runmake \
 		PREFIX=${D}/usr PKGDIR=${S} \
-    		CROSS=${AR%-*}- \
-    		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-    		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
-    		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
+		CROSS=${AR%-*}- \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} OMXLIBDIR=${STAGING_LIBDIR} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
+		OMXINCLUDEDIR=${STAGING_INCDIR}/omx \
 		all
 }
 
@@ -44,9 +45,10 @@ do_install() {
 	cd ${S}/audio/src/openmax_il/g726_dec
 	oe_runmake \
 		PREFIX=${D}/usr PKGDIR=${S} \
-    		CROSS=${AR%-*}- \
-   		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-    		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} \
+		CROSS=${AR%-*}- \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${D}/usr OMXTESTDIR=${D}${bindir} OMXROOT=${S} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
 		SYSTEMINCLUDEDIR=${D}/usr/include/omx \
 		install
 }
@@ -55,16 +57,17 @@ do_stage() {
 	cd ${S}/audio/src/openmax_il/g726_dec
 	oe_runmake \
 		PREFIX=${STAGING_DIR_TARGET}/usr PKGDIR=${S} \
-   		CROSS=${AR%-*}- \
-   		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
-    		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXTESTDIR=${STAGING_BINDIR} OMXROOT=${S} \
-    		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
+		CROSS=${AR%-*}- \
+		BRIDGEINCLUDEDIR=${STAGING_INCDIR}/dspbridge BRIDGELIBDIR=${STAGING_LIBDIR} \
+		TARGETDIR=${STAGING_DIR_TARGET}/usr OMXTESTDIR=${STAGING_BINDIR} OMXROOT=${S} \
+		OMX_PERF_INSTRUMENTATION=1 OMX_PERF_CUSTOMIZABLE=1 \
+		SYSTEMINCLUDEDIR=${STAGING_INCDIR}/omx \
 		install
 }
 
 FILES_${PN} = "\
 	/usr/lib \
-  	/usr/bin \
+	/usr/bin \
 	"
 
 FILES_${PN}-patterns = "\
