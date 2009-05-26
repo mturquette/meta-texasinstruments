@@ -1,0 +1,21 @@
+Index: tiopenmax-imagedisplaytest-3.22/application/src/openmax_il/image_display/src/Makefile
+===================================================================
+--- tiopenmax-imagedisplaytest-3.22.orig/application/src/openmax_il/image_display/src/Makefile	2009-05-26 16:00:19.000000000 -0500
++++ tiopenmax-imagedisplaytest-3.22/application/src/openmax_il/image_display/src/Makefile	2009-05-26 16:00:37.000000000 -0500
+@@ -29,7 +29,6 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=ImageDisplayTest
+ VPP_TEST=VPPTunnelTest
+ 
+@@ -38,7 +37,7 @@
+ 
+ all install:: $(COMPONENT_TARGET) $(VPP_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

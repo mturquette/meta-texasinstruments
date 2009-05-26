@@ -1,0 +1,21 @@
+Index: tiopenmax-imagecapturetest-3.22/application/src/openmax_il/image_capture/src/Makefile
+===================================================================
+--- tiopenmax-imagecapturetest-3.22.orig/application/src/openmax_il/image_capture/src/Makefile	2009-05-26 16:08:41.000000000 -0500
++++ tiopenmax-imagecapturetest-3.22/application/src/openmax_il/image_capture/src/Makefile	2009-05-26 16:09:19.000000000 -0500
+@@ -30,7 +30,6 @@
+     CFLAGS += -DOMX_DEBUG=1
+ endif
+ 
+-OMXCORE_LIB=$(OMXLIBDIR)/libOMX_Core.so
+ COMPONENT_TEST=ImageCaptureTest
+ VPP_TEST=VPPCaptureTest
+ 
+@@ -39,7 +38,7 @@
+ 
+ all install:: $(COMPONENT_TARGET) $(VPP_TARGET)
+ 
+-omxcore $(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR) $(OMXCORE_LIB)  
++$(COMPONENT_TARGET): $(OMXTESTDIR) $(COMPONENT_TEST) $(OMXLIBDIR)
+ 	@echo "Installing $(COMPONENT_TEST)"
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 

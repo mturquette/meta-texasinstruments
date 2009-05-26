@@ -1,0 +1,46 @@
+Index: tiopenmax-3.20/application/src/openmax_il/avplay/src/Makefile
+===================================================================
+--- tiopenmax-3.20.orig/application/src/openmax_il/avplay/src/Makefile	2009-03-13 12:00:48.000000000 -0500
++++ tiopenmax-3.20/application/src/openmax_il/avplay/src/Makefile	2009-03-28 18:57:13.000000000 -0500
+@@ -6,8 +6,7 @@
+ 
+ SRC=\
+ 	AvPlayTest.c \
+-	AvPlayTest_WMV.c \
+-    AvPlayTest_Real.c
++	AvPlayTest_WMV.c
+ 
+ HSRC=$(wildcard ../inc/*)
+ 
+@@ -50,7 +49,7 @@
+ 	cp -f $(COMPONENT_TEST) $(COMPONENT_TARGET)
+ 
+ $(COMPONENT_TEST): $(OBJ)
+-	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -ldl -lOMX_Core -lpthread -lRM_Parser
++	$(CROSS)gcc $(CFLAGS) -o $(COMPONENT_TEST) $(OBJ) -L$(OMXLIBDIR) -ldl -lOMX_Core -lpthread 
+ 	
+ $(SRC): $(HSRC)
+ 
+Index: tiopenmax-3.20/application/src/openmax_il/avplay/src/AvPlayTest.c
+===================================================================
+--- tiopenmax-3.20.orig/application/src/openmax_il/avplay/src/AvPlayTest.c	2009-03-13 12:00:37.000000000 -0500
++++ tiopenmax-3.20/application/src/openmax_il/avplay/src/AvPlayTest.c	2009-03-28 18:55:05.000000000 -0500
+@@ -113,7 +113,6 @@
+ int Test_AVSync_Video_BAMR(int argc, char** argv);
+ int Test_AVSync_Video_AAC(int argc, char** argv, int bARMCodec);
+ extern int WmaWmvTest(int argc, char** argv);
+-extern int Test_AVSync_Video_RA(int argc, char** argv);
+ 
+ int nPostProcInPipe[2];
+ int VPP_IpBuf_Pipe[2];
+@@ -652,10 +651,6 @@
+         /* With MP3 */
+         eError = Test_AVSync_Video_MPEG1L2(argc,argv);
+     }
+-    else if (atoi(argv[1]) == 18) {
+-        /* With RA */
+-        eError = Test_AVSync_Video_RA(argc,argv);
+-    }
+ 
+ 
+ 	muntrace();
