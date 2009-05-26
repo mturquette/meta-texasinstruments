@@ -11,6 +11,8 @@ RDEPENDS = "\
 	${@base_contains("DISTRO_FEATURES", "720p", "tiopenmax-armaacdec", "", d)} \
 	${@base_contains("DISTRO_FEATURES", "720p", "tiopenmax-armaacenc", "", d)} \
 	tiopenmax-audiomanager \
+	tiopenmax-avplaytest \
+	tiopenmax-avrecordtest \
 	${@base_contains("DISTRO_FEATURES", "camera", "tiopenmax-camera", "", d)} \
 	tiopenmax-clock \
 	tiopenmax-common \
@@ -33,6 +35,8 @@ RDEPENDS = "\
 	tiopenmax-ilbcenc \
 	tiopenmax-imaadpcmdec \
 	tiopenmax-imaadpcmenc \
+	tiopenmax-imagecapturetest \
+	tiopenmax-imagedisplaytest \
 	${@base_contains("DISTRO_FEATURES", "jpegdec", "tiopenmax-jpegdec", "", d)} \
 	${@base_contains("DISTRO_FEATURES", "jpegenc", "tiopenmax-jpegenc", "", d)} \
 	tiopenmax-lcml \
@@ -51,6 +55,8 @@ RDEPENDS = "\
 	tiopenmax-rmproxy \
 	tiopenmax-videodec \
 	tiopenmax-videoenc \
+	tiopenmax-videocapturetest \
+	tiopenmax-videodisplaytest \
 	tiopenmax-wbamrdec \
 	tiopenmax-wbamrenc \
 	tiopenmax-wmadec \
