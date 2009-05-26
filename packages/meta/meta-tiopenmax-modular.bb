@@ -44,6 +44,7 @@ RDEPENDS = "\
 	tiopenmax-perf \
 	tiopenmax-policymanager \
 	tiopenmax-postproc \
+	tiopenmax-prepostproc \
 	${@base_contains("DISTRO_FEATURES", "rarv", "tiopenmax-rageckodec", "", d)} \
 	tiopenmax-ram \
 	tiopenmax-resourcemanager \
