@@ -34,7 +34,7 @@ DEFAULT_BASEIMAGE=/lib/dsp/baseimage.dof
 export QOSDYN_FILE=/dspbridge/qosdyn_3430.dll64P
 
 # for OMXPolicyManager (also started by /etc/init.d/bridge):
-export PM_TBLFILE=/omx/policytable.tbl
+export PM_TBLFILE=/usr/bin/policytable.tbl
 
 # for OMXAudioManager (also started by /etc/init.d/bridge):
 export DCTN_DLLFILE=/lib/dsp/dctn_dyn.dll64P
