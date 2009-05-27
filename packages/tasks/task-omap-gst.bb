@@ -3,7 +3,7 @@
 #
 
 DESCRIPTION = "Tasks for the TI's GStreamer Multimedia Framework"
-PR = "r8"
+PR = "r9"
 
 PACKAGES = "\
     task-omap-gst \
@@ -51,6 +51,7 @@ RDEPENDS_task-omap-gst-plugins = "\
     gst-plugin-mms \
     gst-plugin-freeze \
     gst-plugin-multifile \
+    gst-plugin-gconfelements \
     "
 
 RDEPENDS_task-omap-gst-apps = ""
