@@ -3,15 +3,14 @@
 # [2] http://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html 
 # [3] https://support.codesourcery.com/GNUToolchain/kbentry29
 
-TARGET_CC_ARCH = "-march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize -pipe -O2"
+TARGET_CC_ARCH = "-march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize"
 
 # Override the options for some packages
 # Occasionally, specifying '-march=armv7-a' breaks compilation.  Why?
-TARGET_CC_ARCH_pn-liba52 = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize -pipe -O2"
-TARGET_CC_ARCH_pn-libmad = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize -pipe -O2"
-TARGET_CC_ARCH_pn-js = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize -pipe -O2"
-TARGET_CC_ARCH_pn-portmap = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize -pipe -O2"
-TARGET_CC_ARCH_pn-oprofile = "-march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -fno-tree-vectorize -pipe"
+TARGET_CC_ARCH_pn-liba52 = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp"
+TARGET_CC_ARCH_pn-libmad = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp"
+TARGET_CC_ARCH_pn-js = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp"
+TARGET_CC_ARCH_pn-portmap = "-mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp"
 
 # Other potentially useful (and hazardous) options
 # -ftree-vectorize -ffast-math -fno-omit-frame-pointer
