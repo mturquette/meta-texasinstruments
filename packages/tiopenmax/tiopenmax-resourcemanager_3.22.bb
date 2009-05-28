@@ -1,6 +1,6 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL Resource Manager."
 DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-ram tiopenmax-policymanager"
-PR = "r0"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-dev ${PN}"
 
 require tiopenmax-cspec-${PV}.inc

@@ -1,6 +1,6 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL Camera."
-DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager mm-isp"
-PR = "r0"
+DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager mm-isp tiopenmax-clock"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-patterns ${PN}-dev ${PN}"
 
 require tiopenmax-cspec-${PV}.inc

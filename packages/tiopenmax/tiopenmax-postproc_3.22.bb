@@ -1,6 +1,6 @@
 DESCRIPTION = "Texas Instruments OpenMAX IL Post Processor."
 DEPENDS = "tidspbridge-lib tiopenmax-core tiopenmax-lcml tiopenmax-rmproxy tiopenmax-resourcemanager tiopenmax-clock"
-PR = "r0"
+PR = "r1"
 PACKAGES = "${PN}-dbg ${PN}-patterns ${PN}-dev ${PN}"
 
 require tiopenmax-cspec-${PV}.inc
